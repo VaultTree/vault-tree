@@ -1,19 +1,27 @@
-= gem-template
+= cc_engine
 
-Description goes here.
+Serverside Engine for driving Cryptographic Contracts.
 
-== Contributing to gem-template
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+== Interface Requirements
 
-== Copyright
+CC Engine adhears to a strict and simple interface:
 
-Copyright (c) 2013 Andrew Bashelor. See LICENSE.txt for
-further details.
+  ** Only JSON Cryptographic Contracts can be provided to the CC Engine **
+  ** Only JSON Cryptographic Contracts are returned from the CC Engine **
+
+There are **no** exceptions. This means that the engine does not except run time parameters nor
+does it return error messages or data formated as anything other than a proper Cryptographic Contract.
+
+
+== API
+
+```
+  contract = "{'state':'Contact State', 'format': 'json'}"
+
+  CryptoContract::Engine.fulfill(contract)
+      # => "{'state':'New Contact State', 'format': 'json'}"
+```
+
+
+
 

@@ -22,4 +22,28 @@ module LockSmith
       end
     end
   end 
+
+  describe '#as_json' do
+    before :all do
+      contents = [LockSmith::Id.new('123456'), LockSmith::Id.new('654321')]
+      @rack = Rack.new(contents: contents)
+      @expected_json = %Q[{"object":"vault_rack","value":[{"object":"id","value":{"number":"123456"}},{"object":"id","value":{"number":"654321"}}]}]
+    end
+
+    it 'returns the expected json' do
+      @rack.as_json.should == @expected_json 
+    end
+
+    it 'the checksums match' do
+      act = Digest::SHA1.hexdigest(@rack.as_json)
+      exp = Digest::SHA1.hexdigest(@expected_json)
+      act.should == exp
+    end
+
+    it 'json looks correct on a file' do
+      @file = File.new("#{Dir.pwd}/test.json", "w+")
+      File.open(@file, 'w') { |file| file.write("#{@rack.as_json}")}
+    end
+
+  end
 end

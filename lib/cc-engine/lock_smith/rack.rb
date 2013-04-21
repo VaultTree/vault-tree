@@ -4,6 +4,8 @@ module LockSmith
 
     def initialize(opts = {})
       @contents = opts[:contents] 
+      @string = opts[:json] || json_string
+ 
     end
 
     def same_as?(rack)
@@ -16,12 +18,15 @@ module LockSmith
     end
 
     def as_json
-      to_jbuilder.target!
+      string
     end
 
     def object
       'vault_rack'
     end
+
+    private
+    attr_reader :string
 
     def to_jbuilder
       Jbuilder.new do |json|
@@ -35,7 +40,9 @@ module LockSmith
       end
     end
 
-    private
+    def json_string 
+      to_jbuilder.target!
+    end
 
     def same_item?(first,second)
       first.value.eql?(second.value)

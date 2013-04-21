@@ -1,20 +1,13 @@
 module LockSmith
   class Rack
-    attr_reader :contents
+    attr_reader :string
 
-    def initialize(opts = {})
-      @contents = opts[:contents] 
-      @string = opts[:json] || json_string
- 
+    def initialize(json = nil)
+      @string = json || empty_rack_string
     end
 
     def same_as?(rack)
-      contents.each do |i|
-        i_1 = i
-        i_2 = rack.contents[contents.index(i)]
-        return false unless same_item?(i_1,i_2)
-      end
-      return true
+      self.as_json.eql?(rack.as_json)
     end
 
     def as_json
@@ -25,27 +18,32 @@ module LockSmith
       'vault_rack'
     end
 
-    private
-    attr_reader :string
+    def contents
+      build_contents(deserialized['state'])
+    end
 
-    def to_jbuilder
-      Jbuilder.new do |json|
-        json.object object
-        json.value do
-          json.array! contents do |i|
-            json.object i.object
-            json.value i.to_jbuilder
-          end
-        end
+    private
+
+    def build_contents(state)
+      state.map do |item|
+        class_constant(item["object"]).send(:new, item["state"])
       end
     end
 
-    def json_string 
-      to_jbuilder.target!
+    def class_constant(obj_str)
+      "#{module_name}::#{obj_str.capitalize}".constantize
     end
 
-    def same_item?(first,second)
-      first.value.eql?(second.value)
+    def module_name
+      self.class.to_s.split("::").first
+    end
+
+    def deserialized
+      MultiJson.load(string)
+    end
+
+    def empty_rack_string
+      %Q[{"object":"#{type}","state":{}}]
     end
   end
 end

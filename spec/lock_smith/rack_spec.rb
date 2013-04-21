@@ -2,13 +2,50 @@ require 'spec_helper'
 
 module LockSmith
   describe 'Rack' do
+    describe '#as_json' do
+      before :all do
+        @rack = Rack.new(Fixtures.vault_rack)
+      end
+
+      it 'returns the expected json' do
+        @rack.as_json.should == Fixtures.vault_rack 
+      end
+
+      it 'the checksums match' do
+        act = Digest::SHA1.hexdigest(@rack.as_json)
+        exp = Digest::SHA1.hexdigest(Fixtures.vault_rack)
+        act.should == exp
+      end
+
+      it 'json looks correct on a file' do
+        f = File.new("#{Dir.pwd}/test.json", "w+")
+        File.open(f, 'w') { |file| file.write("#{@rack.as_json}")}
+      end
+    end
+
+    describe '#contents' do
+      before :all do
+        @rack = Rack.new(Fixtures.vault_rack_mixed)
+      end
+
+      it 'returns an array' do
+        @rack.contents.should be_an_instance_of(Array)
+      end
+
+      it 'the first item is an Id object' do
+        @rack.contents.first.should be_an_instance_of(Id)
+      end
+
+      it 'the last item is a Map object' do
+        @rack.contents.last.should be_an_instance_of(Map)
+      end
+    end
+
     describe '#same_as?' do
       before :all do
-        same_array = [LockSmith::Id.new('123456'), LockSmith::Id.new('654321')]
-        diff_array = [LockSmith::Id.new('123456'), LockSmith::Id.new('987656')]
-        @first_rack = LockSmith::Rack.new(contents: same_array)
-        @second_rack = LockSmith::Rack.new(contents: same_array)
-        @different_rack = LockSmith::Rack.new(contents: diff_array)
+        @first_rack = LockSmith::Rack.new(Fixtures.vault_rack)
+        @second_rack = LockSmith::Rack.new(Fixtures.vault_rack)
+        @different_rack = LockSmith::Rack.new(Fixtures.vault_rack_alt)
       end
 
       it 'returns true if the contents strings are the same' do
@@ -22,28 +59,4 @@ module LockSmith
       end
     end
   end 
-
-  describe '#as_json' do
-    before :all do
-      contents = [LockSmith::Id.new('123456'), LockSmith::Id.new('654321')]
-      @rack = Rack.new(contents: contents)
-      @expected_json = %Q[{"object":"vault_rack","value":[{"object":"id","value":{"number":"123456"}},{"object":"id","value":{"number":"654321"}}]}]
-    end
-
-    it 'returns the expected json' do
-      @rack.as_json.should == @expected_json 
-    end
-
-    it 'the checksums match' do
-      act = Digest::SHA1.hexdigest(@rack.as_json)
-      exp = Digest::SHA1.hexdigest(@expected_json)
-      act.should == exp
-    end
-
-    it 'json looks correct on a file' do
-      @file = File.new("#{Dir.pwd}/test.json", "w+")
-      File.open(@file, 'w') { |file| file.write("#{@rack.as_json}")}
-    end
-
-  end
 end

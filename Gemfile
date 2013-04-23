@@ -4,6 +4,7 @@ gem 'nokogiri'
 gem 'rbnacl'
 gem 'jbuilder'
 gem 'multi_json', '>= 1.2.0'
+gem 'gli'
 
 group :development do
   gem 'cucumber'

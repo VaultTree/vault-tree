@@ -1,0 +1,5 @@
+= vault-tree
+
+Generate this with
+    vault-tree rdoc
+After you have described your command line interface

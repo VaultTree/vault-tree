@@ -1,5 +1,6 @@
 require 'jbuilder'
 require 'digest/sha1'
+require 'rbnacl'
 
 describe 'Vault' do
   describe '#clear_text' do
@@ -28,37 +29,32 @@ describe 'Vault' do
   end
 end
 
-class Vault
-  attr_reader :content
-
-  def initialize(opts = {} )
-    @content = opts[:content]
-  end
-
-  def clear_text 
-    jbuilder_clear_text.target!
-  end
-
-  def jbuilder_clear_text
-    Jbuilder.new do |json|
-      json.vault content, :id
+describe 'Vault' do
+  describe 'cipher_text' do
+    before :all do
+      @first_id = Id.new('123456')
+      @second_id = Id.new('654321')
+      @expected_clear_text = %Q[{"vault":[{"id":"123456"},{"id":"654321"}]}] 
+      @clear_text_sha1 = Digest::SHA1.hexdigest(@expected_clear_text)
+      @vault =  Vault.new(content: [@first_id, @second_id])
+      @cipher_text = @vault.cipher_text
     end
-  end
-end
 
-class Id
-  attr_reader :id
-  def initialize(id)
-    @id = id
-  end
-
-  def jbuilder_clear_text
-    Jbuilder.new do |json|
-      json.id id
+    it 'the encrypted text is a string' do
+      @cipher_text.kind_of?(String).should == true
     end
-  end
 
-  def clear_text 
-    jbuilder_clear_text.target!
+    it 'it writes the encrypted values to a file' do
+      @file = File.new("#{Dir.pwd}/test.json", "w+")
+      File.open(@file, 'w') { |file| file.write("#{@cipher_text}")}
+    end
+
+    it 'the hash of the cipher text differs from the clear text' do
+      puts @cipher_text
+      puts Digest::SHA1.hexdigest(@cipher_text)
+      puts @clear_text_sha1
+      Digest::SHA1.hexdigest(@cipher_text).should_not == @clear_text_sha1
+    end
+
   end
 end

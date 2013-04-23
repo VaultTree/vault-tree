@@ -8,6 +8,7 @@ gem 'gli'
 
 group :development do
   gem 'cucumber'
+  gem 'aruba'
   gem 'rspec'
   gem 'factory_girl'
   gem "jeweler", "~> 1.8.4"

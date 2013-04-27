@@ -1,7 +1,6 @@
 load File.dirname(__FILE__) + '/../lib/cc-engine.rb'
 require 'factory_girl'
 
-
 class String
   def compress
     gsub("\n", ' ').squeeze(' ').strip
@@ -11,10 +10,34 @@ end
 
 module Fixtures
 
-  def self.id
+  def self.valid_vault_collection
     %Q[
-      {"object":"id","state":123456}
+      {"#{valid_vault_id}":"#{valid_vault}","#{valid_vault_id_alt}":"#{valid_vault_alt}"}
     ].compress
+  end
+
+  def self.valid_vault
+    "ENCRYPTED_CONTENTS"
+  end
+
+  def self.valid_vault_alt
+    "ENCRYPTED_CONTENTS_ALT"
+  end
+
+  def self.valid_vault_id
+    "VALID_VAULT_ID"
+  end
+
+  def self.valid_vault_id_alt
+    "VALID_VAULT_ID_ALT"
+  end
+
+  def self.invalid_vault_id
+    "INVALID_VAULT_ID"
+  end
+
+  def self.id
+    %Q[{"object":"id","state":123456}].compress
   end
 
   def self.id_alt

@@ -1,27 +1,49 @@
-= cc_engine
+= Vault-Tree
 
-Serverside Engine for driving Cryptographic Contracts.
+Vault-Tree is a Command Line Application for managing distributed Cryptographic
+Contracts. The CLI makes it easy to manage Bit-coin denominated contracts that are executed by the Vault-Tree protocol.
 
-== Interface Requirements
+== Install
 
-CC Engine adhears to a strict and simple interface:
+On OSX:
 
-  ** Only JSON Cryptographic Contracts can be provided to the CC Engine **
-  ** Only JSON Cryptographic Contracts are returned from the CC Engine **
+    brew install vault-tree
 
-There are **no** exceptions. This means that the engine does not except run time parameters nor
-does it return error messages or data formated as anything other than a proper Cryptographic Contract.
+On Linux:
 
+    yum install vault-tree
 
-== API
+To view available commands type:
 
-```
-  contract = "{'state':'Contact State', 'format': 'json'}"
+    vault-tree
 
-  CryptoContract::Engine.fulfill(contract)
-      # => "{'state':'New Contact State', 'format': 'json'}"
-```
+or simply:
 
+    vt
 
+== Available Commands
 
+    SYNOPSIS
+        vault-tree [global options] command [command options] [arguments...]
 
+    GLOBAL OPTIONS
+        -f, --flagname=The name of the argument - Describe some flag here (default: the default)
+        --help                                  - Show this message
+        -s, --[no-]switch                       - Describe some switch here
+
+    COMMANDS
+        contract      - Describe add here
+        party       - Describe complete here
+        help     - Shows a list of commands or help for one command
+        list     - Describe list here
+
+    > bundle exec bin/todo help list
+    NAME
+        list - Describe list here
+
+    SYNOPSIS
+        todo [global options] list [command options] Describe arguments to list here
+
+    COMMAND OPTIONS
+        -f arg - Describe a flag to list (default: default)
+        -s     - Describe a switch to list

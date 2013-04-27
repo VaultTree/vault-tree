@@ -55,6 +55,7 @@ PLATFORMS
 
 DEPENDENCIES
   aruba
+  bundler
   cucumber
   factory_girl
   gli

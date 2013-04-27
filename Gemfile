@@ -7,6 +7,7 @@ gem 'multi_json', '>= 1.2.0'
 gem 'gli'
 
 group :development do
+  gem 'bundler'
   gem 'cucumber'
   gem 'aruba'
   gem 'rspec'

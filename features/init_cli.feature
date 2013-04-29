@@ -4,10 +4,7 @@ Feature: Initialize the CLI
     Given a clean start
     Then a directory named "~/.vault-tree" should not exist
     When I run `vault-tree`
-    Then the output should contain
-      ```
-        Creating a .vault-tree dir under ~/
-      ```
+    Then the output should contain "Creating a .vault-tree dir under ~/"
     And a directory named "~/.vault-tree" should exist
 
   Scenario: After the first init
@@ -15,10 +12,7 @@ Feature: Initialize the CLI
     Then a directory named "~/.vault-tree" should not exist
     When I run `vault-tree`
     And I run `vault-tree`
-    Then the output should not contain
-      ```
-        Creating a .vault-tree dir under ~/
-      ```
+    Then the output should not contain "Creating a .vault-tree dir under ~/"
     And a directory named "~/.vault-tree" should exist
 
   Scenario: With the CLI Alias
@@ -26,7 +20,7 @@ Feature: Initialize the CLI
     Then a directory named "~/.vault-tree" should not exist
     When I run `vt`
     Then the output should contain
-      ```
+      """ 
                           Vault Tree
                 Self Enforcing Bitcoin Contracts
 
@@ -39,4 +33,4 @@ Feature: Initialize the CLI
         fetch       Download, objects and refs from remote urls
         status      Show the status of active contracts 
         log         Show contract logs
-      ```
+     """ 

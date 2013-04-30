@@ -28,6 +28,7 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     multi_json (1.7.2)
+    rake (10.0.4)
     rbnacl (1.1.0)
       ffi
     rspec (2.13.0)
@@ -50,5 +51,6 @@ DEPENDENCIES
   gli
   jbuilder
   multi_json (>= 1.2.0)
+  rake
   rbnacl
   rspec

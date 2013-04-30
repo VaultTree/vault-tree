@@ -19,7 +19,7 @@ Feature: Initialize the CLI
     Given a clean start
     Then a directory named "~/.vault-tree" should not exist
     When I run `vt`
-    Then the output should contain
+    Then the output should contain:
       """ 
                           Vault Tree
                 Self Enforcing Bitcoin Contracts

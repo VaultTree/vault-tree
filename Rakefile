@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "cc_engine"
   gem.homepage = "http://github.com/abashelor/cc_engine"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Self Enforcing Contracts}
+  gem.description = %Q{Self Enforcing BitCoin Contracts}
   gem.email = "none"
   gem.authors = ["Andrew Bashelor"]
   # dependencies defined in Gemfile

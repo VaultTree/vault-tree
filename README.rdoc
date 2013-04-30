@@ -47,3 +47,11 @@ or simply:
     COMMAND OPTIONS
         -f arg - Describe a flag to list (default: default)
         -s     - Describe a switch to list
+
+== Notes
+
+Installing Gems
+
+  bundle install --path='./gems/'
+
+

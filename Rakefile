@@ -14,8 +14,8 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "cc_engine"
-  gem.homepage = "http://github.com/abashelor/cc_engine"
+  gem.name = "vault-tree"
+  gem.homepage = "http://github.com/abashelor/vault-tree"
   gem.license = "MIT"
   gem.summary = %Q{Self Enforcing Contracts}
   gem.description = %Q{Self Enforcing BitCoin Contracts}
@@ -39,7 +39,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "cc_engine #{version}"
+  rdoc.title = "vault-tree #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

@@ -4,6 +4,13 @@ require 'rubygems'
 require 'bundler'
 require 'rake'
 
+namespace :build do
+  desc 'Manual Install of Brew Package'
+  task :homebrew do
+    puts "Manual Homebrew Install"
+  end
+end
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e

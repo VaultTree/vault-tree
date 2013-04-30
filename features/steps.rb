@@ -1,3 +1,9 @@
+require 'fileutils'
+
+Given(/^a clean start$/) do
+  Dir.chdir(ENV['HOME'])
+  FileUtils.rm_rf(ENV['HOME']+'/.vault-tree')
+end
 
 Given(/^we have some objects$/) do
   content_array = [LockSmith::Id.new('123456'), LockSmith::Id.new('654321')]

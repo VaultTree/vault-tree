@@ -1,10 +1,9 @@
 source "http://rubygems.org"
 
-gem 'nokogiri'
+gem 'gli'
 gem 'rbnacl'
 gem 'jbuilder'
 gem 'multi_json', '>= 1.2.0'
-gem 'gli'
 
 group :development do
   gem 'bundler'
@@ -12,5 +11,4 @@ group :development do
   gem 'aruba'
   gem 'rspec'
   gem 'factory_girl'
-  gem "jeweler", "~> 1.8.4"
 end

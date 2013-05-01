@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 require 'gli'
-begin # XXX: Remove this begin/rescue before distributing your app
-require 'vault-tree'
-
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'Self Enforcing BitCoin Contracts'
+
+module VaultTree
+  VERSION = '0.0.1'
+end
 
 version VaultTree::VERSION
 

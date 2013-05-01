@@ -18,39 +18,105 @@ default_value 'the default'
 arg_name 'The name of the argument'
 flag [:f,:flagname]
 
-desc 'Describe list here'
-arg_name 'Describe arguments to list here'
-command :list do |c|
-  c.desc 'Describe a switch to list'
+desc 'Execute, create or delete contracts'
+arg_name 'Describe arguments to contract here'
+command :contract do |c|
+  c.desc 'Describe a switch to contract'
   c.switch :s
 
-  c.desc 'Describe a flag to list'
+  c.desc 'Describe a flag to contract'
   c.default_value 'default'
   c.flag :f
   c.action do |global_options,options,args|
-
     # Your command logic here
-     
     # If you have any errors, just raise them
     # raise "that command made no sense"
-
-    puts "list command ran"
+    puts "contract command ran"
   end
 end
 
-desc 'Describe add here'
-arg_name 'Describe arguments to add here'
-command :add do |c|
+desc 'Create or delete public and private keys'
+arg_name 'Describe arguments to key here'
+command :key do |c|
+  c.desc 'Describe a switch to key'
+  c.switch :s
+
+  c.desc 'Describe a flag to key'
+  c.default_value 'default'
+  c.flag :f
   c.action do |global_options,options,args|
-    puts "add command ran"
+    # Your command logic here
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+    puts "key command ran"
   end
 end
 
-desc 'Describe complete here'
-arg_name 'Describe arguments to complete here'
-command :complete do |c|
+desc 'Create, delete, and rename remote urls'
+arg_name 'Describe arguments to url here'
+command :url do |c|
+  c.desc 'Describe a switch to url'
+  c.switch :s
+
+  c.desc 'Describe a flag to key'
+  c.default_value 'default'
+  c.flag :f
   c.action do |global_options,options,args|
-    puts "complete command ran"
+    # Your command logic here
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+    puts "url command ran"
+  end
+end
+
+desc 'Download, objects and refs from remote urls'
+arg_name 'Describe arguments to fetch here'
+command :fetch do |c|
+  c.desc 'Describe a switch to fetch'
+  c.switch :s
+
+  c.desc 'Describe a flag to fetch'
+  c.default_value 'default'
+  c.flag :f
+  c.action do |global_options,options,args|
+    # Your command logic here
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+    puts "fetch command ran"
+  end
+end
+
+desc 'Show the status of active contracts '
+arg_name 'Describe arguments to status here'
+command :status do |c|
+  c.desc 'Describe a switch to status'
+  c.switch :s
+
+  c.desc 'Describe a flag to status'
+  c.default_value 'default'
+  c.flag :f
+  c.action do |global_options,options,args|
+    # Your command logic here
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+    puts "status command ran"
+  end
+end
+
+desc 'Show contract logs'
+arg_name 'Describe arguments to log here'
+command :log do |c|
+  c.desc 'Describe a switch to log'
+  c.switch :s
+
+  c.desc 'Describe a flag to log'
+  c.default_value 'default'
+  c.flag :f
+  c.action do |global_options,options,args|
+    # Your command logic here
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+    puts "log command ran"
   end
 end
 

@@ -4,14 +4,14 @@ module VaultTree
     def template_erb
       %Q[
         {
-          "<%= uuid %>":"<%= seller_step_1%>",
-          "<%= uuid %>":"<%= seller_step_2%>",
-          "<%= uuid %>":"<%= seller_step_3%>",
-          "<%= uuid %>":"<%= seller_step_4%>",
-          "<%= uuid %>":"<%= buyer_step_1%>",
-          "<%= uuid %>":"<%= buyer_step_2%>",
-          "<%= uuid %>":"<%= buyer_step_3%>",
-          "<%= uuid %>":"<%= buyer_step_4%>"
+          "<%= generate_uuid %>":"<%= seller_step_1%>",
+          "<%= generate_uuid %>":"<%= seller_step_2%>",
+          "<%= generate_uuid %>":"<%= seller_step_3%>",
+          "<%= generate_uuid %>":"<%= seller_step_4%>",
+          "<%= generate_uuid %>":"<%= buyer_step_1%>",
+          "<%= generate_uuid %>":"<%= buyer_step_2%>",
+          "<%= generate_uuid %>":"<%= buyer_step_3%>",
+          "<%= generate_uuid %>":"<%= buyer_step_4%>"
         }
       ]
     end

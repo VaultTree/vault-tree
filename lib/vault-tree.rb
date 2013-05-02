@@ -1,2 +1,2 @@
-require 'vault-tree/version.rb'
-require 'vault-tree/template.rb'
+require_relative 'vault-tree/version'
+require_relative 'vault-tree/template'

@@ -1,5 +1,11 @@
 load File.dirname(__FILE__) + '/../lib/cc-engine.rb'
 load File.dirname(__FILE__) + '/../lib/vault-tree.rb'
+require 'uuidtools'
+
+
+RSpec.configure do |config|
+  config.mock_framework = :mocha
+end
 
 class String
   def compress

@@ -1,32 +1,48 @@
 module LockSmith
   class Vault
-    attr_reader :string
+    attr_reader :string, :id
 
-    def initialize(json = nil)
-      @string = json || empty_vault_string
+    def initialize
+      @string = empty_vault_string
+      post_initialize
     end
 
-    def vault_rack
-      build_rack(string)
+    def post_initialize
+      nil
+    end
+
+    def add_object(json)
+    end
+
+    def id 
+      @id ||= generate_uuid 
     end
 
     def as_json
       string
     end
 
-    def type
+    def lock
       raise 'subclass must implement'
     end
 
-    def lock(key)
+    def unlock
       raise 'subclass must implement'
     end
 
-    def unlock(key)
-      raise 'subclass must implement'
+    def generate_uuid
+      UUIDTools::UUID.random_create.to_s
     end
 
     private
+
+    def rack_string
+      "{}"
+    end
+
+    def domain_class
+      'vault'
+    end
 
     def deserialized
       MultiJson.load(string)
@@ -37,7 +53,7 @@ module LockSmith
     end
 
     def empty_vault_string
-      %Q[{"object":"#{type}","state":{}}]
+      %Q[{"class":"#{domain_class}","id":"#{id}","rack":#{rack_string}}]
     end
   end
 end

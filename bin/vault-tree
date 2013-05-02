@@ -4,6 +4,12 @@ include GLI::App
 require File.expand_path('../../lib/vault-tree', __FILE__)
 require "uuidtools"
 
+class String
+  def compress
+    gsub("\n", ' ').squeeze(' ').strip
+  end
+end
+
 module VaultTree
   module Api
     module Contracts
@@ -94,7 +100,7 @@ command :generate do |c|
     # Your command logic here
     # If you have any errors, just raise them
     # raise "that command made no sense"
-    puts "generate command ran"
+    puts "The following contract was generated:"
     VaultTree::Api::Contracts.generate_contract
   end
 end

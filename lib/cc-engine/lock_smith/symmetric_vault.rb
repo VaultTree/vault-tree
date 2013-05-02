@@ -1,6 +1,10 @@
 module LockSmith
   class SymmetricVault < Vault
 
+    def post_initialize
+      nil
+    end
+
     def type
       'symmetric_vault'
     end

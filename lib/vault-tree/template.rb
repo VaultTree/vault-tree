@@ -14,7 +14,7 @@ module VaultTree
       ERB.new(template_erb).result(binding)
     end
 
-    def uuid
+    def generate_uuid
       UUIDTools::UUID.random_create.to_s
     end
   end

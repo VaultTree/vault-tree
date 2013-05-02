@@ -9,7 +9,6 @@ module VaultTree
       end
 
       it 'returns as string' do
-        puts @mock_template.generate_contract
         @mock_template.generate_contract.should be_an_instance_of(String)
       end
 
@@ -17,28 +16,6 @@ module VaultTree
         MultiJson.load(@mock_template.generate_contract).values.first.should == 'ENCRYPTED_1'
         MultiJson.load(@mock_template.generate_contract).values.last.should == 'ENCRYPTED_4'
       end
-    end
-  end
-end
-
-require 'erb'
-
-module VaultTree
-  class Template
-    def initialize
-      post_initialize
-    end
-
-    def post_initialize
-      nil
-    end
-
-    def generate_contract
-      ERB.new(template_erb).result(binding)
-    end
-
-    def uuid
-      "MOCK_UUID"
     end
   end
 end
@@ -78,4 +55,3 @@ module VaultTree
     end
   end
 end
-

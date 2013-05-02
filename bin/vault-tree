@@ -2,6 +2,52 @@
 require 'gli'
 include GLI::App
 
+module VaultTree
+  module Api
+    module Contracts
+
+      def self.enforce(opts = {})
+        path = 'path/to/default'
+        json = VaultTree::Import::ContractReader.new(path).read
+        VaultTree::Contract.new(json).enforce
+      end
+
+    end
+  end
+end
+
+module VaultTree
+  module Import
+    class ContractReader
+      attr_reader :path
+
+      def initialize(path)
+        @path = path
+      end
+
+      def read
+        puts 'Reading in file at:'
+        puts path
+        '[]'
+      end
+    end
+  end
+end
+
+module VaultTree
+  class Contract
+    attr_reader :string
+
+    def initialize(json)
+      @string = json
+    end
+
+    def enforce
+      puts 'enforcing myself'
+    end
+  end
+end
+
 program_desc 'Self Enforcing BitCoin Contracts'
 
 module VaultTree
@@ -18,20 +64,17 @@ default_value 'the default'
 arg_name 'The name of the argument'
 flag [:f,:flagname]
 
-desc 'Execute, create or delete contracts'
-arg_name 'Describe arguments to contract here'
-command :contract do |c|
-  c.desc 'Describe a switch to contract'
+desc 'Enforce the active contract'
+arg_name 'Describe arguments to enforce here'
+command :enforce do |c|
+  c.desc 'Describe a switch to enforce'
   c.switch :s
 
-  c.desc 'Describe a flag to contract'
+  c.desc 'Describe a flag to enforce'
   c.default_value 'default'
   c.flag :f
   c.action do |global_options,options,args|
-    # Your command logic here
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
-    puts "contract command ran"
+    VaultTree::Api::Contracts.enforce
   end
 end
 

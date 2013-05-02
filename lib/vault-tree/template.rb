@@ -1,4 +1,5 @@
 require 'erb'
+require 'uuidtools'
 
 module VaultTree
   class Template

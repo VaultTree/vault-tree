@@ -2,7 +2,7 @@
 require 'gli'
 include GLI::App
 require File.expand_path('../../lib/vault-tree', __FILE__)
-
+require "uuidtools"
 
 module VaultTree
   module Api

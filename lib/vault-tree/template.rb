@@ -15,7 +15,7 @@ module VaultTree
     end
 
     def uuid
-      "MOCK_UUID"
+      UUIDTools::UUID.random_create.to_s
     end
   end
 end

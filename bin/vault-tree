@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 require 'gli'
 include GLI::App
+require File.expand_path('../../lib/vault-tree', __FILE__)
+
 
 module VaultTree
   module Api
@@ -10,6 +12,11 @@ module VaultTree
         path = 'path/to/default'
         json = VaultTree::Import::ContractReader.new(path).read
         VaultTree::Contract.new(json).enforce
+      end
+
+      def self.generate_contract
+        require_relative '../.vault-tree/templates/escrow.rb'
+        puts VaultTree::Escrow.new.generate_contract
       end
 
     end
@@ -50,10 +57,6 @@ end
 
 program_desc 'Self Enforcing BitCoin Contracts'
 
-module VaultTree
-  VERSION = '0.0.1'
-end
-
 version VaultTree::VERSION
 
 desc 'Describe some switch here'
@@ -75,6 +78,24 @@ command :enforce do |c|
   c.flag :f
   c.action do |global_options,options,args|
     VaultTree::Api::Contracts.enforce
+  end
+end
+
+desc 'Generate a contract from a template'
+arg_name 'Describe arguments to generate here'
+command :generate do |c|
+  c.desc 'Describe a switch to generate'
+  c.switch :s
+
+  c.desc 'Describe a flag to generate'
+  c.default_value 'default'
+  c.flag :f
+  c.action do |global_options,options,args|
+    # Your command logic here
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+    puts "generate command ran"
+    VaultTree::Api::Contracts.generate_contract
   end
 end
 

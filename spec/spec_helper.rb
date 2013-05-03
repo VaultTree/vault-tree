@@ -23,7 +23,7 @@ module Fixtures
   end
 
   def self.wallet_address_alt
-    %Q[{"class":"wallet_address",
+    %Q[{"class":"wallet_address_alt",
         "description":"Alternate Fixture Wallet Address",
         "value":"ADDRESS_ALT"}].compress
   end

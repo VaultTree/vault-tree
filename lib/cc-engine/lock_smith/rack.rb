@@ -3,7 +3,7 @@ module LockSmith
     attr_reader :string
 
     def initialize(json = nil)
-      @string = json || empty_rack_string
+      @string = json
     end
 
     def same_as?(rack)
@@ -14,8 +14,8 @@ module LockSmith
       string
     end
 
-    def object
-      'vault_rack'
+    def type
+      'rack'
     end
 
     def contents
@@ -40,10 +40,6 @@ module LockSmith
 
     def deserialized
       MultiJson.load(string)
-    end
-
-    def empty_rack_string
-      %Q[{"object":"#{type}","state":{}}]
     end
   end
 end

@@ -1,9 +1,11 @@
+require 'active_support'
 module LockSmith
   class Vault
-    attr_reader :string, :id
+    attr_reader :string, :id, :contents
 
     def initialize
-      @string = empty_vault_string
+      @string = vault_string(empty_contents_json)
+      @contents = []
       post_initialize
     end
 
@@ -12,6 +14,8 @@ module LockSmith
     end
 
     def add_object(json)
+      contents.push(MultiJson.load(json))
+      @string = vault_string(contents_as_json)
     end
 
     def id 
@@ -34,36 +38,27 @@ module LockSmith
       UUIDTools::UUID.random_create.to_s
     end
 
+    def deserialized
+      MultiJson.load(string)
+    end
+
     private
+    attr_accessor :contents
 
-    def rack
-      LockSmith::Rack.new
-    end
-
-    def empty_rack
-      LockSmith::EmptyRack.new
-    end
-
-    def rack_string
-      #puts deserialized
-      '{}'
-      #rack.as_json
+    def contents_as_json
+      ActiveSupport::JSON.encode(contents)
     end
 
     def domain_class
       'vault'
     end
 
-    def deserialized
-      MultiJson.load(string)
+    def empty_contents_json
+      '[]'
     end
 
-    def build_rack(str)
-      Rack.new(deserialized['state'])
-    end
-
-    def empty_vault_string
-      %Q[{"class":"#{domain_class}","id":"#{id}","rack":#{empty_rack.as_json}}]
+    def vault_string(contents_json)
+      %Q[{"class":"#{domain_class}","id":"#{id}","contents":#{contents_json}}]
     end
   end
 end

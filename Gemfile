@@ -6,6 +6,7 @@ gem 'jbuilder'
 gem 'multi_json', '>= 1.2.0'
 gem 'uuidtools'
 gem 'rake'
+gem 'activesupport'
 
 group :development do
   gem 'bundler'

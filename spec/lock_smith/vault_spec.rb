@@ -18,24 +18,28 @@ module LockSmith
           result = MultiJson.load(@vault.as_json)
           result["class"].should == 'vault'
           UUIDTools::UUID.parse(result["id"]).should be_an_instance_of(UUIDTools::UUID)
-          result["rack"].should be_an_instance_of(Hash)
-          result["rack"].should be_empty
+          result["contents"].should be_an_instance_of(Array)
+          result["contents"].should be_empty
         end
       end
     end
 
     context 'when the vault has objects' do
-      before :each do
-        @vault = Vault.new
-      end
-
       describe '#add_object' do
-        it 'can adds One object its vault rack' do
-          pending
+        before :each do
+          @vault = Vault.new
         end
 
-        it 'can add Two objects its vault rack' do
-          pending
+        it 'can add One object its vault contents' do
+           @vault.add_object(Fixtures.wallet_address)
+           ActiveSupport::JSON.decode(@vault.as_json)["contents"][0]["class"].should == "wallet_address"
+        end
+
+        it 'can add Two objects its vault contents' do
+           @vault.add_object(Fixtures.wallet_address)
+           @vault.add_object(Fixtures.wallet_address_alt)
+           ActiveSupport::JSON.decode(@vault.as_json)["contents"][0]["class"].should == "wallet_address"
+           ActiveSupport::JSON.decode(@vault.as_json)["contents"][1]["class"].should == "wallet_address_alt"
         end
 
       end

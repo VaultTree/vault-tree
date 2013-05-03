@@ -13,12 +13,12 @@ module VaultTree
 
     def vault_1
       json = "{}"
-      LockSmith::SymmetricVault.new(json)
+      #LockSmith::SymmetricVault.new(json)
     end
 
     def vault_2
       json = "{}"
-      LockSmith::SymmetricVault.new(json)
+      #LockSmith::SymmetricVault.new(json)
     end
 
     def vault_3
@@ -26,12 +26,13 @@ module VaultTree
       vault_key = %Q[
         {
           "class":"symmetric_key",
-          "desc":"Symmetric Key for Vault: #{vault_id}",
-          "id":"#{sha1(vault_id)}"
+          "description":"Symmetric Key for Vault: #{vault_id}",
+          "id":"#{vault_id_checksum(vault_id)}"
           "key":""
         }
       ]
-      LockSmith::SymmetricVault.new(json)
+      puts vault_key 
+      #LockSmith::SymmetricVault.new(json)
     end
 
   end

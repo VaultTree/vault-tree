@@ -70,27 +70,9 @@ module Fixtures
     ].compress
   end
 
-  def self.vault_rack
-    %Q[
-      {"object":"vault_rack","state":[#{id},#{id}]}
-    ].compress
-  end
-
-  def self.vault_rack_alt
-    %Q[
-      {"object":"vault_rack","state":[#{id},#{id_alt}]}
-    ].compress
-  end
-
-  def self.vault_rack_mixed
-    %Q[
-      {"object":"vault_rack","state":[#{id},#{map}]}
-    ].compress
-  end
-
   def self.symmetric_vault
     %Q[
-      {"object":"symmetric_vault","state":#{vault_rack}} 
+      {"object":"symmetric_vault","state":{}} 
     ].compress
   end
 end

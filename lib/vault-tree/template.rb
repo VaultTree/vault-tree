@@ -1,5 +1,6 @@
 require 'erb'
 require 'uuidtools'
+require 'digest/sha1'
 
 module VaultTree
   class Template
@@ -17,6 +18,10 @@ module VaultTree
 
     def generate_uuid
       UUIDTools::UUID.random_create.to_s
+    end
+
+    def vault_id_checksum(id)
+      Digest::SHA1.hexdigest(id)
     end
   end
 end

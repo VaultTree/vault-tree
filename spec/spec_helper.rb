@@ -1,5 +1,11 @@
 load File.dirname(__FILE__) + '/../lib/cc-engine.rb'
 load File.dirname(__FILE__) + '/../lib/vault-tree.rb'
+require 'uuidtools'
+
+
+RSpec.configure do |config|
+  config.mock_framework = :mocha
+end
 
 class String
   def compress
@@ -9,6 +15,18 @@ end
 
 
 module Fixtures
+
+  def self.wallet_address
+    %Q[{"class":"wallet_address",
+        "description":"Fixture Wallet Address",
+        "value":"ADDRESS"}].compress
+  end
+
+  def self.wallet_address_alt
+    %Q[{"class":"wallet_address_alt",
+        "description":"Alternate Fixture Wallet Address",
+        "value":"ADDRESS_ALT"}].compress
+  end
 
   def self.valid_vault_collection
     %Q[

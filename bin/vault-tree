@@ -21,8 +21,8 @@ module VaultTree
       end
 
       def self.generate_contract
-        require_relative '../.vault-tree/templates/escrow.rb'
-        puts VaultTree::Escrow.new.generate_contract
+        require_relative '../.vault-tree/templates/one_two_three.rb'
+        puts VaultTree::OneTwoThree.new.generate_contract
       end
 
     end

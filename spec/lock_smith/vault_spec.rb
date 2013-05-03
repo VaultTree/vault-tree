@@ -20,7 +20,6 @@ module LockSmith
           UUIDTools::UUID.parse(result["id"]).should be_an_instance_of(UUIDTools::UUID)
           result["rack"].should be_an_instance_of(Hash)
           result["rack"].should be_empty
-          puts @vault.as_json
         end
       end
     end

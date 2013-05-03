@@ -36,8 +36,18 @@ module LockSmith
 
     private
 
+    def rack
+      LockSmith::Rack.new
+    end
+
+    def empty_rack
+      LockSmith::EmptyRack.new
+    end
+
     def rack_string
-      "{}"
+      #puts deserialized
+      '{}'
+      #rack.as_json
     end
 
     def domain_class
@@ -53,7 +63,7 @@ module LockSmith
     end
 
     def empty_vault_string
-      %Q[{"class":"#{domain_class}","id":"#{id}","rack":#{rack_string}}]
+      %Q[{"class":"#{domain_class}","id":"#{id}","rack":#{empty_rack.as_json}}]
     end
   end
 end

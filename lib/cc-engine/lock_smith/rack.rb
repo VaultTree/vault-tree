@@ -47,3 +47,11 @@ module LockSmith
     end
   end
 end
+
+module LockSmith
+  class EmptyRack
+    def as_json
+      '{}'
+    end
+  end
+end

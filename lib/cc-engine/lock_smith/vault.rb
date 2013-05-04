@@ -3,8 +3,8 @@ module LockSmith
   class Vault
     attr_reader :string, :id, :contents
 
-    def initialize
-      @string = vault_string(empty_contents_json)
+    def initialize(encrypted_json = nil)
+      @string = encrypted_json || vault_string(empty_contents_json)
       @contents = []
       post_initialize
     end

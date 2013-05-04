@@ -1,3 +1,5 @@
+require 'rbnacl'
+
 module LockSmith
   class SymmetricVault < Vault
 
@@ -9,8 +11,7 @@ module LockSmith
       'symmetric_vault'
     end
 
-    def lock(key)
-      secret_box(key.rbnacl_key)
+    def lock
     end
 
     private

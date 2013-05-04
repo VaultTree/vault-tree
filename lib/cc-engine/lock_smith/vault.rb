@@ -12,6 +12,7 @@ module LockSmith
     def add_object(json)
       contents.push(MultiJson.load(json))
       @string = vault_string(contents_as_json)
+      return self
     end
 
     def id 

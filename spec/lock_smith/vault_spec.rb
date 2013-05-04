@@ -30,6 +30,10 @@ module LockSmith
           @vault = Vault.new
         end
 
+        it 'returns self' do
+           @vault.add_object(Fixtures.wallet_address).should be_an_instance_of(LockSmith::Vault)
+        end
+
         it 'can add One object its vault contents' do
            @vault.add_object(Fixtures.wallet_address)
            ActiveSupport::JSON.decode(@vault.as_json)["contents"][0]["class"].should == "wallet_address"

@@ -1,7 +1,8 @@
 load File.dirname(__FILE__) + '/../lib/cc-engine.rb'
 load File.dirname(__FILE__) + '/../lib/vault-tree.rb'
 require 'uuidtools'
-
+require 'active_support'
+require 'digest/sha1'
 
 RSpec.configure do |config|
   config.mock_framework = :mocha

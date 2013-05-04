@@ -1,7 +1,7 @@
 require 'active_support'
 module LockSmith
   class Vault
-    attr_reader :string, :id, :contents
+    attr_reader :string, :id
 
     def initialize(encrypted_json = nil)
       @string = encrypted_json || vault_string(empty_contents_json)

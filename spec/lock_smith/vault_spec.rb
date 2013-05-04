@@ -37,8 +37,8 @@ module LockSmith
 
         it 'can add Two objects its vault contents' do
            @vault.add_object(Fixtures.wallet_address)
-           @vault.add_object(Fixtures.wallet_address_alt)
            ActiveSupport::JSON.decode(@vault.as_json)["contents"][0]["class"].should == "wallet_address"
+           @vault.add_object(Fixtures.wallet_address_alt)
            ActiveSupport::JSON.decode(@vault.as_json)["contents"][1]["class"].should == "wallet_address_alt"
         end
 

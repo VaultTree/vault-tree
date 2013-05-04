@@ -7,6 +7,7 @@ gem 'multi_json', '>= 1.2.0'
 gem 'uuidtools'
 gem 'rake'
 gem 'activesupport'
+gem 'base32'
 
 group :development do
   gem 'bundler'

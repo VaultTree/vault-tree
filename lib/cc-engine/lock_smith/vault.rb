@@ -3,8 +3,8 @@ module LockSmith
   class Vault
     attr_reader :string
 
-    def initialize(encrypted_json = nil)
-      @string = encrypted_json || vault_string(empty_contents_json)
+    def initialize(json = nil)
+      @string = json || vault_string(empty_contents_json)
       @contents = []
       post_initialize
     end
@@ -22,11 +22,11 @@ module LockSmith
       string
     end
 
-    def lock
+    def lock(key = nil)
       raise 'subclass must implement'
     end
 
-    def unlock
+    def unlock(key = nil)
       raise 'subclass must implement'
     end
 

@@ -1,16 +1,12 @@
 require 'active_support'
 module LockSmith
   class Vault
-    attr_reader :string, :id
+    attr_reader :string
 
     def initialize(encrypted_json = nil)
       @string = encrypted_json || vault_string(empty_contents_json)
       @contents = []
       post_initialize
-    end
-
-    def post_initialize
-      nil
     end
 
     def add_object(json)
@@ -34,16 +30,16 @@ module LockSmith
       raise 'subclass must implement'
     end
 
+    private
+    attr_accessor :contents
+
+    def post_initialize
+      nil
+    end
+
     def generate_uuid
       UUIDTools::UUID.random_create.to_s
     end
-
-    def deserialized
-      MultiJson.load(string)
-    end
-
-    private
-    attr_accessor :contents
 
     def contents_as_json
       ActiveSupport::JSON.encode(contents)

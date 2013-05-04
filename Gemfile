@@ -14,6 +14,7 @@ group :development do
   gem 'cucumber'
   gem 'aruba'
   gem 'rspec'
+  gem 'rspec-encoding-matchers'
   gem 'mocha'
   gem 'factory_girl'
 end

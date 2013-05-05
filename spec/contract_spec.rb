@@ -3,16 +3,15 @@ module VaultTree
   describe 'Contract' do
     describe '#enforce' do
       before :each do
-        json = Fixtures.one_two_three
-        @contract = Contract.new(json)
+        @encrypted_json = Fixtures.one_two_three_encrypted
+        @contract_key = 'VAULT_KEY_1'
+        @contract = Contract.new(@encrypted_json, contract_key: @contract_key)
       end
 
-      it 'pends' do
-        pending 'Not Implemented'
-      end
-
-      it 'pends' do
-        pending 'Not Implemented'
+      it 'writes the decryped contents to log' do
+        @contract.enforce
+        pending
+        puts ActiveSupport::JSON.decode(@contract.log)
       end
     end
   end
@@ -22,8 +21,10 @@ module VaultTree
   class Contract
     attr_reader :string
 
-    def initialize(json)
+    def initialize(json, opts = {contract_key: nil})
+      @contract_key = opts[:contract_key] 
       @string = json
+      @log = ''
     end
 
     def enforce
@@ -31,6 +32,14 @@ module VaultTree
     end
 
     def log
+      @log
     end
+
+    private
+
+    def vault_collection
+      @vault_collection ||= LockSmith::VaultCollection.new(string)
+    end
+
   end
 end

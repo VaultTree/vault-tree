@@ -6,6 +6,7 @@ module LockSmith
   class SymmetricKey
     def initialize(opts = {})
       @vault_id = opts[:vault_id] || no_vault_id
+      @rbnacl_key = opts[:rbnacl_key] 
     end
 
     def id

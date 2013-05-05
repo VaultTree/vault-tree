@@ -38,7 +38,7 @@ module VaultTree
     end
 
     def key_1_json
-      @k1 ||= LockSmith::SymmetricKey.new(vault_id: vault_1.id)
+      @k1 ||= LockSmith::SymmetricKey.new(vault_id: vault_1.id, rbnacl_key: 'VAULT_KEY_1')
       @k1.as_json
     end
 

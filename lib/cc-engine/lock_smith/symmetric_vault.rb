@@ -11,10 +11,6 @@ module LockSmith
       'symmetric_vault'
     end
 
-    def unlock
-      true
-    end
-
     def lock
       @key = Crypto::Random.random_bytes(Crypto::SecretBox.key_bytes)
       @box = Crypto::RandomNonceBox.from_secret_key(@key)

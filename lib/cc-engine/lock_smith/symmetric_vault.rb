@@ -1,3 +1,5 @@
+require 'rbnacl'
+
 module LockSmith
   class SymmetricVault < Vault
 
@@ -9,18 +11,21 @@ module LockSmith
       'symmetric_vault'
     end
 
-    def lock(key)
-      secret_box(key.rbnacl_key)
+    def unlock
+      true
     end
 
-    private
-
-    def secret_box(rbnacl_key)
-      Crypto::SecretBox.new(rbnacl_key) 
+    def lock
+      @key = Crypto::Random.random_bytes(Crypto::SecretBox.key_bytes)
+      @box = Crypto::RandomNonceBox.from_secret_key(@key)
+      @string = @box.box(self.as_json, encoding = :base32)
+      return true
     end
 
-    def box_with_nonce
-      nonce = Crypto::Random.random_bytes(24)
+    def unlock
+      @box = Crypto::RandomNonceBox.from_secret_key(@key)
+      @string = @box.open(self.as_json, encoding = :base32)
+      return true
     end
   end
 end

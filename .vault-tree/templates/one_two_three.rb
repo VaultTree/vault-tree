@@ -4,36 +4,52 @@ module VaultTree
     def template_erb
       %Q[
         {
-          "<%= vault_3.id %>":"<%= vault_3.lock%>",
-          "<%= vault_2.id %>":"<%= vault_2.lock%>",
-          "<%= vault_1.id %>":"<%= vault_1.lock%>"
+          "<%= vault_3.id %>":"<%= construct_vault_3.lock%>",
+          "<%= vault_2.id %>":"<%= construct_vault_2.lock%>",
+          "<%= vault_1.id %>":"<%= construct_vault_1.lock%>"
         }
       ]
     end
 
+    def construct_vault_3
+      vault_3.add_object(key_3_json)
+    end
+
+    def construct_vault_2
+      vault_2.add_object(key_3_json)
+      vault_2.add_object(key_2_json)
+    end
+
+    def construct_vault_1
+      vault_1.add_object(key_2_json)
+      vault_1.add_object(key_1_json)
+    end
+    
     def vault_1
-      json = "{}"
-      #LockSmith::SymmetricVault.new(json)
+      @v1 ||= LockSmith::SymmetricVault.new
     end
 
     def vault_2
-      json = "{}"
-      #LockSmith::SymmetricVault.new(json)
+      @v2 ||= LockSmith::SymmetricVault.new
     end
 
     def vault_3
-      vault_id = generate_uuid
-      vault_key = %Q[
-        {
-          "class":"symmetric_key",
-          "description":"Symmetric Key for Vault: #{vault_id}",
-          "id":"#{vault_id_checksum(vault_id)}"
-          "key":""
-        }
-      ]
-      puts vault_key 
-      #LockSmith::SymmetricVault.new(json)
+      @v3 ||= LockSmith::SymmetricVault.new
     end
 
+    def key_1_json
+      @k1 ||= LockSmith::SymmetricKey.new(vault_id: @v1.id)
+      @k1.as_json
+    end
+
+    def key_2_json
+      @k2 ||= LockSmith::SymmetricKey.new(vault_id: @v2.id)
+      @k2.as_json
+    end
+
+    def key_3_json
+      @k3 ||= LockSmith::SymmetricKey.new(vault_id: @v3.id)
+      @k3.as_json
+    end
   end
 end

@@ -1,7 +1,15 @@
 load File.dirname(__FILE__) + '/../lib/cc-engine.rb'
 load File.dirname(__FILE__) + '/../lib/vault-tree.rb'
 require 'uuidtools'
+require 'active_support'
+require 'digest/sha1'
+require 'rspec_encoding_matchers'
 
+
+RSpec.configure do |config|
+  config.color_enabled = true
+  config.include RSpecEncodingMatchers
+end
 
 RSpec.configure do |config|
   config.mock_framework = :mocha
@@ -12,7 +20,6 @@ class String
     gsub("\n", ' ').squeeze(' ').strip
   end
 end
-
 
 module Fixtures
 

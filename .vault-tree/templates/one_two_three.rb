@@ -4,9 +4,9 @@ module VaultTree
     def template_erb
       %Q[
         {
-          "<%= vault_3.id %>":"<%= construct_vault_3.lock%>",
-          "<%= vault_2.id %>":"<%= construct_vault_2.lock%>",
-          "<%= vault_1.id %>":"<%= construct_vault_1.lock%>"
+          "<%= vault_3.id.color(:green) %>":"<%= construct_vault_3.lock%>",
+          "<%= vault_2.id.color(:green) %>":"<%= construct_vault_2.lock%>",
+          "<%= vault_1.id.color(:green) %>":"<%= construct_vault_1.lock%>"
         }
       ]
     end
@@ -38,17 +38,17 @@ module VaultTree
     end
 
     def key_1_json
-      @k1 ||= LockSmith::SymmetricKey.new(vault_id: @v1.id)
+      @k1 ||= LockSmith::SymmetricKey.new(vault_id: vault_1.id)
       @k1.as_json
     end
 
     def key_2_json
-      @k2 ||= LockSmith::SymmetricKey.new(vault_id: @v2.id)
+      @k2 ||= LockSmith::SymmetricKey.new(vault_id: vault_2.id)
       @k2.as_json
     end
 
     def key_3_json
-      @k3 ||= LockSmith::SymmetricKey.new(vault_id: @v3.id)
+      @k3 ||= LockSmith::SymmetricKey.new(vault_id: vault_3.id)
       @k3.as_json
     end
   end

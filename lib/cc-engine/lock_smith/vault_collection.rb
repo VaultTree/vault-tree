@@ -17,7 +17,7 @@ module LockSmith
     end
 
     def collection
-      MultiJson.load(string)
+      ActiveSupport::JSON.decode(string)
     end
 
     def empty

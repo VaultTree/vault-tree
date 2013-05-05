@@ -5,12 +5,12 @@ require 'digest/sha1'
 module LockSmith
   class SymmetricKey
     def initialize(opts = {})
-      @vault_id = opts[:vault_id] || no_vault_id
+      @vault_id = opts[:vault_id]
       @rbnacl_key = opts[:rbnacl_key] 
     end
 
-    def id
-      Digest::SHA1.hexdigest(@vault_id)
+    def vault_id
+      @vault_id
     end
 
     def rbnacl_key
@@ -19,7 +19,7 @@ module LockSmith
     end
 
     def as_json
-      %Q[{"class":"#{domain_class}","id":"#{id}","rbnacl_key":"#{rbnacl_key}"}]
+      %Q[{"class":"#{domain_class}","vault_id":"#{vault_id}","rbnacl_key":"#{rbnacl_key}"}]
     end
 
     private
@@ -27,10 +27,5 @@ module LockSmith
     def domain_class
       'symmetric_key'
     end
-
-    def no_vault_id
-      raise " #{self.class} initializer expects a vault id"
-    end
-
   end
 end

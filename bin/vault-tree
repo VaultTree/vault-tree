@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require 'gli'
 include GLI::App
-require File.expand_path('../../lib/vault-tree', __FILE__)
+require_relative '../lib/cc-engine'
+require_relative '../lib/vault-tree'
 require "uuidtools"
 
 class String
@@ -21,7 +22,7 @@ module VaultTree
       end
 
       def self.generate_contract
-        require_relative '../.vault-tree/templates/one_two_three.rb'
+        require_relative '../.vault-tree/templates/one_two_three'
         puts VaultTree::OneTwoThree.new.generate_contract
       end
 

@@ -8,6 +8,9 @@ gem 'uuidtools'
 gem 'rake'
 gem 'activesupport'
 gem 'base32'
+gem 'json'
+gem 'rainbow'
+
 
 group :development do
   gem 'bundler'

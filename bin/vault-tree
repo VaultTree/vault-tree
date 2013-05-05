@@ -4,6 +4,8 @@ include GLI::App
 require_relative '../lib/cc-engine'
 require_relative '../lib/vault-tree'
 require "uuidtools"
+require 'json'
+require 'rainbow'
 
 class String
   def compress

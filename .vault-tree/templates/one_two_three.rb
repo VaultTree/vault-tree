@@ -4,9 +4,9 @@ module VaultTree
     def template_erb
       %Q[
         {
-          "<%= vault_3.id %>":"<%= construct_vault_3.lock%>",
-          "<%= vault_2.id %>":"<%= construct_vault_2.lock%>",
-          "<%= vault_1.id %>":"<%= construct_vault_1.lock%>"
+          "<%= vault_3.id.color(:green) %>":"<%= construct_vault_3.lock%>",
+          "<%= vault_2.id.color(:green) %>":"<%= construct_vault_2.lock%>",
+          "<%= vault_1.id.color(:green) %>":"<%= construct_vault_1.lock%>"
         }
       ]
     end

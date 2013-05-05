@@ -18,8 +18,8 @@ module VaultTree
     module Contracts
 
       def self.enforce(opts = {})
-        path = 'path/to/default'
-        json = VaultTree::Import::ContractReader.new(path).read
+        require_relative '../.vault-tree/templates/one_two_three'
+        json = VaultTree::OneTwoThree.new.generate_contract
         VaultTree::Contract.new(json).enforce
       end
 
@@ -59,7 +59,7 @@ module VaultTree
     end
 
     def enforce
-      puts 'enforcing myself'
+      puts "Enforcing with this json: #{string}"
     end
   end
 end

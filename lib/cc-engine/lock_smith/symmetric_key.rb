@@ -4,6 +4,7 @@ require 'digest/sha1'
 
 module LockSmith
   class SymmetricKey
+
     def initialize(opts = {})
       @vault_id = opts[:vault_id]
       @rbnacl_key = opts[:rbnacl_key] 
@@ -18,6 +19,10 @@ module LockSmith
       @rbnacl_key ||= HexEncoder.new.encode(bytes)
     end
 
+    def rbnacl_key_bytes
+      HexEncoder.new.decode(rbnacl_key)
+    end
+
     def as_json
       %Q[{"class":"#{domain_class}","vault_id":"#{vault_id}","rbnacl_key":"#{rbnacl_key}"}]
     end
@@ -27,5 +32,6 @@ module LockSmith
     def domain_class
       'symmetric_key'
     end
+
   end
 end

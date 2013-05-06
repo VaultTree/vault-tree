@@ -92,4 +92,19 @@ def self.one_two_three_encrypted
         }].compress
 end
 
+
+  def self.test_vault_class
+    'test_object'
+  end
+
+  def self.test_vault_contents
+    %Q[
+      {"class":"test_object"} 
+    ]
+  end
+
+  def self.encrypted_test_vault_contents
+"zhfnk6d5udhpnfxqjuhkm7att2il3wv2y5uoriaptpgxdk7zdfjefna3tfuhagojguj7loydyvb7fiyvocw6fuuzjzisevxfvfpyynn4fv7w6i37yfx6yu4veu======"
+  end
+
 end

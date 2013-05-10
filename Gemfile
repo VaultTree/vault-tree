@@ -6,18 +6,19 @@ gem 'jbuilder'
 gem 'multi_json', '>= 1.2.0'
 gem 'uuidtools'
 gem 'rake'
+gem 'activerecord', '~> 3.2.13'
 gem 'activesupport'
 gem 'base32'
 gem 'json'
 gem 'rainbow'
-
+gem 'sqlite3'
 
 group :development do
   gem 'bundler'
-  gem 'cucumber'
   gem 'aruba'
-  gem 'rspec'
+  gem 'rspec', '>= 2.0.0'
   gem 'rspec-encoding-matchers'
+  gem 'cucumber'
   gem 'mocha'
   gem 'factory_girl'
 end

@@ -52,20 +52,6 @@ module VaultTree
   end
 end
 
-module VaultTree
-  class Contract
-    attr_reader :string
-
-    def initialize(json)
-      @string = json
-    end
-
-    def enforce
-      puts "Enforcing with this json: #{string}"
-    end
-  end
-end
-
 program_desc 'Self Enforcing BitCoin Contracts'
 
 version VaultTree::VERSION

@@ -11,7 +11,7 @@ gem 'activesupport'
 gem 'base32'
 gem 'json'
 gem 'rainbow'
-
+gem 'sqlite3'
 
 group :development do
   gem 'bundler'

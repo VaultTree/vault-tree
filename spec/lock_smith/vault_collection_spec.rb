@@ -11,7 +11,7 @@ module LockSmith
     describe '#[]' do
       it 'returns a Vault when given a valid vault id' do
         collection = VaultCollection.new(@valid_collection)
-        collection[@valid_vault_id].should be_an_instance_of(Vault)
+        collection[@valid_vault_id].should be_an_instance_of(SymmetricVault)
       end
 
       it 'returns the Null Vault when given an invalid vault id' do

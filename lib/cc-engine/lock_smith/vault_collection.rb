@@ -13,7 +13,7 @@ module LockSmith
     private
 
     def vault(id)
-      Vault.new(collection[id]) if collection[id]
+      SymmetricVault.new(collection[id]) if collection[id]
     end
 
     def collection

@@ -30,7 +30,6 @@ module VaultTree
     end
 
     def establish_connection
-      puts connection_details
       ActiveRecord::Base.establish_connection(connection_details)
     end
 

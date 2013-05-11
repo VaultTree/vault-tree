@@ -13,4 +13,3 @@ describe 'Contract' do
     end
   end
 end
-

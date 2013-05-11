@@ -21,5 +21,5 @@ group :development do
   gem 'rspec-encoding-matchers'
   gem 'cucumber'
   gem 'mocha'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end

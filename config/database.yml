@@ -1,5 +1,4 @@
 adapter: sqlite3
-database: vault-tree
+database: db/vault_tree.sqlite3
 pool: 5
 timeout: 5000
-encoding: 'utf8'

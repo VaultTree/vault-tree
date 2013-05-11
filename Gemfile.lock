@@ -80,5 +80,5 @@ DEPENDENCIES
   rbnacl
   rspec (>= 2.0.0)
   rspec-encoding-matchers
-  sqlite3
+  sqlite3 (~> 1.3.7)
   uuidtools

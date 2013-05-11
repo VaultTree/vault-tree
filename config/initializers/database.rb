@@ -29,6 +29,11 @@ module VaultTree
       migrate
     end
 
+    def establish_connection
+      puts connection_details
+      ActiveRecord::Base.establish_connection(connection_details)
+    end
+
     private
 
     def project_dir
@@ -38,10 +43,7 @@ module VaultTree
     def connection_details
       YAML::load_file(config_file)
     end
-
-    def establish_connection
-      puts connection_details
-      ActiveRecord::Base.establish_connection(connection_details)
-    end
   end
 end
+
+#VaultTree::DataBase.new.establish_connection

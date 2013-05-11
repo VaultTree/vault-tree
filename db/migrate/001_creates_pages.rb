@@ -4,5 +4,8 @@ class CreatesPages < ActiveRecord::Migration
       t.text :content
       t.boolean :published, default: false
     end
+
+    create_table :contracts do |t|
+    end
   end
 end

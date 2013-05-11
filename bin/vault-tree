@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require_relative '../config/initialize'
-
+VaultTree::DataBase.new.establish_connection
 include GLI::App
+
 program_desc 'Self Enforcing BitCoin Contracts'
 version VaultTree::VERSION
 

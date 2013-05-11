@@ -1,59 +1,8 @@
 #!/usr/bin/env ruby
-require 'gli'
+require_relative '../config/initialize'
+
 include GLI::App
-require_relative '../lib/cc-engine'
-require_relative '../lib/vault-tree'
-require "uuidtools"
-require 'json'
-require 'rainbow'
-
-class String
-  def compress
-    gsub("\n", ' ').squeeze(' ').strip
-  end
-end
-
-module VaultTree
-  module Api
-    module Contracts
-
-      def self.enforce(opts = {})
-        require_relative '../.vault-tree/templates/one_two_three'
-        json = VaultTree::OneTwoThree.new.generate_contract
-        contract = VaultTree::Contract.new(json)
-        contract.enforce
-        puts contract.log.show
-      end
-
-      def self.generate_contract
-        require_relative '../.vault-tree/templates/one_two_three'
-        puts VaultTree::OneTwoThree.new.generate_contract
-      end
-
-    end
-  end
-end
-
-module VaultTree
-  module Import
-    class ContractReader
-      attr_reader :path
-
-      def initialize(path)
-        @path = path
-      end
-
-      def read
-        puts 'Reading in file at:'
-        puts path
-        '[]'
-      end
-    end
-  end
-end
-
 program_desc 'Self Enforcing BitCoin Contracts'
-
 version VaultTree::VERSION
 
 desc 'Describe some switch here'

@@ -1,11 +1,3 @@
-# encoding: utf-8
-require 'rubygems'
-require 'rake'
-require 'bundler'
-require "bundler/setup"
-require 'sqlite3'
-require 'active_record'
-require 'yaml'
 
 
 begin
@@ -23,13 +15,6 @@ namespace :db do
     Dir.glob(project_root + "/app/models/*.rb").each{|f| require f}
   end
 
-  module VaultTree
-    class PathHelpers
-      def self.project_dir
-        File.dirname(File.absolute_path(__FILE__))
-      end
-    end
-  end
 
   module VaultTree
     class DataBase

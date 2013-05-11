@@ -1,4 +1,7 @@
-
+require_relative 'config/initialize'
+require 'rake'
+require 'bundler'
+require 'bundler/setup'
 
 begin
   Bundler.setup(:default, :development)
@@ -9,61 +12,6 @@ rescue Bundler::BundlerError => e
 end
 
 namespace :db do
-
-  def active_record_models
-    project_root = File.dirname(File.absolute_path(__FILE__))
-    Dir.glob(project_root + "/app/models/*.rb").each{|f| require f}
-  end
-
-
-  module VaultTree
-    class DataBase
-      attr_reader :config_file
-
-      def initialize
-        @config_file = "#{project_dir}/config/database.yml"
-      end
-
-      def create
-        SQLite3::Database.new(connection_details["database"])
-      end
-
-      def drop
-        begin
-          FileUtils.rm(connection_details["database"])
-        rescue
-          nil
-        end
-      end
-      
-      def migrate
-        establish_connection
-        ActiveRecord::Migrator.migrate("db/migrate/")
-      end
-
-      def setup
-        drop
-        create
-        migrate
-      end
-
-      private
-
-      def project_dir
-        VaultTree::PathHelpers.project_dir
-      end
-
-      def connection_details
-        YAML::load_file(config_file)
-      end
-
-      def establish_connection
-        puts connection_details
-        ActiveRecord::Base.establish_connection(connection_details)
-      end
-    end
-  end
-
   def database 
     VaultTree::DataBase.new
   end
@@ -87,5 +35,4 @@ namespace :db do
   task :setup do
     database.setup 
   end
-
 end

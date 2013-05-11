@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem 'gli'
+gem 'require_all'
 gem 'rbnacl'
 gem 'jbuilder'
 gem 'multi_json', '>= 1.2.0'

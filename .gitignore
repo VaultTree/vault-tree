@@ -1,4 +1,6 @@
-# rcov generated
+# Ignore the database
+db/*.sqlite3
+
 coverage
 coverage.data
 

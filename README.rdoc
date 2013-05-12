@@ -54,4 +54,6 @@ Installing Gems
 
   bundle install --path='./gems/'
 
+Active Model Serializer
 
+# http://rubydoc.info/github/josevalim/active_model_serializers/ActiveModel/Serializer

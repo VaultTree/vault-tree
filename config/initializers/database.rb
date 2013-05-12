@@ -44,5 +44,3 @@ module VaultTree
     end
   end
 end
-
-#VaultTree::DataBase.new.establish_connection

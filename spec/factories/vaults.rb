@@ -5,6 +5,12 @@ FactoryGirl.define do
   end
 
   factory :genesis_vault, class: VaultTree::GenesisVault do
-    content "ENCRYPTED_CONTENT-random_hex"
+    content {"ENCRYPTED_CONTENT-#{generate(:random_hex)}"}
+  end
+
+  factory :dummy_symmetric_vault, class: VaultTree::SymmetricVault do
+  end
+
+  factory :dummy_asymmetric_vault, class: VaultTree::AsymmetricVault do
   end
 end

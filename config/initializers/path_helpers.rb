@@ -28,5 +28,9 @@ module VaultTree
     def self.database_config
      "#{project_dir}/config/database.yml"
     end
+
+    def self.factories
+     "#{project_dir}/spec/factories"
+    end
   end
 end

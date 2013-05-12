@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe 'Contract' do
+
+  describe '#content' do
+    before(:each) do
+      @contract = FactoryGirl.create(:dummy_contract)
+    end
+
+    it 'experiment with serializer' do
+      puts '@contract.as_json'
+      puts @contract.as_json
+      pending
+    end
+  end
+
   describe '#create' do
 
     before(:each) do

@@ -13,6 +13,9 @@ class CreateModels < ActiveRecord::Migration
     end
 
     create_table :contracts do |t|
+      t.text :donkey
+      t.text :zebra
+      t.text :content
     end
 
     create_table :contract_headers do |t|

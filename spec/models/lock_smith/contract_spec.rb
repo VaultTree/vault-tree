@@ -1,43 +1,5 @@
 require 'spec_helper'
 
-module FactoryHelpers
-  def self.random_hex
-    (0...4).map{ ('a'..'z').to_a[rand(26)] }.join
-  end
-end
-
-
-FactoryGirl.define do
-  sequence(:random_hex) {FactoryHelpers.random_hex}
-end
-
-FactoryGirl.define do
-
-  factory :vault, class: VaultTree::Vault do
-    content {"ENCRYPTED_CONTENT-#{generate(:random_hex)}"}
-  end
-
-  factory :genesis_vault, class: VaultTree::GenesisVault do
-    content "ENCRYPTED_CONTENT-random_hex"
-  end
-
-  factory :contract_header, class: VaultTree::ContractHeader do
-    content "HEADER_CONTENT"
-  end
-end
-
-FactoryGirl.define do
-  factory :dummy_contract, class: VaultTree::Contract do
-    after(:create) do |contract|
-      contract.vaults << FactoryGirl.create(:vault)
-      contract.vaults << FactoryGirl.create(:vault)
-      contract.vaults << FactoryGirl.create(:vault)
-      contract.contract_header = FactoryGirl.create(:contract_header)
-      contract.genesis_vault = FactoryGirl.create(:genesis_vault)
-    end
-  end 
-end
-
 describe 'Contract' do
   describe '#create' do
 

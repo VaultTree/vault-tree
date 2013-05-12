@@ -18,6 +18,7 @@ class CreateModels < ActiveRecord::Migration
 
     create_table :contract_headers do |t|
       t.integer :contract_id
+      t.text :contract_vault_id
       t.text :content
     end
 

@@ -6,10 +6,15 @@ module FactoryHelpers
   end
 end
 
+
+FactoryGirl.define do
+  sequence(:random_hex) {FactoryHelpers.random_hex}
+end
+
 FactoryGirl.define do
 
   factory :vault, class: VaultTree::Vault do
-    content "ENCRYPTED_CONTENT-#{FactoryHelpers.random_hex}"
+    content {"ENCRYPTED_CONTENT-#{generate(:random_hex)}"}
   end
 
   factory :genesis_vault, class: VaultTree::GenesisVault do
@@ -22,11 +27,7 @@ FactoryGirl.define do
 end
 
 FactoryGirl.define do
-  factory :contract_with_vaults, class: VaultTree::Contract do
-    #after(:create) do |contract|
-      #contract.genesis_vault << FactoryGirl.create(:genesis_vault)
-    #end
-
+  factory :dummy_contract, class: VaultTree::Contract do
     after(:create) do |contract|
       contract.vaults << FactoryGirl.create(:vault)
       contract.vaults << FactoryGirl.create(:vault)
@@ -41,7 +42,7 @@ describe 'Contract' do
   describe '#create' do
 
     before(:each) do
-      @contract = FactoryGirl.create(:contract_with_vaults)
+      @contract = FactoryGirl.create(:dummy_contract)
     end
 
     it 'has_many vaults' do
@@ -49,7 +50,9 @@ describe 'Contract' do
     end
 
     it 'each vault is different' do
-      pending
+      f = @contract.vaults.first.content 
+      l = @contract.vaults.last.content 
+      f.should_not == l
     end
 
     it 'has_one contract_header' do

@@ -33,9 +33,5 @@ describe 'Contract' do
     it 'has_one contract_header' do
       @contract.contract_header.should be_an_instance_of(VaultTree::ContractHeader)
     end
-
-    it 'has_one genesis_vault' do
-      @contract.genesis_vault.should be_an_instance_of(VaultTree::GenesisVault)
-    end
   end
 end

@@ -4,7 +4,7 @@ FactoryGirl.define do
     content {"ENCRYPTED_CONTENT-#{generate(:random_hex)}"}
   end
 
-  factory :genesis_vault, class: VaultTree::GenesisVault do
+  factory :dummy_vault, class: VaultTree::Vault do
     content {"ENCRYPTED_CONTENT-#{generate(:random_hex)}"}
   end
 

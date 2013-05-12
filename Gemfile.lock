@@ -107,7 +107,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.8.1)
   activerecord (~> 3.2.13)
-  activesupport
+  activesupport (~> 3.2.13)
   aruba
   base32
   bundler
@@ -115,7 +115,7 @@ DEPENDENCIES
   factory_girl_rails
   gli
   jbuilder
-  json
+  json (~> 1.7.7)
   mocha
   multi_json (>= 1.2.0)
   rainbow

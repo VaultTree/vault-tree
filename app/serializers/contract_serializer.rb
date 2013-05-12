@@ -1,5 +1,4 @@
 class ContractSerializer < ActiveModel::Serializer
-  attributes :zebra, :donkey
+  has_one :contract_header
+  has_many :vaults
 end
-
-# http://rubydoc.info/github/josevalim/active_model_serializers/ActiveModel/Serializer

@@ -1,3 +1,4 @@
 class VaultSerializer < ActiveModel::Serializer
-  attributes :id, :content
+  attributes :content
+  has_many :unlocking_conditions
 end

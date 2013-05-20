@@ -1,3 +1,4 @@
 class ContractSerializer < ActiveModel::Serializer
-  attributes :name, :content
+  attributes :name
+  has_many :nodes
 end

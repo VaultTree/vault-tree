@@ -11,5 +11,10 @@ FactoryGirl.define do
   factory :one_two_three, class: VaultTree::Contract do
     name :one_two_three
     content 'my content'
+    after(:create) do |contract|
+      contract.nodes << FactoryGirl.create(:node_one)
+      contract.nodes << FactoryGirl.create(:node_two)
+      contract.nodes << FactoryGirl.create(:node_three)
+    end
   end
 end

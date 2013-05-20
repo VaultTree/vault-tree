@@ -6,4 +6,16 @@ FactoryGirl.define do
       node.vault = FactoryGirl.create(:vault)
     end
   end
+
+  factory :node_one, parent: :node  do
+    label {"[1]"}
+  end
+
+  factory :node_two, parent: :node do
+    label {"[1,2]"}
+  end
+
+  factory :node_three, parent: :node do
+    label {"[1,2,3]"}
+  end
 end

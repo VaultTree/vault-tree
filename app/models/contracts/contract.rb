@@ -1,7 +1,7 @@
 module VaultTree
   class Contract < ActiveRecord::Base
     has_one :contract_header
-    has_many :vaults
+    has_many :nodes
 
     def active_model_serializer
       ContractSerializer

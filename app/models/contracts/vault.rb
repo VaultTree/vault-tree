@@ -1,6 +1,7 @@
 module VaultTree
   class Vault < ActiveRecord::Base
     belongs_to :contract
+    has_many :unlocking_conditions
 
     def active_model_serializer
       VaultSerializer

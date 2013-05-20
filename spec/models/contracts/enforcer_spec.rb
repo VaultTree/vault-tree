@@ -10,9 +10,9 @@ describe 'Enforcer' do
         @enforcer.contract.should be_an_instance_of(VaultTree::Contract)
       end
 
-      it 'can access vaults via the contract' do
-        v = @enforcer.contract.vaults.first 
-        v.should be_an_instance_of(VaultTree::Vault)
+      it 'can access nodes via the contract' do
+        v = @enforcer.contract.nodes.first 
+        v.should be_an_instance_of(VaultTree::Node)
       end
     end
 

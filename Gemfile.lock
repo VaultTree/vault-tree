@@ -115,7 +115,7 @@ DEPENDENCIES
   factory_girl_rails
   gli
   jbuilder
-  json (~> 1.7.7)
+  json (>= 1.7.7)
   mocha
   multi_json (>= 1.2.0)
   rainbow

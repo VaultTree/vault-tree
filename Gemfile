@@ -13,6 +13,7 @@ gem 'activesupport', "~> 3.2.13"
 gem "active_model_serializers", "~> 0.8.1"
 gem 'base32'
 gem 'rainbow'
+gem 'json', '>= 1.7.7'
 
 group :development do
   gem 'bundler'

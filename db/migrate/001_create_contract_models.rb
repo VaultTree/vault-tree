@@ -2,6 +2,7 @@ class CreateContractModels < ActiveRecord::Migration
   def change
 
     create_table :contracts do |t|
+      t.text :name
       t.text :content
     end
 

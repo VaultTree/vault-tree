@@ -32,5 +32,9 @@ module VaultTree
     def self.factories
      "#{project_dir}/spec/factories"
     end
+
+    def self.spec_helper
+     "#{project_dir}/spec/spec_helper"
+    end
   end
 end

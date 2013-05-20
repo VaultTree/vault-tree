@@ -52,3 +52,16 @@ end
 When(/^we unlock the vault$/) do
   pending # express the regexp above with the code you wish you had
 end
+
+Given(/^we set up the One Two Three Contract$/) do
+  @contract = FactoryGirl.create(:one_two_three)
+end
+
+When(/^we export this contract$/) do
+  @api = VaultTree::Api.new
+  @api.export_contract(name: :one_two_three, file: 'my_file')
+end
+
+Then(/^this contract is written to the proper file$/) do
+  pending # express the regexp above with the code you wish you had
+end

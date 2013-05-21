@@ -11,3 +11,7 @@ Before do
     $dunit = true 
   end 
 end
+
+Before do
+  @dirs = ["#{VaultTree::PathHelpers.practice_config_dir}"]
+end

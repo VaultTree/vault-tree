@@ -36,5 +36,9 @@ module VaultTree
     def self.spec_helper
      "#{project_dir}/spec/spec_helper"
     end
+
+    def self.practice_config_dir
+     "#{project_dir}/.vault-tree"
+    end
   end
 end

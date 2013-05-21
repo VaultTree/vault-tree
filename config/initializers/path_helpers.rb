@@ -40,5 +40,14 @@ module VaultTree
     def self.practice_config_dir
      "#{project_dir}/.vault-tree"
     end
+
+    def self.config_dir
+     "#{project_dir}/.vault-tree"
+    end
+
+    def self.contracts_dir
+     "#{project_dir}/.vault-tree/contracts"
+    end
+
   end
 end

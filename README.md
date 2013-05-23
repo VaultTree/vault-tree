@@ -68,6 +68,27 @@ In the context of the protocol this means the following:
 * There does not exist a combination of conditions that would fail to unlock a
   leaf vault.
 
+
+## Address Signalling
+Address Signalling is a method by which contract participants can express clear
+intentions via the Block chain. It is also a method of transfering symmetric
+vault keys to other counter parties.
+
+The main components of an Address Signalling scheme are: 
+*  **From Address**. The Block chain wallet address that is the source of all
+   transfered funds. This is agreed to in advance by all parties.
+*  **BTC Signal Quanity**. 
+*  **Signal Address**. or the **To Address**
+
+### Simple Address Signal
+
+### Address Signal and Associated Symmetric Key Transfer
+
+### Address Signal and Non Associated Symmetric Key Transfer
+
+### Address Signal with Two Way Revealed Key Transfer
+
+
 ##### Notes for Developers
 
 * Vault Tree makes heavy use of [Active Model Serializers] for managing

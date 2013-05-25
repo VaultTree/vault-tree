@@ -9,14 +9,6 @@ module VaultTree
         @contract = Contract.import(@json)
       end
 
-      it '.import returns a contract object' do
-        @contract.should be_an_instance_of(Contract)
-      end
-
-      it 'there is now one saved contract' do
-        Contract.find(:all).length.should == 1
-      end
-
       it 'the json matches after input and output' do
         puts @contract.as_json 
         @contract.as_json.should == @json
@@ -28,8 +20,25 @@ module VaultTree
     end
 
     describe '.import' do
-      it 'returns a null contract for invalid json' do
-        pending
+      context 'for valid contract' do
+        before(:each) do
+          @json = File.open(PathHelpers.one_two_three_contract).read
+          @contract = Contract.import(@json)
+        end
+
+        it 'returns a contract object' do
+          @contract.should be_an_instance_of(Contract)
+        end
+
+        it 'the contract has been properly save' do
+          @contract.persisted?.should be true
+        end
+      end
+
+      context 'for invalid contract' do
+        it 'returns a null contract' do
+          pending
+        end
       end
     end
 

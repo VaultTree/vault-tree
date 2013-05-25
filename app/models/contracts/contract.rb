@@ -1,14 +1,16 @@
 module VaultTree
   class Contract < ActiveRecord::Base
-    has_one :contract_header
-    has_many :nodes
-
-    def active_model_serializer
-      ContractSerializer
-    end
+    has_many :vaults
+    has_many :parties
 
     def as_json
-      active_model_serializer.new(self).to_json
+      ContractSerializer.new(presenter).to_json
+    end
+
+    private
+
+    def presenter
+      ContractPresenter.new(self)
     end
   end
 end

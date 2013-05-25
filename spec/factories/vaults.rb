@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :vault, class: VaultTree::Vault do
     label {FactoryHelpers.vault_label}
-    unlocking_certificate ""
+    custodian_number {FactoryHelpers.random_int} 
     custodian_signature ""
-    desc ""
+    unlocking_certificate ""
     content ""
+    desc ""
   end
 end

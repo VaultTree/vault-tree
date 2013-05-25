@@ -41,7 +41,12 @@ module VaultTree
     attr_accessor :contract
 
     def saved_contract
-      #@contract.save
+      contract.save
+      puts 'after assembly'
+      puts contract.attributes
+      contract.parties.each{|p| puts 'party:'; puts p.attributes;}
+      contract.vaults.each{|v| puts 'vault:'; puts v.attributes;}
+      contract
     end
 
     def assemble_sections
@@ -57,24 +62,18 @@ module VaultTree
 
     def assemble_header
       contract.checksum = contract_hash['header']['checksum']
-      contract.specification = contract_hash['header']['specification'] 
-      puts 'after assemble_header'
-      puts contract.attributes
+      contract.specification = contract_hash['header']['specification']
     end
 
     def assemble_parties
-      puts 'assemble_parties'
-      puts contract_hash['parties']
+      contract_hash['parties'].each{|p| contract.parties << Party.new(p)}
     end
 
     def assemble_vaults
-      puts 'assemble_vaults'
-      puts contract_hash['vaults']
+      contract_hash['vaults'].each{|v| contract.vaults << Vault.new(v)}
     end
 
     def assemble_signature_blocks
-      puts 'assemble_signature_blocks'
-      puts contract_hash['signature_blocks']
     end
   end
 end

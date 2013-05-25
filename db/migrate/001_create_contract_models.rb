@@ -8,7 +8,7 @@ class CreateContractModels < ActiveRecord::Migration
 
     create_table :parties do |t|
       t.integer :contract_id
-      t.integer :number
+      t.text :number
       t.text :public_key
       t.text :address
       t.text :affirmation_key
@@ -17,17 +17,17 @@ class CreateContractModels < ActiveRecord::Migration
 
     create_table :vaults do |t|
       t.integer :contract_id
-      t.integer :party_id
       t.text :label
-      t.text :unlocking_certificate
+      t.text :custodian_number
       t.text :custodian_signature
-      t.text :desc
+      t.text :unlocking_certificate
       t.text :content
+      t.text :desc
     end
 
     create_table :signature_blocks do |t|
       t.integer :contract_id
-      t.integer :party_number
+      t.text :party_number
       t.text :affirmation_key
       t.text :signature
     end

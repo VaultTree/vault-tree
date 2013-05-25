@@ -5,7 +5,6 @@ module VaultTree
 
     describe '.import | #as_json' do
       before(:each) do
-        pending
         @json = File.open(PathHelpers.one_two_three_contract).read
         @contract = Contract.import(@json)
       end

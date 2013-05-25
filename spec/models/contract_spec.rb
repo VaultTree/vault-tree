@@ -9,9 +9,14 @@ module VaultTree
         @contract = Contract.import(@json)
       end
 
-      it 'the json matches after input and output' do
-        puts @contract.as_json 
-        @contract.as_json.should == @json
+      it 'the compressed json matches after input and output' do
+        puts "##INPUT##"
+        puts @json
+        puts "##INPUT COMPRESSED##"
+        puts @json.compress
+        puts "##OUTPUT##"
+        puts @contract.as_json
+        @contract.as_json.should == @json.compress
       end
 
       it 'the compressed string checksums should match' do

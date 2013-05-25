@@ -9,6 +9,10 @@ module VaultTree
         @contract = Contract.import(@json)
       end
 
+      it 'there is now one saved contract' do
+        Contract.find(:all).length.should == 1
+      end
+
       it 'the json matches after input and output' do
         @contract.as_json.should == @json
       end

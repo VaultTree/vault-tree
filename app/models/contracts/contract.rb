@@ -42,11 +42,6 @@ module VaultTree
 
     def saved_contract
       contract.save
-      puts 'after assembly'
-      puts contract.attributes
-      contract.parties.each{|p| puts 'party:'; puts p.attributes;}
-      contract.vaults.each{|v| puts 'vault:'; puts v.attributes;}
-      contract
     end
 
     def assemble_sections
@@ -74,6 +69,7 @@ module VaultTree
     end
 
     def assemble_signature_blocks
+      contract_hash['signature_blocks'].each{|sb| contract.signature_blocks << SignatureBlock.new(sb)}
     end
   end
 end

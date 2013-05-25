@@ -63,7 +63,7 @@ module VaultTree
     end
 
     def one_two_three_contract
-      "#{project_dir_parent}/vault_tree_contracts/one_two_three-0.1.0.json"
+      "#{project_dir_parent}/contracts/one_two_three-0.1.0.json"
     end
 
   end

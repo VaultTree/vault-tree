@@ -2,33 +2,25 @@ class CreateContractModels < ActiveRecord::Migration
   def change
 
     create_table :contracts do |t|
-      t.text :name
-      t.text :content
+      t.text :specification
     end
 
-    create_table :contract_headers do |t|
+    create_table :parties do |t|
       t.integer :contract_id
-      t.text :content
+      t.integer :party_number
+      t.text :public_key
+      t.text :bit_message_address
+      t.text :affirmation_key
+      t.text :contract_signature
     end
 
-    create_table :nodes do |t|
-      t.text :label
-      t.text :content
-      t.integer :contract_id
-    end
-
+    # use in model: alias_attribute :subject, :title
     create_table :vaults do |t|
-      t.integer :node_id
-      t.text :content
-    end
-
-    create_table :unlocking_conditions do |t|
-      t.integer :vault_id
-      t.text :content
-    end
-
-    create_table :unlocking_certificates do |t|
-      t.integer :unlocking_condition_id
+      t.text :party_id
+      t.text :label
+      t.text :unlocking_certificate
+      t.text :custodian_signature
+      t.text :desc
       t.text :content
     end
   end

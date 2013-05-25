@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe 'Party' do
+describe 'Header' do
   describe '#create' do
 
     before(:each) do
-      @party = FactoryGirl.create(:party)
+      @header = FactoryGirl.create(:header)
     end
 
     it 'is properly created' do
-      @party.should be_an_instance_of(VaultTree::Party)
+      @header.should be_an_instance_of(VaultTree::Header)
     end
   end
 end

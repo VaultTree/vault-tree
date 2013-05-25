@@ -1,52 +1,69 @@
 module VaultTree
-  class PathHelpers
+  module PathHelpers
+    extend self
 
-    def self.current_dir
+    def current_dir
       File.dirname(__FILE__)
     end 
 
-    def self.walk_to_root
+    def up_one
+      '../'
+    end 
+
+    def walk_to_root
       '../../'
     end 
 
-    def self.project_dir
+    def project_dir
       File.expand_path(project_dir_rel)
     end
 
-    def self.project_dir_rel
+    def project_dir_rel
       File.join(current_dir,walk_to_root)
     end
 
-    def self.app_dir
+    def app_dir
      "#{project_dir}/app"
     end
 
-    def self.lib_dir
+    def lib_dir
      "#{project_dir}/lib"
     end
 
-    def self.database_config
+    def database_config
      "#{project_dir}/config/database.yml"
     end
 
-    def self.factories
+    def factories
      "#{project_dir}/spec/factories"
     end
 
-    def self.spec_helper
+    def spec_helper
      "#{project_dir}/spec/spec_helper"
     end
 
-    def self.practice_config_dir
+    def practice_config_dir
      "#{project_dir}/.vault-tree"
     end
 
-    def self.config_dir
+    def config_dir
      "#{project_dir}/.vault-tree"
     end
 
-    def self.contracts_dir
+    def contracts_dir
      "#{project_dir}/.vault-tree/contracts"
+    end
+
+    def project_dir_parent_rel
+      File.join(project_dir,up_one)
+    end
+
+    def project_dir_parent
+      File.expand_path(project_dir_parent_rel)
+    end
+
+    def one_two_three_contract
+      "#{project_dir_parent}/contracts/one_two_three-0.1.0.json"
     end
 
   end

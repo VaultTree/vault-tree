@@ -1,5 +1,5 @@
 module VaultTree
-  class Party < ActiveRecord::Base
+  class SignatureBlock < ActiveRecord::Base
     belongs_to :contract
   end
 end

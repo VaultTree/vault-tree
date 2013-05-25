@@ -1,14 +1,20 @@
 module VaultTree
   class Contract < ActiveRecord::Base
+
+    def self.import(json)
+      ContractDeserializer.new().build_contract(json)
+    end
+
+  end
+end
+
+module VaultTree
+  class Contract < ActiveRecord::Base
     has_many :vaults
     has_many :parties
 
     def as_json
       ContractSerializer.new(presenter).to_json
-    end
-
-    def self.import(json)
-      ContractDeserializer.new().build_contract(json)
     end
 
     private
@@ -25,10 +31,17 @@ module VaultTree
 
     def build_contract(json)
       @json = json
+      @contract = Contract.new
       assemble_sections
+      saved_contract
     end
 
     private
+    attr_accessor :contract
+
+    def saved_contract
+      #@contract.save
+    end
 
     def assemble_sections
       assemble_header

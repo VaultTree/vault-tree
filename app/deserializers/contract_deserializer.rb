@@ -29,8 +29,7 @@ module VaultTree
     end
 
     def assemble_header
-      contract.checksum = contract_hash['header']['checksum']
-      contract.specification = contract_hash['header']['specification']
+     contract.header = Header.new(contract_hash['header'])
     end
 
     def assemble_parties

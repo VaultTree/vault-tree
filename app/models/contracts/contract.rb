@@ -1,5 +1,6 @@
 module VaultTree
   class Contract < ActiveRecord::Base
+    has_one :header
     has_many :vaults
     has_many :parties
     has_many :signature_blocks
@@ -23,7 +24,10 @@ end
 
 module VaultTree
   class ContractSerializer < ActiveModel::Serializer
-    attributes :id
+    has_one :header
+    has_many :parties
+    has_many :vaults
+    has_many :signature_blocks
   end
 end
 
@@ -31,5 +35,3 @@ module VaultTree
   class ContractPresenter < ActiveModel::Serializer
   end
 end
-
-

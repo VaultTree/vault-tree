@@ -6,6 +6,12 @@ class CreateContractModels < ActiveRecord::Migration
       t.text :checksum
     end
 
+    create_table :headers do |t|
+      t.integer :contract_id
+      t.text :specification
+      t.text :checksum
+    end
+
     create_table :parties do |t|
       t.integer :contract_id
       t.text :number

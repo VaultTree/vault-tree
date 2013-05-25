@@ -39,6 +39,10 @@ module VaultTree
         @contract = FactoryGirl.create(:contract)
       end
 
+      it 'has_one header' do
+        @contract.header.should be_an_instance_of(Header)
+      end
+
       it 'has_many vaults' do
         @contract.vaults.length.should be > 1
       end

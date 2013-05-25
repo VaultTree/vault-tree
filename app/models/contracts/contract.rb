@@ -12,6 +12,7 @@ module VaultTree
   class Contract < ActiveRecord::Base
     has_many :vaults
     has_many :parties
+    has_many :signature_blocks
 
     def as_json
       ContractSerializer.new(presenter).to_json
@@ -55,8 +56,10 @@ module VaultTree
     end
 
     def assemble_header
-      puts 'assemble_header'
-      puts contract_hash['header']
+      contract.checksum = contract_hash['header']['checksum']
+      contract.specification = contract_hash['header']['specification'] 
+      puts 'after assemble_header'
+      puts contract.attributes
     end
 
     def assemble_parties

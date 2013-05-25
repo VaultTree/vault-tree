@@ -5,6 +5,7 @@ module VaultTree
 
     describe '.import | #as_json' do
       before(:each) do
+        pending
         @json = File.open(PathHelpers.one_two_three_contract).read
         @contract = Contract.import(@json)
       end
@@ -53,8 +54,22 @@ module VaultTree
       end
 
       it 'each party is different' do
-        f = @contract.parties.first.party_number
-        l = @contract.parties.last.party_number
+        f = @contract.parties.first.number
+        l = @contract.parties.last.number
+        f.should_not == l
+      end
+
+      it 'has_many signature blocks' do
+        @contract.signature_blocks.length.should be > 1
+      end
+
+      it 'can access its signature blocks' do
+        @contract.signature_blocks.first.should be_an_instance_of(SignatureBlock)
+      end
+
+      it 'each sig block is different' do
+        f = @contract.signature_blocks.first.party_number
+        l = @contract.signature_blocks.last.party_number
         f.should_not == l
       end
     end

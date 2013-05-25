@@ -3,20 +3,19 @@ require 'spec_helper'
 module VaultTree
   describe 'Contract' do
 
+    def normalize(json)
+      de_ser = ActiveSupport::JSON.decode(json)
+      ser = ActiveSupport::JSON.encode(de_ser)
+    end
+
     describe '.import | #as_json' do
       before(:each) do
         @json = File.open(PathHelpers.one_two_three_contract).read
         @contract = Contract.import(@json)
       end
 
-      it 'the compressed json matches after input and output' do
-        puts "##INPUT##"
-        puts @json
-        puts "##INPUT COMPRESSED##"
-        puts @json.compress
-        puts "##OUTPUT##"
-        puts @contract.as_json
-        @contract.as_json.should == @json.compress
+      it 'the normalized inputs matches the normalized output' do
+        @contract.as_json.normalized.should == @json.normalized
       end
 
       it 'the compressed string checksums should match' do

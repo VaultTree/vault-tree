@@ -2,12 +2,6 @@ require 'spec_helper'
 
 module VaultTree
   describe 'Contract' do
-
-    def normalize(json)
-      de_ser = Support::JSON.decode(json)
-      ser = Support::JSON.encode(de_ser)
-    end
-
     describe '.import | #as_json' do
       before(:each) do
         @json = File.open(PathHelpers.one_two_three_contract).read

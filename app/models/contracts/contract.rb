@@ -21,8 +21,12 @@ module VaultTree
   end
 
   class NullContract
+    attr_reader :msg
+    def initialize(msg)
+      @msg = msg 
+    end
     def as_json
-      %Q[{"Error":"Malformed JSON"}]
+      %Q[{"Error":"#{msg}"}]
     end
   end
 end

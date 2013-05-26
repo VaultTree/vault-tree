@@ -42,6 +42,14 @@ module VaultTree
      "#{project_dir}/spec/spec_helper"
     end
 
+    def fixtures_dir
+      "#{project_dir}/spec/support/fixtures"
+    end
+
+    def mal_formed_json_contract
+     "#{fixtures_dir}/malformed_json_contract.json"
+    end
+
     def practice_config_dir
      "#{project_dir}/.vault-tree"
     end

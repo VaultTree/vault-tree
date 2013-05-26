@@ -5,12 +5,20 @@ module VaultTree
     def build_contract(json)
       @json = json
       @contract = Contract.new
-      assemble_sections
-      saved_contract
+      assemble_and_save_contract
     end
 
     private
     attr_accessor :contract
+
+    def assemble_and_save_contract
+      begin
+        assemble_sections
+        saved_contract
+      rescue(MultiJson::DecodeError)
+        NullContract.new('Malformed JSON')
+      end
+    end
 
     def saved_contract
       contract.save
@@ -25,7 +33,7 @@ module VaultTree
     end
 
     def contract_hash
-      @contract_hash ||= ActiveSupport::JSON.decode(json)
+      @contract_hash ||= Support::JSON.decode(json)
     end
 
     def assemble_header

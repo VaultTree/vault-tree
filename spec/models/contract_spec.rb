@@ -24,7 +24,7 @@ module VaultTree
     end
 
     describe '.import' do
-      context 'for valid contract' do
+      context 'with an valid contract' do
         before(:each) do
           @json = File.open(PathHelpers.one_two_three_contract).read
           @contract = Contract.import(@json)
@@ -39,9 +39,25 @@ module VaultTree
         end
       end
 
-      context 'for invalid contract' do
-        it 'returns a null contract' do
-          pending
+      context 'with an invalid contract' do
+        context 'mal formed json' do
+
+          before(:each) do
+            @json = File.open(PathHelpers.mal_formed_json_contract).read
+            @contract = Contract.import(@json)
+          end
+
+          it 'returns a NullContract' do
+            @contract.should be_an_instance_of(NullContract)
+          end
+
+          it 'the NullContract responds to as_json and returns a string' do
+            @contract.as_json.should be_an_instance_of(String)
+          end
+
+          it 'the NullContract.as_json returns the proper string' do
+            @contract.as_json.should =~ /Malformed JSON/
+          end
         end
       end
     end

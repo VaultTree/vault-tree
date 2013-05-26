@@ -5,8 +5,12 @@ module VaultTree
     def build_contract(json)
       @json = json
       @contract = Contract.new
-      assemble_sections
-      saved_contract
+      begin
+        assemble_sections
+        saved_contract
+      rescue
+        NullContract.new
+      end
     end
 
     private

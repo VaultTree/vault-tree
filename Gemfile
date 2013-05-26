@@ -11,6 +11,7 @@ gem "active_model_serializers", "~> 0.8.1"
 gem "base32", "~> 0.2.0"
 gem "rainbow", "~> 1.1.4"
 gem "gli", "~> 2.5.6"
+gem "json", ">= 1.8.0"
 
 group :development do
   gem "bundler", "~> 1.3.5"

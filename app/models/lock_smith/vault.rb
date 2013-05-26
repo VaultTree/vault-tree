@@ -43,7 +43,7 @@ module LockSmith
     end
 
     def contents_as_json
-      ActiveSupport::JSON.encode(contents)
+      VaultTree::Support::JSON.encode(contents)
     end
 
     def domain_class

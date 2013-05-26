@@ -25,7 +25,7 @@ module VaultTree
     end
 
     def contract_hash
-      @contract_hash ||= ActiveSupport::JSON.decode(json)
+      @contract_hash ||= Support::JSON.decode(json)
     end
 
     def assemble_header

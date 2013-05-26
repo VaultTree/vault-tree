@@ -4,8 +4,8 @@ module VaultTree
   describe 'Contract' do
 
     def normalize(json)
-      de_ser = ActiveSupport::JSON.decode(json)
-      ser = ActiveSupport::JSON.encode(de_ser)
+      de_ser = Support::JSON.decode(json)
+      ser = Support::JSON.encode(de_ser)
     end
 
     describe '.import | #as_json' do

@@ -27,6 +27,7 @@ class CreateContractModels < ActiveRecord::Migration
       t.text :custodian_number
       t.text :custodian_signature
       t.text :unlocking_certificate
+      t.text :content_certificate
       t.text :content
       t.text :desc
     end

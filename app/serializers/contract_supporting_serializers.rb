@@ -15,7 +15,7 @@ module VaultTree
   end
 
   class VaultSerializer < ActiveModel::Serializer
-    attributes :label, :custodian_number, :custodian_signature, :unlocking_certificate, :content, :desc
+    attributes :label, :custodian_number, :custodian_signature, :unlocking_certificate, :content_certificate, :content, :desc
   end
 
   class SignatureBlockSerializer < ActiveModel::Serializer

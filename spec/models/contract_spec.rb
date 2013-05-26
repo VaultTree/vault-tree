@@ -18,8 +18,8 @@ module VaultTree
         @contract.as_json.normalized.should == @json.normalized
       end
 
-      it 'the compressed string checksums should match' do
-        pending
+      it 'the normalized string checksums should match' do
+        @contract.as_json.normalized.checksum.should == @json.normalized.checksum
       end
     end
 

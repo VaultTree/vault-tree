@@ -11,7 +11,7 @@ module VaultTree
   end
 
   class PartySerializer < ActiveModel::Serializer
-    attributes :number, :public_key, :address
+    attributes :number, :address, :signature_key, :encryption_key
   end
 
   class VaultSerializer < ActiveModel::Serializer

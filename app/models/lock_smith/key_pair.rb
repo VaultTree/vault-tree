@@ -13,24 +13,25 @@ module VaultTree
       end
     end
 
-
-    class String
-      def base32_encoded?
-      end
-    end
-
     class PartyKey
+      def to_s
+        HexEncoder.new.encode(rbnacl_key.to_bytes)
+      end
     end
 
     class PrivateKey < PartyKey 
       attr_reader :rbnacl_key 
 
       def initialize
-        @rbnacl_key = Crypto::PrivateKey.generate
+        @rbnacl_key = Crypto::SigningKey.generate
       end
 
-      def to_s
-        HexEncoder.new.encode(rbnacl_key.to_bytes)
+      def public_key
+        rbnacl_key.verify_key
+      end
+
+      def sign(msg)
+        DigitalSignature.new(rbnacl_key.sign(msg))
       end
     end
 
@@ -40,12 +41,25 @@ module VaultTree
 
       def initialize(private_key)
         @private_key = private_key 
-        @rbnacl_key = private_key.rbnacl_key.public_key
+        @rbnacl_key = private_key.public_key
+      end
+
+      def verify(msg,sig)
+        rbnacl_key.verify(msg,sig, :hex) 
+      end
+    end
+
+    class DigitalSignature
+      attr_reader :bytes
+
+      def initialize(bytes)
+        @bytes = bytes
       end
 
       def to_s
-        HexEncoder.new.encode(rbnacl_key.to_bytes)
+        HexEncoder.new.encode(@bytes)
       end
+
     end
   end
 end

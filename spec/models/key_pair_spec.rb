@@ -32,15 +32,23 @@ module VaultTree
           @key_pair = KeyPair.new
           @private_key = @key_pair.private_key
           @public_key = @key_pair.public_key
+          @signature = @private_key.sign(@msg)
         end
 
         it 'can sign a message with the private key' do
-          pending
-          sig = @private_key.sign(@msg)
-          @public_key.vaild_signature?({signature: sig, message: @msg}).should be true
+          @signature.should be_an_instance_of(DigitalSignature)
         end
-      end
 
+        it 'can validate the signature' do
+          @public_key.verify(@msg,@signature.to_s).should be true
+        end
+
+        it 'can identify a forged signature' do
+          forged_sig = @signature.to_s.gsub('a','z')
+          @public_key.verify(@msg,forged_sig).should be false
+        end
+
+      end
     end
   end
 end

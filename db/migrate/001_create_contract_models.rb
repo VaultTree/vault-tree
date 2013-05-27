@@ -15,7 +15,8 @@ class CreateContractModels < ActiveRecord::Migration
     create_table :parties do |t|
       t.integer :contract_id
       t.text :number
-      t.text :public_key
+      t.text :encryption_key
+      t.text :signature_key
       t.text :address
       t.text :affirmation_key
       t.text :contract_signature
@@ -27,6 +28,7 @@ class CreateContractModels < ActiveRecord::Migration
       t.text :custodian_number
       t.text :custodian_signature
       t.text :unlocking_certificate
+      t.text :content_certificate
       t.text :content
       t.text :desc
     end

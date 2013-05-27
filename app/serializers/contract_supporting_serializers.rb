@@ -11,11 +11,11 @@ module VaultTree
   end
 
   class PartySerializer < ActiveModel::Serializer
-    attributes :number, :public_key, :address
+    attributes :number, :address, :signature_key, :encryption_key
   end
 
   class VaultSerializer < ActiveModel::Serializer
-    attributes :label, :custodian_number, :custodian_signature, :unlocking_certificate, :content, :desc
+    attributes :label, :custodian_number, :custodian_signature, :unlocking_certificate, :content_certificate, :content, :desc
   end
 
   class SignatureBlockSerializer < ActiveModel::Serializer

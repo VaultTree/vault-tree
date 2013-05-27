@@ -1,19 +1,39 @@
-Given(/^"(.*?)" has the blank contract$/) do |arg1|
-  @contract_json = File.open(VaultTree::PathHelpers.one_two_three_contract).read
+Given(/^Bob has the blank contract$/) do
+  @contract = File.open(VaultTree::PathHelpers.one_two_three_contract).read
   @bob = VaultTree::AutoBots::Bob.new()
-  @bob.take_contract(@contract_json)
-  @bob.hand_over_contract.should == @contract_json
 end
 
-When(/^"(.*?)" FLS Vault '\[(\d+),(\d+),(\d+)\]'$/) do |arg1, arg2, arg3, arg4|
+Given(/^he provides his public key$/) do
+  opts = {
+    party_number: '2',
+    public_key: @bob.public_key
+  }
+  opts[:public_key].should be_an_instance_of(String)
+  @contract = VaultTree::V1.set_public_key(@contract, opts)
+end
+
+When(/^Bob FLS the third vault$/) do
+  # Fill Vault
+  opts = {
+    private_key: @bob.private_key,
+    label: '[1,2,3]',
+    content: "Congratulations!"
+  }
+  @contract = VaultTree::V1.fill_vault(@contract, opts)
+
+  # Lock Vault
+  opts = {
+    private_key: @bob.private_key,
+    label: '[1,2,3]'
+  }
+  @contract = VaultTree::V1.lock_vault(@contract, opts)
+end
+
+When(/^Bob FLS the second vault$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^"(.*?)" FLS Vault '\[(\d+),(\d+)\]'$/) do |arg1, arg2, arg3|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^"(.*?)" FLS Vault '\[(\d+)\]'$/) do |arg1, arg2|
+When(/^Bob FLS the first vault$/) do
   pending # express the regexp above with the code you wish you had
 end
 
@@ -21,14 +41,14 @@ Then(/^each vault is properly locked and signed$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Given(/^"(.*?)" FLS each contract Vault$/) do |arg1|
+Given(/^Bob FLS each contract Vault$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^"(.*?)" Affirms, Signs, and Sends the contract to "(.*?)"$/) do |arg1, arg2|
+When(/^Bob Affirms, Signs, and Sends the contract to Alice$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Then(/^"(.*?)" has and is ready to enforce the contract$/) do |arg1|
+Then(/^Alice has and is ready to enforce the contract$/) do
   pending # express the regexp above with the code you wish you had
 end

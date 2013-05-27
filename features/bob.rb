@@ -1,17 +1,19 @@
 module VaultTree
   module AutoBots
     class Bob
-
-      def take_contract(json)
-        @contract_json = json 
+      def public_key
+        key_pair.public_key
       end
 
-      def hand_over_contract
-        contract_json
+      def private_key
+        key_pair.private_key
       end
 
       private
-      attr_reader :contract_json
+
+      def key_pair
+        @key_pair ||= LockSmith::KeyPair.new()
+      end
 
     end
   end

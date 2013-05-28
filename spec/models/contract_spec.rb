@@ -89,8 +89,8 @@ module VaultTree
       end
 
       it 'each party is different' do
-        f = @contract.parties.first.number
-        l = @contract.parties.last.number
+        f = @contract.parties.first
+        l = @contract.parties.last
         f.should_not == l
       end
 
@@ -103,8 +103,8 @@ module VaultTree
       end
 
       it 'each sig block is different' do
-        f = @contract.signature_blocks.first.party_number
-        l = @contract.signature_blocks.last.party_number
+        f = @contract.signature_blocks.first
+        l = @contract.signature_blocks.last
         f.should_not == l
       end
     end

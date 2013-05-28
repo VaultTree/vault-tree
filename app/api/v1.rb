@@ -22,6 +22,15 @@ module VaultTree
       contract_json
     end
 
+
+    # Exaustive environment and data tear down to ensure no state is left over.
+    #  This method will run after every API call without exception.
+    #
+    # @return [Boolean] The teardown was successful
+    def environment_teardown
+      #Work in progress
+    end
+
     # Sets the respective party's signature verification key.
     #
     # @param contract [String] the input contract

@@ -9,6 +9,18 @@ module VaultTree
         key_pair.private_key
       end
 
+      def verification_key
+        public_key.to_s
+      end
+
+      def private_signing_key
+        private_key.to_s
+      end
+
+      def public_encryption_key
+        'BOBS_PUBLIC_ENCRYPTION_KEY'
+      end
+
       private
 
       def key_pair

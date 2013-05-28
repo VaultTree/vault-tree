@@ -11,14 +11,25 @@ module VaultTree
   end
 
   class PartySerializer < ActiveModel::Serializer
-    attributes :number, :address, :signature_key, :encryption_key
+    attributes :label, :address, :verification_key, :public_encryption_key, :contract_consent_key
   end
 
   class VaultSerializer < ActiveModel::Serializer
-    attributes :label, :custodian_number, :custodian_signature, :unlocking_certificate, :content_certificate, :content, :desc
+    attribute :label
+    attribute :custodian
+    attribute :unlocking_certificate
+    attribute :content_certificate
+    attribute :content
+    attribute :signed_vault_content
+    attribute :desc
   end
 
   class SignatureBlockSerializer < ActiveModel::Serializer
-    attributes :party_number, :affirmation_key, :signature
+    attribute :party_label
+    attribute :signed_label
+    attribute :signed_address
+    attribute :signed_verification_key
+    attribute :signed_public_encryption_key
+    attribute :signed_contract_consent_key
   end
 end

@@ -17,11 +17,11 @@ module VaultTree
           @key_pair.public_key.should be_an_instance_of(PublicKey)
         end
 
-        it 'private key as a 64 character string string' do
+        it 'private key as a 64 character string' do
           @key_pair.private_key.to_s.length.should == 64
         end
 
-        it 'private key as a 64 character string string' do
+        it 'private key as a 64 character string' do
           @key_pair.public_key.to_s.length.should == 64
         end
       end

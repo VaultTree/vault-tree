@@ -6,7 +6,7 @@ end
 Given(/^he provides his public key$/) do
   opts = { party_number: '2', signature_key: @bob.verify_key, encryption_key: @bob.encryption_key}
   opts[:signature_key].should be_an_instance_of(String)
-  @contract = VaultTree::V1.set_public_key(@contract, opts)
+  @contract = VaultTree::V1.set_public_keys(@contract, opts)
 end
 
 When(/^Bob FLS the third vault$/) do

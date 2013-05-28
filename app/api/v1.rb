@@ -17,11 +17,10 @@ module VaultTree
     #  * Valid Contract Signatures if present
     # @param contract [String] the input contract
     # @return [String] The output contract. 
-    def certify_contract(contract_json)
+    def certified_contract(contract_json)
       #Work in progress
       contract_json
     end
-
 
     # Exaustive environment and data tear down to ensure no state is left over.
     #  This method will run after every API call without exception.
@@ -31,14 +30,15 @@ module VaultTree
       #Work in progress
     end
 
-    # Sets the respective party's signature verification key.
+    # Sets the respective party's public keys and signs them
     #
     # @param contract [String] the input contract
     # @param [Hash] Required Options
     # @option opts [String] :party_number
     #   The number associated with the particular party.
     #   This must be a positive integer passed as a string. Example: '1','2','5'
-    # @option opts [String] :signature_key Digital Signature Verification Key
+    # @option opts [String] :verification_key Digital Signature Verification Key
+    # @option opts [String] :private_signing_key Digital Signature private signing key
     #   In the real world, signatures help uniquely identify people because everyone's signature
     #   is unique. Digital signatures work similarly in that they are unique to holders of a
     #   private key, but unlike real world signatures, digital signatures are unforgable.
@@ -46,7 +46,7 @@ module VaultTree
     #   Digital signatures allow you to publish a public key, then you can use your
     #   private signing key to sign messages. Others who have your public key can then
     #   use it to validate that your messages are actually authentic.
-    # @option opts [String] :encryption_key
+    # @option opts [String] :public_encryption_key
     # 
     #   Imagine Alice wants something valuable shipped to her. Because it's valuable, she wants
     #   to make sure it arrives securely (i.e. hasn't been opened or tampered with) and that
@@ -71,9 +71,9 @@ module VaultTree
     #   This bidirectional guarantee around identity is known as mutual authentication.
     # @return [String] The output contract
     def set_public_keys(contract_json, opts)
-      filter(contract_json, opts)
+      certified_contract(contract_json)
+      raise 'Not yet implemented'
     end
-
 
   end
 end

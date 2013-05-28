@@ -9,15 +9,15 @@ module VaultTree
         key_pair.private_key
       end
 
-      def verify_key
+      def verification_key
         public_key.to_s
       end
 
-      def signing_key
-        private_key
+      def private_signing_key
+        private_key.to_s
       end
 
-      def encryption_key
+      def public_encryption_key
         'BOBS_PUBLIC_ENCRYPTION_KEY'
       end
 

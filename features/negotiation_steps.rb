@@ -4,8 +4,15 @@ Given(/^Bob has the blank contract$/) do
 end
 
 Given(/^he provides his public key$/) do
-  opts = { party_number: '2', signature_key: @bob.verify_key, encryption_key: @bob.encryption_key}
-  opts[:signature_key].should be_an_instance_of(String)
+  opts = {
+    label: 'BOB',
+    verification_key: @bob.verification_key,
+    public_encryption_key: @bob.public_encryption_key,
+    private_signing_key: @bob.private_signing_key
+  }
+  opts[:verification_key].should be_an_instance_of(String)
+  opts[:public_encryption_key].should be_an_instance_of(String)
+  opts[:private_signing_key].should be_an_instance_of(String)
   @contract = VaultTree::V1.set_public_keys(@contract, opts)
 end
 

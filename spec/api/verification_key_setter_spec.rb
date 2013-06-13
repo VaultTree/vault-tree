@@ -24,6 +24,10 @@ module VaultTree
         it 'the verification key has been set with the proper value' do
           @verification_key.should == @exp_verification_key
         end
+
+        it 'the returned contract should have only 2 parties' do
+          Support::JSON.decode(@returned_contract)["parties"].length.should == 2
+        end
       end
     end
   end

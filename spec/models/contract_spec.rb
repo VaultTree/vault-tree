@@ -2,6 +2,35 @@ require 'spec_helper'
 
 module VaultTree
   describe 'Contract' do
+
+    describe '#set_verification_key' do
+      before(:each) do
+        @label = "BOB" 
+        @expected_verification_key = "TEST_VERIFICATION_KEY" 
+        @contract = FactoryGirl.create(:contract)
+        @contract.set_verification_key(@expected_verification_key, @label)
+      end
+
+      it 'the verification key is set' do
+        @contract.verification_key(@label).should == @expected_verification_key
+      end
+    end
+
+    describe '#party_with_label' do
+      before(:each) do
+        @contract = FactoryGirl.create(:contract)
+        @label = "BOB" 
+      end
+
+      it 'returns a party' do
+        @contract.party_with_label(@label).should be_an_instance_of(Party)
+      end
+
+      it 'the parties label matches the given label' do
+        @contract.party_with_label(@label).label.should == @label
+      end
+    end
+
     describe '.import | #as_json' do
       before(:each) do
         @json = File.open(PathHelpers.one_two_three_contract).read

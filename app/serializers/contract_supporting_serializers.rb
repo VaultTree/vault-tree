@@ -7,11 +7,16 @@ module VaultTree
   end
 
   class HeaderSerializer < ActiveModel::Serializer
-    attributes :checksum, :specification
+    attribute :checksum
+    attribute :specification
   end
 
   class PartySerializer < ActiveModel::Serializer
-    attributes :label, :address, :verification_key, :public_encryption_key, :contract_consent_key
+    attribute :label
+    attribute :address
+    attribute :verification_key
+    attribute :public_encryption_key
+    attribute :contract_consent_key
   end
 
   class VaultSerializer < ActiveModel::Serializer

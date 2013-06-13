@@ -12,6 +12,20 @@ module VaultTree
     def as_json
       active_model_serializer.new(self).to_json
     end
+
+    def set_verification_key(vk,pl)
+      p = party_with_label(pl)
+      p.verification_key = vk
+      self.parties << p
+    end
+
+    def verification_key(pl)
+      party_with_label(pl).verification_key
+    end
+
+    def party_with_label(label)
+      @party_with_label ||= self.parties.where(label: label).first
+    end
   end
 
   class Contract < ActiveRecord::Base

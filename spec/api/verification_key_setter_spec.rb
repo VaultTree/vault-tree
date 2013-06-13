@@ -10,7 +10,7 @@ module VaultTree
           opts = {party_label: "BOB", verification_key: @exp_verification_key} 
           key_setter = VerificationKeySetter.new(contract,opts)
           @returned_contract = key_setter.run
-          @verification_key = Support::JSON.decode(@returned_contract)["parties"][2]["verification_key"]
+          @verification_key = Support::JSON.decode(@returned_contract)["parties"][1]["verification_key"]
         end
 
         it 'returns the contract as a json string' do

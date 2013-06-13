@@ -8,6 +8,7 @@ FactoryGirl.define do
     after(:create) do |contract|
       contract.parties << FactoryGirl.create(:party)
       contract.parties  << FactoryGirl.create(:party)
+      contract.parties  << FactoryGirl.create(:party, label: "BOB")
     end
 
     after(:create) do |contract|

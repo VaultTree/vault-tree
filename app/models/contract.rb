@@ -24,7 +24,7 @@ module VaultTree
     end
 
     def party_with_label(label)
-      @party ||= parties.where(label: label).first
+      @party_with_label ||= self.parties.where(label: label).first
     end
   end
 

@@ -1,6 +1,6 @@
 module VaultTree
   class Party < ActiveRecord::Base
-    belongs_to :contract, touch: true 
+    belongs_to :contract
 
     def set_label(label)
       @label = label

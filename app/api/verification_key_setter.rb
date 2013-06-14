@@ -11,14 +11,14 @@ module VaultTree
 
       def run
         contract.set_verification_key(verification_key, party_label)
-        contract.save
+        contract.save!
         contract.as_json
       end
 
       private
 
       def contract
-        @contract ||= Contract.import(json)
+        @contract ||= VaultTree::Contract.import(json)
       end
     end
   end

@@ -12,6 +12,7 @@ module VaultTree
       def run
         contract.set_verification_key(verification_key, party_label)
         contract.save!
+        contract.reload
         contract.as_json
       end
 

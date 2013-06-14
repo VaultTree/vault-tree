@@ -21,7 +21,7 @@ module VaultTree
     end
 
     def saved_contract
-      contract.save
+      contract.save!
       contract
     end
 
@@ -37,11 +37,13 @@ module VaultTree
     end
 
     def assemble_header
-     contract.header = Header.new(contract_hash['header'])
+      contract.header = Header.new(contract_hash['header'])
     end
 
     def assemble_parties
-      contract_hash['parties'].each{|p| contract.parties << Party.new(p)}
+      contract_hash['parties'].each do |p| 
+        contract.parties << Party.create(p)
+      end
     end
 
     def assemble_vaults

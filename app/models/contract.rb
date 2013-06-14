@@ -14,9 +14,9 @@ module VaultTree
     end
 
     def set_verification_key(vk,pl)
-      p = party_with_label(pl)
+      p = parties.with_label(pl).first
       p.verification_key = vk
-      self.parties << p
+      p.save!
     end
 
     def verification_key(pl)

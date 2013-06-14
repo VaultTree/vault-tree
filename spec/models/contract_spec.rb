@@ -137,5 +137,45 @@ module VaultTree
         f.should_not == l
       end
     end
+
+    describe '#parties' do
+      before :each do
+        @contract = FactoryGirl.create(:contract)
+        @test_label = "TEST_LABEL"
+      end
+
+      it 'can access a party' do
+        @contract.parties.first.should be_an_instance_of(Party)
+      end
+
+      it 'can set a value on a party' do
+        party = @contract.parties.first
+        party.label = @test_label
+        party.save!
+        @contract.parties.first.label.should == @test_label
+      end
+
+      it 'can save the associated party ' do
+        party = @contract.parties.first
+        party.label = @test_label
+        party.save!
+        @contract.parties.first.persisted?.should be true 
+      end
+
+      it 'when the associated party is saved the set value is persisted' do
+        party = @contract.parties.first
+        party.label = @test_label
+        party.save!
+        party.label.should == @test_label
+      end
+
+      it 'when the associated party is saved the contract can access the value' do
+        party = @contract.parties.first
+        party.label = @test_label
+        party.save!
+        @contract.parties.first.label.should == @test_label
+      end
+    end
+
   end
 end

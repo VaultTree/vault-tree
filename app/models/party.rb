@@ -1,6 +1,7 @@
 module VaultTree
   class Party < ActiveRecord::Base
     belongs_to :contract
+    validates :contract_id, :presence => true
 
     def set_label(label)
       @label = label

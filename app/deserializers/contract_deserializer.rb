@@ -21,7 +21,7 @@ module VaultTree
     end
 
     def saved_contract
-      contract.save
+      contract.save!
       contract
     end
 

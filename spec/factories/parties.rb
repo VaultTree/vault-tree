@@ -8,11 +8,11 @@ FactoryGirl.define do
     contract_consent_key ""
   end
 
-  factory :bob, parent: :party do
+  factory :party_bob, parent: :party do
     label "BOB"
   end
 
-  factory :bob_with_vk, parent: :bob do
+  factory :party_bob_with_vk, parent: :bob do
     verification_key "TEST_VERIFICATION_KEY"
   end
 end

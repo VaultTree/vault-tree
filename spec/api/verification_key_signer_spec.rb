@@ -6,8 +6,8 @@ module VaultTree
       before :all do
         @party_label = "BOB"
         @verification_key = "TEST_VERIFICATION_KEY"
-        blank_contract = File.open(PathHelpers.one_two_three_contract).read 
-        opts = {party_label: @party_label, verification_key: @verification_key} 
+        blank_contract = File.open(PathHelpers.one_two_three_contract).read
+        opts = {party_label: @party_label, verification_key: @verification_key}
         @contract = VerificationKeySetter.new(blank_contract,opts).run
         @private_signing_key = LockSmith::SigningKeyPair.new().signing_key
         @exp_signature = LockSmith::DigitalSignature.new(message: @verification_key, signing_key: @private_signing_key).generate

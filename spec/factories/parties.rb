@@ -12,7 +12,8 @@ FactoryGirl.define do
     label "BOB"
   end
 
-  factory :party_bob_with_vk, parent: :bob do
+  factory :party_bob_with_vk, parent: :party do
+    label "BOB"
     verification_key "TEST_VERIFICATION_KEY"
   end
 end

@@ -32,9 +32,9 @@ FactoryGirl.define do
     end
   end
 
-  factory :contract_with_bob_vk, parent: :bob do |contract|
+  factory :contract_with_bob_vk, parent: :contract do |contract|
     after(:create) do |contract|
-      contract.parties << FactoryGirl.create(:bob_with_vk)
+      contract.parties << FactoryGirl.create(:party_bob_with_vk)
       contract.save!
     end
   end

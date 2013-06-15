@@ -5,12 +5,11 @@ module VaultTree
     describe 'VerificationKeySetter' do
       describe '#run' do
         before :each do
-          contract = File.open(PathHelpers.one_two_three_contract).read 
+          contract = FactoryGirl.create(:contract_with_bob).as_json
           @exp_verification_key =  "TEST_VERIFICATION_KEY"
           opts = {party_label: "BOB", verification_key: @exp_verification_key} 
-          key_setter = VerificationKeySetter.new(contract,opts)
-          @returned_contract = key_setter.run
-          @verification_key = Support::JSON.decode(@returned_contract)["parties"][1]["verification_key"]
+          @returned_contract = VerificationKeySetter.new(contract,opts).run
+          @verification_key = Support::JSON.decode(@returned_contract)["parties"].last["verification_key"]
         end
 
         it 'returns the contract as a json string' do
@@ -25,8 +24,8 @@ module VaultTree
           @verification_key.should == @exp_verification_key
         end
 
-        it 'the returned contract should have only 2 parties' do
-          Support::JSON.decode(@returned_contract)["parties"].length.should == 2
+        it 'the returned contract should have only 3 parties' do
+          Support::JSON.decode(@returned_contract)["parties"].length.should == 3
         end
       end
     end

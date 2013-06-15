@@ -7,7 +7,7 @@ module VaultTree
       before(:each) do
         @label = "BOB" 
         @expected_verification_key = "TEST_VERIFICATION_KEY" 
-        @contract = FactoryGirl.create(:contract)
+        @contract = FactoryGirl.create(:contract_with_bob)
         @contract.set_verification_key(@expected_verification_key, @label)
       end
 
@@ -18,7 +18,7 @@ module VaultTree
 
     describe '#party_with_label' do
       before(:each) do
-        @contract = FactoryGirl.create(:contract)
+        @contract = FactoryGirl.create(:contract_with_bob)
         @label = "BOB" 
       end
 

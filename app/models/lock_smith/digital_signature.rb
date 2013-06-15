@@ -3,8 +3,6 @@ module VaultTree
     class DigitalSignature
       attr_reader :signing_key, :verify_key, :message
 
-      ENCODING = :hex
-
       def initialize(opts = {})
         @message = opts[:message]
         @signing_key = opts[:signing_key]
@@ -12,21 +10,21 @@ module VaultTree
       end
 
       def generate
-        sig_generator.sign(@message, ENCODING)
+        sig_generator.sign(message, :base64)
       end
 
       def verify
-        sig_verifier.verify(@message, ENCODING)
+        sig_verifier.verify(@message, :base64)
       end
 
       private
 
       def sig_generator
-        Crypto::SigningKey.new(signing_key, ENCODING)
+        Crypto::SigningKey.new(signing_key, :base64)
       end
 
       def sig_verifier
-        Crypto::VerifyKey.new(verify_key, ENCODING)
+        Crypto::VerifyKey.new(verify_key, :base64)
       end
     end
   end

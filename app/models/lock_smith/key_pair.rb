@@ -49,17 +49,5 @@ module VaultTree
       end
     end
 
-    class DigitalSignature
-      attr_reader :bytes
-
-      def initialize(bytes)
-        @bytes = bytes
-      end
-
-      def to_s
-        HexEncoder.new.encode(@bytes)
-      end
-
-    end
   end
 end

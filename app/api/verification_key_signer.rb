@@ -1,6 +1,6 @@
 module VaultTree
   module V1
-    class VerificationKeySigner
+    class VerificationKeySigner < ContractModifier
       attr_reader :json, :party_label, :private_signing_key
 
       def initialize(json, opts = {})

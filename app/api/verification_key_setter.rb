@@ -1,6 +1,6 @@
 module VaultTree
   module V1
-    class VerificationKeySetter
+    class VerificationKeySetter < ContractModifier
       attr_reader :json, :party_label, :verification_key
 
       def initialize(json, opts = {})

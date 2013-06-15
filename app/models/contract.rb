@@ -23,7 +23,6 @@ module VaultTree
       vk = verification_key(pl)
       sig_block = signature_blocks.with_party_label(pl).first
       sig_block.sign_verification_key(vk,psk)
-      #sig_block.save!
     end
 
     def verification_key(pl)

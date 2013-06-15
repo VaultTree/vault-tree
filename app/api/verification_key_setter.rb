@@ -1,10 +1,9 @@
 module VaultTree
   module V1
-    class VerificationKeySetter
-      attr_reader :json, :party_label, :verification_key
+    class VerificationKeySetter < ContractModifier
+      attr_reader :party_label, :verification_key
 
-      def initialize(json, opts = {})
-        @json = json
+      def post_initialize(opts = {})
         @party_label = opts[:party_label]
         @verification_key = opts[:verification_key]
       end
@@ -16,11 +15,6 @@ module VaultTree
         contract.as_json
       end
 
-      private
-
-      def contract
-        @contract ||= VaultTree::Contract.import(json)
-      end
     end
   end
 end

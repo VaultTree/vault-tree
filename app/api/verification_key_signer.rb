@@ -11,7 +11,6 @@ module VaultTree
 
       def run
         contract.sign_verification_key(private_signing_key, party_label)
-        contract.save!
         contract.reload
         contract.as_json
       end

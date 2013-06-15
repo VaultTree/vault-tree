@@ -7,4 +7,8 @@ FactoryGirl.define do
     signed_public_encryption_key ""
     signed_contract_consent_key ""
   end
+
+  factory :signature_block_bob, parent: :signature_block do
+    party_label "BOB"
+  end
 end

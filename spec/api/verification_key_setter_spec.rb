@@ -4,11 +4,14 @@ module VaultTree
   module V1
     describe 'VerificationKeySetter' do
       describe '#run' do
-        before :each do
-          contract = FactoryGirl.create(:contract_with_bob).as_json
+        before :all do
+          @contract = FactoryGirl.create(:contract_with_bob).as_json
           @exp_verification_key =  "TEST_VERIFICATION_KEY"
+        end
+
+        before :each do
           opts = {party_label: "BOB", verification_key: @exp_verification_key} 
-          @returned_contract = VerificationKeySetter.new(contract,opts).run
+          @returned_contract = VerificationKeySetter.new(@contract,opts).run
           @verification_key = Support::JSON.decode(@returned_contract)["parties"].last["verification_key"]
         end
 

@@ -13,6 +13,11 @@ module VaultTree
       active_model_serializer.new(self).to_json
     end
 
+    def set_party_attribute(party_label, attribute, value)
+      p = parties.with_label(party_label).first
+      p.set_attribute(attribute,value)
+    end
+
     def set_verification_key(vk,pl)
       p = parties.with_label(pl).first
       p.verification_key = vk

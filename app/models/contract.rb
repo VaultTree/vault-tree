@@ -24,6 +24,12 @@ module VaultTree
       p.save!
     end
 
+    def sign_party_attribute(attr,pl,psk)
+      attr_value = parties.with_label(pl).first.send(attr)   
+      sig_block = signature_blocks.with_party_label(pl).first
+      sig_block.sign_party_attribute(attr, attr_value, psk)
+    end
+
     def sign_verification_key(psk,pl)
       vk = verification_key(pl)
       sig_block = signature_blocks.with_party_label(pl).first

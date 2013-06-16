@@ -1,4 +1,4 @@
 adapter: sqlite3
-database: db/vault_tree.sqlite3
+database: ':memory:'
 pool: 5
 timeout: 5000

@@ -2,7 +2,7 @@ Feature: Bob prepares the contract and sends to Alice
 
 Scenario: Bob Fills, Locks, and Signs (FLS) each Vault
   Given Bob has the blank contract
-  And he provides his public key
+  And he provides and signs his public keys
   When Bob FLS the third vault
   And Bob FLS the second vault
   And Bob FLS the first vault

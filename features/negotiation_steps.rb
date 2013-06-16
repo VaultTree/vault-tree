@@ -3,20 +3,34 @@ Given(/^Bob has the blank contract$/) do
   @bob = VaultTree::AutoBots::Bob.new()
 end
 
-Given(/^he provides his public key$/) do
-  opts = {
-    label: 'BOB',
-    verification_key: @bob.verification_key,
-    public_encryption_key: @bob.public_encryption_key,
-    private_signing_key: @bob.private_signing_key
-  }
-  opts[:verification_key].should be_an_instance_of(String)
-  opts[:public_encryption_key].should be_an_instance_of(String)
-  opts[:private_signing_key].should be_an_instance_of(String)
-  @contract = VaultTree::V1.set_public_keys(@contract, opts)
+Given(/^he provides and signs his public keys$/) do
+  @contract = VaultTree::V1::PartyAttributeSetter.new(@contract,
+    party_label: "BOB",
+    attribute: :verification_key,
+    value: @bob.verification_key
+  ).run
+
+  @contract = VaultTree::V1::PartyAttributeSigner.new(@contract,
+    party_label: "BOB",
+    attribute: :verification_key,
+    private_signing_key: @bob.signing_key
+  ).run
+
+  @contract = VaultTree::V1::PartyAttributeSetter.new(@contract,
+    party_label: "BOB",
+    attribute: :public_encryption_key,
+    value: @bob.public_encryption_key
+  ).run
+
+  @contract = VaultTree::V1::PartyAttributeSigner.new(@contract,
+    party_label: "BOB",
+    attribute: :public_encryption_key,
+    private_signing_key: @bob.signing_key
+  ).run
 end
 
 When(/^Bob FLS the third vault$/) do
+  pending
   # Fill Vault
   opts = { private_key: @bob.private_key, label: '[1,2,3]', content: "Congrats!" }
   @contract = VaultTree::V1.fill_vault(@contract, opts)

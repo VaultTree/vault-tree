@@ -29,8 +29,15 @@ module VaultTree
           end
 
           context 'for label' do
+            before :each do
+              @expected_attr_value = "TEST_PARTY_ATTR"
+              @opts = {attribute: :label, value: @expected_attr_value, party_label: "BOB"}
+              @returned_contract = PartyAttributeSetter.new(@contract, @opts).run
+              @returned_contract_hash =  Support::JSON.decode(@returned_contract)
+            end
+
             it 'the attribute has been set with the proper value' do
-              pending
+              @attr_value = @returned_contract_hash["parties"].select{|p| p["label"] == "#{@expected_attr_value}"}.first["label"]
               @attr_value.should == @expected_attr_value
             end
           end

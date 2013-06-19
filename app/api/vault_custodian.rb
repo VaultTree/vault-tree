@@ -1,6 +1,7 @@
 module VaultTree
   module V1
     class VaultCustodian < ContractModifier
+      attr_reader :vault_label, :contents
 
       def post_initialize(opts = {})
         @vault_label = opts[:vault_label]
@@ -15,6 +16,10 @@ module VaultTree
       # @option opts [String] :contents the contents to be placed in the vault
       # @return [String] The output contract
       def fill_vault
+        v = contract.vault_with_label(vault_label)
+        v.fill(contents)
+        contract.reload
+        contract.as_json
       end
 
       # Encrypts the vault contents with the provided symmetric key

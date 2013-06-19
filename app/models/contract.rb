@@ -43,6 +43,10 @@ module VaultTree
     def party_with_label(label)
       @party_with_label ||= self.parties.where(label: label).first
     end
+
+    def vault_with_label(l)
+      vaults.with_label(l).first
+    end
   end
 
   class Contract < ActiveRecord::Base

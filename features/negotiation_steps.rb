@@ -30,18 +30,12 @@ Given(/^he provides and signs his public keys$/) do
 end
 
 When(/^Bob FLS the third vault$/) do
-  pending
-  # Fill Vault
-  opts = { private_key: @bob.private_key, label: '[1,2,3]', content: "Congrats!" }
-  @contract = VaultTree::V1.fill_vault(@contract, opts)
-
-  # Lock Vault
-  opts = {private_key: @bob.private_key, label: '[1,2,3]'}
-  @contract = VaultTree::V1.lock_vault(@contract, opts)
-
-  # Sign Vault
-  opts = {private_key: @bob.private_key, label: '[1,2,3]'}
-  @contract = VaultTree::V1.lock_vault(@contract, opts)
+  @vault_three_key = @bob.generate_key
+  @contract = @bob.fill_lock_sign_vault(@contract,
+    vault_label: "[1-2-3]",
+    vault_key: @vault_three_key,
+    content: "Congrats!"
+  )
 end
 
 When(/^Bob FLS the second vault$/) do

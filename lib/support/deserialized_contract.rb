@@ -22,6 +22,10 @@ module VaultTree
       def vaults
         contract_hash["vaults"]
       end
+
+      def vault_content(l)
+        vault_with_label(l)["content"]
+      end
     end
   end
 end

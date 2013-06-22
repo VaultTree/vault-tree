@@ -17,8 +17,8 @@ module VaultTree
         before :each do
           opts = {vault_label: @label, content: @expected_content}
           @returned_contract = VaultCustodian.new(@contract, opts).fill_vault
-          @returned_contract_hash = Support::JSON.decode(@returned_contract)
-          @content = @returned_contract_hash["vaults"].select{|v| v["label"] == @label}.first["content"]
+          @desr_contract = Support::DeserializedContract.new(@returned_contract)
+          @content = @desr_contract.vault_content(@label)
         end
 
         it 'the vault content has been properly set' do
@@ -41,8 +41,8 @@ module VaultTree
           @vault_key = @cipher.generate_key
           opts = {vault_label: @label, vault_key: @vault_key}
           @returned_contract = VaultCustodian.new(@contract, opts).lock_vault
-          @returned_contract_hash = Support::JSON.decode(@returned_contract)
-          @encryped_content = @returned_contract_hash["vaults"].select{|v| v["label"] == @label}.first["content"] 
+          @desr_contract = Support::DeserializedContract.new(@returned_contract)
+          @encryped_content = @desr_contract.vault_content(@label)
         end
 
         it 'the vault content is now an encrypted string' do

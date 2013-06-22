@@ -57,4 +57,10 @@ FactoryGirl.define do
       contract.vaults << FactoryGirl.create(:vault, label: '[1]', content: 'CONGRATULATIONS YOU HAVE FILLED THE VAULT.')
     end
   end
+
+  factory :contract_with_locked_vault, parent: :contract do |contract|
+    after(:create) do |contract|
+      contract.vaults << FactoryGirl.create(:locked_vault)
+    end
+  end
 end

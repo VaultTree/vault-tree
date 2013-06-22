@@ -19,7 +19,16 @@ module VaultTree
       save!
     end
 
+    def sign(signing_key)
+      self.signed_vault_content = content_signature(signing_key)
+      save!
+    end
+
     private
+
+    def content_signature(key)
+      LockSmith::DigitalSignature.new(signing_key: key, message: self.content).generate
+    end
 
     def symmetric_cipher
       @symmetric_cipher ||= LockSmith::SymmetricCipher.new

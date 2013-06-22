@@ -55,12 +55,25 @@ module VaultTree
       end
 
       describe '#sign_vault' do
-        it 'the vaults signed_vault_content field is set with a signature' do
-          pending
+
+        before :each do
+          @contract = FactoryGirl.create(:contract_with_locked_vault).as_json
+          @signing_key = LockSmith::SigningKeyPair.new().signing_key
         end
 
-        it 'the signature validates against the custodians verification key' do
-          pending
+        before :each do
+          @label = "[1]"
+          opts = {vault_label: @label, custodian_signing_key: @signing_key}
+          @returned_contract = VaultCustodian.new(@contract, opts).sign_vault
+          @desr_contract = Support::DeserializedContract.new(@returned_contract)
+        end
+
+        it 'the vaults signed_vault_content field is set with a signature' do
+          @desr_contract.signed_vault_content(vault_label: @label).should be_an_instance_of(String)
+        end
+
+        it 'the signature is none empty' do
+          @desr_contract.signed_vault_content(vault_label: @label).empty?.should be false
         end
       end
     end

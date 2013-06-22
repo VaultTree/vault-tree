@@ -51,6 +51,10 @@ module VaultTree
     def lock_vault_with_label(opts = {})
       vaults.with_label(opts[:vault_label]).first.lock(opts[:vault_key])
     end
+
+    def sign_vault_with_label(opts = {})
+      vaults.with_label(opts[:vault_label]).first.sign(opts[:custodian_signing_key])
+    end
   end
 
   class Contract < ActiveRecord::Base

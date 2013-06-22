@@ -8,4 +8,10 @@ FactoryGirl.define do
     signed_vault_content ""
     desc ""
   end
+
+  factory :locked_vault, parent: :vault do
+    label "[1]"
+    content "ENCRYPTED_CONTENT"
+    signed_vault_content ""
+  end
 end

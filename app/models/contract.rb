@@ -47,6 +47,10 @@ module VaultTree
     def vault_with_label(l)
       vaults.with_label(l).first
     end
+
+    def lock_vault_with_label(opts = {})
+      vaults.with_label(opts[:vault_label]).first.lock(opts[:vault_key])
+    end
   end
 
   class Contract < ActiveRecord::Base

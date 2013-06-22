@@ -10,19 +10,19 @@ module VaultTree
         end
 
         before :each do
-          @expected_contents = 'CONGRATULATIONS YOU HAVE FILLED THE VAULT.'
+          @expected_content = 'CONGRATULATIONS YOU HAVE FILLED THE VAULT.'
           @label = "[1]"
         end
 
         before :each do
-          opts = {vault_label: @label, contents: @expected_contents}
+          opts = {vault_label: @label, content: @expected_content}
           @returned_contract = VaultCustodian.new(@contract, opts).fill_vault
           @returned_contract_hash = Support::JSON.decode(@returned_contract)
           @content = @returned_contract_hash["vaults"].select{|v| v["label"] == @label}.first["content"]
         end
 
-        it 'the vault contents have been properly set' do
-          @content.should == @expected_contents
+        it 'the vault content has been properly set' do
+          @content.should == @expected_content
         end
       end
 
@@ -32,7 +32,7 @@ module VaultTree
         end
 
         before :each do
-          @expected_contents = 'CONGRATULATIONS YOU HAVE FILLED THE VAULT.'
+          @expected_content = 'CONGRATULATIONS YOU HAVE FILLED THE VAULT.'
           @label = "[1]"
         end
 
@@ -45,12 +45,12 @@ module VaultTree
           @encryped_content = @returned_contract_hash["vaults"].select{|v| v["label"] == @label}.first["content"] 
         end
 
-        it 'the vault contents are now an encrypted string' do
+        it 'the vault content is now an encrypted string' do
           @encryped_content.should be_an_instance_of(String)
         end
 
-        it 'decrypting the vault value returns the original contents' do
-          @cipher.decrypt(cipher_text: @encryped_content, key: @vault_key).should == @expected_contents
+        it 'decrypting the vault value returns the original content' do
+          @cipher.decrypt(cipher_text: @encryped_content, key: @vault_key).should == @expected_content
         end
       end
 

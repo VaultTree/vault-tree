@@ -1,12 +1,12 @@
 module VaultTree
   module V1
     class VaultCustodian < ContractModifier
-      attr_reader :vault_label, :contents, :vault_key
+      attr_reader :vault_label, :content, :vault_key
 
       def post_initialize(opts = {})
         @vault_key = opts[:vault_key]
         @vault_label = opts[:vault_label]
-        @contents = opts[:contents]
+        @content = opts[:content]
       end
 
       # Fills a vault with secret contents 
@@ -17,9 +17,7 @@ module VaultTree
       # @option opts [String] :contents the contents to be placed in the vault
       # @return [String] The output contract
       def fill_vault
-        # This is crap. Push this behavior down.
-        v = contract.vault_with_label(vault_label)
-        v.fill(contents)
+        contract.fill_vault_with_label(vault_label: vault_label, content: content)
         contract.reload
         contract.as_json
       end

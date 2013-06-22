@@ -44,8 +44,8 @@ module VaultTree
       @party_with_label ||= self.parties.where(label: label).first
     end
 
-    def vault_with_label(l)
-      vaults.with_label(l).first
+    def fill_vault_with_label(opts = {})
+      vaults.with_label(opts[:vault_label]).first.fill(opts[:content])
     end
 
     def lock_vault_with_label(opts = {})

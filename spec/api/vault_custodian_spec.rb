@@ -17,8 +17,8 @@ module VaultTree
         before :each do
           opts = {vault_label: @label, content: @expected_content}
           @returned_contract = VaultCustodian.new(@contract, opts).fill_vault
-          @returned_contract_hash = Support::JSON.decode(@returned_contract)
-          @content = @returned_contract_hash["vaults"].select{|v| v["label"] == @label}.first["content"]
+          @desr_contract = Support::DeserializedContract.new(@returned_contract)
+          @content = @desr_contract.vault_content(@label)
         end
 
         it 'the vault content has been properly set' do
@@ -41,8 +41,8 @@ module VaultTree
           @vault_key = @cipher.generate_key
           opts = {vault_label: @label, vault_key: @vault_key}
           @returned_contract = VaultCustodian.new(@contract, opts).lock_vault
-          @returned_contract_hash = Support::JSON.decode(@returned_contract)
-          @encryped_content = @returned_contract_hash["vaults"].select{|v| v["label"] == @label}.first["content"] 
+          @desr_contract = Support::DeserializedContract.new(@returned_contract)
+          @encryped_content = @desr_contract.vault_content(@label)
         end
 
         it 'the vault content is now an encrypted string' do
@@ -55,12 +55,25 @@ module VaultTree
       end
 
       describe '#sign_vault' do
-        it 'the vaults signed_vault_content field is set with a signature' do
-          pending
+
+        before :each do
+          @contract = FactoryGirl.create(:contract_with_locked_vault).as_json
+          @signing_key = LockSmith::SigningKeyPair.new().signing_key
         end
 
-        it 'the signature validates against the custodians verification key' do
-          pending
+        before :each do
+          @label = "[1]"
+          opts = {vault_label: @label, custodian_signing_key: @signing_key}
+          @returned_contract = VaultCustodian.new(@contract, opts).sign_vault
+          @desr_contract = Support::DeserializedContract.new(@returned_contract)
+        end
+
+        it 'the vaults signed_vault_content field is set with a signature' do
+          @desr_contract.signed_vault_content(vault_label: @label).should be_an_instance_of(String)
+        end
+
+        it 'the signature is none empty' do
+          @desr_contract.signed_vault_content(vault_label: @label).empty?.should be false
         end
       end
     end

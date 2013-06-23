@@ -1,32 +1,29 @@
+Given(/^Alice has the blank contract$/) do
+  @contract = File.open(VaultTree::PathHelpers.one_two_three_contract).read
+  @alice = VaultTree::AutoBots::Alice.new()
+end
+
+When(/^she writes and signs her public attributes$/) do
+  @contract = @alice.write_public_attrs(@contract)
+  @contract = @alice.sign_public_attrs(@contract)
+end
+
+When(/^she sends the contract to Bob$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^Bob can validate her public attributes$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 Given(/^Bob has the blank contract$/) do
   @contract = File.open(VaultTree::PathHelpers.one_two_three_contract).read
   @bob = VaultTree::AutoBots::Bob.new()
 end
 
-Given(/^he provides and signs his public keys$/) do
-  @contract = VaultTree::V1::PartyAttributeSetter.new(@contract,
-    party_label: "BOB",
-    attribute: :verification_key,
-    value: @bob.verification_key
-  ).run
-
-  @contract = VaultTree::V1::PartyAttributeSigner.new(@contract,
-    party_label: "BOB",
-    attribute: :verification_key,
-    private_signing_key: @bob.signing_key
-  ).run
-
-  @contract = VaultTree::V1::PartyAttributeSetter.new(@contract,
-    party_label: "BOB",
-    attribute: :public_encryption_key,
-    value: @bob.public_encryption_key
-  ).run
-
-  @contract = VaultTree::V1::PartyAttributeSigner.new(@contract,
-    party_label: "BOB",
-    attribute: :public_encryption_key,
-    private_signing_key: @bob.signing_key
-  ).run
+Given(/^he writes and signs his public attributes$/) do
+  @contract = @bob.write_public_attrs(@contract)
+  @contract = @bob.sign_public_attrs(@contract)
 end
 
 When(/^Bob FLS the third vault$/) do
@@ -39,11 +36,22 @@ When(/^Bob FLS the third vault$/) do
 end
 
 When(/^Bob FLS the second vault$/) do
-  pending # express the regexp above with the code you wish you had
+  @vault_two_key = @bob.generate_key
+  @contract = @bob.fill_lock_sign_vault(@contract,
+    vault_label: "[1-2]",
+    vault_key: @vault_two_key,
+    content: @vault_three_key
+  )
 end
 
 When(/^Bob FLS the first vault$/) do
-  pending # express the regexp above with the code you wish you had
+  pending 'LOCK THE FIRST VAULT WITH ALICES PUBLIC KEY'
+  @alice_pek = 'ALICE PUBLIC ENCRYPTION KEY'
+  @contract = @bob.fill_lock_sign_vault(@contract,
+    vault_label: "[1-2]",
+    vault_key: @vault_one_key,
+    content: @vault_two_key
+  )
 end
 
 Then(/^each vault is properly locked and signed$/) do

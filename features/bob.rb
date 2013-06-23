@@ -3,19 +3,19 @@ module VaultTree
     class Bob
 
       def public_encryption_key
-        encryption_key_pair.public_key
+        @public_encryption_key ||= encryption_key_pair.public_key
       end
 
       def private_encryption_key
-        encryption_key_pair.private_key
+        @private_encryption_key ||= encryption_key_pair.private_key
       end
 
       def signing_key
-        signing_key_pair.signing_key
+        @signing_key ||= signing_key_pair.signing_key
       end
 
       def verification_key
-        signing_key_pair.verify_key
+        @verification_key ||= signing_key_pair.verify_key
       end
 
       def fill_lock_sign_vault(contract, opts = {})
@@ -42,7 +42,7 @@ module VaultTree
           opts = {party_label: party_label, attribute: k}.merge(my_keys)
           contract = VaultTree::V1::PartyAttributeSigner.new(contract, opts).run
         end
-        return contract 
+        return contract
       end
 
       private

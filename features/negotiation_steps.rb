@@ -18,11 +18,22 @@ When(/^Bob FLS the third vault$/) do
 end
 
 When(/^Bob FLS the second vault$/) do
-  pending # express the regexp above with the code you wish you had
+  @vault_two_key = @bob.generate_key
+  @contract = @bob.fill_lock_sign_vault(@contract,
+    vault_label: "[1-2]",
+    vault_key: @vault_two_key,
+    content: @vault_three_key
+  )
 end
 
 When(/^Bob FLS the first vault$/) do
-  pending # express the regexp above with the code you wish you had
+  pending 'LOCK THE FIRST VAULT WITH ALICES PUBLIC KEY'
+  @alice_pek = 'ALICE PUBLIC ENCRYPTION KEY'
+  @contract = @bob.fill_lock_sign_vault(@contract,
+    vault_label: "[1-2]",
+    vault_key: @vault_one_key,
+    content: @vault_two_key
+  )
 end
 
 Then(/^each vault is properly locked and signed$/) do

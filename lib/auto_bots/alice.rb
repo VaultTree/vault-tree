@@ -1,6 +1,6 @@
 module VaultTree
   module AutoBots
-    class Alice
+    class Alice < AutoBot
 
       def party_label
         "ALICE"

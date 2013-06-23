@@ -1,3 +1,19 @@
+Given(/^Alice has the blank contract$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^she writes and signs her public attributes$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^she sends the contract to Bob$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^Bob can validate her public attributes$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 Given(/^Bob has the blank contract$/) do
   @contract = File.open(VaultTree::PathHelpers.one_two_three_contract).read
   @bob = VaultTree::AutoBots::Bob.new()

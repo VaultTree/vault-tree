@@ -29,14 +29,46 @@ module VaultTree
         LockSmith::SymmetricCipher.new.generate_key
       end
 
+      def write_public_attrs(contract)
+        my_public_attrs.each do |k,v|
+          opts = { party_label: party_label, attribute: k, value: v }
+          contract = VaultTree::V1::PartyAttributeSetter.new(contract, opts).run
+        end
+        return contract 
+      end
+
+      def sign_public_attrs(contract)
+        my_public_attrs.each do |k,v|
+          opts = {party_label: party_label, attribute: k}.merge(my_keys)
+          contract = VaultTree::V1::PartyAttributeSigner.new(contract, opts).run
+        end
+        return contract 
+      end
+
       private
 
-      def my_keys
+      def party_label
+        "BOB"
+      end
+
+      def my_public_attrs
         {
-          custodian_signing_key: signing_key
+          label: party_label,
+          public_encryption_key: public_encryption_key,
+          verification_key: verification_key
         }
       end
 
+      def my_keys
+        {
+          custodian_signing_key: signing_key,
+          private_signing_key: signing_key
+        }
+      end
+
+      def party_label
+        "BOB"
+      end
 
       def signing_key_pair
         @signing_key_pair ||= LockSmith::SigningKeyPair.new()

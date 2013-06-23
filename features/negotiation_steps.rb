@@ -3,30 +3,9 @@ Given(/^Bob has the blank contract$/) do
   @bob = VaultTree::AutoBots::Bob.new()
 end
 
-Given(/^he provides and signs his public keys$/) do
-  @contract = VaultTree::V1::PartyAttributeSetter.new(@contract,
-    party_label: "BOB",
-    attribute: :verification_key,
-    value: @bob.verification_key
-  ).run
-
-  @contract = VaultTree::V1::PartyAttributeSigner.new(@contract,
-    party_label: "BOB",
-    attribute: :verification_key,
-    private_signing_key: @bob.signing_key
-  ).run
-
-  @contract = VaultTree::V1::PartyAttributeSetter.new(@contract,
-    party_label: "BOB",
-    attribute: :public_encryption_key,
-    value: @bob.public_encryption_key
-  ).run
-
-  @contract = VaultTree::V1::PartyAttributeSigner.new(@contract,
-    party_label: "BOB",
-    attribute: :public_encryption_key,
-    private_signing_key: @bob.signing_key
-  ).run
+Given(/^he writes and signs his public attributes$/) do
+  @contract = @bob.write_public_attrs(@contract)
+  @contract = @bob.sign_public_attrs(@contract)
 end
 
 When(/^Bob FLS the third vault$/) do

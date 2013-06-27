@@ -46,6 +46,16 @@ FactoryGirl.define do
     end
   end
 
+  factory :contract_with_bob_cck, parent: :contract do |contract|
+    after(:create) do |contract|
+      contract.parties << FactoryGirl.create(:party_bob_with_cck)
+    end
+
+    after(:create) do |contract|
+      contract.signature_blocks << FactoryGirl.create(:signature_block_bob)
+    end
+  end
+
   factory :contract_with_empty_vault, parent: :contract do |contract|
     after(:create) do |contract|
       contract.vaults << FactoryGirl.create(:vault, label: '[1]')

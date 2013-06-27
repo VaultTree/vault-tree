@@ -13,6 +13,17 @@ module VaultTree
       active_model_serializer.new(self).to_json
     end
 
+    def party_attribute(opts)
+      p = parties.with_label(opts[:party_label]).first
+      p.attributes[opts[:attribute].to_s]
+    end
+
+    def party_attribute_signature(opts)
+      sig_block = signature_blocks.with_party_label(opts[:party_label]).first
+      puts sig_block.attributes 
+      sig_block.signature_for_attribute(opts[:attribute])
+    end
+
     def set_party_attribute(party_label, attribute, value)
       p = parties.with_label(party_label).first
       p.set_attribute(attribute,value)

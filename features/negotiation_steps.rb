@@ -9,11 +9,12 @@ When(/^she writes and signs her public attributes$/) do
 end
 
 When(/^she sends the contract to Bob$/) do
-  pending # express the regexp above with the code you wish you had
+  @bob = VaultTree::AutoBots::Bob.new()
 end
 
 Then(/^Bob can validate her public attributes$/) do
-  pending # express the regexp above with the code you wish you had
+  pending 'NON YET IMPLEMENTED'
+  @contract = @bob.validate_public_attrs(@contract, party_label: "ALICE")
 end
 
 Given(/^Bob has the blank contract$/) do

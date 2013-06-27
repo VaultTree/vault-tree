@@ -1,12 +1,13 @@
 module VaultTree
   module LockSmith
     class DigitalSignature
-      attr_reader :signing_key, :verify_key, :message
+      attr_reader :signing_key, :verify_key, :message, :signature
 
       def initialize(opts = {})
         @message = opts[:message]
         @signing_key = opts[:signing_key]
         @verify_key = opts[:verify_key]
+        @signature = opts[:signature]
       end
 
       def generate
@@ -14,7 +15,7 @@ module VaultTree
       end
 
       def verify
-        sig_verifier.verify(@message, :base64)
+        sig_verifier.verify(@message, @signature, :base64)
       end
 
       private

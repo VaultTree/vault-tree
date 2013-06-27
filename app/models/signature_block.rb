@@ -14,6 +14,10 @@ module VaultTree
       self.save!
     end
 
+    def signature_for_attribute(attr)
+      self.send("signed_#{attr}")
+    end
+
     private
 
     def generate_digital_signature(msg,psk)

@@ -71,7 +71,7 @@ module VaultTree
     end
 
     def one_two_three_contract
-      "#{project_dir_parent}/lab/contracts/one_two_three-0.1.0.EXP.json"
+      "#{project_dir}/spec/support/fixtures/one_two_three-0.1.0.EXP.json"
     end
 
     def one_two_three_020

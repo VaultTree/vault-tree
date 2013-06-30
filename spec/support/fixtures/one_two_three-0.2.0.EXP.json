@@ -1,4 +1,5 @@
 {
+  "header": {},
   "parties":{
    "alice":{
       "public_data":{
@@ -11,14 +12,19 @@
         "address": "",
         "verification_key": "",
         "public_encryption_key": "",
-        "contract_consent_key": ""
+        "contract_consent_key": "",
+        "vault_contents": {
+          "first":"",
+          "second":"",
+          "third":""
+        }
       },
       "private_data": {
         "decryption_key":"",
         "signing_key":""
       }
     },
-    "alice":{
+    "bob":{
       "public_data":{
         "address": "",
         "verification_key": "",
@@ -29,7 +35,8 @@
         "address": "",
         "verification_key": "",
         "public_encryption_key": "",
-        "contract_consent_key": ""
+        "contract_consent_key": "",
+        "vault_contents": {}
       },
       "private_data": {
         "decryption_key":"",
@@ -38,7 +45,16 @@
     }
   },
   "vaults": {
-    "first":{},
+    "first":{
+      "custodian":"bob",
+      "locked_after": "second",
+      "unlocked_after": "",
+      "locking_key": "",
+      "unlocking_key": "",
+      "content_type":"",
+      "ciphertext_content": "",
+      "plaintext_content": ""
+    },
     "second":{},
     "third":{}
   }

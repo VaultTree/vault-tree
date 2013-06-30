@@ -49,9 +49,9 @@
       "custodian":"bob",
       "locked_after": "second",
       "unlocked_after": "",
-      "locking_key": "",
-      "unlocking_key": "",
-      "content_type":"",
+      "locking_key": "['parties']['alice']['public_data']['public_encryption_key']",
+      "unlocking_key": "['parties']['alice']['private_data']['decryption_key']",
+      "content_type":"['vaults']['second']['unlocking_key']",
       "ciphertext_content": "",
       "plaintext_content": ""
     },

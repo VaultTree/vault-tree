@@ -58,8 +58,11 @@
       "unlocked_after": "",
       "locking_key": "['parties']['alice']['public_data']['public_encryption_key']",
       "unlocking_key": "['parties']['alice']['private_data']['decryption_key']",
-      "ciphertext_content": "",
-      "plaintext_content": "['vaults']['first']['custodian']['private_data']['generated_vault_keys']['second']"
+      "content": {
+        "source": "['vaults']['first']['custodian']['private_data']['generated_vault_keys']['second']",
+        "ciphertext": "",
+        "plaintext":""
+      }
     },
     "second":{
       "custodian":"bob",

@@ -40,7 +40,11 @@
       },
       "private_data": {
         "decryption_key":"",
-        "signing_key":""
+        "signing_key":"",
+        "generated_vault_keys": {
+          "second":"",
+          "third":"" 
+        }
       }
     }
   },
@@ -55,7 +59,16 @@
       "ciphertext_content": "",
       "plaintext_content": ""
     },
-    "second":{},
+    "second":{
+      "custodian":"bob",
+      "locked_after": "third",
+      "unlocked_after": "first",
+      "locking_key": "['parties']['bob']['private_data']['generated_vault_keys']['second']",
+      "unlocking_key": "['vaults']['first']['plaintext_content']",
+      "content_type":"['vaults']['second']['unlocking_key']",
+      "ciphertext_content": "",
+      "plaintext_content": ""
+    },
     "third":{}
   }
 }

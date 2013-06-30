@@ -44,6 +44,9 @@
         "generated_vault_keys": {
           "second":"",
           "third":"" 
+        },
+        "messages":{
+          "congratulations":"CONGRATS! YOU OPENED THE THIRD VAULT."
         }
       }
     }
@@ -55,9 +58,8 @@
       "unlocked_after": "",
       "locking_key": "['parties']['alice']['public_data']['public_encryption_key']",
       "unlocking_key": "['parties']['alice']['private_data']['decryption_key']",
-      "content_type":"['vaults']['second']['unlocking_key']",
       "ciphertext_content": "",
-      "plaintext_content": ""
+      "plaintext_content": "['parties']['bob']['private_data']['generated_vault_keys']['second']"
     },
     "second":{
       "custodian":"bob",
@@ -65,10 +67,17 @@
       "unlocked_after": "first",
       "locking_key": "['parties']['bob']['private_data']['generated_vault_keys']['second']",
       "unlocking_key": "['vaults']['first']['plaintext_content']",
-      "content_type":"['vaults']['second']['unlocking_key']",
       "ciphertext_content": "",
-      "plaintext_content": ""
+      "plaintext_content": "['parties']['bob']['private_data']['generated_vault_keys']['third']"
     },
-    "third":{}
+    "third":{
+      "custodian":"bob",
+      "locked_after": "",
+      "unlocked_after": "second",
+      "locking_key": "['parties']['bob']['private_data']['generated_vault_keys']['third']",
+      "unlocking_key": "['vaults']['second']['plaintext_content']",
+      "ciphertext_content": "",
+      "plaintext_content": "['parties']['bob']['private_data']['messages']['congratulations']"
+    }
   }
 }

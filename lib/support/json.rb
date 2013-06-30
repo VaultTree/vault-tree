@@ -3,12 +3,12 @@ module VaultTree
     module JSON
       extend self
 
-      def encode(json)
-        ActiveSupport::JSON.encode(json)
+      def encode(ruby_hash)
+        ActiveSupport::JSON.encode(ruby_hash)
       end
 
-      def decode(ruby_hash)
-        ActiveSupport::JSON.decode(ruby_hash)
+      def decode(json)
+        ActiveSupport::JSON.decode(json)
       end
     end
   end

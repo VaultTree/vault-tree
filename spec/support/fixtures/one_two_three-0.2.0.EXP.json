@@ -36,5 +36,10 @@
         "signing_key":""
       }
     }
+  },
+  "vaults": {
+    "first":{},
+    "second":{},
+    "third":{}
   }
 }

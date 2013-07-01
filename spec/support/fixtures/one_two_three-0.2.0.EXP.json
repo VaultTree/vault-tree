@@ -53,8 +53,8 @@
   },
   "vaults": {
     "first": {
-      "custodian": "bob",
-      "locked_after": "second",
+      "custodian": "['parties']['bob']",
+      "locked_after": "['vaults']['second']",
       "unlocked_after": "",
       "locking_key": "['parties']['alice']['public_data']['public_encryption_key']",
       "unlocking_key": "['parties']['alice']['private_data']['decryption_key']",
@@ -65,9 +65,9 @@
       }
     },
     "second": {
-      "custodian": "bob",
-      "locked_after": "third",
-      "unlocked_after": "first",
+      "custodian": "['parties']['bob']",
+      "locked_after": "['vaults']['third']",
+      "unlocked_after": "['vaults']['first']",
       "locking_key": "['vaults']['second']['custodian']['private_data']['generated_vault_keys']['second']",
       "unlocking_key": "['vaults']['first']['plaintext_content']",
       "content": {
@@ -77,9 +77,9 @@
       }
     },
     "third": {
-      "custodian": "bob",
+      "custodian": "['parties']['bob']",
       "locked_after": "",
-      "unlocked_after": "second",
+      "unlocked_after": "['vaults']['second']",
       "locking_key": "['vaults']['third']['custodian']['private_data']['generated_vault_keys']['third']",
       "unlocking_key": "['vaults']['second']['plaintext_content']",
       "content": {

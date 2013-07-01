@@ -70,8 +70,11 @@
       "unlocked_after": "first",
       "locking_key": "['vaults']['second']['custodian']['private_data']['generated_vault_keys']['second']",
       "unlocking_key": "['vaults']['first']['plaintext_content']",
-      "ciphertext_content": "",
-      "plaintext_content": "['vaults']['second']['custodian']['private_data']['generated_vault_keys']['third']"
+      "content":{
+        "source": "['vaults']['second']['custodian']['private_data']['generated_vault_keys']['third']",
+        "ciphertext": "",
+        "plaintext": ""
+      }
     },
     "third":{
       "custodian":"bob",
@@ -79,8 +82,11 @@
       "unlocked_after": "second",
       "locking_key": "['vaults']['third']['custodian']['private_data']['generated_vault_keys']['third']",
       "unlocking_key": "['vaults']['second']['plaintext_content']",
-      "ciphertext_content": "",
-      "plaintext_content": "['vaults']['third']['custodian']['private_data']['messages']['congratulations']"
+      "content":{
+        "source": "['vaults']['third']['custodian']['private_data']['messages']['congratulations']",
+        "ciphertext": "",
+        "plaintext":""
+      }
     }
   }
 }

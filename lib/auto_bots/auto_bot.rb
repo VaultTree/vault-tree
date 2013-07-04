@@ -2,12 +2,16 @@ module VaultTree
   module AutoBots
     class AutoBot
 
+      def address
+        "#{party_label}@auto_bot.com"
+      end
+
       def public_encryption_key
         @public_encryption_key ||= encryption_key_pair.public_key
       end
 
-      def private_encryption_key
-        @private_encryption_key ||= encryption_key_pair.private_key
+      def decryption_key
+        @decryption_key ||= encryption_key_pair.private_key
       end
 
       def signing_key
@@ -16,6 +20,10 @@ module VaultTree
 
       def verification_key
         @verification_key ||= signing_key_pair.verify_key
+      end
+
+      def contract_consent_key
+        @contract_consent_key ||= encryption_key_pair.private_key
       end
 
       def fill_lock_sign_vault(contract, opts = {})
@@ -71,6 +79,39 @@ module VaultTree
       def encryption_key_pair
         @encryption_key_pair ||= LockSmith::EncryptionKeyPair.new()
       end
+
+      def public_data
+        %Q[
+          {
+            "parties":{
+              "#{party_label}": {
+                "public_data": {
+                  "address": "#{address}",
+                  "verification_key": "#{verification_key}",
+                  "public_encryption_key": "#{public_encryption_key}",
+                  "contract_consent_key": "#{contract_consent_key}"
+                }
+              }
+            }
+          }
+        ]
+      end
+
+      def private_data
+        %Q[
+          {
+            "parties":{
+              "#{party_label}": {
+                "private_data": {
+                  "decryption_key": "#{decryption_key}",
+                  "signing_key": "#{signing_key}"
+                }
+              }
+            }
+          }
+        ]
+      end
+
     end
   end
 end

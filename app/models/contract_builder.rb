@@ -12,7 +12,14 @@ module VaultTree
     end
 
     private
-   
+
+    def update_contract
+      fresh_contract
+      update_public_data
+      update_private_data
+      updated_contract
+    end
+
     def party_id
       party_properties['parties'].keys.first
     end
@@ -35,13 +42,6 @@ module VaultTree
       if private_data_given?
         @updated_contract['parties'][party_id]['private_data'] = party_properties['parties'][party_id]['private_data']
       end
-    end
-
-    def update_contract
-      fresh_contract
-      update_public_data
-      update_private_data
-      updated_contract
     end
 
     def fresh_contract

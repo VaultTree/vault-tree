@@ -14,6 +14,10 @@ module VaultTree
         @decryption_key ||= encryption_key_pair.private_key
       end
 
+      def private_encryption_key
+        @private_encryption_key ||= encryption_key_pair.private_key
+      end
+
       def signing_key
         @signing_key ||= signing_key_pair.signing_key
       end

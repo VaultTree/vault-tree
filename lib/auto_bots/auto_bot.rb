@@ -10,8 +10,8 @@ module VaultTree
         @public_encryption_key ||= encryption_key_pair.public_key
       end
 
-      def private_encryption_key
-        @private_encryption_key ||= encryption_key_pair.private_key
+      def decryption_key
+        @decryption_key ||= encryption_key_pair.private_key
       end
 
       def signing_key
@@ -90,6 +90,21 @@ module VaultTree
                   "verification_key": "#{verification_key}",
                   "public_encryption_key": "#{public_encryption_key}",
                   "contract_consent_key": "#{contract_consent_key}"
+                }
+              }
+            }
+          }
+        ]
+      end
+
+      def private_data
+        %Q[
+          {
+            "parties":{
+              "#{party_label}": {
+                "private_data": {
+                  "decryption_key": "#{decryption_key}",
+                  "signing_key": "#{signing_key}"
                 }
               }
             }

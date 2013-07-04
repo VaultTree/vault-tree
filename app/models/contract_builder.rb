@@ -30,9 +30,17 @@ module VaultTree
       new_contract = contract
       new_pps = party_properties
       party_id = new_pps['parties'].keys.first
-      new_contract['parties'][party_id]['public_data'] = new_pps['parties'][party_id]['public_data']
+      if new_pps['parties'][party_id]['public_data']
+        new_contract['parties'][party_id]['public_data'] = new_pps['parties'][party_id]['public_data']
+      end
+
+      if new_pps['parties'][party_id]['private_data']
+        new_contract['parties'][party_id]['private_data'] = new_pps['parties'][party_id]['private_data']
+      end
+
       new_contract
     end
+
 
     def contract
       Support::JSON.decode(json_contract) 

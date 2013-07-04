@@ -20,13 +20,29 @@ module VaultTree
           Support::JSON.decode(@json)['parties']['alice']['public_data']['verification_key'].should == @alice.verification_key
           Support::JSON.decode(@json)['parties']['alice']['public_data']['public_encryption_key'].should == @alice.public_encryption_key
         end
+      end
 
-        context 'with bob public data' do
-          context 'with bob private data' do
-            it 'does something' do
-              pending
-            end
-          end
+      context 'with alice then bobs public data' do
+
+        before :each do
+          @alice = AutoBots::Alice.new
+          @alice_public_data = @alice.public_data
+          @json = ContractBuilder.new(json_contract: @json_contract, json_party_properties: @alice_public_data).build
+          @bob = AutoBots::Bob.new
+          @bob_public_data = @bob.public_data
+          @json = ContractBuilder.new(json_contract: @json, json_party_properties: @bob_public_data).build
+        end
+
+        it 'has alices public data' do
+          Support::JSON.decode(@json)['parties']['alice']['public_data']['address'].should == @alice.address
+          Support::JSON.decode(@json)['parties']['alice']['public_data']['verification_key'].should == @alice.verification_key
+          Support::JSON.decode(@json)['parties']['alice']['public_data']['public_encryption_key'].should == @alice.public_encryption_key
+        end
+
+        it 'has bobs public data' do
+          Support::JSON.decode(@json)['parties']['bob']['public_data']['address'].should == @bob.address
+          Support::JSON.decode(@json)['parties']['bob']['public_data']['verification_key'].should == @bob.verification_key
+          Support::JSON.decode(@json)['parties']['bob']['public_data']['public_encryption_key'].should == @bob.public_encryption_key
         end
       end
     end

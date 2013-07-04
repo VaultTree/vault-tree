@@ -1,3 +1,16 @@
+
+class Hash
+  def branch_hashes
+    hks = self.keys.select{|k| self[k].kind_of?(Hash) } # array of hashes
+    hks.map{|k| {k => self[k]}}
+  end
+
+  def leaf_hashes
+    hks = self.keys.select{|k| ! self[k].kind_of?(Hash) } # array of hashes
+    hks.map{|k| {k => self[k]}}
+  end
+end
+
 module VaultTree
   class ContractBuilder
     attr_reader :json_contract, :json_party_properties 
@@ -12,21 +25,21 @@ module VaultTree
     end
 
     private
-
+    
     def active_contract
-      contract.merge(party_properties){|key, c_val, pp_val| c_val.merge(pp_val)}
-    end
-
-    def updated_parties
-      contract['parties'].update(party_properties)
+      new_contract = contract
+      new_pps = party_properties
+      party_id = new_pps['parties'].keys.first
+      new_contract['parties'][party_id]['public_data'] = new_pps['parties'][party_id]['public_data']
+      new_contract
     end
 
     def contract
-      @contract ||= Support::JSON.decode(json_contract) 
+      Support::JSON.decode(json_contract) 
     end
 
     def party_properties
-      @party_properties ||= Support::JSON.decode(json_party_properties)
+      Support::JSON.decode(json_party_properties)
     end
   end
 end

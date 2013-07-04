@@ -3,7 +3,7 @@ module VaultTree
     class Alice < AutoBot
 
       def party_label
-        "ALICE"
+        "alice"
       end
 
     end

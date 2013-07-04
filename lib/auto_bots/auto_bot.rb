@@ -84,7 +84,7 @@ module VaultTree
         %Q[
           {
             "parties":{
-              "alice": {
+              "#{party_label}": {
                 "public_data": {
                   "address": "#{address}",
                   "verification_key": "#{verification_key}",

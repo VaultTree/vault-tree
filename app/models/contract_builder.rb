@@ -1,16 +1,3 @@
-
-class Hash
-  def branch_hashes
-    hks = self.keys.select{|k| self[k].kind_of?(Hash) } # array of hashes
-    hks.map{|k| {k => self[k]}}
-  end
-
-  def leaf_hashes
-    hks = self.keys.select{|k| ! self[k].kind_of?(Hash) } # array of hashes
-    hks.map{|k| {k => self[k]}}
-  end
-end
-
 module VaultTree
   class ContractBuilder
     attr_reader :json_contract, :json_party_properties, :updated_contract

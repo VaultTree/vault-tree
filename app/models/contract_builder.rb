@@ -13,7 +13,7 @@ end
 
 module VaultTree
   class ContractBuilder
-    attr_reader :json_contract, :json_party_properties 
+    attr_reader :json_contract, :json_party_properties, :updated_contract
 
     def initialize(opts = {})
       @json_contract = opts[:json_contract]
@@ -21,26 +21,45 @@ module VaultTree
     end
 
     def build
-      Support::JSON.encode(active_contract) 
+      Support::JSON.encode(update_contract) 
     end
 
     private
-    
-    def active_contract
-      new_contract = contract
-      new_pps = party_properties
-      party_id = new_pps['parties'].keys.first
-      if new_pps['parties'][party_id]['public_data']
-        new_contract['parties'][party_id]['public_data'] = new_pps['parties'][party_id]['public_data']
-      end
-
-      if new_pps['parties'][party_id]['private_data']
-        new_contract['parties'][party_id]['private_data'] = new_pps['parties'][party_id]['private_data']
-      end
-
-      new_contract
+   
+    def party_id
+      party_properties['parties'].keys.first
     end
 
+    def public_data_given?
+      !! party_properties['parties'][party_id]['public_data']
+    end
+
+    def private_data_given?
+      !! party_properties['parties'][party_id]['private_data']
+    end
+
+    def update_public_data
+      if public_data_given?
+        @updated_contract['parties'][party_id]['public_data'] = party_properties['parties'][party_id]['public_data']
+      end
+    end
+
+    def update_private_data
+      if private_data_given?
+        @updated_contract['parties'][party_id]['private_data'] = party_properties['parties'][party_id]['private_data']
+      end
+    end
+
+    def update_contract
+      fresh_contract
+      update_public_data
+      update_private_data
+      updated_contract
+    end
+
+    def fresh_contract
+      @updated_contract = contract.clone
+    end
 
     def contract
       Support::JSON.decode(json_contract) 

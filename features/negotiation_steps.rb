@@ -14,7 +14,7 @@ end
 
 Then(/^Bob can validate her public attributes$/) do
   pending 'NON YET IMPLEMENTED'
-  @contract = @bob.validate_public_attrs(@contract, party_label: "ALICE")
+  @contract = @bob.validate_public_attrs(@contract, party_label: "alice")
 end
 
 Given(/^Bob has the blank contract$/) do

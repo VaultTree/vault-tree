@@ -2,6 +2,8 @@ require_relative 'config/initialize'
 require 'rake'
 require 'bundler'
 require 'bundler/setup'
+require 'cucumber/rake/task'
+require 'rspec/core/rake_task'
 
 begin
   Bundler.setup(:default, :development)
@@ -11,18 +13,13 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-require 'cucumber/rake/task'
-require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec) do |t|
-  t.spec_opts = "--format doc"
+  t.rspec_opts = "--format doc"
 end
-
-task :default => :test
 
 Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty"
 end
-
 
 desc "Run Tests"
 task :test do
@@ -55,3 +52,5 @@ namespace :db do
     database.setup 
   end
 end
+
+task :default => :test

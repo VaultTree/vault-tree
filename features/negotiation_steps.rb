@@ -8,7 +8,8 @@ When(/^she writes her public attributes$/) do
 end
 
 When(/^she signs her public attributes$/) do
-  pending # express the regexp above with the code you wish you had
+  pending 'NOT YET IMPLEMENTED'
+  @contract = @alice.sign_public_attributes(@contract)
 end
 
 Then(/^Bob can validate her signatures$/) do

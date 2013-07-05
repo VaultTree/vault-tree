@@ -57,6 +57,9 @@ module VaultTree
         return contract
       end
 
+      def sign_public_attributes(contract)
+      end
+
       def validate_public_attrs(contract, opts = {})
         contract = VaultTree::V1::PartyAttributeValidator.new(contract, opts).run
       end

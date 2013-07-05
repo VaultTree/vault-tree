@@ -29,3 +29,9 @@ Scenario: Bob Signs and Sends the contract to Alice
   Given Bob FLS each contract Vault 
   When Bob Affirms, Signs, and Sends the contract to Alice
   Then Alice has and is ready to enforce the contract
+
+Scenario: Alice builds and signs 0.2.0 contracgt 
+  Given Alice has a version two blank contract
+  When she writes her public attributes
+  And she signs her public attributes
+  Then Bob can validate her signatures

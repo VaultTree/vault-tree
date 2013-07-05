@@ -5,6 +5,7 @@ module VaultTree
     describe 'PartyAttributeValidator' do
       describe '#valid_signature?' do
         before :each do
+          pending 'NOT YET IMPLEMENTED'
           @contract = FactoryGirl.create(:contract_with_bob_cck).as_json
           @bob = AutoBots::Bob.new
           @alice = AutoBots::Alice.new

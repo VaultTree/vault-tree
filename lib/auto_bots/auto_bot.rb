@@ -69,6 +69,10 @@ module VaultTree
         }
       end
 
+      def write_public_attributes(contract)
+        VaultTree::ContractBuilder.new(json_contract: contract, json_party_properties: public_data).build
+      end
+
       def my_keys
         {
           custodian_signing_key: signing_key,

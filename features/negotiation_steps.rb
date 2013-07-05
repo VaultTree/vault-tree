@@ -1,3 +1,20 @@
+Given(/^Alice has a version two blank contract$/) do
+  @contract = File.open(VaultTree::PathHelpers.one_two_three_020).read
+  @alice = VaultTree::AutoBots::Alice.new()
+end
+
+When(/^she writes her public attributes$/) do
+  @contract = @alice.write_public_attributes(@contract)
+end
+
+When(/^she signs her public attributes$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^Bob can validate her signatures$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
 Given(/^Alice has the blank contract$/) do
   @contract = File.open(VaultTree::PathHelpers.one_two_three_contract).read
   @alice = VaultTree::AutoBots::Alice.new()

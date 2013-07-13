@@ -27,7 +27,7 @@ module VaultTree
       end
 
       def contract_consent_key
-        @contract_consent_key ||= encryption_key_pair.private_key
+        @contract_consent_key ||= symmetric_cipher.generate_key
       end
 
       def fill_lock_sign_vault(contract, opts = {})
@@ -55,6 +55,11 @@ module VaultTree
           contract = VaultTree::V1::PartyAttributeSigner.new(contract, opts).run
         end
         return contract
+      end
+
+
+      def sanitize_contract(contract)
+        VaultTree::ContractBuilder.new(json_contract: contract, json_party_properties: blank_private_data).build
       end
 
       def sign_public_attributes(contract)
@@ -96,6 +101,10 @@ module VaultTree
         @encryption_key_pair ||= LockSmith::EncryptionKeyPair.new()
       end
 
+      def symmetric_cipher
+        @symmetric_cipher ||= LockSmith::SymmetricCipher.new
+      end
+
       def public_data
         %Q[
           {
@@ -128,6 +137,20 @@ module VaultTree
         ]
       end
 
+      def blank_private_data
+        %Q[
+          {
+            "parties":{
+              "#{party_label}": {
+                "private_data": {
+                  "decryption_key": "",
+                  "signing_key": ""
+                }
+              }
+            }
+          }
+        ]
+      end
     end
   end
 end

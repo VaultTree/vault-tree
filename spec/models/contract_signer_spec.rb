@@ -6,9 +6,12 @@ module VaultTree
       @json_contract = File.open(VaultTree::PathHelpers.one_two_three_020).read
       @alice = AutoBots::Alice.new
       @alice_public_data = @alice.public_data
+      @bob = AutoBots::Bob.new
+      @bob_private_data = @bob.private_data
       @json_contract = ContractBuilder.new(json_contract: @json_contract, json_party_properties: @alice_public_data).build
       @alice_private_data = @alice.private_data
       @json_contract = ContractBuilder.new(json_contract: @json_contract, json_party_properties: @alice_private_data).build
+      @json_contract_two_signing_keys = ContractBuilder.new(json_contract: @json_contract, json_party_properties: @bob_private_data).build
     end
 
     describe '#sign' do
@@ -30,12 +33,9 @@ module VaultTree
         verification_key_sig.empty?.should be false
       end
 
-      it 'public signatures with empty values have been left blank' do
-        pending 'NYI'
-      end
-
       it 'an exception is thrown if there is more than 1 private signing key found' do
-        pending 'NYI'
+        @invalid_contract_signer = ContractSigner.new(json_contract: @json_contract_two_signing_keys)
+        expect {@invalid_contract_signer.sign}.to raise_error(MultipleSigningKeys)
       end
     end
 

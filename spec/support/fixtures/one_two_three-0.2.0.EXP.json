@@ -25,20 +25,7 @@
           "source": "['parties']['alice']['public_data']['contract_consent_key']",
           "signature": ""
         },
-        "vaults": {
-          "first": {
-            "source": "['vaults']['first']['content']['ciphertext']",
-            "signature": ""
-          },
-          "second": {
-            "source": "['vaults']['second']['content']['ciphertext']",
-            "signature": ""
-          },
-          "third": {
-            "source": "['vaults']['third']['content']['ciphertext']",
-            "signature": ""
-          }
-        }
+        "vaults": {}
       },
       "private_data": {
         "decryption_key": "",
@@ -53,11 +40,36 @@
         "contract_consent_key": ""
       },
       "public_signatures": {
-        "address": "",
-        "verification_key": "",
-        "public_encryption_key": "",
-        "contract_consent_key": "",
-        "vault_contents": {}
+        "address": {
+          "source": "['parties']['bob']['public_data']['address']",
+          "signature": ""
+        },
+        "verification_key": {
+          "source": "['parties']['bob']['public_data']['verification_key']",
+          "signature": ""
+        },
+        "public_encryption_key": {
+          "source": "['parties']['bob']['public_data']['public_encryption_key']",
+          "signature": ""
+        },
+        "contract_consent_key": {
+          "source": "['parties']['bob']['public_data']['contract_consent_key']",
+          "signature": ""
+        },
+        "vaults": {
+          "first": {
+            "source": "['vaults']['first']['content']['ciphertext']",
+            "signature": ""
+          },
+          "second": {
+            "source": "['vaults']['second']['content']['ciphertext']",
+            "signature": ""
+          },
+          "third": {
+            "source": "['vaults']['third']['content']['ciphertext']",
+            "signature": ""
+          }
+        }
       },
       "private_data": {
         "decryption_key": "",

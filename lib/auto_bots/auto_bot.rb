@@ -58,6 +58,7 @@ module VaultTree
       end
 
       def sign_public_attributes(contract)
+        VaultTree::ContractSigner.new(json_contract: contract).sign
       end
 
       def validate_public_attrs(contract, opts = {})
@@ -74,6 +75,10 @@ module VaultTree
 
       def write_public_attributes(contract)
         VaultTree::ContractBuilder.new(json_contract: contract, json_party_properties: public_data).build
+      end
+
+      def write_private_attributes(contract)
+        VaultTree::ContractBuilder.new(json_contract: contract, json_party_properties: private_data).build
       end
 
       def my_keys

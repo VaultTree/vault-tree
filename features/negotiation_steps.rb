@@ -7,8 +7,11 @@ When(/^she writes her public attributes$/) do
   @contract = @alice.write_public_attributes(@contract)
 end
 
+When(/^she writes her private attributes$/) do
+  @contract = @alice.write_private_attributes(@contract)
+end
+
 When(/^she signs her public attributes$/) do
-  pending 'NOT YET IMPLEMENTED'
   @contract = @alice.sign_public_attributes(@contract)
 end
 

@@ -1,3 +1,29 @@
+When(/^she sanitizes the contract$/) do
+  @contract = @alice.sanitize_contract(@contract)
+end
+
+When(/^he sanitizes the contract$/) do
+  @contract = @bob.sanitize_contract(@contract)
+end
+
+Given(/^Bob has the contract with Alices signed public attributes$/) do
+  step "Alice has a version two blank contract"
+  step "she writes her public attributes"
+  step "she writes her private attributes"
+  step "she signs her public attributes"
+  step "she sanitizes the contract"
+  step "she can send the contract to Bob"
+end
+
+When(/^he writes his public and private attributes$/) do
+  @contract = @bob.write_public_attributes(@contract)
+  @contract = @bob.write_private_attributes(@contract)
+end
+
+When(/^he signs his public attributes$/) do
+  @contract = @bob.sign_public_attributes(@contract)
+end
+
 Given(/^Alice has a version two blank contract$/) do
   @contract = File.open(VaultTree::PathHelpers.one_two_three_020).read
   @alice = VaultTree::AutoBots::Alice.new()
@@ -13,6 +39,10 @@ end
 
 When(/^she signs her public attributes$/) do
   @contract = @alice.sign_public_attributes(@contract)
+end
+
+Then(/^she can send the contract to Bob$/) do
+  @bob = VaultTree::AutoBots::Bob.new()
 end
 
 Then(/^Bob can validate her signatures$/) do

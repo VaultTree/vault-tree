@@ -9,6 +9,8 @@ module VaultTree
         lib_public_key.to_s(:base64)
       end
 
+
+
       private
 
       def lib_private_key

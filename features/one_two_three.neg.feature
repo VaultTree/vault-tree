@@ -30,9 +30,16 @@ Scenario: Bob Signs and Sends the contract to Alice
   When Bob Affirms, Signs, and Sends the contract to Alice
   Then Alice has and is ready to enforce the contract
 
-Scenario: Alice builds and signs 0.2.0 contract 
+Scenario: Alice builds and signs her 0.2.0 public attributes
   Given Alice has a version two blank contract
   When she writes her public attributes
   And she writes her private attributes
   And she signs her public attributes
-  Then Bob can validate her signatures
+  And she sanitizes the contract
+  Then she can send the contract to Bob
+
+Scenario: Bob builds and signs his 0.2.0 public attributes
+  Given Bob has the contract with Alices signed public attributes 
+  When he writes his public and private attributes
+  And he signs his public attributes
+  And he sanitizes the contract

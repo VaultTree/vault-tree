@@ -7,6 +7,7 @@ module VaultTree
     end
 
     def sign
+      validate_private_data
       Support::JSON.encode(sign_contract) 
     end
 
@@ -17,6 +18,10 @@ module VaultTree
       fresh_contract
       write_public_data_signatures
       signed_contract
+    end
+
+    def validate_private_data
+      raise MultipleSigningKeys if multiple_signing_keys? 
     end
 
     def write_public_data_signatures
@@ -51,6 +56,10 @@ module VaultTree
       party_ids.select{|p_id| parties[p_id]['private_data']['signing_key'].non_empty?}.first
     end
 
+    def multiple_signing_keys?
+      party_ids.select{|p_id| parties[p_id]['private_data']['signing_key'].non_empty?}.length > 1
+    end
+
     def party_ids
       parties.keys
     end
@@ -70,6 +79,17 @@ module VaultTree
     def contract
       Support::JSON.decode(json_contract) 
     end
+  end
+end
+
+
+module VaultTree
+  class VaultTreeException < StandardError
+  end
+end
+
+module VaultTree
+  class MultipleSigningKeys < VaultTreeException
   end
 end
 

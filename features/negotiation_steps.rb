@@ -1,3 +1,28 @@
+Then(/^Alice can validate his signatures$/) do
+  @alice.verify_signatures(@contract, 'bob').should be true
+end
+
+Then(/^Bob can validate her signatures$/) do
+  @bob.verify_signatures(@contract, 'alice').should be true
+end
+
+Given(/^Bob is ready to FLS each vault$/) do
+  step "Bob has the contract with Alices signed public attributes"
+  step "he writes his public and private attributes"
+  step "he signs his public attributes"
+end
+
+When(/^Bob FLS each vault$/) do
+  raise 'IN THE PROCESS OF IMPLEMENTING'
+  @contract = @bob.fill_vaults(@contract)
+  @contract = @bob.lock_vaults(@contract)
+  @contract = @bob.sign_vaults(@contract)
+end
+
+Then(/^the contract is ready to be executed$/) do
+  @bob.ready_to_execute?(@contract).should be true
+end
+
 When(/^she sanitizes the contract$/) do
   @contract = @alice.sanitize_contract(@contract)
 end
@@ -43,10 +68,6 @@ end
 
 Then(/^she can send the contract to Bob$/) do
   @bob = VaultTree::AutoBots::Bob.new()
-end
-
-Then(/^Bob can validate her signatures$/) do
-  pending # express the regexp above with the code you wish you had
 end
 
 Given(/^Alice has the blank contract$/) do

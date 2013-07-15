@@ -37,9 +37,16 @@ Scenario: Alice builds and signs her 0.2.0 public attributes
   And she signs her public attributes
   And she sanitizes the contract
   Then she can send the contract to Bob
+  And Bob can validate her signatures
 
 Scenario: Bob builds and signs his 0.2.0 public attributes
   Given Bob has the contract with Alices signed public attributes 
   When he writes his public and private attributes
   And he signs his public attributes
   And he sanitizes the contract
+  Then Alice can validate his signatures
+
+Scenario: Bob Fills, Locks, and Signs (FLS) each Vault (0.2.0)
+  Given Bob is ready to FLS each vault
+  When Bob FLS each vault
+  Then the contract is ready to be executed

@@ -105,6 +105,22 @@ module VaultTree
         @symmetric_cipher ||= LockSmith::SymmetricCipher.new
       end
 
+      def fill_vaults(contract)
+        VaultTree::VaultFiller.new(json_contract: contract).fill_vaults
+      end
+
+      def lock_vaults(contract)
+        VaultTree::VaultLocker.new(json_contract: contract).lock_vaults
+      end
+
+      def sign_vaults(contract)
+        VaultTree::VaultSigner.new(json_contract: contract).sign_vaults
+      end
+
+      def verify_signatures(json_contract, party_to_validate)
+        VaultTree::ContractValidator.new(json_contract: json_contract, party_to_validate: party_to_validate).valid_signatures?
+      end
+
       def public_data
         %Q[
           {

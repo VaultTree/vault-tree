@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :blank_contract, class: VaultTree::V2::Contract do
+    initialize_with { new(json: File.open(VaultTree::PathHelpers.one_two_three_020).read) }
+  end
+end
+
+FactoryGirl.define do
   factory :contract, class: VaultTree::Contract do
 
     after(:create) do |contract|

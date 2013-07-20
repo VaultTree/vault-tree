@@ -1,8 +1,10 @@
 Then(/^Alice can validate his signatures$/) do
+  pending 'NYI'
   @alice.verify_signatures(@contract, 'bob').should be true
 end
 
 Then(/^Bob can validate her signatures$/) do
+  pending 'NYI'
   @bob.verify_signatures(@contract, 'alice').should be true
 end
 
@@ -13,7 +15,7 @@ Given(/^Bob is ready to FLS each vault$/) do
 end
 
 When(/^Bob FLS each vault$/) do
-  raise 'IN THE PROCESS OF IMPLEMENTING'
+  pending 'IN THE PROCESS OF IMPLEMENTING'
   @contract = @bob.fill_vaults(@contract)
   @contract = @bob.lock_vaults(@contract)
   @contract = @bob.sign_vaults(@contract)

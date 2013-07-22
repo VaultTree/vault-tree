@@ -7,7 +7,15 @@
       "fill_with": "RANDOM_NUMBER",
       "lock_with": "MASTER_PASSPHRASE",
       "unlock_with": "MASTER_PASSPHRASE",
-      "contents": "<%= VAULT_CONTENTS['bob_contract_passphrase'] %>"
+      "contents": ""
+    },
+
+    "bob_shared_contract_secret": {
+      "owner": "bob",
+      "fill_with": "SHARED_CONTRACT_SECRET",
+      "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
+      "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
+      "contents": ""
     },
 
     "alice_contract_secret": {
@@ -15,15 +23,23 @@
       "fill_with": "RANDOM_NUMBER",
       "lock_with": "MASTER_PASSPHRASE",
       "unlock_with": "MASTER_PASSPHRASE",
-      "contents": "<%= VAULT_CONTENTS['alice_contract_secret'] %>"
+      "contents": ""
+    },
+
+    "alice_shared_contract_secret": {
+      "owner": "alice",
+      "fill_with": "SHARED_CONTRACT_SECRET",
+      "lock_with": "VAULT_CONTENTS['alice_contract_secret']",
+      "unlock_with": "VAULT_CONTENTS['alice_contract_secret']",
+      "contents": ""
     },
 
     "alice_public_encryption_key": {
       "owner": "alice",
       "fill_with": "PUBLIC_ENCRYPTION_KEY",
-      "lock_with": "SHARED_CONTRACT_SECRET",
+      "lock_with": "VAULT_CONTENTS['alice_shared_contract_secret']",
       "unlock_with": "SHARED_CONTRACT_SECRET",
-      "contents": "<%= VAULT_CONTENTS['alice_public_encryption_key'] %>"
+      "contents": ""
     },
 
     "alice_decryption_key": {
@@ -31,7 +47,7 @@
       "fill_with": "DECRYPTION_KEY",
       "lock_with": "VAULT_CONTENTS['alice_contract_secret']",
       "unlock_with": "VAULT_CONTENTS['alice_contract_secret']",
-      "contents": "<%= VAULT_CONTENTS['alice_decryption_key'] %>"
+      "contents": ""
     },
 
     "congratulations_message": {
@@ -39,7 +55,7 @@
       "fill_with": "MESSAGE['congratulations']",
       "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
       "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
-      "contents": "<%= VAULT_CONTENTS['congratulations_message'] %>"
+      "contents": ""
     },
 
     "vault_two_key": {
@@ -47,7 +63,7 @@
       "fill_with": "RANDOM_NUMBER",
       "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
       "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
-      "contents": "<%= VAULT_CONTENTS['vault_two_key'] %>"
+      "contents": ""
     },
 
     "vault_three_key": {
@@ -55,7 +71,7 @@
       "fill_with": "RANDOM_NUMBER",
       "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
       "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
-      "contents": "<%= VAULT_CONTENTS['vault_three_key'] %>"
+      "contents": ""
     },
 
     "first": {
@@ -63,7 +79,7 @@
       "fill_with": "VAULT_CONTENTS['random_vault_key']",
       "lock_with": "VAULT_CONTENTS['alice_public_encryption_key']",
       "unlock_with": "VAULT_CONTENTS['alice_decryption_key']",
-      "contents": "<%= VAULT_CONTENTS['first'] %>"
+      "contents": ""
     },
 
     "second": {
@@ -71,7 +87,7 @@
       "fill_with": "VAULT_CONTENTS['vault_three_key']",
       "lock_with": "VAULT_CONTENTS['vault_three_key']",
       "unlock_with": "VAULT_CONTENTS['first']",
-      "contents": "<%= VAULT_CONTENTS['second'] %>"
+      "contents": ""
     },
 
     "third": {
@@ -79,7 +95,7 @@
       "fill_with": "VAULT_CONTENTS['congratulations_message']",
       "lock_with": "VAULT_CONTENTS['vault_three_key']",
       "unlock_with": "VAULT_CONTENTS['second']",
-      "contents": "<%= VAULT_CONTENTS['third'] %>"
+      "contents": ""
     }
   }
 }

@@ -50,6 +50,10 @@ module VaultTree
         contract.user_decryption_key 
       end
 
+      def messages(arg = nil)
+        contract.user_messages(arg)
+      end
+
       def sha(data)
         Crypto::Hash.sha256("#{data}", :base64)
       end

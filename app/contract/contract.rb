@@ -51,6 +51,10 @@ module VaultTree
         user.decryption_key 
       end
 
+      def user_messages(arg) 
+        user.messages[arg]
+      end
+
       private
       attr_accessor :contract
 

@@ -1,12 +1,13 @@
 module VaultTree
   module V3
     class User
-      attr_reader :user_id, :master_passphrase, :shared_contract_secret
+      attr_reader :user_id, :master_passphrase, :shared_contract_secret, :messages
 
       def initialize(opts)
         @user_id = opts[:user_id]
         @master_passphrase = opts[:master_passphrase]
         @shared_contract_secret = opts[:shared_contract_secret] 
+        @messages = opts[:messages] 
       end
 
       def address

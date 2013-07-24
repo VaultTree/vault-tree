@@ -32,7 +32,7 @@ module VaultTree
       end
 
       def as_json
-        ERB.new(template).result(binding)
+        ContractPresenter.new(self).as_json
       end
 
       def user_master_passphrase
@@ -63,31 +63,7 @@ module VaultTree
         vaults[vault_id]['contents'].non_empty?
       end
 
-      def separating_comma(k)
-        ',' unless last_vault?(k)
-      end
 
-      def last_vault?(k)
-        k.eql?(vaults.keys.last)
-      end
-
-      def template
-%Q[
-{
-  "header": {},
-  "vaults": {
-<% vaults.each do |k,v| %>
-    "<%= k %>": {
-      "owner": "<%= v['owner'] %>",
-      "fill_with": "<%= v['fill_with'] %>",
-      "lock_with": "<%= v['lock_with'] %>",
-      "unlock_with": "<%= v['unlock_with'] %>",
-      "contents": "<%= v['contents'] %>"
-    }<%= separating_comma(k) %>
-<% end %>
-  }
-}]
-      end
     end
   end
 end

@@ -1,3 +1,5 @@
+require 'json'
+
 module VaultTree
   module V3
     class ContractPresenter
@@ -21,22 +23,21 @@ module VaultTree
         k.eql?(contract.vaults.keys.last)
       end
 
+      def vault_as_json(v)
+        JSON.pretty_generate(v)
+      end
+
       def template
-%Q[
+        %Q[
 {
-  "header": {},
+"header": {},
   "vaults": {
-<% contract.vaults.each do |k,v| %>
-    "<%= k %>": {
-      "owner": "<%= v['owner'] %>",
-      "fill_with": "<%= v['fill_with'] %>",
-      "lock_with": "<%= v['lock_with'] %>",
-      "unlock_with": "<%= v['unlock_with'] %>",
-      "contents": "<%= v['contents'] %>"
-    }<%= separating_comma(k) %>
+<%contract.vaults.each do |k,v|%>
+"<%=k%>":<%=vault_as_json(v)%><%=separating_comma(k)%>
 <% end %>
   }
-}]
+}
+        ]
       end
     end
   end

@@ -6,6 +6,10 @@ module VaultTree
         Crypto::PrivateKey.generate.to_s(:base64)
       end
 
+      def random_number
+        sha rand(1000000000000)
+      end
+
       def encrypt(opts = {})
         key = sha(opts[:key]) 
         plain_text = opts[:plain_text]

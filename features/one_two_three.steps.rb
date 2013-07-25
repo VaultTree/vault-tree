@@ -28,7 +28,9 @@ When(/^Bob locks his public attributes$/) do
 end
 
 When(/^He fills and locks each of the three vaults$/) do
-  pending # express the regexp above with the code you wish you had
+  pending 'YOU NEED TESTS FOR ASYMMETRIC ENCRYPTION'
+  @contract = @interpreter.close_vault_path(vault_id: 'first', contract: @contract, user: @bob)
+  puts @contract 
 end
 
 Then(/^Alice can execute the contract to recover the final message$/) do

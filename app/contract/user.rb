@@ -15,32 +15,34 @@ module VaultTree
       end
 
       def public_encryption_key
-        @public_encryption_key ||= encryption_key_pair.public_key
+        encryption_key_pair.public_key
       end
 
       def decryption_key
-        @decryption_key ||= encryption_key_pair.private_key
+        encryption_key_pair.private_key
       end
 
       def private_encryption_key
-        @private_encryption_key ||= encryption_key_pair.private_key
+        encryption_key_pair.private_key
       end
 
       def signing_key
-        @signing_key ||= signing_key_pair.signing_key
+        signing_key_pair.signing_key
       end
 
       def verification_key
-        @verification_key ||= signing_key_pair.verify_key
+        signing_key_pair.verify_key
       end
 
       def contract_consent_key
-        @contract_consent_key ||= symmetric_cipher.generate_key
+        symmetric_cipher.random_number
       end
 
       def generate_key
-        LockSmith::SymmetricCipher.new.generate_key
+        symmetric_cipher.generate_key
       end
+
+      private
 
       def signing_key_pair
         @signing_key_pair ||= LockSmith::SigningKeyPair.new()

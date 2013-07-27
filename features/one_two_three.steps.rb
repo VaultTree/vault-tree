@@ -21,10 +21,32 @@ end
 
 When(/^Bob locks his public attributes$/) do
   @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
+  # Verify they can reopen (Duplicated at the bottom)
+  @interpreter.retrieve_contents(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
+
+  @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
+  # Verify they can reopen
+  @interpreter.retrieve_contents(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
+
   @contract = @interpreter.close_vault_path(vault_id: 'bob_decryption_key', contract: @contract, user: @bob)
+  # Verify they can reopen
+  @interpreter.retrieve_contents(vault_id: 'bob_decryption_key', contract: @contract, user: @bob)
+
   @contract = @interpreter.close_vault_path(vault_id: 'congratulations_message', contract: @contract, user: @bob)
+  # Verify they can reopen
+  @interpreter.retrieve_contents(vault_id: 'congratulations_message', contract: @contract, user: @bob)
+
   @contract = @interpreter.close_vault_path(vault_id: 'vault_two_key', contract: @contract, user: @bob)
+  # Verify they can reopen
+  @interpreter.retrieve_contents(vault_id: 'vault_two_key', contract: @contract, user: @bob)
+
   @contract = @interpreter.close_vault_path(vault_id: 'vault_three_key', contract: @contract, user: @bob)
+  # Verify they can reopen
+  @interpreter.retrieve_contents(vault_id: 'vault_three_key', contract: @contract, user: @bob)
+
+  @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
+  # Verify they can reopen
+  @interpreter.retrieve_contents(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
 end
 
 When(/^He fills and locks each of the three vaults$/) do

@@ -13,7 +13,6 @@ module VaultTree
         attribute_value = contract.party_attribute(attribute: attribute, party_label: party_label)
         verification_key = contract.party_attribute(attribute: :verification_key, party_label: party_label)
         digital_signature = contract.party_attribute_signature(party_label: party_label , attribute: attribute)
-        puts verification_key
         verify_sig(verification_key, digital_signature, attribute_value)
       end
 

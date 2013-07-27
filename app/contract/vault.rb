@@ -30,9 +30,26 @@ module VaultTree
       end
 
       def closed_contents(c)
-        key = discover_locking_key(c)
-        fill = discover_vault_fill(c)
-        encrypt(key,fill)
+        if lock_type(c) == 'ASYMMETRIC'
+          key = discover_locking_key(c)
+          fill = discover_vault_fill(c)
+          asymmetric_encrypt(key, discover_decryption_key(c), fill)
+        else
+          key = discover_locking_key(c)
+          fill = discover_vault_fill(c)
+          encrypt(key,fill)
+        end
+      end
+
+      def discover_decryption_key(c)
+        #dk_vault_id = "#{owner(c)}_decryption_key"
+        #"VAULT_CONTENTS['bob_decryption_key']"
+        stg = "VAULT_CONTENTS['bob_decryption_key']"
+        #puts stg 
+        r =  Keyword.new(stg,c).evaluate
+        puts r
+        raise 'STOP'
+        #Keyword.new("VAULT_CONTENTS['bob_decryption_key']",c).evaluate
       end
 
       def discover_unlocking_key(c)
@@ -74,6 +91,15 @@ module VaultTree
         vault_hash(c)['fill_with']
       end
 
+      def owner(c)
+        vault_hash(c)['owner']
+      end
+
+      def lock_type(c)
+        h = vault_hash(c) 
+        h['lock_type'] if h.has_key?('lock_type')
+      end
+
       def lock_with(c)
         vault_hash(c)['lock_with']
       end
@@ -112,8 +138,16 @@ module VaultTree
         LockSmith::SymmetricCipher.new
       end
 
+      def asymmetric_cipher
+        LockSmith::AsymmetricCipher.new
+      end
+
       def encrypt(key,plain_text)
         symmetric_cipher.encrypt(key: key, plain_text: plain_text)
+      end
+
+      def asymmetric_encrypt(pub_key,priv_key,fill)
+        asymmetric_cipher.encrypt(pub_key,priv_key,fill)
       end
 
       def decrypt(key,cipher_text)

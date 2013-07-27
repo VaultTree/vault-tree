@@ -20,7 +20,6 @@ module VaultTree
 
     def party_attribute_signature(opts)
       sig_block = signature_blocks.with_party_label(opts[:party_label]).first
-      puts sig_block.attributes 
       sig_block.signature_for_attribute(opts[:attribute])
     end
 

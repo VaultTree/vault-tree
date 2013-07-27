@@ -33,12 +33,6 @@ module VaultTree
             @contract.vault_closed?('alice_decryption_key').should be true
           end
         end
-
-        context 'for bob' do
-          it 'pends' do
-            pending 'Not Implemented'
-          end
-        end
       end
 
       describe '#retrieve_contents' do

@@ -10,7 +10,7 @@ When(/^she locks all of her public attributes$/) do
 end
 
 When(/^she sends the contract to Bob$/) do
-  @bobs_messages = {"congratulations" => "CONGRATS ALICE! YOU OPENED THE THIRD VAULT."}
+  @bobs_messages = {"congratulations" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
   @bob = VaultTree::V3::User.new(user_id: 'bob', master_passphrase: 'BOB_SECURE_PASS', shared_contract_secret: 'ALICE_AND_BOB', messages: @bobs_messages)
 end
 
@@ -21,16 +21,15 @@ end
 
 When(/^Bob locks his public attributes$/) do
   @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
+  @contract = @interpreter.close_vault_path(vault_id: 'bob_decryption_key', contract: @contract, user: @bob)
   @contract = @interpreter.close_vault_path(vault_id: 'congratulations_message', contract: @contract, user: @bob)
   @contract = @interpreter.close_vault_path(vault_id: 'vault_two_key', contract: @contract, user: @bob)
   @contract = @interpreter.close_vault_path(vault_id: 'vault_three_key', contract: @contract, user: @bob)
-  #puts @contract.as_json 
 end
 
 When(/^He fills and locks each of the three vaults$/) do
-  pending 'YOU NEED TESTS FOR ASYMMETRIC ENCRYPTION'
+  pending
   @contract = @interpreter.close_vault_path(vault_id: 'first', contract: @contract, user: @bob)
-  puts @contract 
 end
 
 Then(/^Alice can execute the contract to recover the final message$/) do

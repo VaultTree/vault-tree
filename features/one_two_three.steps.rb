@@ -50,8 +50,9 @@ When(/^Bob locks his public attributes$/) do
 end
 
 When(/^He fills and locks each of the three vaults$/) do
-  pending
   @contract = @interpreter.close_vault_path(vault_id: 'first', contract: @contract, user: @bob)
+  @contract = @interpreter.close_vault_path(vault_id: 'second', contract: @contract, user: @bob)
+  @contract = @interpreter.close_vault_path(vault_id: 'third', contract: @contract, user: @bob)
 end
 
 Then(/^Alice can execute the contract to recover the final message$/) do

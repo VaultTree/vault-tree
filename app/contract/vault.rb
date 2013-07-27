@@ -45,7 +45,8 @@ module VaultTree
         if lock_type(c) == 'ASYMMETRIC'
           key = discover_locking_key(c)
           fill = discover_vault_fill(c)
-          asymmetric_encrypt(key, discover_decryption_key(c), fill)
+          priv_key = discover_decryption_key(c)
+          asymmetric_encrypt(key, priv_key, fill)
         else
           key = discover_locking_key(c)
           fill = discover_vault_fill(c)
@@ -57,11 +58,7 @@ module VaultTree
         #dk_vault_id = "#{owner(c)}_decryption_key"
         #"VAULT_CONTENTS['bob_decryption_key']"
         stg = "VAULT_CONTENTS['bob_decryption_key']"
-        #puts stg 
-        r =  Keyword.new(stg,c).evaluate
-        puts r
-        raise 'STOP'
-        #Keyword.new("VAULT_CONTENTS['bob_decryption_key']",c).evaluate
+        Keyword.new(stg,c).evaluate # THIS VALUE IS GOOD!
       end
 
       def discover_unlocking_key(c)

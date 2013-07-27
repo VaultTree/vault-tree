@@ -17,6 +17,14 @@ module VaultTree
         opened_contents(c)
       end
 
+      def closed?(c)
+        ! empty?(c)
+      end
+
+      def empty?(c)
+        contents(c).empty?
+      end
+
       private
 
       def opened_contents(c)
@@ -26,7 +34,11 @@ module VaultTree
       end
 
       def close_self(c)
-        c.set_vault_contents(vault_id, closed_contents(c))
+        if empty?(c)
+          c.set_vault_contents(vault_id, closed_contents(c))
+        else
+          c
+        end
       end
 
       def closed_contents(c)

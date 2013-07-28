@@ -95,7 +95,7 @@
       "fill_with": "VAULT_CONTENTS['vault_two_key']",
       "lock_with": "VAULT_CONTENTS['alice_public_encryption_key']",
       "unlock_with": "VAULT_CONTENTS['alice_decryption_key']",
-      "lock_type": "ASYMMETRIC",
+      "lock_type": "ASYMMETRIC_MUTUAL_AUTH",
       "contents": ""
     },
 

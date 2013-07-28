@@ -19,11 +19,11 @@ module VaultTree
       end
 
       def close_vault_path(vault_id) 
-        Vault.new(vault_id).close_all_ancestors(self) # => a contract
+        Vault.new(vault_id, self).close_all_ancestors
       end
 
       def retrieve_vault_contents(vault_id) 
-        Vault.new(vault_id).retrieve_contents(self) # => a contract
+        Vault.new(vault_id, self).retrieve_contents
       end
 
       def set_vault_contents(vault_id, encrypted_content)

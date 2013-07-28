@@ -28,9 +28,16 @@ module VaultTree
       private
 
       def opened_contents(c)
-        key = discover_unlocking_key(c)
-        cipher_text = discover_contents(c)
-        decrypt(key,cipher_text)
+        if lock_type(c) == 'ASYMMETRIC'
+          cipher_text = discover_contents(c)
+          key = Keyword.new("VAULT_CONTENTS['alice_decryption_key']",c).evaluate
+          pub_key = Keyword.new("VAULT_CONTENTS['bob_public_encryption_key']",c).evaluate
+          asymmetric_decrypt(pub_key,key,cipher_text)
+        else
+          key = discover_unlocking_key(c)
+          cipher_text = discover_contents(c)
+          decrypt(key,cipher_text)
+        end
       end
 
       def close_self(c)
@@ -45,7 +52,7 @@ module VaultTree
         if lock_type(c) == 'ASYMMETRIC'
           key = discover_locking_key(c)
           fill = discover_vault_fill(c)
-          priv_key = discover_decryption_key(c)
+          priv_key = discover_bob_decryption_key(c)
           asymmetric_encrypt(key, priv_key, fill)
         else
           key = discover_locking_key(c)
@@ -54,10 +61,18 @@ module VaultTree
         end
       end
 
-      def discover_decryption_key(c)
-        #dk_vault_id = "#{owner(c)}_decryption_key"
-        #"VAULT_CONTENTS['bob_decryption_key']"
+      def discover_bob_public_key(c)
+        stg = "VAULT_CONTENTS['bob_public_encryption_key']"
+        Keyword.new(stg,c).evaluate # THIS VALUE IS GOOD!
+      end
+
+      def discover_bob_decryption_key(c)
         stg = "VAULT_CONTENTS['bob_decryption_key']"
+        Keyword.new(stg,c).evaluate # THIS VALUE IS GOOD!
+      end
+
+      def discover_alice_decryption_key(c)
+        stg = "VAULT_CONTENTS['alice_decryption_key']"
         Keyword.new(stg,c).evaluate # THIS VALUE IS GOOD!
       end
 
@@ -157,6 +172,10 @@ module VaultTree
 
       def asymmetric_encrypt(pub_key,priv_key,fill)
         asymmetric_cipher.encrypt(pub_key,priv_key,fill)
+      end
+
+      def asymmetric_decrypt(pub_key,priv_key,cipher_text)
+        asymmetric_cipher.decrypt(pub_key,priv_key,cipher_text)
       end
 
       def decrypt(key,cipher_text)

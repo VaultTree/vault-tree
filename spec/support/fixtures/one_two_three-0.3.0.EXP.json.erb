@@ -42,6 +42,14 @@
       "contents": ""
     },
 
+    "bob_public_encryption_key": {
+      "owner": "bob",
+      "fill_with": "PUBLIC_ENCRYPTION_KEY",
+      "lock_with": "VAULT_CONTENTS['bob_shared_contract_secret']",
+      "unlock_with": "SHARED_CONTRACT_SECRET",
+      "contents": ""
+    },
+
     "alice_decryption_key": {
       "owner": "alice",
       "fill_with": "DECRYPTION_KEY",
@@ -94,7 +102,7 @@
     "second": {
       "owner": "bob",
       "fill_with": "VAULT_CONTENTS['vault_three_key']",
-      "lock_with": "VAULT_CONTENTS['vault_three_key']",
+      "lock_with": "VAULT_CONTENTS['vault_two_key']",
       "unlock_with": "VAULT_CONTENTS['first']",
       "contents": ""
     },

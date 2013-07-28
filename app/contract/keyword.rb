@@ -35,7 +35,7 @@ module VaultTree
       end
 
       def vault_contents(arg = nil)
-        Vault.new(arg).retrieve_contents(contract)
+        Vault.new(arg, contract).retrieve_contents
       end
 
       def shared_contract_secret(arg = nil)

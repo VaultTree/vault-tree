@@ -6,9 +6,9 @@ module VaultTree
     before :each do
       @alice = V3::User.new 
       @bob = V3::User.new 
-      @alice_priv_key = @alice.private_encryption_key
+      @alice_priv_key = @alice.decryption_key
       @alice_pub_key = @alice.public_encryption_key
-      @bob_priv_key = @bob.private_encryption_key
+      @bob_priv_key = @bob.decryption_key
       @bob_pub_key = @bob.public_encryption_key
       @message = 'ENCRYPT_ME!'
       @asymmetric_cipher = LockSmith::AsymmetricCipher.new

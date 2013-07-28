@@ -67,9 +67,3 @@ module VaultTree
     end
   end
 end
-
-class String
-  def non_empty?
-    ! self.empty?
-  end
-end

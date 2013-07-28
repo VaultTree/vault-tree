@@ -12,8 +12,8 @@ RSpec.configure do |config|
   config.mock_framework = :mocha
 end
 
-RSpec.configure do |config|
-  config.before(:suite) do
-    VaultTree::DataBase.new().setup
-  end
-end
+#RSpec.configure do |config|
+#  config.before(:suite) do
+#    VaultTree::DataBase.new().setup
+#  end
+#end

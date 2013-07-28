@@ -10,10 +10,6 @@ module VaultTree
         @messages = opts[:messages] 
       end
 
-      def address
-        "#{user_id}@example.com"
-      end
-
       def public_encryption_key
         encryption_key_pair.public_key
       end
@@ -22,31 +18,7 @@ module VaultTree
         encryption_key_pair.private_key
       end
 
-      def private_encryption_key
-        encryption_key_pair.private_key
-      end
-
-      def signing_key
-        signing_key_pair.signing_key
-      end
-
-      def verification_key
-        signing_key_pair.verify_key
-      end
-
-      def contract_consent_key
-        symmetric_cipher.random_number
-      end
-
-      def generate_key
-        symmetric_cipher.generate_key
-      end
-
       private
-
-      def signing_key_pair
-        @signing_key_pair ||= LockSmith::SigningKeyPair.new()
-      end
 
       def encryption_key_pair
         @encryption_key_pair ||= LockSmith::EncryptionKeyPair.new()

@@ -47,6 +47,10 @@ When(/^Bob locks his public attributes$/) do
   @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
   # Verify they can reopen
   @interpreter.retrieve_contents(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
+
+  @contract = @interpreter.close_vault_path(vault_id: 'bob_public_encryption_key', contract: @contract, user: @bob)
+  # Verify they can reopen
+  @interpreter.retrieve_contents(vault_id: 'bob_public_encryption_key', contract: @contract, user: @bob)
 end
 
 When(/^He fills and locks each of the three vaults$/) do
@@ -56,5 +60,6 @@ When(/^He fills and locks each of the three vaults$/) do
 end
 
 Then(/^Alice can execute the contract to recover the final message$/) do
-  pending # express the regexp above with the code you wish you had
+  puts @interpreter.retrieve_contents(vault_id: 'third', contract: @contract, user: @alice)
+  @interpreter.retrieve_contents(vault_id: 'third', contract: @contract, user: @alice).should == @bobs_messages['congratulations']
 end

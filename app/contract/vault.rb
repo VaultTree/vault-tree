@@ -50,8 +50,8 @@ module VaultTree
 
       def open_asymmetric
         cipher_text = discover_contents
-        key = Keyword.new("VAULT_CONTENTS['alice_decryption_key']", contract).evaluate
-        pub_key = Keyword.new("VAULT_CONTENTS['bob_public_encryption_key']", contract).evaluate
+        key = KeywordInterpreter.new("VAULT_CONTENTS['alice_decryption_key']", contract).evaluate
+        pub_key = KeywordInterpreter.new("VAULT_CONTENTS['bob_public_encryption_key']", contract).evaluate
         asymmetric_decrypt(pub_key,key,cipher_text)
       end
 
@@ -84,22 +84,22 @@ module VaultTree
 
       def discover_bob_public_key
         stg = "VAULT_CONTENTS['bob_public_encryption_key']"
-        Keyword.new(stg,contract).evaluate # THIS VALUE IS GOOD!
+        KeywordInterpreter.new(stg,contract).evaluate # THIS VALUE IS GOOD!
       end
 
       def discover_bob_decryption_key
         stg = "VAULT_CONTENTS['bob_decryption_key']"
-        Keyword.new(stg,contract).evaluate # THIS VALUE IS GOOD!
+        KeywordInterpreter.new(stg,contract).evaluate # THIS VALUE IS GOOD!
       end
 
       def discover_alice_decryption_key
         stg = "VAULT_CONTENTS['alice_decryption_key']"
-        Keyword.new(stg,contract).evaluate # THIS VALUE IS GOOD!
+        KeywordInterpreter.new(stg,contract).evaluate # THIS VALUE IS GOOD!
       end
 
       def discover_unlocking_key
         ulw = unlock_with
-        Keyword.new(ulw,contract).evaluate
+        KeywordInterpreter.new(ulw,contract).evaluate
       end
 
       def discover_contents
@@ -108,12 +108,12 @@ module VaultTree
 
       def discover_locking_key
         lw = lock_with
-        Keyword.new(lw,contract).evaluate
+        KeywordInterpreter.new(lw,contract).evaluate
       end
 
       def discover_vault_fill
         fw = fill_with
-        Keyword.new(fw,contract).evaluate
+        KeywordInterpreter.new(fw,contract).evaluate
       end
 
       def close_all_lock_ancestors(c)
@@ -205,23 +205,6 @@ module VaultTree
         symmetric_cipher.decrypt(key: key, cipher_text: cipher_text)
       end
 
-
-    end
-  end
-end
-
-module VaultTree
-  module V3
-    class CommonAncestorVault
-      attr_reader :contract
-
-      def initialize(contract)
-        @contract = contract
-      end
-
-      def close_all_ancestors
-        contract
-      end
     end
   end
 end

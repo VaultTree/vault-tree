@@ -1,6 +1,6 @@
 module VaultTree
   module V3
-    class Keyword
+    class KeywordInterpreter
       attr_reader :word, :contract
       
       def initialize(word,contract)
@@ -12,7 +12,15 @@ module VaultTree
         self.send("#{word_base.downcase}", keyword_arg)
       end
 
+      def wip_evaluate # start here
+        keyword_class_name.new(contract, keyword_arg).evaluate
+      end
+
       private
+
+      def keyword_class_name
+        word_base.downcase.camelize.constantize
+      end
 
       def word_base
         word.match(/[A-Z_]*/).to_s
@@ -27,36 +35,33 @@ module VaultTree
       end
 
       def master_passphrase(arg = nil)
-        contract.user_master_passphrase
+        MasterPassphrase.new(contract, arg).evaluate
       end
 
       def random_number(arg = nil)
-        sha rand(10000000)
+        RandomNumber.new(contract,arg).evaluate 
       end
 
       def vault_contents(arg = nil)
-        Vault.new(arg, contract).retrieve_contents
+        VaultContents.new(contract, arg).evaluate
       end
 
       def shared_contract_secret(arg = nil)
-        contract.user_shared_contract_secret
+        SharedContractSecret.new(contract, arg).evaluate
       end
 
       def public_encryption_key(arg = nil)
-        contract.user_public_encryption_key
+        PublicEncryptionKey.new(contract, arg).evaluate
       end
 
       def decryption_key(arg = nil)
-        contract.user_decryption_key 
+        DecryptionKey.new(contract,arg).evaluate
       end
 
       def messages(arg = nil)
-        contract.user_messages(arg)
+        Message.new(contract,arg).evaluate
       end
 
-      def sha(data)
-        Crypto::Hash.sha256("#{data}", :base64)
-      end
     end
   end
 end

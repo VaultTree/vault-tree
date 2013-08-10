@@ -1,6 +1,4 @@
 # encoding: utf-8
-require 'sqlite3'
-require 'active_record'
 require 'active_support'
 require 'json'
 require 'active_model_serializers'

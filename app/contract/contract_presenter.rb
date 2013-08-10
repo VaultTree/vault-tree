@@ -28,16 +28,14 @@ module VaultTree
       end
 
       def template
-        %Q[
-{
+%Q[{
 "header": {},
-  "vaults": {
+"vaults": {
 <%contract.vaults.each do |k,v|%>
 "<%=k%>":<%=vault_as_json(v)%><%=separating_comma(k)%>
 <% end %>
-  }
 }
-        ]
+}]
       end
     end
   end

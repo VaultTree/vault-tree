@@ -15,22 +15,16 @@ desc 'Retrieve the contents of a vault'
 arg_name 'Describe arguments to open here'
 command :open do |c|
   c.action do |global_options,options,args|
-
-    # Your command logic here
-     
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
-
-    puts "open command ran"
+    VaultTree::CLI::Open.new(
+      contract_path: args[0],
+      vault_id: args[1]
+    ).execute
   end
 end
 
 desc 'Close a vault and all of its ancestors'
 arg_name 'Describe arguments to close here'
 command :close do |c|
-  c.desc 'JSON Object with external data'
-  c.default_value '{}'
-  c.flag :d
   c.action do |global_options,options,args|
     VaultTree::CLI::Close.new(
       contract_path: args[0],

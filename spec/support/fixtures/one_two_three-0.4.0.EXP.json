@@ -1,0 +1,119 @@
+{
+"header": {},
+"vaults": {
+
+"bob_contract_secret":{
+  "owner": "bob",
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+},
+
+"bob_shared_contract_secret":{
+  "owner": "bob",
+  "fill_with": "SHARED_CONTRACT_SECRET",
+  "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "contents": ""
+},
+
+"alice_contract_secret":{
+  "owner": "alice",
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+},
+
+"alice_shared_contract_secret":{
+  "owner": "alice",
+  "fill_with": "SHARED_CONTRACT_SECRET",
+  "lock_with": "VAULT_CONTENTS['alice_contract_secret']",
+  "unlock_with": "VAULT_CONTENTS['alice_contract_secret']",
+  "contents": ""
+},
+
+"alice_public_encryption_key":{
+  "owner": "alice",
+  "fill_with": "PUBLIC_ENCRYPTION_KEY",
+  "lock_with": "VAULT_CONTENTS['alice_shared_contract_secret']",
+  "unlock_with": "SHARED_CONTRACT_SECRET",
+  "contents": ""
+},
+
+"bob_public_encryption_key":{
+  "owner": "bob",
+  "fill_with": "PUBLIC_ENCRYPTION_KEY",
+  "lock_with": "VAULT_CONTENTS['bob_shared_contract_secret']",
+  "unlock_with": "SHARED_CONTRACT_SECRET",
+  "contents": ""
+},
+
+"alice_decryption_key":{
+  "owner": "alice",
+  "fill_with": "DECRYPTION_KEY",
+  "lock_with": "VAULT_CONTENTS['alice_contract_secret']",
+  "unlock_with": "VAULT_CONTENTS['alice_contract_secret']",
+  "contents": ""
+},
+
+"bob_decryption_key":{
+  "owner": "bob",
+  "fill_with": "DECRYPTION_KEY",
+  "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "contents": ""
+},
+
+"congratulations_message":{
+  "owner": "bob",
+  "fill_with": "MESSAGES['congratulations']",
+  "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "contents": ""
+},
+
+"vault_two_key":{
+  "owner": "bob",
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "contents": ""
+},
+
+"vault_three_key":{
+  "owner": "bob",
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "unlock_with": "VAULT_CONTENTS['bob_contract_secret']",
+  "contents": ""
+},
+
+"first":{
+  "owner": "bob",
+  "fill_with": "VAULT_CONTENTS['vault_two_key']",
+  "lock_with": "VAULT_CONTENTS['alice_public_encryption_key']",
+  "unlock_with": "VAULT_CONTENTS['alice_decryption_key']",
+  "lock_type": "ASYMMETRIC_MUTUAL_AUTH",
+  "contents": ""
+},
+
+"second":{
+  "owner": "bob",
+  "fill_with": "VAULT_CONTENTS['vault_three_key']",
+  "lock_with": "VAULT_CONTENTS['vault_two_key']",
+  "unlock_with": "VAULT_CONTENTS['first']",
+  "contents": ""
+},
+
+"third":{
+  "owner": "bob",
+  "fill_with": "VAULT_CONTENTS['congratulations_message']",
+  "lock_with": "VAULT_CONTENTS['vault_three_key']",
+  "unlock_with": "VAULT_CONTENTS['second']",
+  "contents": ""
+}
+
+}
+}

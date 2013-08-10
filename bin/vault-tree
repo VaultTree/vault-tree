@@ -1,30 +1,19 @@
 #!/usr/bin/env ruby
 require 'gli'
-# Initialize Application HEAR
+require_relative '../config/initialize'
 
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'The Self Enforcing Contract'
 
 version '0.0.1'
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+desc 'Write the newly modified contract to disk'
+switch [:w]
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
-
-desc 'Describe open here'
+desc 'Retrieve the contents of a vault'
 arg_name 'Describe arguments to open here'
 command :open do |c|
-  c.desc 'Describe a switch to open'
-  c.switch :s
-
-  c.desc 'Describe a flag to open'
-  c.default_value 'default'
-  c.flag :f
   c.action do |global_options,options,args|
 
     # Your command logic here
@@ -36,15 +25,22 @@ command :open do |c|
   end
 end
 
-desc 'Describe close here'
+desc 'Close a vault and all of its ancestors'
 arg_name 'Describe arguments to close here'
 command :close do |c|
+  c.desc 'JSON Object with external data'
+  c.default_value '{}'
+  c.flag :d
   c.action do |global_options,options,args|
-    puts "close command ran"
+    VaultTree::CLI::Close.new(
+      contract_path: args[0],
+      vault_id: args[1],
+      write_flag: global_options[:w]
+    ).execute
   end
 end
 
-desc 'Describe status here'
+desc 'Contract status'
 arg_name 'Describe arguments to status here'
 command :status do |c|
   c.action do |global_options,options,args|

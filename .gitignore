@@ -17,3 +17,7 @@ doc
 
 # jeweler generated
 pkg
+
+# Vagrant
+.vagrant/
+package.box

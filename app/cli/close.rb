@@ -1,38 +1,27 @@
 module VaultTree
   module CLI
-    class Close 
-      attr_reader :vault_id, :contract_path, :write_flag
+    class Close < Command 
+      attr_reader :write_flag
 
-      def initialize(opts = {})
-        @vault_id = opts[:vault_id]
-        @contract_path = opts[:contract_path]
+      def post_initialize(opts = {})
         @write_flag = opts[:write_flag]
       end
 
       def execute
-        Status.new(close_vault).present
+        c = close_vault
+        Status.new(c).present
+        save_contract(c) if write_new_contract?
+        return 0
       end
 
       private
 
+      def save_contract(c)
+        File.open(expanded_path, 'r+') { |file| file.write(c.as_json) }
+      end
+
       def close_vault
         interpreter.close_vault_path(vault_id: vault_id, contract: contract, user: user)
-      end
-
-      def interpreter
-        V3::Interpreter.new
-      end
-
-      def user
-        V3::User.new(user_id: 'alice', master_passphrase: 'ALICE_SECURE_PASS', shared_contract_secret: 'ALICE_AND_BOB')
-      end
-
-      def contract
-        V3::Contract.new File.open(expanded_path).read
-      end
-
-      def expanded_path
-        File.expand_path(contract_path)
       end
 
       def write_new_contract?

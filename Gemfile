@@ -5,10 +5,10 @@ gem "rbnacl", "~> 1.1.0"
 gem "uuidtools", "~> 2.1.4"
 gem 'rake', '>= 10.0.4'
 gem 'activesupport', "~> 3.2.13"
-gem "active_model_serializers", "~> 0.8.1"
 gem "base32", "~> 0.2.0"
 gem "rainbow", "~> 1.1.4"
 gem "json", ">= 1.8.0"
+gem "gli", "~> 2.7.0"
 
 group :test do
   gem 'simplecov', :require => false

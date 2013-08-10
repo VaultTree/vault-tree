@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'active_support'
 require 'json'
-require 'active_model_serializers'
 require 'rainbow'
 require 'digest/sha1'
 require 'yaml'
@@ -9,3 +8,4 @@ require 'rbnacl'
 require 'rbnacl/encoders/base32'
 require 'require_all'
 require 'uuidtools'
+require 'gli'

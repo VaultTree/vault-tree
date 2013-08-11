@@ -1,5 +1,5 @@
 Given(/^Alice has the blank contract$/) do
-  @alice = VaultTree::V3::User.new(user_id: 'alice', master_passphrase: 'ALICE_SECURE_PASS', shared_contract_secret: 'ALICE_AND_BOB')
+  @alice = VaultTree::V3::User.new(user_id: 'alice', master_passphrase: 'ALICE_SECURE_PASS')
   @contract = FactoryGirl.build(:blank_one_two_three)
   @interpreter = VaultTree::V3::Interpreter.new
 end
@@ -11,7 +11,7 @@ end
 
 When(/^she sends the contract to Bob$/) do
   @bobs_messages = {"congratulations" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
-  @bob = VaultTree::V3::User.new(user_id: 'bob', master_passphrase: 'BOB_SECURE_PASS', shared_contract_secret: 'ALICE_AND_BOB', messages: @bobs_messages)
+  @bob = VaultTree::V3::User.new(user_id: 'bob', master_passphrase: 'BOB_SECURE_PASS', messages: @bobs_messages)
 end
 
 Then(/^Bob can access all of her public attributes$/) do
@@ -20,13 +20,6 @@ Then(/^Bob can access all of her public attributes$/) do
 end
 
 When(/^Bob locks his public attributes$/) do
-  @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
-  # Verify they can reopen (Duplicated at the bottom)
-  @interpreter.retrieve_contents(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
-
-  @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
-  # Verify they can reopen
-  @interpreter.retrieve_contents(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
 
   @contract = @interpreter.close_vault_path(vault_id: 'bob_decryption_key', contract: @contract, user: @bob)
   # Verify they can reopen
@@ -43,10 +36,6 @@ When(/^Bob locks his public attributes$/) do
   @contract = @interpreter.close_vault_path(vault_id: 'vault_three_key', contract: @contract, user: @bob)
   # Verify they can reopen
   @interpreter.retrieve_contents(vault_id: 'vault_three_key', contract: @contract, user: @bob)
-
-  @contract = @interpreter.close_vault_path(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
-  # Verify they can reopen
-  @interpreter.retrieve_contents(vault_id: 'bob_shared_contract_secret', contract: @contract, user: @bob)
 
   @contract = @interpreter.close_vault_path(vault_id: 'bob_public_encryption_key', contract: @contract, user: @bob)
   # Verify they can reopen

@@ -39,10 +39,6 @@ module VaultTree
         user.master_passphrase
       end
 
-      def user_shared_contract_secret
-        user.shared_contract_secret
-      end
-
       def user_public_encryption_key
         user.public_encryption_key
       end

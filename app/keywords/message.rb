@@ -1,6 +1,6 @@
 module VaultTree
   module V3
-    class Message < Keyword
+    class Messages < Keyword
       attr_reader :arg 
 
       def post_initialize(arg)

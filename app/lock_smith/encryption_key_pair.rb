@@ -1,6 +1,7 @@
 module VaultTree
   module LockSmith
     class EncryptionKeyPair
+
       def private_key
         lib_private_key.to_s(:base64)
       end
@@ -8,8 +9,6 @@ module VaultTree
       def public_key
         lib_public_key.to_s(:base64)
       end
-
-
 
       private
 

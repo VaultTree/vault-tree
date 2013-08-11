@@ -3,14 +3,9 @@ module VaultTree
     class RandomNumber < Keyword
 
       def evaluate
-        sha rand(10000000)
+        LockSmith::RandomNumber.compute
       end
 
-      private
-
-      def sha(data)
-        Crypto::Hash.sha256("#{data}", :base64)
-      end
     end
   end
 end

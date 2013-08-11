@@ -1,10 +1,15 @@
 module VaultTree
   module CLI
     class Status
-      attr_reader :contract
+      attr_reader :contract, :contract_path
 
-      def initialize(contract)
-        @contract = contract
+      def initialize(contract, opts = {})
+        @contract_path = opts[:contract_path] 
+        @contract = contract || read_contract
+      end
+
+      def execute
+        present
       end
 
       def present
@@ -13,6 +18,14 @@ module VaultTree
       end
 
       private
+
+      def read_contract
+        V3::Contract.new File.open(expanded_path).read
+      end
+
+      def expanded_path
+        File.expand_path(contract_path)
+      end
 
       def print_status_header
         STDOUT.write "CONTRACT STATUS \n"

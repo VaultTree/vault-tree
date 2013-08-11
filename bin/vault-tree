@@ -38,7 +38,9 @@ desc 'Contract status'
 arg_name 'Describe arguments to status here'
 command :status do |c|
   c.action do |global_options,options,args|
-    puts "status command ran"
+    VaultTree::CLI::Status.new(nil,
+      contract_path: args[0]
+    ).execute
   end
 end
 

@@ -20,7 +20,7 @@ module VaultTree
       end
 
       def user
-        V3::User.new(user_id: 'alice', master_passphrase: 'ALICE_SECURE_PASS')
+        V3::User.new(master_passphrase: 'ALICE_SECURE_PASS')
       end
 
       def contract

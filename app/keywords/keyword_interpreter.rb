@@ -1,11 +1,15 @@
 module VaultTree
   module V3
     class KeywordInterpreter
-      attr_reader :word, :contract
+      attr_reader :word, :vault
       
-      def initialize(word,contract)
+      def initialize(word,vault)
         @word = word 
-        @contract = contract
+        @vault = vault
+      end
+
+      def contract
+        vault.contract
       end
 
       def evaluate # start here

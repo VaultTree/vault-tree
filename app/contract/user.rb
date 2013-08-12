@@ -1,12 +1,11 @@
 module VaultTree
   module V3
     class User
-      attr_reader :user_id, :master_passphrase, :messages
+      attr_reader :master_passphrase, :external_data
 
       def initialize(opts = {})
-        @user_id = opts[:user_id]
         @master_passphrase = opts[:master_passphrase]
-        @messages = opts[:messages] 
+        @external_data = opts[:external_data] 
       end
 
       def public_encryption_key

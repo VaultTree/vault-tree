@@ -47,8 +47,8 @@ module VaultTree
         user.decryption_key 
       end
 
-      def user_messages(arg) 
-        user.messages[arg]
+      def user_external_data(vault_id)
+        user.external_data[vault_id]
       end
 
       private

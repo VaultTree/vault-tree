@@ -5,7 +5,7 @@ module VaultTree
     describe 'Interpreter' do
 
       before :all do
-        @alice = User.new(user_id: 'alice', master_passphrase: 'ALICE_SECURE_PASS')
+        @alice = User.new(master_passphrase: 'ALICE_SECURE_PASS')
       end
 
       describe '#close_vault_path' do

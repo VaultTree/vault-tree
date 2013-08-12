@@ -1,5 +1,5 @@
 Given(/^Alice has the blank contract$/) do
-  @alice = VaultTree::V3::User.new(user_id: 'alice', master_passphrase: 'ALICE_SECURE_PASS')
+  @alice = VaultTree::V3::User.new(master_passphrase: 'ALICE_SECURE_PASS')
   @contract = FactoryGirl.build(:blank_one_two_three)
   @interpreter = VaultTree::V3::Interpreter.new
 end
@@ -10,8 +10,8 @@ When(/^she locks all of her public attributes$/) do
 end
 
 When(/^she sends the contract to Bob$/) do
-  @bobs_messages = {"congratulations" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
-  @bob = VaultTree::V3::User.new(user_id: 'bob', master_passphrase: 'BOB_SECURE_PASS', messages: @bobs_messages)
+  @bobs_external_data = {"congratulations_message" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
+  @bob = VaultTree::V3::User.new(master_passphrase: 'BOB_SECURE_PASS', external_data: @bobs_external_data)
 end
 
 Then(/^Bob can access all of her public attributes$/) do
@@ -50,5 +50,5 @@ end
 
 Then(/^Alice can execute the contract to recover the final message$/) do
   puts @interpreter.retrieve_contents(vault_id: 'third', contract: @contract, user: @alice)
-  @interpreter.retrieve_contents(vault_id: 'third', contract: @contract, user: @alice).should == @bobs_messages['congratulations']
+  @interpreter.retrieve_contents(vault_id: 'third', contract: @contract, user: @alice).should == @bobs_external_data['congratulations_message']
 end

@@ -1,10 +1,11 @@
 module VaultTree
   module CLI
     class Close < Command 
-      attr_reader :write_flag
+      attr_reader :write_flag, :external_data
 
       def post_initialize(opts = {})
         @write_flag = opts[:write_flag]
+        @external_data = opts[:external_data]
       end
 
       def execute
@@ -15,6 +16,10 @@ module VaultTree
       end
 
       private
+
+      def user
+        V3::User.new(master_passphrase: master_passphrase, external_data: external_data)
+      end
 
       def save_contract(c)
         File.open(expanded_path, 'r+') { |file| file.write(c.as_json) }
@@ -33,4 +38,4 @@ module VaultTree
 end
 
 # Use this command
-# bundle exec bin/vault-tree close '~/projects/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.3.0.EXP.json' 'alice_public_encryption_key'
+# bundle exec bin/vault-tree -p 'ALICE_SECURE_PASS' close '~/projects/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.3.0.EXP.json' 'alice_public_encryption_key'

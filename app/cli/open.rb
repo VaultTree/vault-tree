@@ -9,6 +9,10 @@ module VaultTree
 
       private
 
+      def user
+        V3::User.new(master_passphrase: master_passphrase)
+      end
+
       def retrieve_contents
         interpreter.retrieve_contents(vault_id: vault_id, contract: contract, user: user)
       end

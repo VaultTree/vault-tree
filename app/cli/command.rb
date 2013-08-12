@@ -1,9 +1,10 @@
 module VaultTree
   module CLI
     class Command
-      attr_reader :vault_id, :contract_path
+      attr_reader :vault_id, :contract_path, :master_password
 
       def initialize(opts = {})
+        @master_password = opts[:master_password]
         @vault_id = opts[:vault_id]
         @contract_path = opts[:contract_path]
         post_initialize(opts)
@@ -17,10 +18,6 @@ module VaultTree
 
       def interpreter
         V3::Interpreter.new
-      end
-
-      def user
-        V3::User.new(master_passphrase: 'ALICE_SECURE_PASS')
       end
 
       def contract

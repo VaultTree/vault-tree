@@ -50,8 +50,8 @@ module VaultTree
 
       def open_asymmetric
         cipher_text = discover_contents
-        key = KeywordInterpreter.new("VAULT_CONTENTS['alice_decryption_key']", contract).evaluate
-        pub_key = KeywordInterpreter.new("VAULT_CONTENTS['bob_public_encryption_key']", contract).evaluate
+        key = KeywordInterpreter.new("VAULT_CONTENTS['alice_decryption_key']", self).evaluate
+        pub_key = KeywordInterpreter.new("VAULT_CONTENTS['bob_public_encryption_key']", self).evaluate
         asymmetric_decrypt(pub_key,key,cipher_text)
       end
 
@@ -84,22 +84,22 @@ module VaultTree
 
       def discover_bob_public_key
         stg = "VAULT_CONTENTS['bob_public_encryption_key']"
-        KeywordInterpreter.new(stg,contract).evaluate # THIS VALUE IS GOOD!
+        KeywordInterpreter.new(stg,self).evaluate # THIS VALUE IS GOOD!
       end
 
       def discover_bob_decryption_key
         stg = "VAULT_CONTENTS['bob_decryption_key']"
-        KeywordInterpreter.new(stg,contract).evaluate # THIS VALUE IS GOOD!
+        KeywordInterpreter.new(stg,self).evaluate # THIS VALUE IS GOOD!
       end
 
       def discover_alice_decryption_key
         stg = "VAULT_CONTENTS['alice_decryption_key']"
-        KeywordInterpreter.new(stg,contract).evaluate # THIS VALUE IS GOOD!
+        KeywordInterpreter.new(stg,self).evaluate # THIS VALUE IS GOOD!
       end
 
       def discover_unlocking_key
         ulw = unlock_with
-        KeywordInterpreter.new(ulw,contract).evaluate
+        KeywordInterpreter.new(ulw,self).evaluate
       end
 
       def discover_contents
@@ -108,12 +108,12 @@ module VaultTree
 
       def discover_locking_key
         lw = lock_with
-        KeywordInterpreter.new(lw,contract).evaluate
+        KeywordInterpreter.new(lw,self).evaluate
       end
 
       def discover_vault_fill
         fw = fill_with
-        KeywordInterpreter.new(fw,contract).evaluate
+        KeywordInterpreter.new(fw,self).evaluate
       end
 
       def close_all_lock_ancestors(c)

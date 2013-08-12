@@ -8,12 +8,8 @@ module VaultTree
         @vault = vault
       end
 
-      def contract
-        vault.contract
-      end
-
       def evaluate # start here
-        keyword_class_name.new(contract, keyword_arg).evaluate
+        keyword_class_name.new(vault, keyword_arg).evaluate
       end
 
       private

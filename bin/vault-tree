@@ -3,16 +3,50 @@ require 'gli'
 require_relative '../config/initialize'
 
 include GLI::App
-
 program_desc 'The Self Enforcing Contract'
-
 version '0.0.1'
+
+########################################
+# READ IN SETTINGS
+
+SETTINGS_FILE = File.expand_path('~/projects/vault-tree/vault-tree/spec/support/cli/.vt')
+settings = {password: nil, contracts: {}, data: {}}
+
+if File.exists? SETTINGS_FILE
+  file_contents = YAML.load_file(SETTINGS_FILE)
+  settings.merge!(file_contents)
+else
+  File.open(SETTINGS_FILE , 'w') {|f| YAML::dump(options,f) }
+  STDERR.puts "Initialized settings file in #{SETTINGS_FILE }"
+end
+
+########################################
+
 
 desc 'User contract master password'
 flag [:p,:password]
 
 desc 'Write the newly modified contract to disk'
 switch [:w]
+
+desc 'List available contracts'
+arg_name 'Describe arguments to open here'
+command :contracts do |c|
+  c.action do |global_options,options,args|
+    VaultTree::CLI::ContractPaths.new(
+      contract_settings: settings[:contracts]
+    ).list
+  end
+end
+
+desc 'Checkout a new active contract'
+arg_name 'contract name'
+command :checkout do |c|
+  c.action do |global_options,options,args|
+    puts 'checkout ran' 
+    VaultTree::CLI::Checkout.new()
+  end
+end
 
 desc 'Retrieve the contents of a vault'
 arg_name 'Describe arguments to open here'

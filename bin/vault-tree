@@ -23,23 +23,25 @@ end
 ########################################
 
 
-desc 'User contract master password'
-flag [:p,:password]
-
-desc 'Write the newly modified contract to disk'
-switch [:w]
-
-desc 'List available contracts'
-arg_name 'Describe arguments to open here'
-command :contracts do |c|
+desc 'Get the status of the active contract.'
+command :status do |c|
   c.action do |global_options,options,args|
-    VaultTree::CLI::ContractPaths.new(
-      contract_settings: settings[:contracts]
-    ).list
+    VaultTree::CLI::Status.new(nil,
+      contract_path: args[0]
+    ).execute
   end
 end
 
-desc 'Checkout a new active contract'
+desc '[list|add|rm|show] actions for contracts.'
+command :contract do |c|
+  c.action do |global_options,options,args|
+    #VaultTree::CLI::ContractPaths.new(
+    #  contract_settings: settings[:contracts]
+    #).list
+  end
+end
+
+desc 'Checkout a new active contract.'
 arg_name 'contract name'
 command :checkout do |c|
   c.action do |global_options,options,args|
@@ -48,43 +50,55 @@ command :checkout do |c|
   end
 end
 
-desc 'Retrieve the contents of a vault'
-arg_name 'Describe arguments to open here'
-command :open do |c|
+#desc 'Retrieve the contents of a vault'
+#arg_name 'Describe arguments to open here'
+#command :open do |c|
+#  c.action do |global_options,options,args|
+#    VaultTree::CLI::Open.new(
+#      master_password: global_options[:p],
+#      contract_path: args[0],
+#      vault_id: args[1]
+#    ).execute
+#  end
+#end
+
+#desc 'Close a vault and all of its ancestors'
+#arg_name 'vault_id'
+#command :close do |c|
+
+#  c.desc 'External data needed to fill vaults'
+#  c.flag [:d,:data], default_value: {}
+
+#  c.action do |global_options,options,args|
+#    VaultTree::CLI::Close.new(
+#      master_password: global_options[:p],
+#      external_data: options[:d],
+#      contract_path: args[0],
+#      vault_id: args[1],
+#      write_flag: global_options[:w]
+#   ).execute
+#  end
+#end
+
+desc '[open|close] Open a vault. Close a vault and its ancestors.'
+command :vault do |c|
   c.action do |global_options,options,args|
-    VaultTree::CLI::Open.new(
-      master_password: global_options[:p],
-      contract_path: args[0],
-      vault_id: args[1]
-    ).execute
+    puts 'vault command ran'
   end
 end
 
-desc 'Close a vault and all of its ancestors'
-arg_name 'vault_id'
-command :close do |c|
-
-  c.desc 'External data needed to fill vaults'
-  c.flag [:d,:data], default_value: {}
-
+desc '[list|add|rm|show] external data to fill your vaults.'
+command :data do |c|
   c.action do |global_options,options,args|
-    VaultTree::CLI::Close.new(
-      master_password: global_options[:p],
-      external_data: options[:d],
-      contract_path: args[0],
-      vault_id: args[1],
-      write_flag: global_options[:w]
-    ).execute
+    puts 'vault command ran'
   end
 end
 
-desc 'Contract status'
-arg_name 'Describe arguments to status here'
-command :status do |c|
+
+desc 'Show your current Vault Tree settings.'
+command :settings do |c|
   c.action do |global_options,options,args|
-    VaultTree::CLI::Status.new(nil,
-      contract_path: args[0]
-    ).execute
+    puts 'settings command ran'
   end
 end
 

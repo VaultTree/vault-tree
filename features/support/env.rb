@@ -18,5 +18,18 @@ require_all VaultTree::PathHelpers.factories
 #end
 
 Before do
+  cmd = "alias vault-tree='#{VaultTree::PathHelpers.cli_executable}'"
+  `#{cmd}`
+end
+
+Before do
   @dirs = ["#{VaultTree::PathHelpers.practice_config_dir}"]
+end
+
+Before do
+  VaultTree::CLI::SettingsFile.new.delete_empty_settings_file
+end
+
+After do
+  VaultTree::CLI::SettingsFile.new.delete_empty_settings_file
 end

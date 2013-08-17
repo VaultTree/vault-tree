@@ -6,24 +6,35 @@ include GLI::App
 program_desc 'The Self Enforcing Contract'
 version '0.0.1'
 
+
 ########################################
 # READ IN SETTINGS
 
-SETTINGS_FILE = File.expand_path('~/projects/vault-tree/vault-tree/spec/support/cli/.vt')
-settings = {password: nil, contracts: {}, data: {}}
+if File.exists?(VaultTree::CLI::SettingsFile.new.empty_settings_path)
+  SETTINGS_FILE = VaultTree::CLI::SettingsFile.new.empty_settings_path
+else
+  SETTINGS_FILE = VaultTree::CLI::SettingsFile.new.default_settings_path
+end
 
+settings = {password: nil, contracts: {}, data: {}}
 if File.exists? SETTINGS_FILE
   file_contents = YAML.load_file(SETTINGS_FILE)
   settings.merge!(file_contents)
 else
   File.open(SETTINGS_FILE , 'w') {|f| YAML::dump(options,f) }
-  STDERR.puts "Initialized settings file in #{SETTINGS_FILE }"
+  STDERR.puts "Initialized settings file in #{SETTINGS_FILE}"
 end
 
 ########################################
 
+desc 'Show your current Vault Tree settings'
+command :settings do |c|
+  c.action do |global_options,options,args|
+    puts VaultTree::CLI::Settings.new(SETTINGS_FILE).file_contents
+  end
+end
 
-desc 'Get the status of the active contract.'
+desc 'Get the status of the active contract'
 command :status do |c|
   c.action do |global_options,options,args|
     VaultTree::CLI::Status.new(nil,
@@ -32,16 +43,16 @@ command :status do |c|
   end
 end
 
-desc '[list|add|rm|show] actions for contracts.'
+desc '[list|add|rm|show] actions for contracts'
 command :contract do |c|
   c.action do |global_options,options,args|
-    #VaultTree::CLI::ContractPaths.new(
-    #  contract_settings: settings[:contracts]
-    #).list
+    settings = VaultTree::CLI::Settings.new(SETTINGS_FILE)
+    method = args[0].to_sym 
+    VaultTree::CLI::Contract.new(settings).send(method,args[1],args[2])
   end
 end
 
-desc 'Checkout a new active contract.'
+desc 'Checkout a new active contract'
 arg_name 'contract name'
 command :checkout do |c|
   c.action do |global_options,options,args|
@@ -80,25 +91,17 @@ end
 #  end
 #end
 
-desc '[open|close] Open a vault. Close a vault and its ancestors.'
+desc '[open|close] Open a vault. Close a vault and its ancestors'
 command :vault do |c|
   c.action do |global_options,options,args|
     puts 'vault command ran'
   end
 end
 
-desc '[list|add|rm|show] external data to fill your vaults.'
+desc '[list|add|rm|show] external data to fill your vaults'
 command :data do |c|
   c.action do |global_options,options,args|
     puts 'vault command ran'
-  end
-end
-
-
-desc 'Show your current Vault Tree settings.'
-command :settings do |c|
-  c.action do |global_options,options,args|
-    puts 'settings command ran'
   end
 end
 

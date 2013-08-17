@@ -1,17 +1,11 @@
 ---
-:password: 'DEFAULT'
-:contracts: 
+:password: DEFAULT_PASSWORD
+:contracts:
+  :first_contract: /Users/abashelor/projects/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.5.0.EXP.json
+:data:
   :one_two_three:
-    :path: '~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.5.0.EXP.json'
-    :active: true
+    :path: ~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-data.json
   :blockchain_signal:
-    :path: '~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.5.0.EXP.json'
+    :path: ~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-data.json
   :blockchain_key_transfer:
-    :path: '~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.5.0.EXP.json'
-:data: 
-  :one_two_three:
-    :path: '~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-data.json'
-  :blockchain_signal:
-    :path: '~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-data.json'
-  :blockchain_key_transfer:
-    path: '~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-data.json'
+    path: ~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-data.json

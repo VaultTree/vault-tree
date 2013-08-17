@@ -35,7 +35,7 @@ module VaultTree
     end
 
     def practice_config_dir
-     "#{project_dir}/.vault-tree"
+     "#{project_dir}/spec/support/cli/files"
     end
 
     def one_two_three_030
@@ -49,5 +49,18 @@ module VaultTree
     def spec_cli_settings_file
       "#{project_dir}/spec/support/cli/.vt"
     end
+
+    def empty_settings_file
+      "#{project_dir}/spec/support/cli/.vt_empty"
+    end
+
+    def cli_executable
+      "#{project_dir}/bin/vault-tree"
+    end
+
+    def aruba_working_dir
+      "#{project_dir}/spec/support/cli/files"
+    end
+
   end
 end

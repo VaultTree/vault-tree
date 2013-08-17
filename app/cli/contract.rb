@@ -1,33 +1,37 @@
 module VaultTree
   module CLI
-    class ContractPaths
-      attr_reader :contract_settings
+    class Contract
+      attr_reader :settings
 
-      def initialize(opts = {})
-        @contract_settings = opts[:contract_settings]
+      def initialize(settings)
+        @settings = settings
       end
 
-      def list
-        STDOUT.puts names_with_color
-        return 0 
+      def add(name,path)
+        settings.add_contract(name,path)
+        return 0
       end
 
-      def active_contract
-        names.select{|n| contract_settings[n][:active]}.first
+      def list(arg_1 = nil,arg_2 = nil)
+        puts settings.list_contracts
+        return 0
+      end
+
+      def show(name = nil,arg_2 = nil)
+        puts name
+        puts read(settings.contract_path(name))
+        return 0
+      end
+
+      def rm(name = nil,arg_2 = nil)
+        settings.rm_contract(name)
+        return 0
       end
 
       private
 
-      def active_contract?(n)
-        n == active_contract
-      end
-
-      def names
-        contract_settings.keys
-      end
-
-      def names_with_color
-        names.map{|n| active_contract?(n) ? n.to_s.color(:green) : n.to_s}
+      def read(d)
+        File.read(d)
       end
     end
   end

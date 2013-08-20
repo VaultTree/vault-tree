@@ -56,8 +56,8 @@ desc 'Checkout a new active contract'
 arg_name 'contract name'
 command :checkout do |c|
   c.action do |global_options,options,args|
-    puts 'checkout ran' 
-    VaultTree::CLI::Checkout.new()
+    settings = VaultTree::CLI::Settings.new(SETTINGS_FILE)
+    VaultTree::CLI::Checkout.new(settings).run(args[0])
   end
 end
 

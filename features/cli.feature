@@ -52,7 +52,18 @@ Scenario: vault-tree contract [rm]
   And I run `vault-tree contract list`
   Then the stdout should contain "No Contracts Registered"
 
-Scenario: vault-tree status
+Scenario: vault-tree checkout (contract)
+  Given an empty settings file
+  And a 1000 byte file named "first_contract.json"
+  And a 1000 byte file named "second_contract.json"
+  When I run `vault-tree contract add first_contract '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/cli/files/first_contract.json'`
+  And I run `vault-tree contract add first_contract '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/cli/files/second_contract.json'`
+  And I run `vault-tree checkout first_contract`
+  Then the active contract is "first_contract"
+  When I run `vault-tree checkout second_contract`
+  Then the active contract is "second_contract"
+
+#Scenario: vault-tree status
   #Given the default settings file
   #When I run `vault-tree status`
   #Then the stdout should contain "Contract Status"

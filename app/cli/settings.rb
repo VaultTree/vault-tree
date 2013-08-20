@@ -15,6 +15,11 @@ module VaultTree
         File.write(file_path, h.to_yaml)
       end
 
+      def activate(name)
+        puts name
+        save contents.merge({active: name}) 
+      end
+
       def contents
         YAML.load_file(file_path)
       end
@@ -66,7 +71,7 @@ module VaultTree
       end
 
       def active_contract
-        names.select{|n| contents[:contracts][n][:active]}.first
+        contents[:active]
       end
 
       def active_contract?(n)

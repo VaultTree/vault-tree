@@ -23,6 +23,7 @@ module VaultTree
 ---
 :password: 'EMPTY_SETTINGS_PASSWORD'
 :contracts: 
+:active:
 :data: 
 ]
       end

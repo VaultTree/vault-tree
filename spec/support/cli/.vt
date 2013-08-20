@@ -2,6 +2,7 @@
 :password: DEFAULT_PASSWORD
 :contracts:
   :first_contract: /Users/abashelor/projects/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.5.0.EXP.json
+:active: first_contract
 :data:
   :one_two_three:
     :path: ~/vault-tree/vault-tree/spec/support/fixtures/one_two_three-data.json

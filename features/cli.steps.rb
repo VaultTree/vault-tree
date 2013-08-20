@@ -17,3 +17,9 @@ end
 Given(/^a test contract file in the home dir with contents "(.*?)"$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
+
+Then(/^the active contract is "(.*?)"$/) do |arg1|
+  SETTINGS_FILE = VaultTree::CLI::SettingsFile.new.empty_settings_path
+  @settings = VaultTree::CLI::Settings.new(SETTINGS_FILE)
+  @settings.active_contract.should == arg1
+end

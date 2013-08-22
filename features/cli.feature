@@ -51,7 +51,7 @@ Scenario: vault-tree contract [show]
     TEST CONTENTS
     """
   When I run `vault-tree contract add first_contract '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/cli/files/first_contract.json'`
-  When I run `vault-tree contract show first_contract`
+  When I run `vault-tree contract show`
   Then the stdout should contain "TEST CONTENTS"
 
 Scenario: vault-tree contract [rm]
@@ -76,7 +76,7 @@ Scenario: vault-tree checkout (contract)
     TEST CONTENTS
     """
   When I run `vault-tree contract add first_contract '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/cli/files/first_contract.json'`
-  And I run `vault-tree contract add first_contract '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/cli/files/second_contract.json'`
+  And I run `vault-tree contract add second_contract '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/cli/files/second_contract.json'`
   And I run `vault-tree checkout first_contract`
   Then the active contract is "first_contract"
   When I run `vault-tree checkout second_contract`

@@ -19,7 +19,7 @@ Given(/^a test contract file in the home dir with contents "(.*?)"$/) do |arg1|
 end
 
 Then(/^the active contract is "(.*?)"$/) do |arg1|
-  SETTINGS_FILE = VaultTree::CLI::SettingsFile.new.empty_settings_path
-  @settings = VaultTree::CLI::Settings.new(SETTINGS_FILE)
-  @settings.active_contract.should == arg1
+  file = VaultTree::CLI::SettingsFile.new.empty_settings_path
+  settings = VaultTree::CLI::Settings.new(file)
+  settings.active_contract?(arg1).should be true
 end

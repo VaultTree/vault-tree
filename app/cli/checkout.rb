@@ -7,8 +7,8 @@ module VaultTree
         @settings = settings
       end
 
-      def run(contract_name)
-        settings.activate contract_name
+      def run(name)
+        settings.activate_contract name
       end
     end
   end

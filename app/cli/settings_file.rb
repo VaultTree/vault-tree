@@ -22,9 +22,9 @@ module VaultTree
 %Q[
 ---
 :password: 'EMPTY_SETTINGS_PASSWORD'
-:contracts: 
-:active:
-:data: 
+:contracts: {}
+:active: ''
+:data: {}
 ]
       end
     end

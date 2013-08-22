@@ -1,94 +1,69 @@
 module VaultTree
   module CLI
     class Settings
-      attr_reader :file_path
+      attr_reader :settings_file
 
-      def initialize(file_path)
-        @file_path = file_path
-      end
-
-      def file_contents
-        File.read(file_path)
-      end
-
-      def save(h)
-        File.write(file_path, h.to_yaml)
-      end
-
-      def activate(name)
-        puts name
-        save contents.merge({active: name}) 
+      def initialize(settings_file)
+        @settings_file = settings_file
       end
 
       def contents
-        YAML.load_file(file_path)
+        @contents = YAML.load_file(settings_file)
       end
 
-      def contracts
-        contents[:contracts]
+      def save
+        File.write(settings_file, to_yaml)
+        true
+      end
+
+      def raw_contents
+        File.read(settings_file)
       end
 
       def add_contract(name,path)
-        new = contracts.merge({name => path})
-        save contents.merge({:contracts => new})
+        new_contracts = contents[:contracts].merge({name => path})
+        @contents = contents.merge(contracts: new_contracts) 
+        save
+        activate_if_only_contract(name)
       end
 
       def rm_contract(name)
         new_contract = contents[:contracts].delete_if {|key, value| key.to_s == name}
-        save contents.merge({:contracts => new_contract})
+        @contents = contents.merge({:contracts => new_contract})
+        save
       end
 
       def list_contracts
-        if contents[:contracts] == {} || contents[:contracts] == nil
-          return 'No Contracts Registered'
-        else
-          return contents[:contracts].keys
-        end
+        contents[:contracts].keys
       end
 
-      def contract_path(name)
-        contents[:contracts][name.to_s]
+      def activate_contract(name)
+        @contents = contents.merge({active: name}) 
+        save
       end
 
-      def no_contracts
-        'No Contracts Registered'
+      def active_contract?(name)
+        name == contents[:active]
       end
 
-      def names_with_color
-        names.map{|n| active_contract?(n) ? n.to_s.color(:green) : n.to_s}
+      def active_contract_path
+        contents[:contracts][active_contract]
       end
 
-      def names
-        contracts.keys
-      end
-
-      def show_file
-      end
-
-      def password
-      end
-
-      def data
-      end
+      private
 
       def active_contract
         contents[:active]
       end
 
-      def active_contract?(n)
-        n == active_contract
+      def to_yaml
+        @contents.to_yaml
       end
 
-      def present
-        SettingsPresenter.new(self).present
+      def activate_if_only_contract(name)
+        activate_contract(name) if contents[:contracts].keys.length == 1
+        true
       end
-    end
-  end
-end
-
-module VaultTree
-  module CLI
-    class SettingsPresenter
     end
   end
 end

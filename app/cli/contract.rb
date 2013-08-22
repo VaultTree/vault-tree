@@ -13,25 +13,22 @@ module VaultTree
       end
 
       def list(arg_1 = nil,arg_2 = nil)
-        puts settings.list_contracts
+        if settings.list_contracts.empty?
+          puts "No Contracts Registered"
+        else
+          puts settings.list_contracts
+        end
         return 0
       end
 
       def show(name = nil,arg_2 = nil)
-        puts name
-        puts read(settings.contract_path(name))
+        puts File.read(settings.active_contract_path)
         return 0
       end
 
       def rm(name = nil,arg_2 = nil)
         settings.rm_contract(name)
         return 0
-      end
-
-      private
-
-      def read(d)
-        File.read(d)
       end
     end
   end

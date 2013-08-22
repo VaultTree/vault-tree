@@ -29,7 +29,3 @@ end
 Before do
   VaultTree::CLI::SettingsFile.new.delete_empty_settings_file
 end
-
-After do
-  VaultTree::CLI::SettingsFile.new.delete_empty_settings_file
-end

@@ -29,7 +29,8 @@ module VaultTree
       end
 
       def add_contract(name,path)
-        save contents.merge({:contracts => {name => path}})
+        new = contracts.merge({name => path})
+        save contents.merge({:contracts => new})
       end
 
       def rm_contract(name)

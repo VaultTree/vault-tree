@@ -50,8 +50,8 @@ module VaultTree
       "#{project_dir}/spec/support/cli/.vt"
     end
 
-    def empty_settings_file
-      "#{project_dir}/spec/support/cli/.vt_empty"
+    def test_settings_file
+      "#{project_dir}/spec/support/cli/.vt_test"
     end
 
     def cli_executable
@@ -60,6 +60,18 @@ module VaultTree
 
     def aruba_working_dir
       "#{project_dir}/spec/support/cli/files"
+    end
+
+    def fixtures_dir
+      "#{project_dir}/spec/support/fixtures"
+    end
+
+    def default_settings_fixture
+      "#{fixtures_dir}/default_settings.yml"
+    end
+
+    def empty_settings_fixture
+      "#{fixtures_dir}/empty_settings.yml"
     end
 
   end

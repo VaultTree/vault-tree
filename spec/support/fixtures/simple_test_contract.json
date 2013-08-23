@@ -1,0 +1,14 @@
+{
+"header": {},
+"vaults": {
+
+"simple_message":{
+  "owner": "tester",
+  "fill_with": "EXTERNAL_DATA",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+}
+
+}
+}

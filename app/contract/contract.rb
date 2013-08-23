@@ -19,7 +19,7 @@ module VaultTree
       end
 
       def close_vault_path(vault_id) 
-        Vault.new(vault_id, self).close_all_ancestors
+        Vault.new(vault_id, self).close_path
       end
 
       def retrieve_vault_contents(vault_id) 

@@ -7,7 +7,7 @@ module VaultTree
         @contract = contract
       end
 
-      def close_all_ancestors
+      def close_path
         contract
       end
     end

@@ -37,6 +37,14 @@ module VaultTree
         vault_description['unlock_with']
       end
 
+      def asym_auth_with
+        vault_description['asym_auth_with']
+      end
+
+      def asym_verify_with
+        vault_description['asym_verify_with']
+      end
+
       def contents
         vault_description['contents']
       end
@@ -51,6 +59,14 @@ module VaultTree
 
       def unlocking_key
         KeywordInterpreter.new(unlock_with, self).evaluate
+      end
+
+      def asym_auth_key
+        KeywordInterpreter.new(asym_auth_with, self).evaluate
+      end
+
+      def asym_verify_key
+        KeywordInterpreter.new(asym_verify_with, self).evaluate
       end
 
       private

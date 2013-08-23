@@ -8,14 +8,10 @@ module VaultTree
       end
 
       def close
-        encrypt(vault.locking_key, vault.filler)
+        symmetric_cipher.encrypt(key: vault.locking_key, plain_text: vault.filler)
       end
 
       private
-
-      def encrypt(key, plain_text)
-        symmetric_cipher.encrypt(key: key, plain_text: plain_text)
-      end
 
       def symmetric_cipher
         LockSmith::SymmetricCipher.new

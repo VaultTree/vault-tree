@@ -80,6 +80,8 @@
   "lock_with": "VAULT_CONTENTS['alice_public_encryption_key']",
   "unlock_with": "VAULT_CONTENTS['alice_decryption_key']",
   "lock_type": "ASYMMETRIC_MUTUAL_AUTH",
+  "asym_auth_with": "VAULT_CONTENTS['bob_decryption_key']",
+  "asym_verify_with": "VAULT_CONTENTS['bob_public_encryption_key']",
   "contents": ""
 },
 

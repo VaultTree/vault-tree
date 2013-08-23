@@ -8,165 +8,115 @@ module VaultTree
         @contract = contract
       end
 
-      def close_all_ancestors
-        c = close_all_lock_ancestors(contract)
-        c = close_all_fill_ancestors(c)
-        close_self
+      def close_path
+        close_ancestors
+        close_self_if_empty
       end
 
       def retrieve_contents
-        opened_contents
+        open_self
+      end
+
+      def owner
+        vault_description['owner']
+      end
+
+      def fill_with
+        vault_description['fill_with']
+      end
+
+      def lock_type
+        vault_description['lock_type']
+      end
+
+      def lock_with
+        vault_description['lock_with']
+      end
+
+      def unlock_with
+        vault_description['unlock_with']
+      end
+
+      def contents
+        vault_description['contents']
+      end
+
+      def filler
+        KeywordInterpreter.new(fill_with, self).evaluate
+      end
+
+      def locking_key
+        KeywordInterpreter.new(lock_with, self).evaluate
+      end
+
+      def unlocking_key
+        KeywordInterpreter.new(unlock_with, self).evaluate
       end
 
       private
 
-      def opened_contents
-        if asymmetric_mutual_auth?
-          open_asymmetric
+      def vault_description
+        contract.vaults[vault_id]
+      end
+
+      def close_ancestors
+        close_fill_ancestor close_lock_ancestor(contract)
+      end
+
+      def close_self_if_empty
+        if empty?
+          contract.set_vault_contents(vault_id, close_self)
         else
-          open_symmetric
+          contract
         end
       end
 
-      def closed_contents
-        if asymmetric_mutual_auth?
-          close_asymmetric
+      def open_self
+        if asymmetric?
+          AsymmetricVaultOpener.new(self).open
         else
-          close_symmetric
+          SymmetricVaultOpener.new(self).open
         end
       end
 
-      def closed?
-        ! empty?
+      def close_self
+        if asymmetric?
+          AsymmetricVaultCloser.new(self).close
+        else
+          SymmetricVaultCloser.new(self).close
+        end
       end
 
       def empty?
         contents.empty?
       end
 
-      def asymmetric_mutual_auth?
+      def asymmetric?
         lock_type == 'ASYMMETRIC_MUTUAL_AUTH'
       end
 
-      def open_asymmetric
-        cipher_text = discover_contents
-        key = KeywordInterpreter.new("VAULT_CONTENTS['alice_decryption_key']", self).evaluate
-        pub_key = KeywordInterpreter.new("VAULT_CONTENTS['bob_public_encryption_key']", self).evaluate
-        asymmetric_decrypt(pub_key,key,cipher_text)
+      def close_lock_ancestor(c)
+        lock_ancestor_vault(c).close_path
       end
 
-      def open_symmetric
-        key = discover_unlocking_key
-        cipher_text = discover_contents
-        decrypt(key,cipher_text)
-      end
-
-      def close_symmetric
-        key = discover_locking_key
-        fill = discover_vault_fill
-        encrypt(key,fill)
-      end
-
-      def close_asymmetric
-        key = discover_locking_key
-        fill = discover_vault_fill
-        priv_key = discover_bob_decryption_key
-        asymmetric_encrypt(key, priv_key, fill)
-      end
-
-      def close_self
-        if empty?
-          contract.set_vault_contents(vault_id, closed_contents)
-        else
-          contract
-        end
-      end
-
-      def discover_bob_public_key
-        stg = "VAULT_CONTENTS['bob_public_encryption_key']"
-        KeywordInterpreter.new(stg,self).evaluate # THIS VALUE IS GOOD!
-      end
-
-      def discover_bob_decryption_key
-        stg = "VAULT_CONTENTS['bob_decryption_key']"
-        KeywordInterpreter.new(stg,self).evaluate # THIS VALUE IS GOOD!
-      end
-
-      def discover_alice_decryption_key
-        stg = "VAULT_CONTENTS['alice_decryption_key']"
-        KeywordInterpreter.new(stg,self).evaluate # THIS VALUE IS GOOD!
-      end
-
-      def discover_unlocking_key
-        ulw = unlock_with
-        KeywordInterpreter.new(ulw,self).evaluate
-      end
-
-      def discover_contents
-        contents
-      end
-
-      def discover_locking_key
-        lw = lock_with
-        KeywordInterpreter.new(lw,self).evaluate
-      end
-
-      def discover_vault_fill
-        fw = fill_with
-        KeywordInterpreter.new(fw,self).evaluate
-      end
-
-      def close_all_lock_ancestors(c)
-        lock_ancestor_vault(c).close_all_ancestors
-      end
-
-      def close_all_fill_ancestors(c)
-        fill_ancestor_vault(c).close_all_ancestors
+      def close_fill_ancestor(c)
+        fill_ancestor_vault(c).close_path
       end
 
       def lock_ancestor_vault(c)
-        infer_lock_ancestor(c) || CommonAncestorVault.new(c)
+        if has_lock_ancestor? 
+          Vault.new(lock_ancestor_id, c) 
+        else
+          CommonAncestorVault.new(c)
+        end
       end
 
       def fill_ancestor_vault(c)
-        infer_fill_ancestor(c) || CommonAncestorVault.new(c)
-      end
-
-      def fill_with
-        vault_hash['fill_with']
-      end
-
-      def owner
-        vault_hash['owner']
-      end
-
-      def lock_type
-        h = vault_hash
-        h['lock_type'] if h.has_key?('lock_type')
-      end
-
-      def lock_with
-        vault_hash['lock_with']
-      end
-
-      def unlock_with
-        vault_hash['unlock_with']
-      end
-
-      def contents
-        vault_hash['contents']
-      end
-
-      def vault_hash
-        contract.vaults[vault_id]
-      end
-
-      def infer_lock_ancestor(c)
-        has_lock_ancestor? && Vault.new( extract_ancestor_id(lock_with), c)
-      end
-
-      def infer_fill_ancestor(c)
-        has_fill_ancestor? && Vault.new( extract_ancestor_id(fill_with), c)
+        if has_fill_ancestor? 
+          Vault.new(fill_ancestor_id, c) 
+        else
+          CommonAncestorVault.new(c)
+        end
       end
 
       def has_lock_ancestor?
@@ -177,32 +127,12 @@ module VaultTree
         fill_with.include? 'VAULT_CONTENTS'
       end
 
-      def extract_ancestor_id(s)
-        s.gsub(/(VAULT_CONTENTS\[\')|(\'\])/,'').strip
+      def lock_ancestor_id
+        lock_with.gsub(/(VAULT_CONTENTS\[\')|(\'\])/,'').strip
       end
 
-      def symmetric_cipher
-        LockSmith::SymmetricCipher.new
-      end
-
-      def asymmetric_cipher
-        LockSmith::AsymmetricCipher.new
-      end
-
-      def encrypt(key,plain_text)
-        symmetric_cipher.encrypt(key: key, plain_text: plain_text)
-      end
-
-      def asymmetric_encrypt(pub_key,priv_key,fill)
-        asymmetric_cipher.encrypt(pub_key,priv_key,fill)
-      end
-
-      def asymmetric_decrypt(pub_key,priv_key,cipher_text)
-        asymmetric_cipher.decrypt(pub_key,priv_key,cipher_text)
-      end
-
-      def decrypt(key,cipher_text)
-        symmetric_cipher.decrypt(key: key, cipher_text: cipher_text)
+      def fill_ancestor_id
+        fill_with.gsub(/(VAULT_CONTENTS\[\')|(\'\])/,'').strip
       end
 
     end

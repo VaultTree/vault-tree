@@ -1,0 +1,8 @@
+---
+:password: DEFAULT_PASSWORD
+:contracts:
+  simple_test_contract: /Users/abashelor/projects/vault-tree/vault-tree/spec/support/fixtures/simple_test_contract.json
+  one_two_three: /Users/abashelor/projects/vault-tree/vault-tree/spec/support/fixtures/one_two_three-0.5.0.EXP.json
+:active: one_two_three
+:data:
+  simple_data: ~/vault-tree/vault-tree/spec/support/fixtures/simple_data.json

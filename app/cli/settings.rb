@@ -20,6 +20,22 @@ module VaultTree
         File.read(settings_file)
       end
 
+      def add_data(name,path)
+        new_data = contents[:data].merge({name => path})
+        @contents = contents.merge(data: new_data ) 
+        save
+      end
+
+      def rm_data(name)
+        new_data = contents[:data].delete_if {|key, value| key.to_s == name}
+        @contents = contents.merge({:data => new_data})
+        save
+      end
+
+      def list_data
+        contents[:data].keys
+      end
+
       def add_contract(name,path)
         new_contracts = contents[:contracts].merge({name => path})
         @contents = contents.merge(contracts: new_contracts) 

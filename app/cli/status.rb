@@ -1,15 +1,15 @@
 module VaultTree
   module CLI
     class Status
-      attr_reader :contract, :contract_path
+      attr_reader :settings
 
-      def initialize(contract, opts = {})
-        @contract_path = opts[:contract_path] 
-        @contract = contract || read_contract
+      def initialize(settings)
+        @settings = settings
       end
 
-      def execute
+      def run
         present
+        return 0
       end
 
       def present
@@ -19,16 +19,8 @@ module VaultTree
 
       private
 
-      def read_contract
-        V3::Contract.new File.open(expanded_path).read
-      end
-
-      def expanded_path
-        File.expand_path(contract_path)
-      end
-
       def print_status_header
-        STDOUT.write "CONTRACT STATUS \n"
+        STDOUT.write "Contract Status \n"
       end
 
       def print_vault_status
@@ -49,6 +41,20 @@ module VaultTree
 
       def vault_ids
         contract.vaults.keys
+      end
+
+      private
+
+      def interpreter
+        V3::Interpreter.new
+      end
+
+      def contract
+        V3::Contract.new File.open(contract_path).read
+      end
+
+      def contract_path
+        File.expand_path(settings.active_contract_path)
       end
 
     end

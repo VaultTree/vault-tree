@@ -16,7 +16,7 @@ module VaultTree
         if settings.list_contracts.empty?
           puts "No Contracts Registered"
         else
-          puts settings.list_contracts
+          puts list_contracts_with_color
         end
         return 0
       end
@@ -29,6 +29,20 @@ module VaultTree
       def rm(name = nil,arg_2 = nil)
         settings.rm_contract(name)
         return 0
+      end
+
+      private
+
+      def contract_names
+        settings.list_contracts
+      end
+
+      def list_contracts_with_color
+        contract_names.map{|n| active_contract?(n) ? n.color(:green) : n.color(:white)}
+      end
+
+      def active_contract?(n)
+        settings.active_contract?(n)
       end
     end
   end

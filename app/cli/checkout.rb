@@ -9,6 +9,8 @@ module VaultTree
 
       def run(name)
         settings.activate_contract name
+        puts "Switching to contract: #{name.color(:green)}"
+        return 0
       end
     end
   end

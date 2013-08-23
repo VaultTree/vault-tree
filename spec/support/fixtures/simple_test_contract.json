@@ -5,8 +5,8 @@
 "simple_message":{
   "owner": "tester",
   "fill_with": "EXTERNAL_DATA",
-  "lock_with": "UNLOCKED",
-  "unlock_with": "UNLOCKED",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
   "contents": ""
 }
 

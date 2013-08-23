@@ -7,17 +7,18 @@ module VaultTree
         @settings = settings
       end
 
-      def run
+      def run(contract = nil)
+        @contract = contract  
         present
         return 0
       end
+
+      private
 
       def present
         print_status_header
         print_vault_status
       end
-
-      private
 
       def print_status_header
         STDOUT.write "Contract Status \n"
@@ -50,7 +51,11 @@ module VaultTree
       end
 
       def contract
-        V3::Contract.new File.open(contract_path).read
+        @contract || V3::Contract.new(contract_contents) 
+      end
+
+      def contract_contents
+        File.open(contract_path).read
       end
 
       def contract_path

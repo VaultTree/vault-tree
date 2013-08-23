@@ -8,14 +8,10 @@ module VaultTree
       end
 
       def open
-        decrypt(vault.unlocking_key, vault.contents)
+        symmetric_cipher.decrypt(key: vault.unlocking_key, cipher_text: vault.contents)
       end
 
       private
-
-      def decrypt(key,cipher_text)
-        symmetric_cipher.decrypt(key: key, cipher_text: cipher_text)
-      end
 
       def symmetric_cipher
         LockSmith::SymmetricCipher.new

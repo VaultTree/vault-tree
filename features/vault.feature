@@ -1,7 +1,6 @@
 Feature: CLI Vault
 
   Scenario: vault-tree vault close (vault_name) (data)
-    Given this is a work in progress
     Given the default settings file
     And I run `vault-tree contract add simple_test_contract '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/fixtures/simple_test_contract.json'`
     And I run `vault-tree data add simple_data '/Users/abashelor/projects/vault-tree/vault-tree/spec/support/fixtures/simple_data.json'`

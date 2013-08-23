@@ -1,13 +1,53 @@
 module VaultTree
   module CLI
     class Vault
+      attr_reader :settings, :external_data, :vault_id
 
-      def open
+      def initialize(settings)
+        @settings = settings
       end
 
-      def close
+      def open(vault_id,arg2 = nil)
       end
 
+      def close(vault_id, data_file_name = nil)
+        @vault_id = vault_id 
+        @external_data = external_data_hash(data_file_name)
+        c = close_vault_path
+        #Status.new(settings).run(c)
+        return 0
+      end
+
+      private
+
+      def external_data_hash(data_file_name)
+        data_path = settings.contents[:data][data_file_name]
+        Support::JSON.decode File.read(data_path)
+      end
+
+      def user
+        V3::User.new(master_passphrase: master_passphrase, external_data: external_data)
+      end
+
+      def master_passphrase
+        settings.contents[:password]
+      end
+
+      def contract
+        V3::Contract.new File.open(contract_path).read
+      end
+
+      def contract_path
+        File.expand_path(settings.active_contract_path)
+      end
+
+      def interpreter
+        V3::Interpreter.new
+      end
+
+      def close_vault_path
+        interpreter.close_vault_path(vault_id: vault_id, contract: contract, user: user)
+      end
     end
   end
 end

@@ -136,19 +136,19 @@ module VaultTree
       end
 
       def has_lock_ancestor?
-        lock_with.include? 'VAULT_CONTENTS'
+        lock_with.include? 'CONTENTS'
       end
 
       def has_fill_ancestor?
-        fill_with.include? 'VAULT_CONTENTS'
+        fill_with.include? 'CONTENTS'
       end
 
       def lock_ancestor_id
-        lock_with.gsub(/(VAULT_CONTENTS\[\')|(\'\])/,'').strip
+        lock_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
       end
 
       def fill_ancestor_id
-        fill_with.gsub(/(VAULT_CONTENTS\[\')|(\'\])/,'').strip
+        fill_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
       end
 
     end

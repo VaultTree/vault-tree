@@ -1,5 +1,10 @@
 {
-"header": {},
+"header": {
+  "title":"Block Chain Key Transfer",
+  "summary":"Revealed Transfer of a BTC Signing Key"
+  "reference_url":"",
+  "contributer":"Andrew Bashelor"
+}
 "vaults": {
 
 "sender_secret":{

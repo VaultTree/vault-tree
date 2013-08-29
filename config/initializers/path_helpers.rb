@@ -46,6 +46,10 @@ module VaultTree
       "#{project_dir}/spec/support/fixtures/one_two_three-0.5.0.EXP.json"
     end
 
+    def one_two_three_070
+      "#{project_dir}/spec/support/fixtures/one_two_three.0.7.0.json"
+    end
+
     def spec_cli_settings_file
       "#{project_dir}/spec/support/cli/.vt"
     end

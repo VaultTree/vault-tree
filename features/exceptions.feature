@@ -5,11 +5,10 @@ Scenario: Empty Vault
   When I attempt to open an empty vault
   Then an EmptyVault exception is raised
 
-Scenario: Vault Does Not Exists
-  Given not yet implemented
-
 Scenario: Attempted Fill with Master Password 
-  Given not yet implemented
+  Given the broken contract
+  When I attempt fill a vault with my Master Password  
+  Then a FillAttemptMasterPassword exception is raised
 
 Scenario: Invalid Asymmetric Vault
   Given not yet implemented
@@ -25,3 +24,8 @@ Scenario: Missing Password
 
 Scenario: Unsupported Keyword
   Given not yet implemented
+
+Scenario: Vault Does Not Exists
+  Given the broken contract
+  When I attempt to open a vault that does not exists
+  Then a VaultDoesNotExist exception is raised

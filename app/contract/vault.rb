@@ -88,10 +88,7 @@ module VaultTree
       end
 
       def open_self
-        if empty?
-          raise Exceptions::EmptyVault 
-        end
-
+        confirm_vault_not_empty
         if asymmetric?
           AsymmetricVaultOpener.new(self).open
         else
@@ -100,6 +97,7 @@ module VaultTree
       end
 
       def close_self
+        confirm_valid_fill_keyword
         if asymmetric?
           AsymmetricVaultCloser.new(self).close
         else
@@ -155,6 +153,13 @@ module VaultTree
         fill_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
       end
 
+      def confirm_vault_not_empty
+        raise Exceptions::EmptyVault if empty?
+      end
+
+      def confirm_valid_fill_keyword
+        raise Exceptions::FillAttemptMasterPassword if fill_with == 'MASTER_PASSPHRASE'
+      end
     end
   end
 end

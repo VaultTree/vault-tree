@@ -88,6 +88,10 @@ module VaultTree
       end
 
       def open_self
+        if empty?
+          raise Exceptions::EmptyVault 
+        end
+
         if asymmetric?
           AsymmetricVaultOpener.new(self).open
         else

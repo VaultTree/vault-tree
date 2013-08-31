@@ -1,0 +1,19 @@
+{
+"header": {
+
+"title":"Broken Contract",
+"summary":"This is a test fixture for ensuring proper exception handling",
+"contributers":"Andrew Bashelor"
+},
+"vaults": {
+
+"empty_vault":{
+  "owner": "user",
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+}
+
+}
+}

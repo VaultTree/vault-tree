@@ -78,5 +78,8 @@ module VaultTree
       "#{fixtures_dir}/empty_settings.yml"
     end
 
+    def broken_contract
+      "#{fixtures_dir}/broken_contract.json"
+    end
   end
 end

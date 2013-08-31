@@ -23,6 +23,7 @@ module VaultTree
       end
 
       def retrieve_vault_contents(vault_id) 
+        confirm_vault_exists(vault_id)
         Vault.new(vault_id, self).retrieve_contents
       end
 
@@ -54,11 +55,15 @@ module VaultTree
       private
       attr_accessor :contract
 
+      def confirm_vault_exists(vault_id)
+        if ! vaults.include?(vault_id)
+          raise Exceptions::VaultDoesNotExist
+        end
+      end
 
       def non_empty_contents?(vault_id)
         vaults[vault_id]['contents'].non_empty?
       end
-
 
     end
   end

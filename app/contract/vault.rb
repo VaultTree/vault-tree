@@ -9,11 +9,13 @@ module VaultTree
       end
 
       def close_path
+        CloseValidator.new(self).validate!
         close_ancestors
         close_self_if_empty
       end
 
       def retrieve_contents
+        OpenValidator.new(self).validate!
         open_self
       end
 
@@ -47,6 +49,10 @@ module VaultTree
 
       def contents
         vault_description['contents']
+      end
+
+      def empty?
+        contents.empty?
       end
 
       def filler
@@ -88,7 +94,6 @@ module VaultTree
       end
 
       def open_self
-        confirm_vault_not_empty
         if asymmetric?
           AsymmetricVaultOpener.new(self).open
         else
@@ -97,16 +102,11 @@ module VaultTree
       end
 
       def close_self
-        confirm_valid_fill_keyword
         if asymmetric?
           AsymmetricVaultCloser.new(self).close
         else
           SymmetricVaultCloser.new(self).close
         end
-      end
-
-      def empty?
-        contents.empty?
       end
 
       def asymmetric?
@@ -151,14 +151,6 @@ module VaultTree
 
       def fill_ancestor_id
         fill_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
-      end
-
-      def confirm_vault_not_empty
-        raise Exceptions::EmptyVault if empty?
-      end
-
-      def confirm_valid_fill_keyword
-        raise Exceptions::FillAttemptMasterPassword if fill_with == 'MASTER_PASSPHRASE'
       end
     end
   end

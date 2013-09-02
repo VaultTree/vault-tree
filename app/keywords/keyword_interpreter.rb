@@ -9,7 +9,11 @@ module VaultTree
       end
 
       def evaluate # start here
-        keyword_class_name.new(vault, keyword_arg).evaluate
+        begin
+          keyword_class_name.new(vault, keyword_arg).evaluate
+        rescue NameError
+          raise Exceptions::UnsupportedKeyword 
+        end
       end
 
       private

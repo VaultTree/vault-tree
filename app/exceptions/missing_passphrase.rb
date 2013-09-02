@@ -1,6 +1,6 @@
 module VaultTree
   module Exceptions
-    class UnsupportedKeyword < VaultTreeException
+    class MissingPassphrase < VaultTreeException
     end
   end
 end

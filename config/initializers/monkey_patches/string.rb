@@ -11,10 +11,6 @@ class String
     ! self.empty?
   end
 
-  def constantize
-    Object.const_get(self)
-  end
-
   def camelize
     self.split("_").each {|s| s.capitalize! }.join("")
   end

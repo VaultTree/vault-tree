@@ -19,7 +19,7 @@ module VaultTree
       private
 
       def keyword_class_name
-        "VaultTree::V3::#{word_base.downcase.camelize}".constantize
+        eval "VaultTree::V3::#{word_base.downcase.camelize}"
       end
 
       def word_base

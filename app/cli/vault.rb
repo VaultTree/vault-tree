@@ -14,7 +14,7 @@ module VaultTree
         @vault_id = vault_id 
         @external_data = external_data_hash(data_file_name)
         c = close_vault_path
-        #Status.new(settings).run(c)
+        Status.new(settings).run(c)
         return 0
       end
 

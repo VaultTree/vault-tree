@@ -9,6 +9,9 @@ module VaultTree
       end
 
       def open(vault_id,arg2 = nil)
+        @vault_id = vault_id
+        STDOUT.write retrieve_contents
+        return 0
       end
 
       def close(vault_id, data_file_name = nil)
@@ -59,6 +62,10 @@ module VaultTree
 
       def close_vault_path
         interpreter.close_vault_path(vault_id: vault_id, contract: contract, user: user)
+      end
+
+      def retrieve_contents
+        interpreter.retrieve_contents(vault_id: vault_id, contract: contract, user: user)
       end
     end
   end

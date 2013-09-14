@@ -81,5 +81,13 @@ module VaultTree
     def broken_contract
       "#{fixtures_dir}/broken_contract.json"
     end
+
+    def blank_simple_test_contract
+      "#{fixtures_dir}/blank_simple_test_contract.json"
+    end
+
+    def simple_test_contract
+      "#{fixtures_dir}/simple_test_contract.json"
+    end
   end
 end

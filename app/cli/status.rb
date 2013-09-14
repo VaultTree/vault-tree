@@ -17,6 +17,7 @@ module VaultTree
 
       def present
         print_status_header
+        print_active_contract
         print_vault_status
       end
 
@@ -24,7 +25,16 @@ module VaultTree
         STDOUT.write "Contract Status \n"
       end
 
+      def print_active_contract
+        STDOUT.write "Active Contract: #{active_contract.color(:green)} \n"
+      end
+
+      def active_contract
+        settings.active_contract
+      end
+
       def print_vault_status
+        STDOUT.write "Vault Status: \n"
         i = 1
         vault_ids.each do |id| 
           printf "%-5s %-20s %s\n", "[#{i}]", lock_status(id), id.name_from_id

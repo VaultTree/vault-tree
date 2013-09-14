@@ -75,10 +75,11 @@ end
 
 desc '[open|close] Open a vault. Close a vault and its ancestors'
 command :vault do |c|
+  c.switch [:w,:write]
   c.action do |global_options,options,args|
     settings = VaultTree::CLI::Settings.new(SETTINGS_FILE)
     method = args[0].to_sym
-    VaultTree::CLI::Vault.new(settings).send(method,args[1],args[2])
+    VaultTree::CLI::Vault.new(settings, options).send(method,args[1],args[2])
   end
 end
 

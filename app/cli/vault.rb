@@ -1,10 +1,11 @@
 module VaultTree
   module CLI
     class Vault
-      attr_reader :settings, :external_data, :vault_id
+      attr_reader :settings, :external_data, :vault_id, :options
 
-      def initialize(settings)
+      def initialize(settings, options)
         @settings = settings
+        @options = options
       end
 
       def open(vault_id,arg2 = nil)
@@ -15,10 +16,21 @@ module VaultTree
         @external_data = external_data_hash(data_file_name)
         c = close_vault_path
         Status.new(settings).run(c)
+        if write_to_disk?
+          write_conract(c)
+        end
         return 0
       end
 
+      def write_to_disk?
+        options[:write]
+      end
+
       private
+
+      def write_conract(c)
+        File.open(contract_path, 'w') { |file| file.write(c.as_json) }
+      end
 
       def external_data_hash(data_file_name)
         data_path = settings.contents[:data][data_file_name]

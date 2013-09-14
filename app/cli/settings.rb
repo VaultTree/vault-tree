@@ -66,11 +66,11 @@ module VaultTree
         contents[:contracts][active_contract]
       end
 
-      private
-
       def active_contract
         contents[:active]
       end
+
+      private
 
       def to_yaml
         @contents.to_yaml

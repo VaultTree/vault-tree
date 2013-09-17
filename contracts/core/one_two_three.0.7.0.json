@@ -2,13 +2,14 @@
 "header": {
 
 "title":"One Two Three",
-"summary":"A simple contract to test the full Vault Tree stack. Open each vault to proceed to the next one. Unlock the congratulations message",
-"reference_url":"https://github.com/vault-tree/contracts",
+"description":"A simple contract to test the full Vault Tree stack. Open each vault to proceed to the next one. Unlock the congratulations message",
+"template_url":"https://github.com/VaultTree/contracts/blob/master/contracts/one_two_three.0.7.0.json",
 "contributers":"Andrew Bashelor"
 },
 "vaults": {
 
 "bob_contract_secret":{
+  "description":"contract specific password to lock private information",
   "owner": "bob",
   "fill_with": "RANDOM_NUMBER",
   "lock_with": "MASTER_PASSPHRASE",
@@ -17,6 +18,7 @@
 },
 
 "alice_contract_secret":{
+  "description":"contract specific password to lock private information",
   "owner": "alice",
   "fill_with": "RANDOM_NUMBER",
   "lock_with": "MASTER_PASSPHRASE",
@@ -25,6 +27,7 @@
 },
 
 "alice_public_encryption_key":{
+  "description":"public key for asymmetric encryption",
   "owner": "alice",
   "fill_with": "PUBLIC_ENCRYPTION_KEY",
   "lock_with": "UNLOCKED",
@@ -33,6 +36,7 @@
 },
 
 "bob_public_encryption_key":{
+  "description":"public key for asymmetric encryption",
   "owner": "bob",
   "fill_with": "PUBLIC_ENCRYPTION_KEY",
   "lock_with": "UNLOCKED",
@@ -41,6 +45,7 @@
 },
 
 "alice_decryption_key":{
+  "description":"private key for asymmetric decryption",
   "owner": "alice",
   "fill_with": "DECRYPTION_KEY",
   "lock_with": "CONTENTS['alice_contract_secret']",
@@ -49,6 +54,7 @@
 },
 
 "bob_decryption_key":{
+  "description":"private key for asymmetric decryption",
   "owner": "bob",
   "fill_with": "DECRYPTION_KEY",
   "lock_with": "CONTENTS['bob_contract_secret']",
@@ -57,6 +63,7 @@
 },
 
 "congratulations_message":{
+  "description":"A simple message for Bob to put in the final vault",
   "owner": "bob",
   "fill_with": "EXTERNAL_DATA",
   "lock_with": "CONTENTS['bob_contract_secret']",
@@ -65,6 +72,7 @@
 },
 
 "vault_two_key":{
+  "description":"Key to lock vault two. Once Bob locks the second vault he will put this key inside vault one.",
   "owner": "bob",
   "fill_with": "RANDOM_NUMBER",
   "lock_with": "CONTENTS['bob_contract_secret']",
@@ -73,6 +81,7 @@
 },
 
 "vault_three_key":{
+  "description":"Key to lock vault three. Once Bob locks the third vault he will put this key inside vault two.",
   "owner": "bob",
   "fill_with": "RANDOM_NUMBER",
   "lock_with": "CONTENTS['bob_contract_secret']",
@@ -81,6 +90,7 @@
 },
 
 "first":{
+  "description":"This is an asymmetric vault with mutual authentication. It contains the key to vault two and is locked by Bob, with Alices public key. Only Alice can unlock it.",
   "owner": "bob",
   "fill_with": "CONTENTS['vault_two_key']",
   "lock_with": "CONTENTS['alice_public_encryption_key']",
@@ -92,6 +102,7 @@
 },
 
 "second":{
+  "description":"Alice unlocks this vault with the key held in the first vault.",
   "owner": "bob",
   "fill_with": "CONTENTS['vault_three_key']",
   "lock_with": "CONTENTS['vault_two_key']",
@@ -100,6 +111,7 @@
 },
 
 "third":{
+  "description":"Contains a simple message. Unlock the key found in the second vault.",
   "owner": "bob",
   "fill_with": "CONTENTS['congratulations_message']",
   "lock_with": "CONTENTS['vault_three_key']",

@@ -2,7 +2,6 @@ source "http://rubygems.org"
 
 gem 'require_all', "~> 1.2.1"
 gem "rbnacl", "~> 1.1.0"
-gem "uuidtools", "~> 2.1.4"
 gem 'rake', '>= 10.0.4'
 gem 'activesupport', "~> 3.2.13"
 gem "base32", "~> 0.2.0"

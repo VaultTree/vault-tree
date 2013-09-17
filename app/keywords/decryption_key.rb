@@ -1,11 +1,9 @@
 module VaultTree
-  module V3
-    class DecryptionKey < Keyword
+  class DecryptionKey < Keyword
 
-      def evaluate
-        contract.user_decryption_key 
-      end
-
+    def evaluate
+      contract.user_decryption_key 
     end
+
   end
 end

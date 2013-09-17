@@ -1,11 +1,9 @@
 module VaultTree
-  module V3
-    class RandomNumber < Keyword
+  class RandomNumber < Keyword
 
-      def evaluate
-        LockSmith::RandomNumber.compute
-      end
-
+    def evaluate
+      LockSmith::RandomNumber.compute
     end
+
   end
 end

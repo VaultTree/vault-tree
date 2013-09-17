@@ -1,22 +1,20 @@
 module VaultTree
-  module V3
-    class OpenValidator
-      attr_reader :vault
+  class OpenValidator
+    attr_reader :vault
 
-      def initialize(vault)
-        @vault = vault
-      end
+    def initialize(vault)
+      @vault = vault
+    end
 
-      def validate!
-        confirm_vault_not_empty
-        true
-      end
+    def validate!
+      confirm_vault_not_empty
+      true
+    end
 
-      private
+    private
 
-      def confirm_vault_not_empty
-        raise Exceptions::EmptyVault if vault.empty?
-      end
+    def confirm_vault_not_empty
+      raise Exceptions::EmptyVault if vault.empty?
     end
   end
 end

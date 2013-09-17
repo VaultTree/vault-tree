@@ -26,10 +26,6 @@ module VaultTree
      "#{project_dir}/lib"
     end
 
-    def database_config
-     "#{project_dir}/config/database.yml"
-    end
-
     def factories
      "#{project_dir}/spec/factories"
     end
@@ -38,16 +34,8 @@ module VaultTree
      "#{project_dir}/spec/support/cli/files"
     end
 
-    def one_two_three_030
-      "#{project_dir}/spec/support/fixtures/one_two_three-0.3.0.EXP.json"
-    end
-
-    def one_two_three_050
-      "#{project_dir}/spec/support/fixtures/one_two_three-0.5.0.EXP.json"
-    end
-
-    def one_two_three_070
-      "#{project_dir}/spec/support/fixtures/one_two_three.0.7.0.json"
+    def reference_contract
+      "#{project_dir}/contracts/spec/reference.1.0.0.json"
     end
 
     def spec_cli_settings_file

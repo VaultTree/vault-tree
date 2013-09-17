@@ -13,44 +13,10 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = "--format doc"
-end
-
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = "features --format pretty"
-end
 
 desc "Run Tests"
 task :test do
-  Rake::Task["features"].invoke
-  Rake::Task["spec"].invoke
-end
-
-namespace :db do
-  def database 
-    VaultTree::DataBase.new
-  end
-
-  desc "Migrate the db"
-  task :migrate do
-    database.migrate
-  end
-
-  desc "Create the db"
-  task :create do
-    database.create
-  end
-
-  desc "drop the db"
-  task :drop do
-    database.drop
-  end
-
-  desc "setup the db"
-  task :setup do
-    database.setup 
-  end
+  puts 'Run tests with rspec and cucumber'
 end
 
 task :default => :test

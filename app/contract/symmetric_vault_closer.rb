@@ -1,21 +1,19 @@
 module VaultTree
-  module V3
-    class SymmetricVaultCloser
-      attr_reader :vault
+  class SymmetricVaultCloser
+    attr_reader :vault
 
-      def initialize(vault)
-        @vault = vault
-      end
+    def initialize(vault)
+      @vault = vault
+    end
 
-      def close
-        symmetric_cipher.encrypt(key: vault.locking_key, plain_text: vault.filler)
-      end
+    def close
+      symmetric_cipher.encrypt(key: vault.locking_key, plain_text: vault.filler)
+    end
 
-      private
+    private
 
-      def symmetric_cipher
-        LockSmith::SymmetricCipher.new
-      end
+    def symmetric_cipher
+      LockSmith::SymmetricCipher.new
     end
   end
 end

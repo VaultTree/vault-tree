@@ -17,11 +17,11 @@ module VaultTree
       private
 
       def interpreter
-        V3::Interpreter.new
+        Interpreter.new
       end
 
       def contract
-        V3::Contract.new File.open(expanded_path).read
+        Contract.new File.open(expanded_path).read
       end
 
       def expanded_path

@@ -57,11 +57,11 @@ module VaultTree
       private
 
       def interpreter
-        V3::Interpreter.new
+        VaultTree::Interpreter.new
       end
 
       def contract
-        @contract || V3::Contract.new(contract_contents) 
+        @contract || VaultTree::Contract.new(contract_contents) 
       end
 
       def contract_contents

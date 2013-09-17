@@ -1,11 +1,9 @@
 module VaultTree
-  module V3
-    class Unlocked < Keyword
+  class Unlocked < Keyword
 
-      def evaluate
-        LockSmith::CryptoHash.compute('UNLOCKED')
-      end
-
+    def evaluate
+      LockSmith::CryptoHash.compute('UNLOCKED')
     end
+
   end
 end

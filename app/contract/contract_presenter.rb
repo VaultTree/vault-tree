@@ -1,33 +1,32 @@
 require 'json'
 
 module VaultTree
-  module V3
-    class ContractPresenter
-      attr_reader :contract
+  class ContractPresenter
+    attr_reader :contract
 
-      def initialize(contract)
-        @contract = contract
-      end
+    def initialize(contract)
+      @contract = contract
+    end
 
-      def as_json
-        ERB.new(template).result(binding)
-      end
+    def as_json
+      ERB.new(template).result(binding)
+    end
 
-      private
+    private
 
-      def separating_comma(k)
-        ',' unless last_vault?(k)
-      end
+    def separating_comma(k)
+      ',' unless last_vault?(k)
+    end
 
-      def last_vault?(k)
-        k.eql?(contract.vaults.keys.last)
-      end
+    def last_vault?(k)
+      k.eql?(contract.vaults.keys.last)
+    end
 
-      def vault_as_json(v)
-        JSON.pretty_generate(v)
-      end
+    def vault_as_json(v)
+      JSON.pretty_generate(v)
+    end
 
-      def template
+    def template
 %Q[{
 "header": {},
 "vaults": {
@@ -36,7 +35,6 @@ module VaultTree
 <% end %>
 }
 }]
-      end
     end
   end
 end

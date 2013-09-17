@@ -1,10 +1,10 @@
 Given(/^a valid blank contract$/) do
   @contract = FactoryGirl.build(:blank_one_two_three)
-  @interpreter = VaultTree::V3::Interpreter.new
+  @interpreter = VaultTree::Interpreter.new
 end
 
 When(/^I attempt fill a vault without providing a master passphrase$/) do
-  @user = VaultTree::V3::User.new # No password given in the initializer
+  @user = VaultTree::User.new # No password given in the initializer
   begin
     @contract = @interpreter.close_vault_path(vault_id: 'alice_contract_secret', contract: @contract, user: @user)
   rescue => e
@@ -17,9 +17,9 @@ Then(/^a MissingPassphrase exception is raised$/) do
 end
 
 Given(/^the broken contract$/) do
-  @user = VaultTree::V3::User.new(master_passphrase: 'TEST_USER', external_data: {})
+  @user = VaultTree::User.new(master_passphrase: 'TEST_USER', external_data: {})
   @contract = FactoryGirl.build(:broken_contract)
-  @interpreter = VaultTree::V3::Interpreter.new
+  @interpreter = VaultTree::Interpreter.new
 end
 
 When(/^I attempt fill a vault with External Data that does not exists$/) do

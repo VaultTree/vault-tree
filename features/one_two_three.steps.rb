@@ -1,7 +1,7 @@
 Given(/^Alice has the blank contract$/) do
-  @alice = VaultTree::V3::User.new(master_passphrase: 'ALICE_SECURE_PASS')
+  @alice = VaultTree::User.new(master_passphrase: 'ALICE_SECURE_PASS')
   @contract = FactoryGirl.build(:blank_one_two_three)
-  @interpreter = VaultTree::V3::Interpreter.new
+  @interpreter = VaultTree::Interpreter.new
 end
 
 When(/^she locks all of her public attributes$/) do
@@ -11,7 +11,7 @@ end
 
 When(/^she sends the contract to Bob$/) do
   @bobs_external_data = {"congratulations_message" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
-  @bob = VaultTree::V3::User.new(master_passphrase: 'BOB_SECURE_PASS', external_data: @bobs_external_data)
+  @bob = VaultTree::User.new(master_passphrase: 'BOB_SECURE_PASS', external_data: @bobs_external_data)
 end
 
 Then(/^Bob can access all of her public attributes$/) do

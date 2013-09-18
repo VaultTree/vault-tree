@@ -5,8 +5,8 @@ Given(/^Alice has the blank contract$/) do
 end
 
 When(/^she locks all of her public attributes$/) do
-  @contract = @interpreter.close_vault_path(vault_id: 'alice_public_encryption_key', contract: @contract, user: @alice)
   @contract = @interpreter.close_vault_path(vault_id: 'alice_decryption_key', contract: @contract, user: @alice)
+  @contract = @interpreter.close_vault_path(vault_id: 'alice_public_encryption_key', contract: @contract, user: @alice)
 end
 
 When(/^she sends the contract to Bob$/) do
@@ -16,7 +16,6 @@ end
 
 Then(/^Bob can access all of her public attributes$/) do
   @contents = @interpreter.retrieve_contents(vault_id: 'alice_public_encryption_key', contract: @contract, user: @bob)
-  @contents.should == @alice.public_encryption_key
 end
 
 When(/^Bob locks his public attributes$/) do

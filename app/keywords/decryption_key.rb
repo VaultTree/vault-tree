@@ -2,8 +2,13 @@ module VaultTree
   class DecryptionKey < Keyword
 
     def evaluate
-      contract.user_decryption_key 
+      key_pair.generate_private_key
     end
 
+    private
+
+    def key_pair
+      LockSmith::EncryptionKeyPair.new
+    end
   end
 end

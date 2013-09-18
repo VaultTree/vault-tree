@@ -38,6 +38,10 @@ module VaultTree
       "#{project_dir}/contracts/spec/reference.1.0.0.json"
     end
 
+    def one_two_three
+      "#{project_dir}/contracts/core/one_two_three.0.7.0.json"
+    end
+
     def spec_cli_settings_file
       "#{project_dir}/spec/support/cli/.vt"
     end

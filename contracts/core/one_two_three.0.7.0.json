@@ -29,7 +29,7 @@
 "alice_public_encryption_key":{
   "description":"public key for asymmetric encryption",
   "owner": "alice",
-  "fill_with": "PUBLIC_ENCRYPTION_KEY",
+  "fill_with": "PUBLIC_ENCRYPTION_KEY['alice_decryption_key']",
   "lock_with": "UNLOCKED",
   "unlock_with": "UNLOCKED",
   "contents": ""
@@ -38,7 +38,7 @@
 "bob_public_encryption_key":{
   "description":"public key for asymmetric encryption",
   "owner": "bob",
-  "fill_with": "PUBLIC_ENCRYPTION_KEY",
+  "fill_with": "PUBLIC_ENCRYPTION_KEY['bob_decryption_key']",
   "lock_with": "UNLOCKED",
   "unlock_with": "UNLOCKED",
   "contents": ""

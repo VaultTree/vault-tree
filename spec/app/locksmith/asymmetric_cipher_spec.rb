@@ -6,10 +6,12 @@ module VaultTree
     before :each do
       @alice = User.new 
       @bob = User.new 
-      @alice_priv_key = @alice.decryption_key
-      @alice_pub_key = @alice.public_encryption_key
-      @bob_priv_key = @bob.decryption_key
-      @bob_pub_key = @bob.public_encryption_key
+      alice_key_pair = LockSmith::EncryptionKeyPair.new
+      @alice_priv_key = alice_key_pair.generate_private_key
+      @alice_pub_key = alice_key_pair.public_key(@alice_priv_key)
+      bob_key_pair = LockSmith::EncryptionKeyPair.new
+      @bob_priv_key = bob_key_pair.generate_private_key
+      @bob_pub_key = bob_key_pair.public_key(@bob_priv_key)
       @message = 'ENCRYPT_ME!'
       @asymmetric_cipher = LockSmith::AsymmetricCipher.new
     end

@@ -26,3 +26,6 @@ package.box
 spec/support/cli/files
 *.vt_empty*
 *.vt*
+
+# ignore contracts directory
+contracts/

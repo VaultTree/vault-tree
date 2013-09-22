@@ -1,14 +1,6 @@
 
+
 ## Vaults
-
-Vault Tree [Contracts] made be assembling simple structures called vaults. A
-vault is like a digital lock box that stores a single unambiguous piece of
-information that is need to execute the contract beyond a certain point.
-
-The light bulb shoud turn on when you relize that vaults can hold not only
-valuable information, but keys to other vaults.
-
-[Contracts]:  http://vault-tree.org/overviews/contract
 
 Let's take a look at an example:
 

@@ -10,12 +10,12 @@ module VaultTree
     def close_path
       CloseValidator.new(self).validate!
       close_ancestors
-      close_self_if_empty
+      close_self
     end
 
     def retrieve_contents
       OpenValidator.new(self).validate!
-      open_self
+      unlocked_contents
     end
 
     def owner
@@ -54,6 +54,10 @@ module VaultTree
       contents.empty?
     end
 
+    def asymmetric?
+      lock_type == 'ASYMMETRIC_MUTUAL_AUTH'
+    end
+
     def filler
       KeywordInterpreter.new(fill_with, self).evaluate
     end
@@ -84,32 +88,16 @@ module VaultTree
       close_fill_ancestor close_lock_ancestor(contract)
     end
 
-    def close_self_if_empty
-      if empty?
-        contract.set_vault_contents(vault_id, close_self)
-      else
-        contract
-      end
-    end
-
-    def open_self
-      if asymmetric?
-        AsymmetricVaultOpener.new(self).open
-      else
-        SymmetricVaultOpener.new(self).open
-      end
-    end
-
     def close_self
-      if asymmetric?
-        AsymmetricVaultCloser.new(self).close
-      else
-        SymmetricVaultCloser.new(self).close
-      end
+      contract.set_vault_contents(vault_id, locked_contents)
     end
 
-    def asymmetric?
-      lock_type == 'ASYMMETRIC_MUTUAL_AUTH'
+    def unlocked_contents
+      Doorman.new(self).unlocked_contents
+    end
+
+    def locked_contents
+      Doorman.new(self).locked_contents
     end
 
     def close_lock_ancestor(c)

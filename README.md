@@ -17,16 +17,18 @@ please take a look at the [Vault Tree Homepage] for an overview of the project.
 There are two ways to get up and going:
 
 * Use [Vagrant]
-* Package Install with [Brew] and [Bundler]
+* Package and Gem Install with [Brew] and [Bundler]
+
+[Brew]: http://brew.sh/
+[Bundler]: http://bundler.io/
+[Vagrant]: http://www.vagrantup.com/
 
 #### Vagrant Install
 
 It should be easy for you to get Vault Tree development environment up and running.
 If you don't know about Vagrant, you should, it's awesome!
 
-
-* Download [Virtual Box]
-* Install [Vagrant]
+* Follow the [Vagrant] download and install steps
 * Clone the Repo and go to it:
 ```
   git clone git@github.com:VaultTree/vault_tree.git

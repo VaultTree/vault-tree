@@ -2,8 +2,8 @@ module VaultTree
   class PublicEncryptionKey < Keyword
     attr_reader :vault_id
 
-    def post_initialize(vault_id)
-      @vault_id = vault_id
+    def post_initialize(arg_array)
+      @vault_id = arg_array[0]
     end
 
     def evaluate

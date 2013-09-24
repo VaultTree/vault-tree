@@ -9,7 +9,7 @@ module VaultTree
 
     def evaluate # start here
       begin
-        keyword_class_name.new(vault, keyword_arg).evaluate
+        keyword_class_name.new(vault, arg_array).evaluate
       rescue NameError
         raise Exceptions::UnsupportedKeyword 
       end
@@ -22,11 +22,19 @@ module VaultTree
     end
 
     def word_base
-      word.match(/[A-Z_]*/).to_s
+      word.gsub(/(\[.*\])/,'').strip
     end
 
-    def keyword_arg
-      word.gsub(/(#{word_base}\[\')|(\'\])/,'').strip if has_args?
+    def arg_array
+      if has_args?
+        eval arg_array_string
+      else
+        []
+      end
+    end
+
+    def arg_array_string
+      word.gsub(word_base,'').strip
     end
 
     def has_args?

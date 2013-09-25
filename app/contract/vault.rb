@@ -8,13 +8,11 @@ module VaultTree
     end
 
     def close_path
-      CloseValidator.new(self).validate!
       close_ancestors
       close_self
     end
 
     def retrieve_contents
-      OpenValidator.new(self).validate!
       unlocked_contents
     end
 
@@ -38,24 +36,12 @@ module VaultTree
       vault_description['unlock_with']
     end
 
-    def asym_auth_with
-      vault_description['asym_auth_with']
-    end
-
-    def asym_verify_with
-      vault_description['asym_verify_with']
-    end
-
     def contents
       vault_description['contents']
     end
 
     def empty?
       contents.empty?
-    end
-
-    def asymmetric?
-      lock_type == 'ASYMMETRIC_MUTUAL_AUTH'
     end
 
     def filler
@@ -68,14 +54,6 @@ module VaultTree
 
     def unlocking_key
       KeywordInterpreter.new(unlock_with, self).evaluate
-    end
-
-    def asym_auth_key
-      KeywordInterpreter.new(asym_auth_with, self).evaluate
-    end
-
-    def asym_verify_key
-      KeywordInterpreter.new(asym_verify_with, self).evaluate
     end
 
     private

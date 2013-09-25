@@ -2,12 +2,12 @@ module VaultTree
   module LockSmith
     class AsymmetricCipher
 
-      def encrypt(public_key,private_key,plain_text)
-        crypto_box(public_key,private_key).box(plain_text, :base64)
+      def encrypt(opts)
+        crypto_box(opts[:public_key],opts[:secret_key]).box(opts[:plain_text], :base64)
       end
 
-      def decrypt(public_key,private_key,cipher_text)
-        crypto_box(public_key,private_key).open(cipher_text, :base64)
+      def decrypt(opts)
+        crypto_box(opts[:public_key],opts[:secret_key]).open(opts[:cipher_text], :base64)
       end
 
       private

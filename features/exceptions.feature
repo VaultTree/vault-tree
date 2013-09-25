@@ -25,9 +25,6 @@ Scenario: Unsupported Keyword
   When I attempt fill a vault with an unsupported Keyword
   Then an UnsupportedKeyword exception is raised
 
-Scenario: Invalid Asymmetric Vault
-  Given not yet implemented
-
 Scenario: Vault Does Not Exists
   Given the broken contract
   When I attempt to open a vault that does not exists

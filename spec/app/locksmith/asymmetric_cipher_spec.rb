@@ -18,8 +18,8 @@ module VaultTree
 
     describe '#encrypt | #decrypt' do
       it 'Bob can encrypt with alice pub key and Alice can decrypt' do
-        cipher_text = @asymmetric_cipher.encrypt(@alice_pub_key, @bob_priv_key, @message)
-        plain_text = @asymmetric_cipher.decrypt(@bob_pub_key, @alice_priv_key, cipher_text)
+        cipher_text = @asymmetric_cipher.encrypt(public_key: @alice_pub_key, secret_key: @bob_priv_key, plain_text: @message)
+        plain_text = @asymmetric_cipher.decrypt(public_key: @bob_pub_key, secret_key: @alice_priv_key, cipher_text: cipher_text)
         plain_text.should == @message
       end
     end

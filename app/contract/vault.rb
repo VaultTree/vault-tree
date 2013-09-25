@@ -16,10 +16,6 @@ module VaultTree
       unlocked_contents
     end
 
-    def owner
-      vault_description['owner']
-    end
-
     def fill_with
       vault_description['fill_with']
     end

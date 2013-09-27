@@ -1,22 +1,12 @@
 require_relative 'config/initialize'
-require 'rake'
-require 'bundler'
-require 'bundler/setup'
+require 'cucumber'
 require 'cucumber/rake/task'
 require 'rspec/core/rake_task'
 
-begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
+task :default => 'cuke:api'
+
+Cucumber::Rake::Task.new('cuke:api') do |t|
+  # -r means you require all support files first
+  # this allows you to organize and run by subdirectory
+  t.cucumber_opts = "-r features features/api --format pretty"
 end
-
-
-desc "Run Tests"
-task :test do
-  puts 'Run tests with rspec and cucumber'
-end
-
-task :default => :test

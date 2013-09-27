@@ -1,12 +1,13 @@
 module VaultTree
   class Contract
-    attr_accessor :user
     attr_reader :json
+    attr_accessor :external_data
 
-    def initialize(json)
+    def initialize(json, params = {})
       @json = json
-      @contract = Support::JSON.decode(json)
-      @user = nil
+      @contract = decode_json
+      @master_passphrase = params[:master_passphrase]
+      @external_data = params[:external_data]
     end
 
     def vault_closed?(vault_id)
@@ -21,7 +22,7 @@ module VaultTree
       Vault.new(vault_id, self).close_path
     end
 
-    def retrieve_vault_contents(vault_id) 
+    def retrieve_contents(vault_id) 
       confirm_vault_exists(vault_id)
       Vault.new(vault_id, self).retrieve_contents
     end
@@ -36,23 +37,24 @@ module VaultTree
     end
 
     def user_master_passphrase
-      user.master_passphrase
-    end
-
-    def user_public_encryption_key
-      user.public_encryption_key
-    end
-
-    def user_decryption_key 
-      user.decryption_key 
+      master_passphrase
     end
 
     def user_external_data(vault_id)
-      user.external_data[vault_id]
+      external_data[vault_id]
     end
 
     private
     attr_accessor :contract
+
+    def master_passphrase
+      raise Exceptions::MissingPassphrase if passphrase_missing?
+      @master_passphrase
+    end
+
+    def passphrase_missing?
+      @master_passphrase.nil?
+    end
 
     def confirm_vault_exists(vault_id)
       if ! vaults.include?(vault_id)
@@ -64,5 +66,8 @@ module VaultTree
       vaults[vault_id]['contents'].non_empty?
     end
 
+    def decode_json
+      Support::JSON.decode(json)
+    end
   end
 end

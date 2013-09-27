@@ -56,10 +56,6 @@ module VaultTree
 
       private
 
-      def interpreter
-        VaultTree::Interpreter.new
-      end
-
       def contract
         @contract || VaultTree::Contract.new(contract_contents) 
       end

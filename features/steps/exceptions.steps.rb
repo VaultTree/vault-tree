@@ -1,12 +1,11 @@
 Given(/^a valid blank contract$/) do
-  @contract = FactoryGirl.build(:blank_one_two_three)
-  @interpreter = VaultTree::Interpreter.new
+  @contract_json = FactoryGirl.build(:blank_one_two_three).as_json
 end
 
 When(/^I attempt fill a vault without providing a master passphrase$/) do
-  @user = VaultTree::User.new # No password given in the initializer
   begin
-    @contract = @interpreter.close_vault_path(vault_id: 'alice_contract_secret', contract: @contract, user: @user)
+    @contract = VaultTree::Contract.new(@contract_json)
+    @contract = @contract.close_vault_path('alice_contract_secret')
   rescue => e
     @exception = e
   end
@@ -17,14 +16,13 @@ Then(/^a MissingPassphrase exception is raised$/) do
 end
 
 Given(/^the broken contract$/) do
-  @user = VaultTree::User.new(master_passphrase: 'TEST_USER', external_data: {})
-  @contract = FactoryGirl.build(:broken_contract)
-  @interpreter = VaultTree::Interpreter.new
+  @contract_json = FactoryGirl.build(:broken_contract).as_json
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
 end
 
 When(/^I attempt fill a vault with External Data that does not exists$/) do
   begin
-    @contract = @interpreter.close_vault_path(vault_id: 'missing_external_data_vault', contract: @contract, user: @user)
+    @contract = @contract.close_vault_path('missing_external_data_vault')
   rescue => e
     @exception = e
   end
@@ -36,7 +34,7 @@ end
 
 When(/^I attempt fill a vault with my Master Password$/) do
   begin
-    @contract = @interpreter.close_vault_path(vault_id: 'fill_with_master_pass_vault', contract: @contract, user: @user)
+    @contract = @contract.close_vault_path('fill_with_master_pass_vault')
   rescue => e
     @exception = e
   end
@@ -48,7 +46,7 @@ end
 
 When(/^I attempt to open an empty vault$/) do
   begin
-    @contents = @interpreter.retrieve_contents(vault_id: 'empty_vault', contract: @contract, user: @user)
+    @contents = @contract.retrieve_contents('empty_vault')
   rescue => e
     @exception = e
   end
@@ -60,7 +58,7 @@ end
 
 When(/^I attempt to open a vault that does not exists$/) do
   begin
-    @contents = @interpreter.retrieve_contents(vault_id: 'non_existant_vault', contract: @contract, user: @user)
+    @contents = @contract.retrieve_contents('non_existant_vault')
   rescue => e
     @exception = e
   end
@@ -72,7 +70,7 @@ end
 
 When(/^I attempt fill a vault with an unsupported Keyword$/) do
   begin
-    @contract = @interpreter.close_vault_path(vault_id: 'unsupported_keyword', contract: @contract, user: @user)
+    @contract = @contract.close_vault_path('unsupported_keyword')
   rescue => e
     @exception = e
   end

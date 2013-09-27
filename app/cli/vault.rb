@@ -40,33 +40,24 @@ module VaultTree
         Support::JSON.decode File.read(data_path)
       end
 
-      def user
-        User.new(master_passphrase: master_passphrase, external_data: external_data)
-      end
-
       def master_passphrase
         settings.contents[:password]
       end
 
       def contract
-        # Here we want app/contract.rb not app/cli/contract.rb
-        VaultTree::Contract.new File.open(contract_path).read
+        VaultTree::Contract.new(File.open(contract_path).read, master_passphrase: master_passphrase, external_data: external_data)
       end
 
       def contract_path
         File.expand_path(settings.active_contract_path)
       end
 
-      def interpreter
-        VaultTree::Interpreter.new
-      end
-
       def close_vault_path
-        interpreter.close_vault_path(vault_id: vault_id, contract: contract, user: user)
+        contract.close_vault_path(vault_id)
       end
 
       def retrieve_contents
-        interpreter.retrieve_contents(vault_id: vault_id, contract: contract, user: user)
+        contract.retrieve_contents(vault_id)
       end
     end
   end

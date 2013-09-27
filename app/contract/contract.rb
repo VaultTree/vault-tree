@@ -3,9 +3,11 @@ module VaultTree
     attr_accessor :user
     attr_reader :json
 
-    def initialize(json)
+    def initialize(json, params = {})
       @json = json
       @contract = Support::JSON.decode(json)
+      @master_passphrase = params[:master_passphrase]
+      @external_data = params[:external_data]
       @user = nil
     end
 
@@ -53,6 +55,15 @@ module VaultTree
 
     private
     attr_accessor :contract
+
+    def master_passphrase
+      raise Exceptions::MissingPassphrase if passphrase_missing?
+      @master_passphrase
+    end
+
+    def passphrase_missing?
+      @master_passphrase.nil?
+    end
 
     def confirm_vault_exists(vault_id)
       if ! vaults.include?(vault_id)

@@ -5,7 +5,6 @@ module VaultTree
 
     def initialize(json, params = {})
       @json = json
-      @contract = decode_json
       @master_passphrase = params[:master_passphrase]
       @external_data = params[:external_data]
     end
@@ -32,7 +31,7 @@ module VaultTree
     end
 
     def retrieve_contents(id) 
-      validate_vault(id)
+      raise Exceptions::VaultDoesNotExist unless has_vault?(id)
       vault(id).retrieve_contents
     end
 
@@ -49,7 +48,6 @@ module VaultTree
     end
 
     private
-    attr_accessor :contract
 
     def master_passphrase
       raise Exceptions::MissingPassphrase if passphrase_missing?
@@ -60,10 +58,8 @@ module VaultTree
       @master_passphrase.nil?
     end
 
-    def validate_vault(id)
-      if ! vaults.include?(id)
-        raise Exceptions::VaultDoesNotExist
-      end
+    def has_vault?(id)
+      vaults.include?(id)
     end
 
     def non_empty_contents?(id)
@@ -74,8 +70,9 @@ module VaultTree
       vaults[id]['contents'].nil? || vaults[id]['contents'].empty?
     end
 
-    def decode_json
-      Support::JSON.decode(json)
+    def contract
+      @contract ||= Support::JSON.decode(json)
     end
+
   end
 end

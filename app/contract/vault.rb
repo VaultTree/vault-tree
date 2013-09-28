@@ -8,7 +8,7 @@ module VaultTree
       @contract = contract
     end
 
-    def close_path
+    def close
       close_ancestors
       close_self
     end
@@ -68,11 +68,11 @@ module VaultTree
     end
 
     def close_lock_ancestor(c)
-      lock_ancestor_vault(c).close_path
+      lock_ancestor_vault(c).close
     end
 
     def close_fill_ancestor(c)
-      fill_ancestor_vault(c).close_path
+      fill_ancestor_vault(c).close
     end
 
     def lock_ancestor_vault(c)

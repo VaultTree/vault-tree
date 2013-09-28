@@ -6,8 +6,8 @@ end
 # Change this to just attributes vice public attributes
 When(/^she locks all of her public attributes$/) do
   @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ALICE_SECURE_PASS', external_data: {})
-  @contract = @contract.close_vault_path('alice_decryption_key')
-  @contract = @contract.close_vault_path('alice_public_encryption_key')
+  @contract = @contract.close_vault('alice_decryption_key')
+  @contract = @contract.close_vault('alice_public_encryption_key')
 end
 
 When(/^she sends the contract to Bob$/) do
@@ -22,31 +22,31 @@ end
 
 When(/^Bob locks his public attributes$/) do
 
-  @contract = @contract.close_vault_path('bob_decryption_key')
+  @contract = @contract.close_vault('bob_decryption_key')
   # Verify can reopen
   @contract.retrieve_contents('bob_decryption_key')
 
-  @contract = @contract.close_vault_path('congratulations_message')
+  @contract = @contract.close_vault('congratulations_message')
   # Verify can reopen
   @contract.retrieve_contents('congratulations_message')
 
-  @contract = @contract.close_vault_path('vault_two_key')
+  @contract = @contract.close_vault('vault_two_key')
   # Verify they can reopen
   @contract.retrieve_contents('vault_two_key')
 
-  @contract = @contract.close_vault_path('vault_three_key')
+  @contract = @contract.close_vault('vault_three_key')
   # Verify they can reopen
   @contract.retrieve_contents('vault_three_key')
 
-  @contract = @contract.close_vault_path('bob_public_encryption_key')
+  @contract = @contract.close_vault('bob_public_encryption_key')
   # Verify they can reopen
   @contract.retrieve_contents('bob_public_encryption_key')
 end
 
 When(/^He fills and locks each of the three vaults$/) do
-  @contract = @contract.close_vault_path('first')
-  @contract = @contract.close_vault_path('second')
-  @contract = @contract.close_vault_path('third')
+  @contract = @contract.close_vault('first')
+  @contract = @contract.close_vault('second')
+  @contract = @contract.close_vault('third')
 end
 
 Then(/^Alice can execute the contract to recover the final message$/) do

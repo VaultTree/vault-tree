@@ -5,7 +5,7 @@ end
 When(/^I attempt fill a vault without providing a master passphrase$/) do
   begin
     @contract = VaultTree::Contract.new(@contract_json)
-    @contract = @contract.close_vault_path('alice_contract_secret')
+    @contract = @contract.close_vault('alice_contract_secret')
   rescue => e
     @exception = e
   end
@@ -22,7 +22,7 @@ end
 
 When(/^I attempt fill a vault with External Data that does not exists$/) do
   begin
-    @contract = @contract.close_vault_path('missing_external_data_vault')
+    @contract = @contract.close_vault('missing_external_data_vault')
   rescue => e
     @exception = e
   end
@@ -34,7 +34,7 @@ end
 
 When(/^I attempt fill a vault with my Master Password$/) do
   begin
-    @contract = @contract.close_vault_path('fill_with_master_pass_vault')
+    @contract = @contract.close_vault('fill_with_master_pass_vault')
   rescue => e
     @exception = e
   end
@@ -70,7 +70,7 @@ end
 
 When(/^I attempt fill a vault with an unsupported Keyword$/) do
   begin
-    @contract = @contract.close_vault_path('unsupported_keyword')
+    @contract = @contract.close_vault('unsupported_keyword')
   rescue => e
     @exception = e
   end

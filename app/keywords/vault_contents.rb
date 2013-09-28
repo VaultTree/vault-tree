@@ -7,7 +7,7 @@ module VaultTree
     end
 
     def evaluate
-      Vault.new(vault_id, contract).retrieve_contents
+      contract.retrieve_contents(vault_id)
     end
   end
 end

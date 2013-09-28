@@ -86,11 +86,11 @@ module VaultTree
     end
 
     def lock_ancestor_id
-      lock_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip if has_lock_ancestor?
+      lock_with.extract_ancestor_id if has_lock_ancestor?
     end
 
     def fill_ancestor_id
-      fill_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip if has_fill_ancestor?
+      fill_with.extract_ancestor_id if has_fill_ancestor?
     end
   end
 end

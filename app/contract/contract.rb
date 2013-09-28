@@ -19,7 +19,7 @@ module VaultTree
     end
 
     def vault(id)
-      Vault.new(id, vaults[id], self)
+      id.nil? ? NullVault.new(self) : Vault.new(id, vaults[id], self)
     end
 
     def close_vault(id) 

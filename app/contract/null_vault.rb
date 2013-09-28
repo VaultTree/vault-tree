@@ -1,5 +1,5 @@
 module VaultTree
-  class CommonAncestorVault
+  class NullVault
     attr_reader :contract
 
     def initialize(contract)

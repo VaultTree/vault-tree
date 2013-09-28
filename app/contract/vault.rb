@@ -1,9 +1,9 @@
 module VaultTree
   class Vault
-    attr_reader :vault_id, :properties, :contract
+    attr_reader :id, :properties, :contract
 
-    def initialize(vault_id, properties, contract)
-      @vault_id = vault_id
+    def initialize(id, properties, contract)
+      @id = id
       @properties = properties
       @contract = contract
     end
@@ -52,11 +52,12 @@ module VaultTree
     private
 
     def close_ancestors
-      close_fill_ancestor close_lock_ancestor(contract)
+      close_lock_ancestor
+      close_fill_ancestor
     end
 
     def close_self
-      contract.set_vault_contents(vault_id, locked_contents)
+      contract.set_vault_contents(id, locked_contents)
     end
 
     def unlocked_contents
@@ -67,28 +68,12 @@ module VaultTree
       Doorman.new(self).locked_contents
     end
 
-    def close_lock_ancestor(c)
-      lock_ancestor_vault(c).close
+    def close_lock_ancestor
+      contract.close_vault(lock_ancestor_id)
     end
 
-    def close_fill_ancestor(c)
-      fill_ancestor_vault(c).close
-    end
-
-    def lock_ancestor_vault(c)
-      if has_lock_ancestor?
-        Vault.new(lock_ancestor_id,c.vaults[lock_ancestor_id], c)
-      else
-        CommonAncestorVault.new(c)
-      end
-    end
-
-    def fill_ancestor_vault(c)
-      if has_fill_ancestor?
-        Vault.new(fill_ancestor_id, c.vaults[fill_ancestor_id], c)
-      else
-        CommonAncestorVault.new(c)
-      end
+    def close_fill_ancestor
+      contract.close_vault(fill_ancestor_id)
     end
 
     def has_lock_ancestor?
@@ -100,11 +85,11 @@ module VaultTree
     end
 
     def lock_ancestor_id
-      lock_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
+      lock_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip if has_lock_ancestor?
     end
 
     def fill_ancestor_id
-      fill_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
+      fill_with.gsub(/(CONTENTS\[\')|(\'\])/,'').strip if has_fill_ancestor?
     end
   end
 end

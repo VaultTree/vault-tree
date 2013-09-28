@@ -19,21 +19,21 @@ module VaultTree
     end
 
     def vault(id)
-      id.nil? ? NullVault.new(self) : Vault.new(id, vaults[id], self)
+      id.nil? ? NullVault.new : Vault.new(id, vaults[id], self)
     end
 
     def close_vault(id) 
-      vault(id).close
+      update_vaults vault(id).close
+      self
+    end
+
+    def update_vaults(vault)
+      @contract["vaults"][vault.id] = vault.properties
     end
 
     def retrieve_contents(id) 
       validate_vault(id)
       vault(id).retrieve_contents
-    end
-
-    def set_vault_contents(id, encrypted_content)
-      vaults[id]['contents'] = encrypted_content 
-      self
     end
 
     def as_json

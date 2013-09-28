@@ -28,7 +28,7 @@ module VaultTree
     end
 
     def update_vaults(vault)
-      @contract["vaults"][vault.id] = vault.properties
+      @contract["vaults"][vault.id] = vault.properties unless vault.kind_of?(NullVault)
     end
 
     def retrieve_contents(id) 
@@ -67,7 +67,11 @@ module VaultTree
     end
 
     def non_empty_contents?(id)
-      vaults[id]['contents'].non_empty?
+      ! empty_contents?(id)
+    end
+
+    def empty_contents?(id)
+      vaults[id]['contents'].nil? || vaults[id]['contents'].empty?
     end
 
     def decode_json

@@ -17,7 +17,7 @@ module VaultTree
       def close(vault_id, data_file_name = nil)
         @vault_id = vault_id 
         @external_data = external_data_hash(data_file_name)
-        c = close_vault_path
+        c = close_vault
         Status.new(settings).run(c)
         if write_to_disk?
           write_conract(c)
@@ -52,8 +52,8 @@ module VaultTree
         File.expand_path(settings.active_contract_path)
       end
 
-      def close_vault_path
-        contract.close_vault_path(vault_id)
+      def close_vault
+        contract.close_vault(vault_id)
       end
 
       def retrieve_contents

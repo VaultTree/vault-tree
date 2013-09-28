@@ -1,9 +1,10 @@
 module VaultTree
   class Vault
-    attr_reader :vault_id, :contract
+    attr_reader :vault_id, :properties, :contract
 
-    def initialize(vault_id, contract)
+    def initialize(vault_id, properties, contract)
       @vault_id = vault_id
+      @properties = properties
       @contract = contract
     end
 
@@ -17,23 +18,19 @@ module VaultTree
     end
 
     def fill_with
-      vault_description['fill_with']
-    end
-
-    def lock_type
-      vault_description['lock_type']
+      properties['fill_with']
     end
 
     def lock_with
-      vault_description['lock_with']
+      properties['lock_with']
     end
 
     def unlock_with
-      vault_description['unlock_with']
+      properties['unlock_with']
     end
 
     def contents
-      vault_description['contents']
+      properties['contents']
     end
 
     def empty?
@@ -53,10 +50,6 @@ module VaultTree
     end
 
     private
-
-    def vault_description
-      contract.vaults[vault_id]
-    end
 
     def close_ancestors
       close_fill_ancestor close_lock_ancestor(contract)
@@ -83,16 +76,16 @@ module VaultTree
     end
 
     def lock_ancestor_vault(c)
-      if has_lock_ancestor? 
-        Vault.new(lock_ancestor_id, c) 
+      if has_lock_ancestor?
+        Vault.new(lock_ancestor_id,c.vaults[lock_ancestor_id], c)
       else
         CommonAncestorVault.new(c)
       end
     end
 
     def fill_ancestor_vault(c)
-      if has_fill_ancestor? 
-        Vault.new(fill_ancestor_id, c) 
+      if has_fill_ancestor?
+        Vault.new(fill_ancestor_id, c.vaults[fill_ancestor_id], c)
       else
         CommonAncestorVault.new(c)
       end

@@ -17,7 +17,7 @@ module VaultTree
     end
 
     def decryption_key
-      Vault.new(vault_id, contract).retrieve_contents
+      contract.retrieve_contents(vault_id)
     end
   end
 end

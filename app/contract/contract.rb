@@ -19,12 +19,12 @@ module VaultTree
     end
 
     def close_vault_path(vault_id) 
-      Vault.new(vault_id, self).close_path
+      Vault.new(vault_id, vaults[vault_id], self).close_path
     end
 
     def retrieve_contents(vault_id) 
       confirm_vault_exists(vault_id)
-      Vault.new(vault_id, self).retrieve_contents
+      Vault.new(vault_id, vaults[vault_id], self).retrieve_contents
     end
 
     def set_vault_contents(vault_id, encrypted_content)

@@ -1,13 +1,16 @@
 module VaultTree
   class NullVault
-    attr_reader :contract
 
-    def initialize(contract)
-      @contract = contract
+    def properties
+      {}
+    end
+
+    def id
+      nil
     end
 
     def close
-      contract
+      self
     end
   end
 end

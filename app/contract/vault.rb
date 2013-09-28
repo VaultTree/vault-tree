@@ -57,7 +57,8 @@ module VaultTree
     end
 
     def close_self
-      contract.set_vault_contents(id, locked_contents)
+      @properties['contents'] = locked_contents
+      self
     end
 
     def unlocked_contents

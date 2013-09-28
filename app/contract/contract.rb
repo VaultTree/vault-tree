@@ -10,25 +10,29 @@ module VaultTree
       @external_data = params[:external_data]
     end
 
-    def vault_closed?(vault_id)
-      non_empty_contents?(vault_id)
+    def vault_closed?(id)
+      non_empty_contents?(id)
     end
 
     def vaults
       contract["vaults"]
     end
 
-    def close_vault_path(vault_id) 
-      Vault.new(vault_id, vaults[vault_id], self).close_path
+    def vault(id)
+      Vault.new(id, vaults[id], self)
     end
 
-    def retrieve_contents(vault_id) 
-      confirm_vault_exists(vault_id)
-      Vault.new(vault_id, vaults[vault_id], self).retrieve_contents
+    def close_vault(id) 
+      vault(id).close
     end
 
-    def set_vault_contents(vault_id, encrypted_content)
-      vaults[vault_id]['contents'] = encrypted_content 
+    def retrieve_contents(id) 
+      validate_vault(id)
+      vault(id).retrieve_contents
+    end
+
+    def set_vault_contents(id, encrypted_content)
+      vaults[id]['contents'] = encrypted_content 
       self
     end
 
@@ -40,8 +44,8 @@ module VaultTree
       master_passphrase
     end
 
-    def user_external_data(vault_id)
-      external_data[vault_id]
+    def user_external_data(id)
+      external_data[id]
     end
 
     private
@@ -56,14 +60,14 @@ module VaultTree
       @master_passphrase.nil?
     end
 
-    def confirm_vault_exists(vault_id)
-      if ! vaults.include?(vault_id)
+    def validate_vault(id)
+      if ! vaults.include?(id)
         raise Exceptions::VaultDoesNotExist
       end
     end
 
-    def non_empty_contents?(vault_id)
-      vaults[vault_id]['contents'].non_empty?
+    def non_empty_contents?(id)
+      vaults[id]['contents'].non_empty?
     end
 
     def decode_json

@@ -1,9 +1,9 @@
 module VaultTree
   class Vault
-    attr_reader :vault_id, :properties, :contract
+    attr_reader :id, :properties, :contract
 
-    def initialize(vault_id, properties, contract)
-      @vault_id = vault_id
+    def initialize(id, properties, contract)
+      @id = id
       @properties = properties
       @contract = contract
     end
@@ -56,7 +56,7 @@ module VaultTree
     end
 
     def close_self
-      contract.set_vault_contents(vault_id, locked_contents)
+      contract.set_vault_contents(id, locked_contents)
     end
 
     def unlocked_contents

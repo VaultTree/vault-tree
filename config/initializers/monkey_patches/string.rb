@@ -3,6 +3,10 @@ class String
     gsub("\n", '').squeeze(' ').strip
   end
 
+  def extract_ancestor_id
+    self.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
+  end
+
   def checksum
     Digest::SHA1.hexdigest(self)
   end
@@ -14,9 +18,5 @@ class String
   def camelize
     self.split("_").each {|s| s.capitalize! }.join("")
   end
-
-  #def underscore
-  #  self.scan(/[A-Z][a-z]*/).join("_").downcase
-  #end
 
 end

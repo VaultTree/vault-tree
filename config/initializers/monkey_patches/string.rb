@@ -19,4 +19,7 @@ class String
     self.split("_").each {|s| s.capitalize! }.join("")
   end
 
+  def has_ancestor?
+    self.include? 'CONTENTS'
+  end
 end

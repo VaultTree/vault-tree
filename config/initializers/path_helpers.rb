@@ -42,6 +42,10 @@ module VaultTree
       "#{project_dir}/contracts/core/one_two_three.0.7.0.json"
     end
 
+    def block_chain_key_transfer
+      "#{project_dir}/contracts/core/block_chain_key_transfer.0.1.0.json"
+    end
+
     def spec_cli_settings_file
       "#{project_dir}/spec/support/cli/.vt"
     end

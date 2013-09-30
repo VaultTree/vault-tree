@@ -1,22 +1,11 @@
 Feature: Block Chain Key Transfer
 
-  A simple key transfer sheme utilizing a revealed BTC Wallet Address
-  This can be used as step within the execution of a larger contract.
+Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
-  Key Concepts:
-  * SENDER wishes to transfer a BTC signing key to RECEIVER
-  * An origin wallet address is established by the SENDER
-  and made known via the contract to the RECEIVER
-  * A BTC Signing key is locked in a symmetric vault by the SENDER.
-  * The vault key used to lock the signing key is a valid BTC wallet
-  address that is concealed by the SENDER.
-  * The RECEIVER monitors the known origin wallet address. When a bitcoin
-  payment occurs from the origin wallet address to the concealed destination address,
-  the revealed address can be used by the RECEIVER to unlock the signing key.
-
-Scenario: Sender Transfers a BTC Signing Key to the Receiver
-
-  Given a SENDER, RECEIVER, and valid Bitcoin addresses and keys
-  When the SENDER locks his vaults and transfers the contract to the RECEIVER 
-  And signals the concealed wallet address via the Blockchain
-  Then the RECEIVER can recover the transfered signing key 
+  Given the SENDER has the blank BTC Key Transfer template
+  And the SENDER chooses an origin wallet address and concealed destination address
+  And he locks away the secret BTC signing key
+  When the SENDER transfers the Vault-Tree contract to the RECEIVER
+  Then the RECEIVER can access the origin wallet address
+  When the SENDER reveals the hidden wallet address by Blockchain payment from the origin address
+  Then the RECEIVER can unlock the vault to recover the transfered signing key

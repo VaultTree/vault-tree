@@ -14,63 +14,55 @@ please take a look at the [Vault Tree Homepage] for an overview of the project.
 
 ## Install
 
-There are two ways to get up and going:
+As a prerequisite you will need to get [libsodium] on you machine.
 
-* Use [Vagrant]
-* Package and Gem Install with [Brew] and [Bundler]
+This is the underlying cryptographic library that Vault Tree uses.
 
-[Brew]: http://brew.sh/
-[Bundler]: http://bundler.io/
+If you are on OS X there is a brew package available.
+
+```
+brew install libsodium
+```
+
+If you are a Ruby developer, you know the drill from here
+
+```
+gem install vaelt-tree
+```
+
+somewhere before you use it:
+
+```
+require 'vault-tree'
+```
+
+### Install Roadmap
+
+I'm commited to making this install painless for everyone. Here is what is coming in the near future.
+
+* Complete Vault Tree `brew` Package for OS X devs
+* Complete Vault Tree `apt-get` Package for Debian based systems
+* Pre-Packaged [Vagrant] box that is available for download
+
+Bear with me, I just haven't found the time yet.
+
 [Vagrant]: http://www.vagrantup.com/
 
-#### Vagrant Install
+## Usage
 
-It should be easy for you to get Vault Tree development environment up and running.
-If you don't know about Vagrant, you should, it's awesome!
+You can use Vault Tree in two ways:
+* As a Ruby library to execute Vault Tree contracts
+* Develop and Experiment with contracts using the *Command Line Interface*
 
-* Follow the [Vagrant] download and install steps
-* Clone the Repo and go to it:
-```
-  git clone git@github.com:VaultTree/vault_tree.git
-  cd ~/path/to/vault_tree/
-```
-* Vagrant Up!
-```
-  vagrant up
-```
-This will download and boot the prepackaged Vault Tree virtual machine.
-
-* SSH into the box
-```
-vagrant ssh
-```
-
-[Virtual Box]: https://www.virtualbox.org/wiki/Downloads 
-[Vagrant]: http://downloads.vagrantup.com 
+### Library
 
 
-### Package Install
-
-You need to first get [libsodium] on you machine. This is distribution of Vault
-Tree's underlying cryptographic library.
-
-
-
-From here you know the drill.
-
-```
-gem install vault_tree
-```
-
-or put the [latest version] in your `Gemfile`
-
-
-# Command Line Interface
+### Command Line Interface
 
 Vault Tree provides a CLI so developers can execute contracts and experiment
-with the Interpreter.
+with the library.
 
-## Getting Started
+#### Getting Started
 
 To view available commands issue:
   `$: vault-tree`

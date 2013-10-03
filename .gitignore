@@ -22,10 +22,5 @@ pkg
 .vagrant/
 package.box
 
-# ignore cli test files
-spec/support/cli/files
-*.vt_empty*
-*.vt*
-
 # ignore contracts directory
 contracts/

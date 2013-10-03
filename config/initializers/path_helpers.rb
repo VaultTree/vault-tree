@@ -30,10 +30,6 @@ module VaultTree
      "#{project_dir}/spec/factories"
     end
 
-    def practice_config_dir
-     "#{project_dir}/spec/support/cli/files"
-    end
-
     def reference_contract
       "#{project_dir}/contracts/spec/reference.1.0.0.json"
     end
@@ -46,32 +42,8 @@ module VaultTree
       "#{project_dir}/contracts/core/block_chain_key_transfer.0.1.0.json"
     end
 
-    def spec_cli_settings_file
-      "#{project_dir}/spec/support/cli/.vt"
-    end
-
-    def test_settings_file
-      "#{project_dir}/spec/support/cli/.vt_test"
-    end
-
-    def cli_executable
-      "#{project_dir}/bin/vault-tree"
-    end
-
-    def aruba_working_dir
-      "#{project_dir}/spec/support/cli/files"
-    end
-
     def fixtures_dir
       "#{project_dir}/spec/support/fixtures"
-    end
-
-    def default_settings_fixture
-      "#{fixtures_dir}/default_settings.yml"
-    end
-
-    def empty_settings_fixture
-      "#{fixtures_dir}/empty_settings.yml"
     end
 
     def broken_contract

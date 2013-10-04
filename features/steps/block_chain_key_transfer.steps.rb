@@ -1,5 +1,5 @@
 Given(/^the SENDER has the blank BTC Key Transfer template$/) do
-  @contract_json = FactoryGirl.build(:blank_block_chain_key_transfer).as_json
+  @contract_json = FactoryGirl.build(:reference_contract).as_json
 end
 
 Given(/^the SENDER chooses an origin wallet address and concealed destination address$/) do

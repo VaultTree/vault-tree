@@ -1,5 +1,5 @@
 Given(/^Alice has the blank contract$/) do
-  @contract_json = FactoryGirl.build(:blank_one_two_three).as_json
+  @contract_json = FactoryGirl.build(:reference_contract).as_json
 end
 
 

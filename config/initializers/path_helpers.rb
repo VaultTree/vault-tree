@@ -30,20 +30,12 @@ module VaultTree
      "#{project_dir}/spec/factories"
     end
 
-    def reference_contract
-      "#{project_dir}/contracts/spec/reference.1.0.0.json"
-    end
-
-    def one_two_three
-      "#{project_dir}/contracts/core/one_two_three.0.7.0.json"
-    end
-
-    def block_chain_key_transfer
-      "#{project_dir}/contracts/core/block_chain_key_transfer.0.1.0.json"
-    end
-
     def fixtures_dir
       "#{project_dir}/spec/support/fixtures"
+    end
+
+    def reference_contract
+      "#{fixtures_dir}/reference_contract.1.0.0.json"
     end
 
     def broken_contract

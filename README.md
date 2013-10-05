@@ -1,54 +1,61 @@
 ## Vault Tree
 
-__The Self Enforcing Contract__
+_The Self Enforcing Contract_
 
 Vault Tree is a collection of tools for building and executing distributed
 cryptographic contracts.
 
-### Welcome
-
-If you are coming to this page from Github and are unfamiliar with Vault Tree,
-please take a look at the [Vault Tree Homepage] for an overview of the project.
+Before you begin make sure you checkout the [Vault Tree Homepage] for an overview of the project.
 
 [Vault Tree Homepage]: http://www.vault-tree.org
 
-## Install
+### Welcome!
 
-As a prerequisite you will need to get [libsodium] on you machine.
+The Vault Tree Project consists of:
 
-This is the underlying cryptographic library that Vault Tree uses.
+* A JSON based DSL for building Distributed Crytographic Contracts
+* A a Ruby library to execute these contracts
+* A Github [Contracts Repository] that acts as a focal point of collaboration
+for developers writing and testing interesting crytographic contracts
 
-If you are on OS X there is a brew package available.
+[Contracts Repository]: https://github.com/VaultTree/contracts
+
+### Install
+
+As a prerequisite get [libsodium] on you machine.
+
+This is the underlying cryptographic library that Vault Tree depends on.
+
+If you are on _OSX_ there is a [brew] package available.
 
 ```
 brew install libsodium
 ```
 
-If you are a Ruby developer, you know the drill from here
+If you are a Ruby developer, you know the drill from here:
 
 ```
-gem install vaelt-tree
+gem install vault-tree
 ```
-
-somewhere before you use it:
+and then 
 
 ```
 require 'vault-tree'
 ```
 
+somewhere before you use it.
+
+[brew]: http://brew.sh/
+[libsodium]: https://github.com/jedisct1/libsodium
+
 ### Install Roadmap
 
 I'm commited to making this install painless for everyone. Here is what is coming in the near future.
 
-* Complete Vault Tree `brew` Package for OS X devs
-* Complete Vault Tree `apt-get` Package for Debian based systems
 * Pre-Packaged [Vagrant] box that is available for download
+* Clear install instructions or an `apt-get` package of [libsodium] for Debian based systems
 
-Bear with me, I just haven't found the time yet.
+Bere with me, I just haven't found the time yet.
 
 [Vagrant]: http://www.vagrantup.com/
-
-## Usage
-
-You can use Vault Tree in two ways:
-* As a Ruby library to execute Vault Tree contracts
+[libsodium]: https://github.com/jedisct1/libsodium

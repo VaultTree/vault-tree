@@ -66,7 +66,7 @@ It may not be obvious, but the reference to the Unlocking key does not necessari
 SHARED_KEY
 ```
 
-This is a vault that is locked and unlocked with the help of a [Public-Private](http://en.wikipedia.org/wiki/Public-key_cryptography) keypair. Vault Tree's underlying cryptographic library makes this possible by implementing a cutting edge variant of the [ECDH] key exchange protocol.  
+An Asymmetric Vault is locked and unlocked with the help of a [Public-Private](http://en.wikipedia.org/wiki/Public-key_cryptography) keypair. Vault Tree's underlying cryptographic library makes this possible by implementing a cutting edge variant of the [ECDH] key exchange protocol.  
 
 [ECDH]: http://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman
 
@@ -80,10 +80,8 @@ As you would expect, this field references the encrypted contents of the vault. 
 Here are some items to keep in mind:
 
 * Vaults are either **Empty** or **Closed**, this corresponds to either a **Blank Value** or a **Ciphertext Value**
-* If we want everyone to have access to the contents we simply lock the closed vault with a public value. See the _DSL Keyword_
+* If we want everyone to have access to the contents we simply lock the closed vault with a public value. For a description on how to do this in practice see the _DSL Keyword_
 
 ```
 UNLOCKED
 ```
-
-for description on how to do this in practice.

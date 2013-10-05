@@ -72,5 +72,6 @@ As you would expect, this field references the encrypted contents of the vault. 
 "contents": "rSGrWGL4mEYtpuIaWO/iVGXAA5UUyLeeImSV3SBXzb+C7DW3"
 ```
 Here are some items to keep in mind:
+
 * Vaults are either **Empty** or **Closed**, this corresponds to either a **Blank Value** or a **Ciphertext Value**
 * If we want everyone to have access to the contents we simply lock the closed vault with a public value. See the _DSL Keyword_ **UNLOCKED** for description on how to do this in practice.

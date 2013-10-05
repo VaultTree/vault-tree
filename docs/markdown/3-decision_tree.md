@@ -1,6 +1,7 @@
 #### Contracts as Decision Trees
 
 Contracts can be modeled as a [Decision Tree]. Intuitively this means that:
+
 * The set of contract events and final outcomes for all parties involved can be represented as a [Directed Graph].
 * Often, the graph will take the form of a [Tree].
 * **Events** are represented as nodes in the graph, **Outcomes** are events that correspond to [Leaf Nodes].

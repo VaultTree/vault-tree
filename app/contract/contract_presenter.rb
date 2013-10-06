@@ -1,5 +1,3 @@
-require 'json'
-
 module VaultTree
   class ContractPresenter
     attr_reader :contract

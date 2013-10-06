@@ -5,9 +5,7 @@ cryptographic contracts.
 
 #### So what does that mean?
 
-Contracts are the fundemental building block of our modern economy.
-
-At its heart, a contract is simply a voluntary and structured aggreement between two or more parties.
+Contracts are fundemental building blocks of our modern economy. They are simply a voluntary and structured aggreements between two or more parties.
 
 There are many examples that we are already familiar with from our daily lives such as employment contracts and rental
 agreements. Also, the sophisticated investment instruments that drive our modern financial system are just examples of standardized contracts.

@@ -19,7 +19,7 @@ module VaultTree
     end
 
     def app_dir
-     "#{project_dir}/app"
+      lib_dir
     end
 
     def lib_dir

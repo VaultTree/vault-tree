@@ -1,4 +1,4 @@
-require_relative 'config/initialize'
+require_relative 'lib/vault-tree.rb'
 require 'cucumber'
 require 'cucumber/rake/task'
 require 'rspec/core/rake_task'

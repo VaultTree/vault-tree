@@ -2,6 +2,7 @@ require_relative 'lib/vault-tree.rb'
 require 'cucumber'
 require 'cucumber/rake/task'
 require 'rspec/core/rake_task'
+require "bundler/gem_tasks"
 
 task :default => 'cuke:api'
 

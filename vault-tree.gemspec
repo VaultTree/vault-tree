@@ -1,31 +1,29 @@
-# -*- encoding: utf-8 -*-
-# Ensure we require the local version and not one we might have installed already
-require File.join([File.dirname(__FILE__),'lib','vault-tree','version.rb'])
-spec = Gem::Specification.new do |s| 
-  s.name = 'vault-tree'
-  s.version = VaultTree::VERSION
-  s.platform = Gem::Platform::RUBY
-  s.summary = 'A DSL for building distributed cryptographic contracts'
-  s.description = 'Vault Tree as a collection of tools that helps web developers, businesses, and online communities explore a new way of thinking about contracts.'
-  s.required_ruby_version = '>= 1.9.3'
-  s.required_rubygems_version = '>= 1.8.11'
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'vault-tree/version'
 
-  s.author = 'Andy Bashelor'
-  s.email = 'abash1212@gmail.com'
-  s.homepage = 'http://vault-tree.org'
-  s.license = 'MIT'
+Gem::Specification.new do |spec|
+  spec.name          = "vault-tree"
+  spec.version       = VaultTree::VERSION
+  spec.authors       = ["Andy Bashelor"]
+  spec.email         = ["abash1212@gmail.com"]
+  spec.description   = %q{Vault Tree is a Ruby library for executing distributed cryptographic contracts.}
+  spec.summary       = %q{The Self Enforcing Contract}
+  spec.homepage      = ""
+  spec.license       = "MIT"
 
-  s.files = Dir[ 'config/**/*', 'app/**/*', 'lib/**/*']
-  s.require_path = 'lib'
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
 
-  s.add_dependency 'require_all', '~> 1.2.1'
-  s.add_dependency 'rbnacl', '~> 1.1.0'
-  s.add_dependency 'activesupport', '~> 3.2.13'
-  s.add_dependency 'base32', '~> 0.2.0'
-  s.add_dependency 'rainbow', '~> 1.1.4'
-  s.add_dependency 'json', '>= 1.8.0'
-  s.add_development_dependency 'rake', '>= 10.0.4'
-  s.add_development_dependency 'cucumber', '~> 1.3.2'
-  s.add_development_dependency 'rspec', '~> 2.13.0'
-  s.add_development_dependency 'factory_girl_rails', '~> 4.2.1'
+  spec.add_dependency "rbnacl"
+  spec.add_dependency "active_support", ">=3.0.0"
+  spec.add_dependency "require_all"
+  spec.add_dependency "factory_girl_rails"
+  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "cucumber"
 end

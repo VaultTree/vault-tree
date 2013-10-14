@@ -7,7 +7,7 @@ module VaultTree
     end 
 
     def walk_to_root
-      '../../'
+      '../'
     end 
 
     def project_dir

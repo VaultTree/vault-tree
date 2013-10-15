@@ -26,10 +26,6 @@ module VaultTree
      "#{project_dir}/lib"
     end
 
-    def factories
-     "#{project_dir}/spec/factories"
-    end
-
     def fixtures_dir
       "#{project_dir}/spec/support/fixtures"
     end

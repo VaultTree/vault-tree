@@ -1,6 +1,4 @@
 require_relative '../config/initialize'
-require 'factory_girl_rails'
-require_all VaultTree::PathHelpers.factories
 
 RSpec.configure do |config|
   config.color_enabled = true

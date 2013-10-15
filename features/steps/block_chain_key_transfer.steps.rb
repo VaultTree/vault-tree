@@ -1,5 +1,6 @@
 Given(/^the SENDER has the blank BTC Key Transfer template$/) do
-  @contract_json = FactoryGirl.build(:reference_contract).as_json
+  contract_path = VaultTree::PathHelpers.reference_contract
+  @contract_json = File.read(contract_path)
 end
 
 Given(/^the SENDER chooses an origin wallet address and concealed destination address$/) do

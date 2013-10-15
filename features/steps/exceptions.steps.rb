@@ -1,5 +1,6 @@
 Given(/^a valid blank contract$/) do
-  @contract_json = FactoryGirl.build(:reference_contract).as_json
+  contract_path = VaultTree::PathHelpers.reference_contract
+  @contract_json = File.read(contract_path)
 end
 
 When(/^I attempt fill a vault without providing a master passphrase$/) do
@@ -16,7 +17,8 @@ Then(/^a MissingPassphrase exception is raised$/) do
 end
 
 Given(/^the broken contract$/) do
-  @contract_json = FactoryGirl.build(:broken_contract).as_json
+  contract_path = VaultTree::PathHelpers.broken_contract
+  @contract_json = File.read(contract_path)
   @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
 end
 

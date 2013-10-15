@@ -1,7 +1,7 @@
 Given(/^Alice has the blank contract$/) do
-  @contract_json = FactoryGirl.build(:reference_contract).as_json
+  contract_path = VaultTree::PathHelpers.reference_contract
+  @contract_json = File.read(contract_path)
 end
-
 
 # Change this to just attributes vice public attributes
 When(/^she locks all of her public attributes$/) do

@@ -13,6 +13,10 @@ module VaultTree
       non_empty_contents?(id)
     end
 
+    def header
+      contract["header"]
+    end
+
     def vaults
       contract["vaults"]
     end

@@ -9,5 +9,5 @@ task :default => 'cuke:api'
 Cucumber::Rake::Task.new('cuke:api') do |t|
   # -r means you require all support files first
   # this allows you to organize and run by subdirectory
-  t.cucumber_opts = "-r features features/api --format pretty"
+  t.cucumber_opts = "-r features features --format pretty"
 end

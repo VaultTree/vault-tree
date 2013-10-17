@@ -1,0 +1,43 @@
+{
+"header": {
+
+"title":"Broken Contract",
+"summary":"This is a test fixture for ensuring proper exception handling. These are examples of what NOT to do.",
+"contributers":"Andrew Bashelor"
+},
+"vaults": {
+
+"empty_vault":{
+  "owner": "user",
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+},
+
+"unsupported_keyword":{
+  "owner": "user",
+  "fill_with": "UNSUPPORTED_KEYWORD",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+},
+
+"fill_with_master_pass_vault":{
+  "owner": "user",
+  "fill_with": "MASTER_PASSPHRASE",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+},
+
+"missing_external_data_vault":{
+  "owner": "user",
+  "fill_with": "EXTERNAL_DATA",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+}
+
+}
+}

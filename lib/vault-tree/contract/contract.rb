@@ -26,7 +26,7 @@ module VaultTree
     end
 
     def close_vault(id) 
-      validate_existence(id)
+      validate_vault(id)
       update_vaults vault(id).close
       self
     end
@@ -36,7 +36,7 @@ module VaultTree
     end
 
     def retrieve_contents(id) 
-      validate_existence(id)
+      validate_vault(id)
       vault(id).retrieve_contents
     end
 
@@ -55,16 +55,12 @@ module VaultTree
     private
 
     def master_passphrase
-      raise Exceptions::MissingPassphrase if passphrase_missing?
+      validate_passphrase
       @master_passphrase
     end
 
-    def passphrase_missing?
-      @master_passphrase.nil?
-    end
-
-    def has_vault?(id)
-      vaults.include?(id)
+    def passphrase_present?
+      !! @master_passphrase 
     end
 
     def valid_id?(id)
@@ -83,8 +79,12 @@ module VaultTree
       @contract ||= Support::JSON.decode(json)
     end
 
-    def validate_existence(id)
+    def validate_vault(id)
       raise Exceptions::VaultDoesNotExist unless valid_id?(id)
+    end
+
+    def validate_passphrase
+      raise Exceptions::MissingPassphrase unless passphrase_present?
     end
   end
 end

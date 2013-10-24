@@ -2,7 +2,7 @@ module VaultTree
   class MasterPassphrase < Keyword
 
     def evaluate
-      contract.user_master_passphrase
+      contract.master_passphrase
     end
 
   end

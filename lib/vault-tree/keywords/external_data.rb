@@ -2,7 +2,7 @@ module VaultTree
   class ExternalData < Keyword
 
     def evaluate
-      contract.user_external_data(id)
+      contract.external_data(id)
     end
 
     def id

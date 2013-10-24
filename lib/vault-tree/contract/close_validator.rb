@@ -29,7 +29,7 @@ module VaultTree
     end
 
     def external_data_missing?
-      vault.contract.user_external_data(vault.id).nil?
+      vault.contract.external_data(vault.id).nil?
     end
   end
 end

@@ -1,7 +1,6 @@
 module VaultTree
   class Contract
     attr_reader :json
-    attr_accessor :external_data
 
     def initialize(json, params = {})
       @json = json

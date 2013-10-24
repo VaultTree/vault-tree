@@ -26,6 +26,7 @@ module VaultTree
     end
 
     def close_vault(id) 
+      validate_existence(id)
       update_vaults vault(id).close
       self
     end
@@ -35,7 +36,7 @@ module VaultTree
     end
 
     def retrieve_contents(id) 
-      raise Exceptions::VaultDoesNotExist unless has_vault?(id)
+      validate_existence(id)
       vault(id).retrieve_contents
     end
 
@@ -66,6 +67,10 @@ module VaultTree
       vaults.include?(id)
     end
 
+    def valid_id?(id)
+      id.nil? || vaults.include?(id)
+    end
+
     def non_empty_contents?(id)
       ! empty_contents?(id)
     end
@@ -78,5 +83,8 @@ module VaultTree
       @contract ||= Support::JSON.decode(json)
     end
 
+    def validate_existence(id)
+      raise Exceptions::VaultDoesNotExist unless valid_id?(id)
+    end
   end
 end

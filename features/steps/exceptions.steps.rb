@@ -66,6 +66,14 @@ When(/^I attempt to open a vault that does not exists$/) do
   end
 end
 
+When(/^I attempt to close a vault that does not exists$/) do
+  begin
+    @contents = @contract.close_vault('non_existant_vault')
+  rescue => e
+    @exception = e
+  end
+end
+
 Then(/^a VaultDoesNotExist exception is raised$/) do
   @exception.should be_an_instance_of(VaultTree::Exceptions::VaultDoesNotExist)
 end

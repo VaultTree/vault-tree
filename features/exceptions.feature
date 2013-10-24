@@ -25,7 +25,12 @@ Scenario: Unsupported Keyword
   When I attempt fill a vault with an unsupported Keyword
   Then an UnsupportedKeyword exception is raised
 
-Scenario: Vault Does Not Exists
+Scenario: Vault Does Not Exists on Retrieval
   Given the broken contract
   When I attempt to open a vault that does not exists
+  Then a VaultDoesNotExist exception is raised
+
+Scenario: Vault Does Not Exists on Closing
+  Given the broken contract
+  When I attempt to close a vault that does not exists
   Then a VaultDoesNotExist exception is raised

@@ -18,7 +18,7 @@ module VaultTree
     private
 
     def keyword_class_name
-      eval "VaultTree::#{word_base.downcase.camelize}"
+      instance_eval "VaultTree::#{word_base.downcase.camelize}"
     end
 
     def word_base
@@ -27,7 +27,7 @@ module VaultTree
 
     def arg_array
       if has_args?
-        eval arg_array_string
+        instance_eval arg_array_string
       else
         []
       end

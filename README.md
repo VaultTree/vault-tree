@@ -48,6 +48,17 @@ somewhere before you use it.
 [brew]: http://brew.sh/
 [libsodium]: https://github.com/jedisct1/libsodium
 
+### Is it prduction ready?
+
+Absolutely not. We have a long way to go.
+
+Here are some of the big issues that I could use your help on as we move to version 1.0:
+
+* This is a crypto application so vulnerabilities need to be identified and corrected. We need more eyes in this area.
+* We we need to figure out if the supported keywords are sufficient to implement basic secure computation schemes.
+  - For example, Digital Signatures and HMACs are not implemented but could be.
+  - Should they be implemented? What is the use case? Ect. We need to have these conversations.
+
 ### Install Roadmap
 
 I'm commited to making this install painless for everyone. Here is what is coming in the near future.

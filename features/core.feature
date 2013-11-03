@@ -20,9 +20,12 @@ Scenario: Transfer Key Via Unlocked Vault
 
 Scenario: Asymmetric Vault
   Given I have a blank reference contract
-  And I finish this later
+  And I have access to the another user's unlocked public key
+  And I lock a simple message with a shared key
+  When I transfer the contract to the other user
+  Then they can create a shared key and unlock the message
 
-Scenario: Alice and Bob Execute a One Two Three Contract
+Scenario: Example - Alice and Bob Execute a One Two Three Contract
   Given Alice has the blank contract
   When she locks all of her attributes
   And she sends the contract to Bob  
@@ -31,7 +34,7 @@ Scenario: Alice and Bob Execute a One Two Three Contract
   And He fills and locks each of the three vaults
   Then Alice can execute the contract to recover the final message
 
-Scenario: A Simple Block Chain Key Transfer
+Scenario: Example - A Simple Block Chain Key Transfer
   Given the SENDER has the blank BTC Key Transfer template
   And the SENDER chooses an origin wallet address and concealed destination address
   And he locks away the secret BTC signing key

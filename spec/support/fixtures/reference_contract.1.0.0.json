@@ -146,8 +146,82 @@
   "lock_with": "MASTER_PASSPHRASE",
   "unlock_with": "MASTER_PASSPHRASE",
   "contents": ""
-}
+},
 
+
+"message":{
+  "description":"Vault with a simple message.",
+  "fill_with": "EXTERNAL_DATA",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+},
+
+"random_vault_key":{
+  "description":"Random Number",
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+},
+
+"message_locked_with_random":{
+  "description":"A simple message locked with a random number",
+  "fill_with": "EXTERNAL_DATA",
+  "lock_with": "CONTENTS['random_vault_key']",
+  "unlock_with": "CONTENTS['random_vault_key']",
+  "contents": ""
+},
+
+"message_locked_with_unlocked_random_number":{
+  "fill_with": "CONTENTS['message_locked_with_random']",
+  "lock_with": "CONTENTS['unlocked_random_key']",
+  "unlock_with": "CONTENTS['unlocked_random_key']",
+  "contents": ""
+},
+
+"unlocked_random_key":{
+  "description":"An unlocked random key",
+  "fill_with": "CONTENTS['random_vault_key']",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+},
+
+"another_decryption_key":{
+  "fill_with": "DECRYPTION_KEY",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+},
+
+"another_public_key":{
+  "fill_with": "PUBLIC_ENCRYPTION_KEY['another_decryption_key']",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+},
+
+"my_decryption_key":{
+  "fill_with": "DECRYPTION_KEY",
+  "lock_with": "MASTER_PASSPHRASE",
+  "unlock_with": "MASTER_PASSPHRASE",
+  "contents": ""
+},
+
+"my_public_key":{
+  "fill_with": "PUBLIC_ENCRYPTION_KEY['my_decryption_key']",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+},
+
+"asymmetric_message":{
+  "fill_with": "EXTERNAL_DATA",
+  "lock_with": "SHARED_KEY['another_public_key','my_decryption_key']",
+  "unlock_with": "SHARED_KEY['my_public_key','another_decryption_key']",
+  "contents": ""
+}
 
 }
 }

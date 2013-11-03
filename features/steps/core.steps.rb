@@ -99,3 +99,70 @@ Then(/^the RECEIVER can unlock the vault to recover the transfered signing key$/
   transfered_secret_key.should ==  @sender_external_data['sender_btc_signing_key']
   puts "PROPERLY TRANSFERED: #{transfered_secret_key} !"
 end
+
+Given(/^I have a blank reference contract$/) do
+  contract_path = VaultTree::PathHelpers.reference_contract
+  @contract_json = File.read(contract_path)
+end
+
+When(/^I lock a message in a vault with my Master Password$/) do
+  @external_data = {"message" => "CONGRATS! YOU OPENED THE VAULT."}
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'MY_SECURE_PASS', external_data: @external_data)
+  @contract = @contract.close_vault('message')
+end
+
+Then(/^I can recover the message with my Master Password$/) do
+  @contract.retrieve_contents('message').should == @external_data['message']
+end
+
+When(/^I lock away a random vault key$/) do
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'MY_SECURE_PASS')
+  @contract = @contract.close_vault('random_vault_key')
+end
+
+When(/^I use the random key to lock a message$/) do
+  @external_data = {"message_locked_with_random" => "CONGRATS! YOU OPENED THE VAULT WITH A RANDOM KEY."}
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'MY_SECURE_PASS', external_data: @external_data)
+  @contract = @contract.close_vault('message_locked_with_random')
+end
+
+Then(/^I can recover the message with the Random Key$/) do
+  @contract.retrieve_contents('message_locked_with_random').should == @external_data['message_locked_with_random']
+end
+
+When(/^I put this random key in an unlocked vault$/) do
+  @contract = @contract.close_vault('unlocked_random_key')
+end
+
+Then(/^another user can recover the message with the Unlocked Random Key$/) do
+  @contract = @contract.close_vault('message_locked_with_unlocked_random_number')
+  @contract_json = @contract.as_json
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ANOTHER_SECURE_PASS')
+  @contract.retrieve_contents('message_locked_with_unlocked_random_number').should == @external_data['message_locked_with_random']
+end
+
+Given(/^I have access to the another user's unlocked public key$/) do
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ANOTHER_USERS_SECURE_PASS')
+  @contract = @contract.close_vault('another_decryption_key')
+  @contract = @contract.close_vault('another_public_key')
+  @contract_json = @contract.as_json
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'MY_SECURE_PASS')
+  @contract = @contract.close_vault('my_decryption_key')
+  @contract = @contract.close_vault('my_public_key')
+end
+
+Given(/^I lock a simple message with a shared key$/) do
+  @contract_json = @contract.as_json
+  @external_data = {"asymmetric_message" => "CONGRATS! YOU OPENED THE ASYMMETRIC VAULT."}
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'MY_SECURE_PASS', external_data: @external_data)
+  @contract = @contract.close_vault('asymmetric_message')
+end
+
+When(/^I transfer the contract to the other user$/) do
+  @contract_json = @contract.as_json
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ANOTHER_USERS_SECURE_PASS')
+end
+
+Then(/^they can create a shared key and unlock the message$/) do
+  @contract.retrieve_contents('asymmetric_message').should == @external_data['asymmetric_message']
+end

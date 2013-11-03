@@ -34,3 +34,8 @@ Scenario: Vault Does Not Exists on Closing
   Given the broken contract
   When I attempt to close a vault that does not exists
   Then a VaultDoesNotExist exception is raised
+
+Scenario: Missing Partner Decryption Key
+  Given the broken contract
+  When I attempt to fill with an encryption key without first establishing the decryption key
+  Then a MissingPartnerDecryptionKey exception is raised

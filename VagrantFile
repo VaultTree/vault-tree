@@ -2,7 +2,7 @@ Vagrant::Config.run do |config|
   config.vm.box = "precise"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "cookbooks"
+    chef.cookbooks_path = "support/cookbooks"
      chef.add_recipe("git")
      chef.add_recipe("build-essential")
      chef.add_recipe("ruby_build")

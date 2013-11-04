@@ -90,6 +90,14 @@ Then(/^an UnsupportedKeyword exception is raised$/) do
   @exception.should be_an_instance_of(VaultTree::Exceptions::UnsupportedKeyword)
 end
 
-Given(/^not yet implemented$/) do
-  pending 'Scenario is TBD' 
+When(/^I attempt to fill with an encryption key without first establishing the decryption key$/) do
+  begin
+    @contract = @contract.close_vault('orphaned_public_key')
+  rescue => e
+    @exception = e
+  end
+end
+
+Then(/^a MissingPartnerDecryptionKey exception is raised$/) do
+  @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPartnerDecryptionKey)
 end

@@ -17,7 +17,11 @@ module VaultTree
     end
 
     def decryption_key
-      contract.retrieve_contents(vault_id)
+      begin
+        contract.retrieve_contents(vault_id)
+      rescue Exceptions::EmptyVault
+        raise Exceptions::MissingPartnerDecryptionKey
+      end
     end
   end
 end

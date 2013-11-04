@@ -8,7 +8,6 @@
 "vaults": {
 
 "empty_vault":{
-  "owner": "user",
   "fill_with": "RANDOM_NUMBER",
   "lock_with": "MASTER_PASSPHRASE",
   "unlock_with": "MASTER_PASSPHRASE",
@@ -16,7 +15,6 @@
 },
 
 "unsupported_keyword":{
-  "owner": "user",
   "fill_with": "UNSUPPORTED_KEYWORD",
   "lock_with": "UNLOCKED",
   "unlock_with": "UNLOCKED",
@@ -24,7 +22,6 @@
 },
 
 "fill_with_master_pass_vault":{
-  "owner": "user",
   "fill_with": "MASTER_PASSPHRASE",
   "lock_with": "UNLOCKED",
   "unlock_with": "UNLOCKED",
@@ -32,8 +29,23 @@
 },
 
 "missing_external_data_vault":{
-  "owner": "user",
   "fill_with": "EXTERNAL_DATA",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+},
+
+"empty_decryption_key":{
+  "description": "Leave this empty.",
+  "fill_with": "DECRYPTION_KEY",
+  "lock_with": "UNLOCKED",
+  "unlock_with": "UNLOCKED",
+  "contents": ""
+},
+
+"orphaned_public_key":{
+  "description": "Attempt to establish a public key with first building a decryption key",
+  "fill_with": "PUBLIC_ENCRYPTION_KEY['empty_decryption_key']",
   "lock_with": "UNLOCKED",
   "unlock_with": "UNLOCKED",
   "contents": ""

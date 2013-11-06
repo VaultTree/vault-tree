@@ -1,5 +1,5 @@
 Vagrant::Config.run do |config|
-  config.vm.box = "vault-tree"
+  config.vm.box = "vault-tree-box"
   #config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   #config.vm.provision :chef_solo do |chef|
   #  chef.cookbooks_path = "support/cookbooks"

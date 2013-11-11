@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rbnacl", "1.1.0"
-  spec.add_dependency "ffi", "1.9.0"
   spec.add_dependency "require_all"
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rspec"

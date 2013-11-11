@@ -1,6 +1,6 @@
 Vagrant::Config.run do |config|
   config.vm.box = "vault-tree-box"
-  #config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.box_url = "http://vault-tree-box.s3.amazonaws.com/package.box"
   #config.vm.provision :chef_solo do |chef|
   #  chef.cookbooks_path = "support/cookbooks"
   #   chef.add_recipe("git")

@@ -221,6 +221,41 @@
   "lock_with": "SHARED_KEY['another_public_key','my_decryption_key']",
   "unlock_with": "SHARED_KEY['my_public_key','another_decryption_key']",
   "contents": ""
+},
+
+"a_consent_key":{
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "EXTERNAL_DATA",
+  "unlock_with": "EXTERNAL_DATA",
+  "contents": ""
+},
+
+"b_consent_key":{
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "EXTERNAL_DATA",
+  "unlock_with": "EXTERNAL_DATA",
+  "contents": ""
+},
+
+"c_consent_key":{
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "EXTERNAL_DATA",
+  "unlock_with": "EXTERNAL_DATA",
+  "contents": ""
+},
+
+"abc_joint_consent_key":{
+  "fill_with": "RANDOM_NUMBER",
+  "lock_with": "SPLIT_KEY['a_consent_key','b_consent_key','c_consent_key']",
+  "unlock_with": "SPLIT_KEY['a_consent_key','b_consent_key','c_consent_key']",
+  "contents": ""
+},
+
+"abc_consent_message":{
+  "fill_with": "EXTERNAL_DATA",
+  "lock_with": "CONTENTS['abc_joint_consent_key']",
+  "unlock_with": "CONTENTS['abc_joint_consent_key']",
+  "contents": ""
 }
 
 }

@@ -166,3 +166,44 @@ end
 Then(/^they can create a shared key and unlock the message$/) do
   @contract.retrieve_contents('asymmetric_message').should == @external_data['asymmetric_message']
 end
+
+Given(/^Consent keys for parties A, B, and C$/) do
+  @locking_consent_keys = {
+    "a_consent_key" => "A_SECRET_CONSENT_KEY",
+    "b_consent_key" => "B_SECRET_CONSENT_KEY",
+    "c_consent_key" => "C_SECRET_CONSENT_KEY"
+  }
+end
+
+When(/^I lock a message in a vault using a split key$/) do
+  @message = {"abc_consent_message" => "A, B, AND C ALL AGREED TO OPEN THE VAULT." }
+  @external_data = @locking_consent_keys.merge(@message)
+  @contract = VaultTree::Contract.new(@contract_json, external_data: @external_data)
+  @contract = @contract.close_vault('a_consent_key')
+  @contract = @contract.close_vault('b_consent_key')
+  @contract = @contract.close_vault('c_consent_key')
+  @contract = @contract.close_vault('abc_joint_consent_key')
+  @contract = @contract.close_vault('abc_consent_message')
+  @contract_json = @contract.as_json
+end
+
+Then(/^I can recover the message if each party gives consent$/) do
+  @unlocking_consent_keys = {
+    "a_consent_key" => "A_SECRET_CONSENT_KEY",
+    "b_consent_key" => "B_SECRET_CONSENT_KEY",
+    "c_consent_key" => "C_SECRET_CONSENT_KEY"
+  }
+  @contract = VaultTree::Contract.new(@contract_json, external_data: @unlocking_consent_keys)
+  @contract.retrieve_contents('abc_consent_message').should == @external_data['abc_consent_message']
+  puts @contract.retrieve_contents('abc_consent_message')
+end
+
+Then(/^I cannot recover the message if one party fails to give consent$/) do
+  @incomplete_unlocking_consent_keys = {
+    "a_consent_key" => "A_WRONG_SECRET_CONSENT_KEY",
+    "b_consent_key" => "B_SECRET_CONSENT_KEY",
+    "c_consent_key" => "C_SECRET_CONSENT_KEY"
+  }
+  @contract = VaultTree::Contract.new(@contract_json, external_data: @incomplete_unlocking_consent_keys)
+  expect{@contract.retrieve_contents('abc_consent_message')}.to raise_error(VaultTree::Exceptions::FailedUnlockAttempt)
+end

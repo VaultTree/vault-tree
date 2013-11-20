@@ -24,3 +24,7 @@ contracts/
 
 # ignore built gem
 *.gem
+
+# ignore .spec_in
+# for custom spec runs
+.spec_in

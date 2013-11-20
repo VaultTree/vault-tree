@@ -32,7 +32,11 @@ module VaultTree
       end
 
       def asymmetric_plaintext
+        begin
         asymmetric_cipher.decrypt(public_key: unlocking_public_key, secret_key: unlocking_secret_key, cipher_text: contents)
+        rescue(Crypto::CryptoError)
+          raise(Exceptions::FailedUnlockAttempt)
+        end
       end
 
       def symmetric_ciphertext
@@ -40,7 +44,11 @@ module VaultTree
       end
 
       def symmetric_plaintext
-        symmetric_cipher.decrypt(key: unlocking_key, cipher_text: contents)
+        begin
+          symmetric_cipher.decrypt(key: unlocking_key, cipher_text: contents)
+        rescue(Crypto::CryptoError)
+          raise(Exceptions::FailedUnlockAttempt)
+        end
       end
 
       def locking_key

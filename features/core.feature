@@ -42,3 +42,10 @@ Scenario: Example - A Simple Block Chain Key Transfer
   Then the RECEIVER can access the origin wallet address
   When the SENDER reveals the hidden wallet address by Blockchain payment from the origin address
   Then the RECEIVER can unlock the vault to recover the transfered signing key
+
+Scenario: Close And Open With Split Key
+  Given I have a blank reference contract
+  And Consent keys for parties A, B, and C
+  When I lock a message in a vault using a split key
+  Then I can recover the message if each party gives consent
+  And I cannot recover the message if one party fails to give consent

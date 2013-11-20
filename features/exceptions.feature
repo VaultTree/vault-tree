@@ -10,14 +10,24 @@ Scenario: Attempted Fill with Master Password
   When I attempt fill a vault with my Master Password  
   Then a FillAttemptMasterPassword exception is raised
 
-Scenario: Missing External Data
+Scenario: Missing External Data On Vault Fill
   Given the broken contract
   When I attempt fill a vault with External Data that does not exists
   Then a MissingExternalData exception is raised
 
+Scenario: Missing External Data On Lock
+  Given the broken contract
+  When I attempt lock a vault with External Data that does not exists
+  Then a MissingExternalData exception is raised
+
+Scenario: Missing External Data On Unlock
+  Given the broken contract
+  When I attempt unlock a vault with External Data that does not exists
+  Then a MissingExternalData exception is raised
+
 Scenario: Missing Passphrase
   Given a valid blank contract
-  When I attempt fill a vault without providing a master passphrase 
+  When I attempt fill a vault without providing a master passphrase
   Then a MissingPassphrase exception is raised
 
 Scenario: Unsupported Keyword
@@ -39,3 +49,13 @@ Scenario: Missing Partner Decryption Key
   Given the broken contract
   When I attempt to fill with an encryption key without first establishing the decryption key
   Then a MissingPartnerDecryptionKey exception is raised
+
+Scenario: Failed Symmetric Unlock Attempt
+  Given the broken contract
+  When I lock a vault with External Data and attempt to unlock with the wrong External Data
+  Then a FailedUnlockingAttempt exception is raised
+
+Scenario: Failed Asymmetric Unlock Attempt
+  Given the broken contract
+  When I lock a vault with as shared key and attempt to unlock with the wrong decryption key
+  Then a FailedUnlockingAttempt exception is raised

@@ -12,25 +12,27 @@ describe 'Secret Sharing Test Run' do
       s.create_random_secret
 
       # show secret
-      puts s.secret
+      #puts s.secret
       created_secret = s.secret
 
       # show password representation of secret (Base64)
-      puts s.secret_password
+      #puts s.secret_password
 
       # show shares
-      s.shares.each { |share| puts share }
+      #s.shares.each { |share| puts share }
 
       # recover secret from shares
       s2 = SecretSharing::Shamir.new(3)
 
       # Accepts SecretSharing::Shamir::Share objects or
       # string representations thereof
-      s2 << s.shares[0]
-      s2 << s.shares[2]
-      s2 << s.shares[4]
+
+      # In this case we are useing the string representation
+      s2 << s.shares[0].to_s
+      s2 << s.shares[2].to_s
+      s2 << s.shares[4].to_s
       assembled_secret = s2.secret
-      puts assembled_secret
+      #puts assembled_secret
 
       #Compare assembled to created
       assembled_secret.should == created_secret

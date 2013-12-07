@@ -11,6 +11,7 @@ module VaultTree
       #
       # @return [String] Secure Hash digest of the generated secret integer
       def key
+        create_secret
         CryptoHash.compute secret_string
       end
 
@@ -18,6 +19,7 @@ module VaultTree
       #
       # @return [Array] Array of strings
       def shares
+        create_secret
         shares_array.map{|s| s.to_s}
       end
 
@@ -38,7 +40,6 @@ module VaultTree
       private
 
       def secret_string
-        get_or_create_secret
         shamir_object.secret.to_s
       end
 
@@ -50,8 +51,12 @@ module VaultTree
         @shamir_object ||= SecretSharing::Shamir.new(outstanding_shares, recovery_threshold)
       end
 
-      def get_or_create_secret
-        shamir_object.create_random_secret
+      def create_secret
+        shamir_object.create_random_secret unless secret_set?
+      end
+
+      def secret_set?
+        shamir_object.secret_set?
       end
     end
   end

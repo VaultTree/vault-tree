@@ -19,9 +19,6 @@ pkg
 .vagrant/
 package.box
 
-# ignore contracts directory
-contracts/
-
 # ignore built gem
 *.gem
 

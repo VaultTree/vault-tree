@@ -15,3 +15,9 @@ end
 task :spec => 'cuke' do
   STDOUT.write %x[rspec --format doc]
 end
+
+Cucumber::Rake::Task.new('cuke:contracts') do |t|
+  # -r means you require all support files first
+  # this allows you to organize and run by subdirectory
+  t.cucumber_opts = "-r contracts/features contracts/features/* --format pretty"
+end

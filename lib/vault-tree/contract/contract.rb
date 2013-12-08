@@ -8,7 +8,8 @@ module VaultTree
       @external_data = params[:external_data]
     end
 
-    def close_vault(id)
+    def close_vault(id, params = {data: nil})
+      update_external_data(id: id , data: params[:data])
       validate_vault(id)
       update_vaults vault(id).close
       self
@@ -80,6 +81,12 @@ module VaultTree
 
     def validate_passphrase
       raise Exceptions::MissingPassphrase unless passphrase_present?
+    end
+
+    def update_external_data(params)
+      vault_id = params[:id]
+      data = params[:data]
+      @external_data = @external_data.merge({"#{vault_id}" => "#{data}"}) unless data.nil?
     end
   end
 end

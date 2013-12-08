@@ -59,3 +59,10 @@ Scenario: Failed Asymmetric Unlock Attempt
   Given the broken contract
   When I lock a vault with as shared key and attempt to unlock with the wrong decryption key
   Then a FailedUnlockingAttempt exception is raised
+
+Scenario: Lock or Unlock Attempt with Nil key
+  Given the broken contract
+  When I attempt to lock with a nil key
+  Then a NilKey exception is raised
+  When I attempt to unlock with a nil key
+  Then a NilKey exception is raised

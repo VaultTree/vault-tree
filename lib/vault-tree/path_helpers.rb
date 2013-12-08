@@ -7,7 +7,7 @@ module VaultTree
     end 
 
     def walk_to_root
-      '../../../'
+      '../../'
     end 
 
     def project_dir
@@ -34,6 +34,10 @@ module VaultTree
       "#{fixtures_dir}/reference_contract.1.0.0.json"
     end
 
+    def shared_secret_contract
+      "#{fixtures_dir}/shared_secret_contract.json"
+    end
+
     def broken_contract
       "#{fixtures_dir}/broken_contract.json"
     end
@@ -44,6 +48,22 @@ module VaultTree
 
     def simple_test_contract
       "#{fixtures_dir}/simple_test_contract.json"
+    end
+
+    def exceptions_files
+      Dir["#{project_dir}/lib/vault-tree/exceptions/*.rb"]
+    end
+
+    def keywords_files
+      Dir["#{project_dir}/lib/vault-tree/keywords/*.rb"]
+    end
+
+    def lock_smith_files
+      Dir["#{project_dir}/lib/vault-tree/lock_smith/*.rb"]
+    end
+
+    def contract_files
+      Dir["#{project_dir}/lib/vault-tree/contract/*.rb"]
     end
   end
 end

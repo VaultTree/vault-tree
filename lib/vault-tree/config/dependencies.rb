@@ -2,4 +2,3 @@
 require 'json'
 require 'rbnacl'
 require 'secretsharing'
-require 'require_all'

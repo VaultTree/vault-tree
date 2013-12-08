@@ -34,6 +34,10 @@ module VaultTree
       "#{fixtures_dir}/reference_contract.1.0.0.json"
     end
 
+    def shared_secret_contract
+      "#{fixtures_dir}/shared_secret_contract.json"
+    end
+
     def broken_contract
       "#{fixtures_dir}/broken_contract.json"
     end

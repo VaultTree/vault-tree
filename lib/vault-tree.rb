@@ -1,13 +1,15 @@
+# Dependencies
+require 'json'
+require 'rbnacl'
+require 'secretsharing'
+
 # *.rb
 require_relative 'vault-tree/path_helpers'
 require_relative 'vault-tree/version'
 
-# config/*.rb
-require_relative 'vault-tree/config/dependencies'
-require_relative 'vault-tree/config/string'
-
 # util/*.rb
 require_relative 'vault-tree/util/json'
+require_relative 'vault-tree/util/string'
 
 # exceptions/*.rb
 require_relative 'vault-tree/exceptions/vault_tree_exception'

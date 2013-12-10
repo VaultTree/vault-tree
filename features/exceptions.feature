@@ -25,11 +25,6 @@ Scenario: Missing External Data On Unlock
   When I attempt unlock a vault with External Data that does not exists
   Then a MissingExternalData exception is raised
 
-Scenario: Missing Passphrase
-  Given a valid blank contract
-  When I attempt fill a vault without providing a master passphrase
-  Then a MissingPassphrase exception is raised
-
 Scenario: Unsupported Keyword
   Given the broken contract
   When I attempt fill a vault with an unsupported Keyword

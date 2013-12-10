@@ -6,7 +6,7 @@ end
 When(/^I attempt fill a vault without providing a master passphrase$/) do
   begin
     @contract = VaultTree::Contract.new(@contract_json)
-    @contract = @contract.close_vault('alice_contract_secret')
+    @contract = @contract.close_vault('message')
   rescue => e
     @exception = e
   end

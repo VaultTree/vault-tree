@@ -1,5 +1,5 @@
 Given(/^Alice has the blank asymmetric vault contract$/) do
-  contract_path = VaultTree::ContractsRepo::PathHelpers.core_contracts('asymmetric_vault.0.1.0.json')
+  contract_path = VaultTree::PathHelpers.core_contracts('asymmetric_vault.0.1.0.json')
   @contract_json = File.read(contract_path)
 end
 

@@ -1,13 +1,3 @@
-## Vault Tree Contracts
-A small library of illustrative example contracts
-
-### Welcome
-
-If you are coming to this page from Github and are unfamiliar with Vault Tree,
-please take a look at the [Vault Tree Homepage] for an overview of the project.
-
-### Contracts Overview
-
 Contracts are a central part of the [Vault Tree Project]. Here is what you
 need to know:
 
@@ -20,76 +10,9 @@ need to know:
 * Each vault will typically contain either an **external data** string that is provided by one of the contract
   participants, or a key to anther vault.
 
-### Getting Started
-
-You're in the right place if you:
-
-* Want to run the library against some existing contracts
-* Write and simulate your own cryptographic contracts
-* Submit new Vault Tree contracts back to the community
-
-If you want to use the Vault Tree library in an application or contribute to
-the core code base, you should take a look at the [main repo].
-
-### Install With Vagrant
-
-I think it should be easy for you to get a Vault Tree development environment up and running. If you don't know about Vagrant, you should, it's awesome!
-
-* Follow the [Vagrant] download and install steps
-* Clone the Vault Tree Repo and go into it:
-
-[Vagrant]: http://www.vagrantup.com/
-
-```
-  git clone git@github.com:VaultTree/vault-tree.git
-  cd ~/path/to/vault-tree/
-```
-
-Now you just need to Vagrant Up!
-
-```
-  vagrant up
-```
-
-This will download and boot a pre-packaged Linux virtual machine with Vault-Tree and all dependencies already installed.
-
-Once your VM is downloaded and built. You can go inside with:
-
-```
-  vagrant shh
-```
-
-As a developer working on Vault Tree you can now go to the VM's directory:
-
-```
-/vagrant
-```
-and run
-
-```
-rake
-bundle
-```
-
-This will pull down the latest version of the code from [Ruby Gems] and then run all the core contracts and put you in a good spot to start exploring the library.
-
-If you're not already familiar, take a few minutes to learn about how Vagrant will [sync your files] to and from the guest machine.
-
-[vault-tree]: https://github.com/VaultTree/vault-tree
-[main repo]: https://github.com/VaultTree/vault-tree
-[Ruby Gems]: http://rubygems.org
-
-### Install With Bundler
-
-If you are comfortable with Ruby and Bundler checkout the README in the [main repo] to get started with a direct install.
-
-[main repo]: https://github.com/VaultTree/vault-tree
-
 ### Writing and Simulating Contracts
 
-**LET'S DO THIS!**
-
-If you've made it to this far, then you're ready to build some stuff. You're
+If you've made it to this far, then you're ready to build something. You're
 thinking to yourself:
 
 * For my Vault Tree Contract to be useful it probably needs to involve more than one person.
@@ -155,24 +78,6 @@ Some items to keep in mind when you run Cucumber scenarios:
   - Take care of the wierd cucumber configuration flags needed to handle the unconventional directory structure.
   - Execute all cucumber scenarios associated with contracts in the `/core` directory
 
-### Submitting to the Vault Tree Project
-
-The [Contracts Repository] is a small collection of examples that have
-been assembled for illustrative purposes.
-
-We can learn from these simplified examples, and use them as the foundation for
-more complex _real world_ contracts.
-
-I encourage **anyone** interested, to submit new and innovative contracts. Here are
-some items to keep in mind when you are ready to contribute:
-
-* Vault Tree was designed so that smart people of all different backgrounds
-  could design and execute contracts. Don't feel that you need to be a programmer to
-  get started.
-* The two relevent folders in the [Contracts Repository] are [core] and [lab].
-  All new contracts should initialy start in the [lab] folder. Once we determine
-  it's ready and potentially useful, it will be promoted to the [core] folder.
-
 ### Design Opinions
 
 Vault Tree was written to give contract authors a large amount of flexibilty.
@@ -185,6 +90,7 @@ I'll update these in the coming months as we get some more experience writing si
 * All external data required for contract execution must be provided to the
 interpreter by the run time that is invoking the API. For example, there are no
 plans for the interpreter to make any network requests or do file IO.
+
 
 ##### Notes for Developers
 
@@ -203,14 +109,3 @@ plans for the interpreter to make any network requests or do file IO.
 [js beatifier]: http://jsbeautifier.org 
 [json parser]: http://json.parser.online.fr
 [json]: http://json.org
-
-##### Website Documentation
-
-A few comments on documentation:
-
-* The website documentation is generated from the `docs/` files in this project.
-* We will standardize on Github flavored markdown
-* As you build contracts and solve problems please consider contributing back to the
-  documentation. It's time consuming but extremely important for the life of the project.
-* Respect the established file naming conventions. The Vault Tree Homepage Docs are generated with a
-  build task that makes assumptions.

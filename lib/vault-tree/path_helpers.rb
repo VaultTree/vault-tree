@@ -27,7 +27,7 @@ module VaultTree
     end
 
     def fixtures_dir
-      "#{project_dir}/spec/support/fixtures"
+      "#{project_dir}/features/support/contract_fixtures"
     end
 
     def reference_contract
@@ -64,6 +64,10 @@ module VaultTree
 
     def contract_files
       Dir["#{project_dir}/lib/vault-tree/contract/*.rb"]
+    end
+
+    def core_contracts(file)
+      "#{fixtures_dir}/#{file}"
     end
   end
 end

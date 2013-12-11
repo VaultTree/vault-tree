@@ -14,19 +14,15 @@ The Vault Tree Project consists of:
 
 * A JSON based DSL for building Distributed Crytographic Contracts
 * A a Ruby library to execute these contracts
-* A Github [Contracts Repository] that acts as a focal point of collaboration for developers writing and testing interesting crytographic contracts
+* A focal point of collaboration for developers writing and testing interesting crytographic contracts
 
-[Contracts Repository]: https://github.com/VaultTree/contracts
 
 ### Install
 
 Before you start:
 
-* If you just want to use Vault Tree to build and execute contracts go to the [Contracts Repository].
 * To use the library in your application or want to contribute code, you're in the right place.
 * Before you pull the trigger on the install remember we have a Vagrant Box.
-
-[Contracts Repository]: https://github.com/VaultTree/contracts
 
 Okay, lets begin.
 

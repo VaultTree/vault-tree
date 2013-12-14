@@ -25,3 +25,6 @@ package.box
 # ignore .spec_in
 # for custom spec runs
 .spec_in
+
+# ignore mruby dir
+mruby/

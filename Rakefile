@@ -10,6 +10,12 @@ task :default do
   Rake::Task["spec"].invoke
 end
 
+Cucumber::Rake::Task.new(:native) do |t|
+  # -r means you require all support files first
+  # this allows you to organize and run by subdirectory
+  t.cucumber_opts = "-r features features/native --format pretty"
+end
+
 Cucumber::Rake::Task.new(:cuke) do |t|
   # -r means you require all support files first
   # this allows you to organize and run by subdirectory

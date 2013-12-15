@@ -4,7 +4,7 @@ class String
   end
 
   def extract_ancestor_id
-    self.gsub(/(CONTENTS\[\')|(\'\])/,'').strip
+    self.gsub(/((CONTENTS|KEY)\[\')|(\'\])/,'').strip
   end
 
   def checksum
@@ -17,9 +17,5 @@ class String
 
   def camelize
     self.split("_").each {|s| s.capitalize! }.join("")
-  end
-
-  def has_ancestor?
-    self.include? 'CONTENTS'
   end
 end

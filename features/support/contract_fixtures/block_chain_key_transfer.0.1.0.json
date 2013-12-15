@@ -10,8 +10,8 @@
 "sender_btc_signing_key":{
   "description":"This is the secret Bitcoin Signing Key that SENDER wishes to transfer to RECEIVER. The RECEIVER can unlock only after he has the revealed address.",
   "fill_with": "EXTERNAL_DATA",
-  "lock_with": "CONTENTS['sender_concealed_destination_wallet_address']",
-  "unlock_with": "CONTENTS['receiver_revealed_destination_wallet_address']",
+  "lock_with": "KEY['sender_concealed_destination_wallet_address']",
+  "unlock_with": "KEY['receiver_revealed_destination_wallet_address']",
   "contents": ""
 },
 
@@ -26,16 +26,16 @@
 "sender_concealed_destination_wallet_address":{
   "description":"SENDER concealed copy of the destination wallet address. This wallet address is kept secret until SENDER chosed to transfer BTC to it",
   "fill_with": "EXTERNAL_DATA",
-  "lock_with": "CONTENTS['sender_secret']",
-  "unlock_with": "CONTENTS['sender_secret']",
+  "lock_with": "KEY['sender_secret']",
+  "unlock_with": "KEY['sender_secret']",
   "contents": ""
 },
 
 "receiver_revealed_destination_wallet_address":{
   "description":"RECEIVER monitors the Block Chain and fills this vault with the newly revealied destination address.",
   "fill_with": "EXTERNAL_DATA",
-  "lock_with": "CONTENTS['receiver_secret']",
-  "unlock_with": "CONTENTS['receiver_secret']",
+  "lock_with": "KEY['receiver_secret']",
+  "unlock_with": "KEY['receiver_secret']",
   "contents": ""
 },
 

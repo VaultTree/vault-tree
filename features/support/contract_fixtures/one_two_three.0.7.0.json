@@ -43,40 +43,40 @@
 "alice_decryption_key":{
   "description":"private key for asymmetric decryption",
   "fill_with": "DECRYPTION_KEY",
-  "lock_with": "CONTENTS['alice_contract_secret']",
-  "unlock_with": "CONTENTS['alice_contract_secret']",
+  "lock_with": "KEY['alice_contract_secret']",
+  "unlock_with": "KEY['alice_contract_secret']",
   "contents": ""
 },
 
 "bob_decryption_key":{
   "description":"private key for asymmetric decryption",
   "fill_with": "DECRYPTION_KEY",
-  "lock_with": "CONTENTS['bob_contract_secret']",
-  "unlock_with": "CONTENTS['bob_contract_secret']",
+  "lock_with": "KEY['bob_contract_secret']",
+  "unlock_with": "KEY['bob_contract_secret']",
   "contents": ""
 },
 
 "congratulations_message":{
   "description":"A simple message for Bob to put in the final vault",
   "fill_with": "EXTERNAL_DATA",
-  "lock_with": "CONTENTS['bob_contract_secret']",
-  "unlock_with": "CONTENTS['bob_contract_secret']",
+  "lock_with": "KEY['bob_contract_secret']",
+  "unlock_with": "KEY['bob_contract_secret']",
   "contents": ""
 },
 
 "vault_two_key":{
   "description":"Key to lock vault two. Once Bob locks the second vault he will put this key inside vault one.",
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "CONTENTS['bob_contract_secret']",
-  "unlock_with": "CONTENTS['bob_contract_secret']",
+  "lock_with": "KEY['bob_contract_secret']",
+  "unlock_with": "KEY['bob_contract_secret']",
   "contents": ""
 },
 
 "vault_three_key":{
   "description":"Key to lock vault three. Once Bob locks the third vault he will put this key inside vault two.",
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "CONTENTS['bob_contract_secret']",
-  "unlock_with": "CONTENTS['bob_contract_secret']",
+  "lock_with": "KEY['bob_contract_secret']",
+  "unlock_with": "KEY['bob_contract_secret']",
   "contents": ""
 },
 
@@ -91,16 +91,16 @@
 "second":{
   "description":"Alice unlocks this vault with the key held in the first vault.",
   "fill_with": "CONTENTS['vault_three_key']",
-  "lock_with": "CONTENTS['vault_two_key']",
-  "unlock_with": "CONTENTS['first']",
+  "lock_with": "KEY['vault_two_key']",
+  "unlock_with": "KEY['first']",
   "contents": ""
 },
 
 "third":{
   "description":"Contains a simple message. Unlock the key found in the second vault.",
   "fill_with": "CONTENTS['congratulations_message']",
-  "lock_with": "CONTENTS['vault_three_key']",
-  "unlock_with": "CONTENTS['second']",
+  "lock_with": "KEY['vault_three_key']",
+  "unlock_with": "KEY['second']",
   "contents": ""
 }
 

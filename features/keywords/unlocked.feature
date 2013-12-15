@@ -25,21 +25,21 @@ Scenario: Transfer Key Via Unlocked Vault
           "message_locked_with_random":{
             "description":"A simple message locked with a random number",
             "fill_with": "EXTERNAL_DATA",
-            "lock_with": "CONTENTS['random_vault_key']",
-            "unlock_with": "CONTENTS['random_vault_key']",
+            "lock_with": "KEY['random_vault_key']",
+            "unlock_with": "KEY['random_vault_key']",
             "contents": ""
           },
           "unlocked_random_key":{
             "description":"An unlocked random key",
-            "fill_with": "CONTENTS['random_vault_key']",
+            "fill_with": "KEY['random_vault_key']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
           },
           "message_locked_with_unlocked_random_number":{
             "fill_with": "CONTENTS['message_locked_with_random']",
-            "lock_with": "CONTENTS['unlocked_random_key']",
-            "unlock_with": "CONTENTS['unlocked_random_key']",
+            "lock_with": "KEY['unlocked_random_key']",
+            "unlock_with": "KEY['unlocked_random_key']",
             "contents": ""
           }
         }

@@ -41,8 +41,8 @@ Scenario: Close And Open With Split Key
 
           "abc_consent_message":{
             "fill_with": "EXTERNAL_DATA",
-            "lock_with": "CONTENTS['abc_joint_consent_key']",
-            "unlock_with": "CONTENTS['abc_joint_consent_key']",
+            "lock_with": "KEY['abc_joint_consent_key']",
+            "unlock_with": "KEY['abc_joint_consent_key']",
             "contents": ""
           }
         }

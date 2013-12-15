@@ -15,14 +15,14 @@ module VaultTree
       end
     end
 
+    def word_base
+      word.gsub(/(\[.*\])/,'').strip
+    end
+
     private
 
     def keyword_class_name
       instance_eval "VaultTree::#{word_base.downcase.camelize}"
-    end
-
-    def word_base
-      word.gsub(/(\[.*\])/,'').strip
     end
 
     def arg_array

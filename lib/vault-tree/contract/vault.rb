@@ -78,11 +78,27 @@ module VaultTree
     end
 
     def has_lock_ancestor?
-      lock_with.include? 'CONTENTS'
+      lock_with_key_or_contents?
     end
 
     def has_fill_ancestor?
-      fill_with.include? 'CONTENTS'
+      fill_with_key_or_contents?
+    end
+
+    def lock_with_key_or_contents?
+      (locking_word_base == 'CONTENTS') || (locking_word_base == 'KEY')
+    end
+
+    def locking_word_base
+      KeywordInterpreter.new(lock_with,self).word_base
+    end
+
+    def fill_with_key_or_contents?
+      (filling_word_base == 'CONTENTS') || (filling_word_base == 'KEY')
+    end
+
+    def filling_word_base
+      KeywordInterpreter.new(fill_with,self).word_base
     end
 
     def lock_ancestor_id

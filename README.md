@@ -53,7 +53,7 @@ Now that you have libsodium, if you're a Ruby developer you know the drill from 
 gem install vault-tree
 ```
 
-and then 
+and then
 
 ```
 require 'vault-tree'
@@ -85,18 +85,18 @@ Now you just need to Vagrant Up!
 This will download and boot a pre-packaged Linux virtual machine with Vault-Tree and all dependencies already installed.
 
 Once your VM is downloaded and built. You can go inside with:
- 
+
 ```
-  vagrant shh
+  vagrant ssh
 ```
 
 As a developer working on Vault Tree you can now go to the VM's directory:
 
 ```
-/vagrant 
+/vagrant
 ```
 
-and run `rake`. This will run all the tests and put you in a good spot to start exploring the code.
+and run `bundle` then `rake`. This will grab your dependincies, run all the tests, and leave you in a good spot to start exploring the code.
 
 If you're not already familiar, take a few minutes to learn about how Vagrant will [sync your files] to and from the guest machine.
 
@@ -104,11 +104,12 @@ If you're not already familiar, take a few minutes to learn about how Vagrant wi
 
 ### Is it production ready?
 
-Absolutely not. We have a long way to go.
+Are you serious? This project has like ... 1 fork and 1 star (Thanks Eric!).
+We have a long way to go.
 
-Here are some of the big issues that I could use your help on as we move to version 1.0:
+Here are some of the big issues that I'm thinking about as we move to version 1.0:
 
 * This is a crypto application so vulnerabilities need to be identified and corrected. We need more eyes in this area.
 * We we need to figure out if the supported keywords are sufficient to implement basic secure computation schemes.
-  - For example, Digital Signatures and HMACs are not implemented but could be.
+  - For example, Digital Signatures are not implemented but could be.
   - Should they be implemented? What is the use case? Ect. We need to have these conversations.

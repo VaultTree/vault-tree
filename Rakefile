@@ -10,12 +10,6 @@ task :default do
   Rake::Task["spec"].invoke
 end
 
-Cucumber::Rake::Task.new(:native) do |t|
-  # -r means you require all support files first
-  # this allows you to organize and run by subdirectory
-  t.cucumber_opts = "-r features features/native --format pretty"
-end
-
 Cucumber::Rake::Task.new(:cuke) do |t|
   # -r means you require all support files first
   # this allows you to organize and run by subdirectory
@@ -25,13 +19,14 @@ end
 Cucumber::Rake::Task.new(:contracts) do |t|
   # -r means you require all support files first
   # this allows you to organize and run by subdirectory
-  #t.cucumber_opts = "-r contracts/features contracts/features/* --format pretty"
+  t.cucumber_opts = "-r features features/contracts --format pretty"
 end
 
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.rspec_opts = "--format doc"
 end
 
+desc 'Upload Features and Markdown to Relish'
 task :relish do
   puts `relish push vault-tree/vault-tree`
 end

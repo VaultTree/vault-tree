@@ -6,7 +6,7 @@ Vault Tree is a collection of tools for building and executing distributed crypt
 
 Before you begin make sure you checkout the [Vault Tree Homepage] for an overview of the project.
 
-[Vault Tree Homepage]: http://www.vault-tree.org
+[Vault Tree Homepage]: http://vault-tree.org
 
 ### Welcome!
 

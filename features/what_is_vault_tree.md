@@ -1,5 +1,6 @@
 Vault Tree is a software framework that makes it easy to author and execute **Distributed Cryptographic Contracts.**
-These are sort of like [Smart Contracts], but they are designed for for web developers building applications against the Bitcoin Block Chain.
+
+These are sort of like [Smart Contracts], but designed for for web developers building applications against the Bitcoin Block Chain.
 
 [Smart Contracts]: http://en.wikipedia.org/wiki/Smart_contract
 

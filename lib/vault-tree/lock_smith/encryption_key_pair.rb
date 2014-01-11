@@ -3,17 +3,17 @@ module VaultTree
     class EncryptionKeyPair
 
       def generate_private_key
-        Crypto::PrivateKey.generate.to_s(:base64)
+        RbNaCl::PrivateKey.generate.to_bytes
       end
 
       def public_key(pk)
-        lib_public_key(pk).to_s(:base64)
+        lib_public_key(pk).to_bytes
       end
 
       private
 
       def lib_private_key(s)
-        Crypto::PrivateKey.new(s,:base64)
+        RbNaCl::PrivateKey.new(s)
       end
 
       def lib_public_key(pk)

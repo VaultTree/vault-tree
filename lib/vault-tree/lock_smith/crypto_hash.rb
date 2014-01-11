@@ -3,7 +3,7 @@ module VaultTree
     class CryptoHash
 
       def self.compute(data)
-        Crypto::Hash.sha256("#{data}", :base64)
+        RbNaCl::Hash.sha256 data
       end
 
     end

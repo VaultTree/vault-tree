@@ -26,7 +26,7 @@ Before you start:
 
 Okay, lets begin.
 
-As a prerequisite get [libsodium] on you machine. This is the underlying cryptographic library that Vault Tree depends on.
+As a prerequisite get [libsodium] (>= 0.4.3) on you machine. This is the underlying cryptographic library that Vault Tree depends on.
 
 [libsodium]: https://github.com/jedisct1/libsodium
 

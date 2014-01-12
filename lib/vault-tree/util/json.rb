@@ -1,4 +1,5 @@
 require 'json'
+
 module VaultTree
   module Support
     module JSON

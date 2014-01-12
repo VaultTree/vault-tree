@@ -34,19 +34,19 @@ module VaultTree
       def asymmetric_plaintext
         begin
         asymmetric_cipher.decrypt(public_key: unlocking_public_key, secret_key: unlocking_secret_key, cipher_text: contents)
-        rescue(Crypto::CryptoError)
+        rescue(RbNaCl::CryptoError)
           raise(Exceptions::FailedUnlockAttempt)
         end
       end
 
       def symmetric_ciphertext
-        symmetric_cipher.encrypt(key: locking_key, plain_text: filler)
+        LockSmith.new(message: filler, secret_key: locking_key).symmetric_encrypt
       end
 
       def symmetric_plaintext
         begin
-          symmetric_cipher.decrypt(key: unlocking_key, cipher_text: contents)
-        rescue(Crypto::CryptoError)
+          LockSmith.new(cipher_text: contents, secret_key: unlocking_key).symmetric_decrypt
+        rescue(RbNaCl::CryptoError)
           raise(Exceptions::FailedUnlockAttempt)
         end
       end
@@ -109,10 +109,6 @@ module VaultTree
 
       def asymmetric_cipher
         LockSmith::AsymmetricCipher.new
-      end
-
-      def symmetric_cipher
-        LockSmith::SymmetricCipher.new
       end
 
     end

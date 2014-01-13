@@ -47,7 +47,7 @@ module VaultTree
     end
 
     def key_object
-      @key_object ||= LockSmith::GeneratedShamirKey.new(outstanding_shares: outstanding_shares, recovery_threshold: recovery_threshold)
+      @key_object ||= Crypto::GeneratedShamirKey.new(outstanding_shares: outstanding_shares, recovery_threshold: recovery_threshold)
     end
 
     def validate_share_vaults

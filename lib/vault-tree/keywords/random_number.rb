@@ -2,7 +2,7 @@ module VaultTree
   class RandomNumber < Keyword
 
     def evaluate
-      LockSmith::RandomNumber.compute
+      LockSmith.new().random_number
     end
 
   end

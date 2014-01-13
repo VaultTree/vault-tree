@@ -1,5 +1,5 @@
 module VaultTree
-  class SplitKey
+  class SplitKeyCrypto
     attr_reader :required_keys
 
     def initialize(opts)
@@ -7,14 +7,17 @@ module VaultTree
     end
 
     def generate
-      CryptoHash.compute(key_digests.join(''))
+      secure_hash key_digests.join('')
     end
 
     private
 
     def key_digests
-      required_keys.map{|k| CryptoHash.compute(k) }
+      required_keys.map{|k| secure_hash(k) }
     end
 
+    def secure_hash(s)
+      LockSmith.new(message: s).secure_hash
+    end
   end
 end

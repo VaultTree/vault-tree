@@ -7,7 +7,7 @@ module VaultTree
     end
 
     def evaluate
-      LockSmith::SplitKey.new(required_keys: required_keys).generate
+      SplitKeyCrypto.new(required_keys: required_keys).generate
     end
 
     private

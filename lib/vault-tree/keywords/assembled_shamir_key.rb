@@ -37,7 +37,7 @@ module VaultTree
     end
 
     def key_object
-      @key_object ||= LockSmith::AssembledShamirKey.new(key_shares: collected_shares)
+      @key_object ||= AssembledShamirKey.new(key_shares: collected_shares)
     end
 
   end

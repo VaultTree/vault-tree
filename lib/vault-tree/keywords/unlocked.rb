@@ -2,7 +2,7 @@ module VaultTree
   class Unlocked < Keyword
 
     def evaluate
-      LockSmith::CryptoHash.compute('UNLOCKED')
+      LockSmith.new(message: 'UNLOCKED').secure_hash
     end
 
   end

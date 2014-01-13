@@ -28,24 +28,26 @@ module VaultTree
       end
 
       def asymmetric_ciphertext
-        asymmetric_cipher.encrypt(public_key: locking_public_key, secret_key: locking_secret_key, plain_text: filler)
+        LockSmith.new(public_key: locking_public_key, private_key: locking_secret_key, message: filler).asymmetric_encrypt
       end
 
       def asymmetric_plaintext
         begin
-        asymmetric_cipher.decrypt(public_key: unlocking_public_key, secret_key: unlocking_secret_key, cipher_text: contents)
+          LockSmith.new(public_key: unlocking_public_key, private_key: unlocking_secret_key, cipher_text: contents).asymmetric_decrypt
         rescue(RbNaCl::CryptoError)
           raise(Exceptions::FailedUnlockAttempt)
         end
       end
 
       def symmetric_ciphertext
-        LockSmith.new(message: filler, secret_key: locking_key).symmetric_encrypt
+        key_hash = LockSmith.new(message: locking_key).secure_hash
+        LockSmith.new(message: filler, secret_key: key_hash).symmetric_encrypt
       end
 
       def symmetric_plaintext
         begin
-          LockSmith.new(cipher_text: contents, secret_key: unlocking_key).symmetric_decrypt
+          key_hash = LockSmith.new(message: unlocking_key).secure_hash
+          LockSmith.new(cipher_text: contents, secret_key: key_hash).symmetric_decrypt
         rescue(RbNaCl::CryptoError)
           raise(Exceptions::FailedUnlockAttempt)
         end
@@ -106,11 +108,6 @@ module VaultTree
       def shared_unlocking_key?
         vault.unlock_with =~ /SHARED_KEY/
       end
-
-      def asymmetric_cipher
-        LockSmith::AsymmetricCipher.new
-      end
-
     end
   end
 end

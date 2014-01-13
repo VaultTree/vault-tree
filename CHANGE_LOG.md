@@ -1,3 +1,9 @@
+## 0.3.0 (Upcoming Release)
+
+* Update to RbNaCl 2.0.
+* Major changes to crypto lib interface
+* Now Require Libsodium >= 0.4.3
+
 ## 0.2.3
 
 * Reorganize features dir to work with Relish

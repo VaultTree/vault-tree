@@ -1,5 +1,5 @@
 module VaultTree
-  class SharedKeyPair
+  class DHKeyPair
     attr_reader :public_key, :secret_key
 
     def initialize(opts)

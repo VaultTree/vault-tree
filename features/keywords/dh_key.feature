@@ -1,11 +1,11 @@
-Feature: Shared Key
+Feature: DH Key
 
 ```javascript
-SHARED_KEY['public_key_vault_id','decryption_key_vault_id']
+DH_KEY['public_key_vault_id','decryption_key_vault_id']
 ```
 This keyword enables the creation of **Asymmetric Vaults**.
 
-Shared keys are very powerful and Vault Tree is written to encourage contract authors to make use of asymmetric encryption.
+DH Keys are very powerful and Vault Tree is written to encourage contract authors to make use of asymmetric encryption.
 
 The underlying cryptographic library provides a set of expertly crafted opinionated conventions for using public keys. One such convention is [Mutual Authentication](http://en.wikipedia.org/wiki/Mutual_authentication) accomplished with the Elliptic Curve Diffie-Hellman key exchange protocol.
 
@@ -19,8 +19,8 @@ Scenario: Asymmetric Vault
         "vaults": {
           "asymmetric_message":{
             "fill_with": "EXTERNAL_DATA",
-            "lock_with": "SHARED_KEY['another_public_key','my_decryption_key']",
-            "unlock_with": "SHARED_KEY['my_public_key','another_decryption_key']",
+            "lock_with": "DH_KEY['another_public_key','my_decryption_key']",
+            "unlock_with": "DH_KEY['my_public_key','another_decryption_key']",
             "contents": ""
           },
           "my_decryption_key":{
@@ -51,6 +51,6 @@ Scenario: Asymmetric Vault
       }
     """
   And I have access to the another user's unlocked public key
-  And I lock a simple message with a shared key
+  And I lock a simple message with a DH Key
   When I transfer the contract to the other user
-  Then they can create a shared key and unlock the message
+  Then they can create a DH Key and unlock the message

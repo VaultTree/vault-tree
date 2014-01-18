@@ -49,7 +49,7 @@ Given(/^I have access to the another user's unlocked public key$/) do
   @contract = @contract.close_vault('my_public_key')
 end
 
-Given(/^I lock a simple message with a shared key$/) do
+Given(/^I lock a simple message with a DH Key$/) do
   @contract_json = @contract.as_json
   @external_data = {"asymmetric_message" => "CONGRATS! YOU OPENED THE ASYMMETRIC VAULT."}
   @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'MY_SECURE_PASS', external_data: @external_data)
@@ -61,7 +61,7 @@ When(/^I transfer the contract to the other user$/) do
   @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ANOTHER_USERS_SECURE_PASS')
 end
 
-Then(/^they can create a shared key and unlock the message$/) do
+Then(/^they can create a DH Key and unlock the message$/) do
   @contract.retrieve_contents('asymmetric_message').should == @external_data['asymmetric_message']
 end
 

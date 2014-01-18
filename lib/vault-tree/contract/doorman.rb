@@ -20,11 +20,11 @@ module VaultTree
       private
 
       def ciphertext_contents
-        shared_locking_key? ? asymmetric_ciphertext : symmetric_ciphertext
+        dh_locking_key? ? asymmetric_ciphertext : symmetric_ciphertext
       end
 
       def plaintext_contents
-        shared_unlocking_key? ? asymmetric_plaintext : symmetric_plaintext
+        dh_unlocking_key? ? asymmetric_plaintext : symmetric_plaintext
       end
 
       def asymmetric_ciphertext
@@ -78,11 +78,11 @@ module VaultTree
       end
 
       def locking_key_pair 
-        vault.locking_key if shared_locking_key?
+        vault.locking_key if dh_locking_key?
       end
 
       def unlocking_key_pair 
-        vault.unlocking_key if shared_unlocking_key?
+        vault.unlocking_key if dh_unlocking_key?
       end
 
       def empty?
@@ -101,12 +101,12 @@ module VaultTree
         vault.contents
       end
 
-      def shared_locking_key?
-        vault.lock_with =~ /SHARED_KEY/
+      def dh_locking_key?
+        vault.lock_with =~ /DH_KEY/
       end
 
-      def shared_unlocking_key?
-        vault.unlock_with =~ /SHARED_KEY/
+      def dh_unlocking_key?
+        vault.unlock_with =~ /DH_KEY/
       end
     end
   end

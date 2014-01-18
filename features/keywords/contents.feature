@@ -1,9 +1,9 @@
 Feature: Contents
 
-The contents keyword is used to fetch the contents of another vault:
+The `CONTENTS` keyword is used to fetch the contents of another vault:
 
 ```javascript
-"fill_with": "CONTENTS['some_string']",
+"fill_with": "CONTENTS['some_string']"
 ```
 
 It takes one argument, the name of the vault holding the desired contents.
@@ -14,11 +14,11 @@ the **lock_with** or **unlock_with** fields, you should consider the alias `KEY`
 
 Here is an example of a vault that makes use of the `CONTENTS` keyword.
 
-"""javascript
+```javascript
 "locked_message":{
   "fill_with": "CONTENTS['message_locked_with_random_key']",
   "lock_with": "KEY['unlocked_random_key']",
   "unlock_with": "KEY['unlocked_random_key']",
   "contents": ""
 }
-"""
+```

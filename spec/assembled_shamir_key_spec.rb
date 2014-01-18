@@ -1,7 +1,9 @@
-require 'spec_helper'
+require 'rspec'
+RSpec.configure{ |config| config.color_enabled = true }
+require_relative '../lib/vault-tree/lock_smith/assembled_shamir_key'
 
 module VaultTree
-  module LockSmith
+  module Crypto
     describe AssembledShamirKey do
 
       describe '#assemble' do
@@ -11,7 +13,7 @@ module VaultTree
             s = SecretSharing::Shamir.new(5,3)
             s.create_random_secret
             @established_secret = s.secret.to_s
-            @expected_digest = CryptoHash.compute(@established_secret)
+            @expected_digest = LockSmith.new(message: @established_secret).secure_hash
             @key_shares = s.shares[0..2].map{|s| s.to_s}
             @assembled_key = AssembledShamirKey.new(key_shares: @key_shares)
           end
@@ -26,7 +28,7 @@ module VaultTree
             s = SecretSharing::Shamir.new(5,5)
             s.create_random_secret
             @established_secret = s.secret.to_s
-            @expected_digest = CryptoHash.compute(@established_secret)
+            @expected_digest = LockSmith.new(message: @established_secret).secure_hash
             @key_shares = s.shares[0..4].map{|s| s.to_s}
             @assembled_key = AssembledShamirKey.new(key_shares: @key_shares)
           end
@@ -41,7 +43,7 @@ module VaultTree
             s = SecretSharing::Shamir.new(2,2)
             s.create_random_secret
             @established_secret = s.secret.to_s
-            @expected_digest = CryptoHash.compute(@established_secret)
+            @expected_digest = LockSmith.new(message: @established_secret).secure_hash
             @key_shares = s.shares[0..1].map{|s| s.to_s}
             @assembled_key = AssembledShamirKey.new(key_shares: @key_shares)
           end
@@ -57,7 +59,7 @@ module VaultTree
             s = SecretSharing::Shamir.new(5,3)
             s.create_random_secret
             @established_secret = s.secret.to_s
-            @expected_digest = CryptoHash.compute(@established_secret)
+            @expected_digest = LockSmith.new(message: @established_secret).secure_hash
             @key_shares = s.shares[0..2].map{|s| s.to_s}
 
             # Replace the last string with just an object
@@ -69,9 +71,7 @@ module VaultTree
             @key_shares = nil
             expect{AssembledShamirKey.new(key_shares: @key_shares)}.to raise_error(TypeError)
           end
-
         end
-
 
       end
     end

@@ -1,7 +1,9 @@
-require 'spec_helper'
+require 'rspec'
+RSpec.configure{ |config| config.color_enabled = true }
+require_relative '../lib/vault-tree/lock_smith/generated_shamir_key'
 
 module VaultTree
-  module LockSmith
+  module Crypto
     describe GeneratedShamirKey do
 
       describe '#generate | #assemble' do

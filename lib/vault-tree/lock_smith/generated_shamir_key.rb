@@ -1,5 +1,7 @@
+require 'secretsharing'
+
 module VaultTree
-  module LockSmith
+  module Crypto
     class GeneratedShamirKey
 
       def initialize(params)
@@ -12,7 +14,7 @@ module VaultTree
       # @return [String] Secure Hash digest of the generated secret integer
       def key
         create_secret
-        CryptoHash.compute secret_string
+        LockSmith.new(message: secret_string).secure_hash
       end
 
       # Shares associated with the newly generated Sharmir key
@@ -61,4 +63,3 @@ module VaultTree
     end
   end
 end
-

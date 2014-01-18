@@ -8,7 +8,7 @@ module VaultTree
     end
 
     def evaluate
-      LockSmith::SharedKeyPair.new(public_key: public_key_vault_contents, secret_key: secret_key_vault_contents)
+      SharedKeyPair.new(public_key: public_key_vault_contents, secret_key: secret_key_vault_contents)
     end
 
     private

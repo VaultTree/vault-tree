@@ -1,5 +1,7 @@
+require 'secretsharing'
+
 module VaultTree
-  module LockSmith
+  module Crypto
     class AssembledShamirKey
       attr_reader :key_shares
 
@@ -19,7 +21,7 @@ module VaultTree
       #
       # @return [String] Secure Hash digest of the assembled secret
       def assemble
-        CryptoHash.compute assembled_secret
+        LockSmith.new(message: assembled_secret).secure_hash
       end
 
       private

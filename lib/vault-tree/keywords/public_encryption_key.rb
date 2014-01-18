@@ -7,14 +7,10 @@ module VaultTree
     end
 
     def evaluate
-      key_pair.public_key(decryption_key)
+      LockSmith.new(private_key: decryption_key).generate_public_key
     end
 
     private
-
-    def key_pair
-      LockSmith::EncryptionKeyPair.new
-    end
 
     def decryption_key
       begin

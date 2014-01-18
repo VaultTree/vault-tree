@@ -19,7 +19,7 @@ sudo apt-get install devscripts debhelper build-essential
 
 # Build and Install libsodium
 export NAME=libsodium
-export VERSION=0.4.2
+export VERSION=0.4.3
 export DEBVERSION=${VERSION}-1
 #Download and extract the archive
 if [ ! -f ${NAME}_${VERSION}.orig.tar.gz ]

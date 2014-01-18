@@ -52,8 +52,8 @@ Let's take a look at an example vault:
 ```javascript
 "bob_random_vault_key": {
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "CONTENTS['bob_vault_key']",
-  "unlock_with": "CONTENTS['alice_vault_key']",
+  "lock_with": "KEY['bob_vault_key']",
+  "unlock_with": "KEY['alice_vault_key']",
   "contents": "rSGrWGL4mEYtpuIaWO/iVGXAA5UUyLeeImSV3SBXzb+C7DW3"
 }
 ```

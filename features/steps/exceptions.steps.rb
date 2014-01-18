@@ -36,6 +36,18 @@ When(/^I attempt lock a vault with External Data that does not exists$/) do
   end
 end
 
+When(/^I lock the data away$/) do
+  @contract = VaultTree::Contract.new(@contract_json).close_vault('missing_external_data_vault')
+end
+
+When(/^I attempt to unlock a vault with External Data that does not exists$/) do
+  begin
+    @contract = @contract.retrieve_contents('missing_external_data_vault')
+  rescue => e
+    @exception = e
+  end
+end
+
 When(/^I attempt fill a vault with External Data that does not exists$/) do
   begin
     @contract = @contract.close_vault('missing_external_data_vault')

@@ -34,8 +34,23 @@ Scenario: Missing External Data On Lock
   Then a MissingExternalData exception is raised
 
 Scenario: Missing External Data On Unlock
-  Given the broken contract
-  When I attempt unlock a vault with External Data that does not exists
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "missing_external_data_vault":{
+            "description": "The external data is not provided in the initialzer. See the step definitions in this case.",
+            "fill_with": "RANDOM_NUMBER",
+            "lock_with": "RANDOM_NUMBER",
+            "unlock_with": "EXTERNAL_DATA",
+            "contents": ""
+          }
+        }
+      }
+    """
+  When I lock the data away
+  And I attempt to unlock a vault with External Data that does not exists
   Then a MissingExternalData exception is raised
 
 Scenario: Unsupported Keyword

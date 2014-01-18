@@ -31,8 +31,8 @@ Scenario: Close And Open With Master Password
           "message":{
             "description": "Simple Congratulations Message",
             "fill_with": "EXTERNAL_DATA",
-            "lock_with": "CONTENTS['random_vault_key']",
-            "unlock_with": "CONTENTS['random_vault_key']",
+            "lock_with": "KEY['random_vault_key']",
+            "unlock_with": "KEY['random_vault_key']",
             "contents": ""
           }
         }

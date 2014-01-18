@@ -43,16 +43,16 @@
 "alice_decryption_key":{
   "description":"Private key for asymmetric decryption",
   "fill_with": "DECRYPTION_KEY",
-  "lock_with": "CONTENTS['alice_contract_secret']",
-  "unlock_with": "CONTENTS['alice_contract_secret']",
+  "lock_with": "KEY['alice_contract_secret']",
+  "unlock_with": "KEY['alice_contract_secret']",
   "contents": ""
 },
 
 "bob_decryption_key":{
   "description":"Private key for asymmetric decryption",
   "fill_with": "DECRYPTION_KEY",
-  "lock_with": "CONTENTS['bob_contract_secret']",
-  "unlock_with": "CONTENTS['bob_contract_secret']",
+  "lock_with": "KEY['bob_contract_secret']",
+  "unlock_with": "KEY['bob_contract_secret']",
   "contents": ""
 },
 

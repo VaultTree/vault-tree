@@ -16,10 +16,24 @@ Then(/^a MissingPassphrase exception is raised$/) do
   @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPassphrase)
 end
 
+Given(/^this broken contract:$/) do |string|
+  @contract_json = string
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
+end
+
 Given(/^the broken contract$/) do
   contract_path = VaultTree::PathHelpers.broken_contract
   @contract_json = File.read(contract_path)
   @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
+end
+
+When(/^I attempt lock a vault with External Data that does not exists$/) do
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: nil )
+  begin
+    @contract = @contract.close_vault('missing_external_data_vault')
+  rescue => e
+    @exception = e
+  end
 end
 
 When(/^I attempt fill a vault with External Data that does not exists$/) do

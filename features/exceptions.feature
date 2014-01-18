@@ -16,7 +16,20 @@ Scenario: Missing External Data On Vault Fill
   Then a MissingExternalData exception is raised
 
 Scenario: Missing External Data On Lock
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "missing_external_data_vault":{
+            "fill_with": "EXTERNAL_DATA",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt lock a vault with External Data that does not exists
   Then a MissingExternalData exception is raised
 

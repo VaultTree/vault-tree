@@ -16,10 +16,36 @@ Then(/^a MissingPassphrase exception is raised$/) do
   @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPassphrase)
 end
 
+Given(/^this broken contract:$/) do |string|
+  @contract_json = string
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
+end
+
 Given(/^the broken contract$/) do
   contract_path = VaultTree::PathHelpers.broken_contract
   @contract_json = File.read(contract_path)
   @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
+end
+
+When(/^I attempt lock a vault with External Data that does not exists$/) do
+  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: nil )
+  begin
+    @contract = @contract.close_vault('missing_external_data_vault')
+  rescue => e
+    @exception = e
+  end
+end
+
+When(/^I lock the data away$/) do
+  @contract = VaultTree::Contract.new(@contract_json).close_vault('missing_external_data_vault')
+end
+
+When(/^I attempt to unlock a vault with External Data that does not exists$/) do
+  begin
+    @contract = @contract.retrieve_contents('missing_external_data_vault')
+  rescue => e
+    @exception = e
+  end
 end
 
 When(/^I attempt fill a vault with External Data that does not exists$/) do
@@ -100,4 +126,22 @@ end
 
 Then(/^a MissingPartnerDecryptionKey exception is raised$/) do
   @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPartnerDecryptionKey)
+end
+
+When(/^I lock a vault with External Data and attempt to unlock with the wrong External Data$/) do
+  locking_key = VaultTree::LockSmith.new().generate_secret_key
+  @contract = VaultTree::Contract.new(@contract_json, external_data: {'missing_external_data_vault' => locking_key})
+  @contract = @contract.close_vault('missing_external_data_vault')
+  @contract_json = @contract.as_json
+  begin
+    wrong_unlocking_key = VaultTree::LockSmith.new().generate_secret_key
+    @contract = VaultTree::Contract.new(@contract_json, external_data: {'missing_external_data_vault' => wrong_unlocking_key})
+    @contents = @contract.retrieve_contents('missing_external_data_vault')
+  rescue => e
+    @exception = e
+  end
+end
+
+Then(/^a FailedUnlockAttempt exception is raised$/) do
+  @exception.should be_an_instance_of(VaultTree::Exceptions::FailedUnlockAttempt)
 end

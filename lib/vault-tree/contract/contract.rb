@@ -49,6 +49,10 @@ module VaultTree
       @master_passphrase
     end
 
+    def external_data_hash
+      @external_data
+    end
+
     def external_data(id)
       @external_data[id]
     end
@@ -56,7 +60,7 @@ module VaultTree
     private
 
     def passphrase_present?
-      !! @master_passphrase 
+      !! @master_passphrase
     end
 
     def valid_id?(id)

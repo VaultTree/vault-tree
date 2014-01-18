@@ -109,7 +109,7 @@ It may not be obvious, but the reference to the Unlocking key does not necessari
 * Vault Tree supports the notion of an **Asymmetric Vault** through the _DSL Keyword_
 
 ```
-SHARED_KEY
+DH_KEY
 ```
 
 An Asymmetric Vault is locked and unlocked with the help of a [Public-Private](http://en.wikipedia.org/wiki/Public-key_cryptography) keypair. Vault Tree's underlying cryptographic library makes this possible by implementing a cutting edge variant of the [ECDH] key exchange protocol.  

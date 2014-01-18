@@ -16,13 +16,41 @@ Scenario: Missing External Data On Vault Fill
   Then a MissingExternalData exception is raised
 
 Scenario: Missing External Data On Lock
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "missing_external_data_vault":{
+            "fill_with": "EXTERNAL_DATA",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt lock a vault with External Data that does not exists
   Then a MissingExternalData exception is raised
 
 Scenario: Missing External Data On Unlock
-  Given the broken contract
-  When I attempt unlock a vault with External Data that does not exists
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "missing_external_data_vault":{
+            "description": "The external data is not provided in the initialzer. See the step definitions in this case.",
+            "fill_with": "RANDOM_NUMBER",
+            "lock_with": "RANDOM_NUMBER",
+            "unlock_with": "EXTERNAL_DATA",
+            "contents": ""
+          }
+        }
+      }
+    """
+  When I lock the data away
+  And I attempt to unlock a vault with External Data that does not exists
   Then a MissingExternalData exception is raised
 
 Scenario: Unsupported Keyword
@@ -46,18 +74,19 @@ Scenario: Missing Partner Decryption Key
   Then a MissingPartnerDecryptionKey exception is raised
 
 Scenario: Failed Symmetric Unlock Attempt
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "missing_external_data_vault":{
+            "fill_with": "RANDOM_NUMBER",
+            "lock_with": "EXTERNAL_DATA",
+            "unlock_with": "EXTERNAL_DATA",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I lock a vault with External Data and attempt to unlock with the wrong External Data
-  Then a FailedUnlockingAttempt exception is raised
-
-Scenario: Failed Asymmetric Unlock Attempt
-  Given the broken contract
-  When I lock a vault with as shared key and attempt to unlock with the wrong decryption key
-  Then a FailedUnlockingAttempt exception is raised
-
-Scenario: Lock or Unlock Attempt with Nil key
-  Given the broken contract
-  When I attempt to lock with a nil key
-  Then a NilKey exception is raised
-  When I attempt to unlock with a nil key
-  Then a NilKey exception is raised
+  Then a FailedUnlockAttempt exception is raised

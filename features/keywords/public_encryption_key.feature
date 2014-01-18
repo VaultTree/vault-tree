@@ -10,5 +10,5 @@ Public encryption keys are derived from their corresponding private decryption k
 This Keyword takes one argument the vault ID containing the associated private
 key.
 
-Public encryption keys and private decryption keys are used to build shared keys
+Public encryption keys and private decryption keys are used to build DH Keys
 to lock and unlock asymmetric vaults.

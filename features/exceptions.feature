@@ -90,8 +90,3 @@ Scenario: Failed Symmetric Unlock Attempt
     """
   When I lock a vault with External Data and attempt to unlock with the wrong External Data
   Then a FailedUnlockAttempt exception is raised
-
-Scenario: Failed Asymmetric Unlock Attempt
-  Given the broken contract
-  When I lock a vault with as shared key and attempt to unlock with the wrong decryption key
-  Then a FailedUnlockAttempt exception is raised

@@ -1,5 +1,5 @@
 module VaultTree
-  class SharedKey < Keyword
+  class DhKey < Keyword
     attr_reader :public_key_vault_id, :secret_key_vault_id
 
     def post_initialize(arg_array)
@@ -8,7 +8,7 @@ module VaultTree
     end
 
     def evaluate
-      SharedKeyPair.new(public_key: public_key_vault_contents, secret_key: secret_key_vault_contents)
+      DHKeyPair.new(public_key: public_key_vault_contents, secret_key: secret_key_vault_contents)
     end
 
     private

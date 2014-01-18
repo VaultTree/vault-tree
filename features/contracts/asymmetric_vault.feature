@@ -2,14 +2,14 @@ Feature: Asymmetric Vaults
 
   Goals:
     * Illustrate the use of an Asymmetric Vault
-    * Understand the SHARED_KEY reserved word
+    * Understand the DH_KEY reserved word
     * Illustrate an implementation of Public Key Encryption with Mutual Authentication
       via the ECDH algorithm
 
   Ideas:
-    * Notice in the contract that the Locking SHARED_KEY is formed with
+    * Notice in the contract that the Locking DH_KEY is formed with
       a private key, and the public key of the reciprocal party
-    * The cooresponding Unlocking SHARED_KEY is built and authenticated with a private
+    * The cooresponding Unlocking DH_KEY is built and authenticated with a private
       key and the reciprocal public key
 
 Scenario: Bob Locks and Alice Unlocks with a Shared Key
@@ -18,6 +18,6 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
   And she sends the contract to Bob over the internet
   Then Bob can access of her public keys but not her private keys
   When Bob locks his public and private keys
-  And He fills and locks the vault containing the message using a SHARED_KEY
+  And He fills and locks the vault containing the message using a DH_KEY
   And he sends the contract back to Alice over the internet
-  Then Alice can unlock the message with a SHARED_KEY
+  Then Alice can unlock the message with a DH_KEY

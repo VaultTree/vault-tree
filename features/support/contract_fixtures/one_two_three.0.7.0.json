@@ -83,8 +83,8 @@
 "first":{
   "description":"This is an asymmetric vault with mutual authentication. It contains the key to vault two and is locked by Bob, with Alices public key. Only Alice can unlock it.",
   "fill_with": "KEY['vault_two_key']",
-  "lock_with": "SHARED_KEY['alice_public_encryption_key','bob_decryption_key']",
-  "unlock_with": "SHARED_KEY['bob_public_encryption_key','alice_decryption_key']",
+  "lock_with": "DH_KEY['alice_public_encryption_key','bob_decryption_key']",
+  "unlock_with": "DH_KEY['bob_public_encryption_key','alice_decryption_key']",
   "contents": ""
 },
 

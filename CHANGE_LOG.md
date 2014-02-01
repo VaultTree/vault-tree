@@ -1,4 +1,4 @@
-## 0.3.0 (Upcoming Release)
+## 0.3.3
 
 * Update to RbNaCl 2.0.
 * Major changes to crypto lib interface

@@ -1,3 +1,8 @@
+## 0.3.4
+
+* Bug Fix in Exception Handling
+* Eliminate File missing error when execption is thrown
+
 ## 0.3.3
 
 * Update to RbNaCl 2.0.

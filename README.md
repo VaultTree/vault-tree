@@ -1,8 +1,8 @@
 ## Vault Tree
 
-_The Self Enforcing Contract_
+_The Self Enforcing Bitcoin Contract_
 
-Vault Tree is a collection of tools for building and executing distributed cryptographic contracts.
+Vault Tree helps developers build distributed applications on top of the Bitcoin Blockchain.
 
 Before you begin make sure you checkout the [Vault Tree Homepage] for an overview of the project.
 
@@ -15,7 +15,6 @@ The Vault Tree Project consists of:
 * A JSON based DSL for building Distributed Crytographic Contracts
 * A a Ruby library to execute these contracts
 * A focal point of collaboration for developers writing and testing interesting crytographic contracts
-
 
 ### Install
 

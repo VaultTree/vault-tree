@@ -20,8 +20,8 @@ Feature: Key
             "random_vault_key":{
               "description":"Random Number",
               "fill_with": "RANDOM_NUMBER",
-              "lock_with": "MASTER_PASSPHRASE",
-              "unlock_with": "MASTER_PASSPHRASE",
+              "lock_with": "UNLOCKED",
+              "unlock_with": "UNLOCKED",
               "contents": ""
               },
             "message":{

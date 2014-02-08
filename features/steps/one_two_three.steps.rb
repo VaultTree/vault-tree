@@ -5,15 +5,19 @@ end
 
 # Change this to just attributes vice public attributes
 When(/^she locks all of her attributes$/) do
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ALICE_SECURE_PASS', external_data: {})
+  @alice_contract_secret = "#{VaultTree::LockSmith.new(message: 'ALICE_SECURE_PASS').secure_hash}"
+  @contract = VaultTree::Contract.new(@contract_json,
+                                      external_data: {"alice_contract_secret" => @alice_contract_secret}
+                                     )
   @contract = @contract.close_vault('alice_decryption_key')
   @contract = @contract.close_vault('alice_public_encryption_key')
 end
 
 When(/^she sends the contract to Bob$/) do
+  @bob_contract_secret = "#{VaultTree::LockSmith.new(message: 'BOB_SECURE_PASS').secure_hash}"
   @contract_json = @contract.as_json 
-  @bobs_external_data = {"congratulations_message" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'BOB_SECURE_PASS', external_data: @bobs_external_data)
+  @bobs_external_data = { "bob_contract_secret" => @bob_contract_secret, "congratulations_message" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
+  @contract = VaultTree::Contract.new(@contract_json, external_data: @bobs_external_data)
 end
 
 Then(/^Bob can access all of her public attributes$/) do
@@ -50,8 +54,8 @@ When(/^He fills and locks each of the three main vaults$/) do
 end
 
 Then(/^Alice can execute the contract to recover the final message$/) do
-  @contract_json = @contract.as_json 
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ALICE_SECURE_PASS', external_data: {})
+  @contract_json = @contract.as_json
+  @contract = VaultTree::Contract.new(@contract_json, external_data: {"alice_contract_secret" => @alice_contract_secret})
   puts @contract.retrieve_contents('third')
   @contract.retrieve_contents('third').should == @bobs_external_data['congratulations_message']
 end

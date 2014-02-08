@@ -4,16 +4,20 @@ Given(/^Alice has the blank asymmetric vault contract$/) do
 end
 
 When(/^she locks all of her public and private keys$/) do
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ALICE_SECURE_PASS', external_data: {})
+  @alice_contract_secret = "#{VaultTree::LockSmith.new(message: 'ALICE_SECURE_PASS').secure_hash}"
+  @contract = VaultTree::Contract.new(@contract_json,
+                                      external_data: {"alice_contract_secret" => @alice_contract_secret}
+                                     )
   @contract = @contract.close_vault('alice_contract_secret')
   @contract = @contract.close_vault('alice_decryption_key')
   @contract = @contract.close_vault('alice_public_encryption_key')
 end
 
 When(/^she sends the contract to Bob over the internet$/) do
+  @bob_contract_secret = "#{VaultTree::LockSmith.new(message: 'BOB_SECURE_PASS').secure_hash}"
   @contract_json = @contract.as_json
-  @bobs_external_data = {"message" => "CONGRATS ALICE! YOU UNLOCKED THE SECRET MESSAGE WITH A DH KEY."}
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'BOB_SECURE_PASS', external_data: @bobs_external_data)
+  @bobs_external_data = {"bob_contract_secret" => @bob_contract_secret,"message" => "CONGRATS ALICE! YOU UNLOCKED THE SECRET MESSAGE WITH A DH KEY."}
+  @contract = VaultTree::Contract.new(@contract_json, external_data: @bobs_external_data)
 end
 
 Then(/^Bob can access of her public keys but not her private keys$/) do
@@ -32,7 +36,7 @@ end
 
 When(/^he sends the contract back to Alice over the internet$/) do
   @contract_json = @contract.as_json
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ALICE_SECURE_PASS', external_data: {})
+  @contract = VaultTree::Contract.new(@contract_json, external_data: {"alice_contract_secret" => @alice_contract_secret})
 end
 
 Then(/^Alice can unlock the message with a DH_KEY$/) do

@@ -25,8 +25,8 @@ Scenario: Asymmetric Vault
           },
           "my_decryption_key":{
             "fill_with": "DECRYPTION_KEY",
-            "lock_with": "MASTER_PASSPHRASE",
-            "unlock_with": "MASTER_PASSPHRASE",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
             "contents": ""
           },
           "my_public_key":{
@@ -37,8 +37,8 @@ Scenario: Asymmetric Vault
           },
           "another_decryption_key":{
             "fill_with": "DECRYPTION_KEY",
-            "lock_with": "MASTER_PASSPHRASE",
-            "unlock_with": "MASTER_PASSPHRASE",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
             "contents": ""
           },
           "another_public_key":{

@@ -21,13 +21,6 @@
   "contents": ""
 },
 
-"fill_with_master_pass_vault":{
-  "fill_with": "MASTER_PASSPHRASE",
-  "lock_with": "UNLOCKED",
-  "unlock_with": "UNLOCKED",
-  "contents": ""
-},
-
 "missing_external_data_vault":{
   "fill_with": "EXTERNAL_DATA",
   "lock_with": "UNLOCKED",

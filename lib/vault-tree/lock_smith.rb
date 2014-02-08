@@ -1,4 +1,6 @@
 require 'rbnacl'
+require_relative 'lock_smith/generated_shamir_key'
+require_relative 'lock_smith/assembled_shamir_key'
 
 module VaultTree
   # VaultTree::LockSmith Interface to Crypto Primatives
@@ -135,19 +137,31 @@ module VaultTree
     # Recovers the shared secret from the shares provided
     # in the initializer.
     #
-    # @return [String] Secure Hash digest of the assembled secret
-    def combine_secret_shares
+    # @return [String] assembled secret key
+    def assemble_shamir_key
+      VaultTree::Crypto::AssembledShamirKey.new( key_shares: secret_shares).assemble
     end
 
-    # Secret Shares associated with the split message
+    # Generate a random secret key, and split the key with
+    # Shamir's algorithm.
     #
-    # @return [Array] Array of strings
-    def split_secret
+    # Threshold Requirment and Number of secret shares should be
+    # specified in the LockSmith initializer.
+    #
+    # @return [Array] Array of strings cooresponding to the secret shares
+    def split_random_secret
+      VaultTree::Crypto::GeneratedShamirKey.new(
+        outstanding_shares: outstanding_secret_shares,
+        recovery_threshold: secret_recovery_threshold
+      ).shares
     end
 
     private
 
     def message; @message end
+    def outstanding_secret_shares; @outstanding_secret_shares end
+    def secret_recovery_threshold; @secret_recovery_threshold end
+    def secret_shares; @secret_shares end
 
     # Locksmith always expects hex representations
     # of keys and ciphertext. Convert to binary to

@@ -41,16 +41,16 @@
 
 "receiver_secret":{
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "MASTER_PASSPHRASE",
-  "unlock_with": "MASTER_PASSPHRASE",
+  "lock_with": "EXTERNAL_DATA",
+  "unlock_with": "EXTERNAL_DATA",
   "contents": ""
 },
 
 "sender_secret":{
   "description":"Contract specific password for SENDER. Used to Lock the SENDER private information.",
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "MASTER_PASSPHRASE",
-  "unlock_with": "MASTER_PASSPHRASE",
+  "lock_with": "EXTERNAL_DATA",
+  "unlock_with": "EXTERNAL_DATA",
   "contents": ""
 }
 

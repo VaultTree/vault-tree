@@ -1,3 +1,8 @@
+## 0.3.5
+
+* Remove support for MASTER_PASSPHRASE Keyword.
+* MASTER_PASSPHRASE has been removed from example contracts.
+
 ## 0.3.4
 
 * Bug Fix in Exception Handling

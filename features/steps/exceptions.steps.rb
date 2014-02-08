@@ -3,32 +3,23 @@ Given(/^a valid blank contract$/) do
   @contract_json = File.read(contract_path)
 end
 
-When(/^I attempt fill a vault without providing a master passphrase$/) do
-  begin
-    @contract = VaultTree::Contract.new(@contract_json)
-    @contract = @contract.close_vault('message')
-  rescue => e
-    @exception = e
-  end
-end
-
 Then(/^a MissingPassphrase exception is raised$/) do
   @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPassphrase)
 end
 
 Given(/^this broken contract:$/) do |string|
   @contract_json = string
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
+  @contract = VaultTree::Contract.new(@contract_json, external_data: {})
 end
 
 Given(/^the broken contract$/) do
   contract_path = VaultTree::PathHelpers.broken_contract
   @contract_json = File.read(contract_path)
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: {})
+  @contract = VaultTree::Contract.new(@contract_json, external_data: {})
 end
 
 When(/^I attempt lock a vault with External Data that does not exists$/) do
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'TEST_USER', external_data: nil )
+  @contract = VaultTree::Contract.new(@contract_json, external_data: nil )
   begin
     @contract = @contract.close_vault('missing_external_data_vault')
   rescue => e

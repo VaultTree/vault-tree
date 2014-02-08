@@ -11,16 +11,16 @@
 "bob_contract_secret":{
   "description":"Contract specific password to lock private information",
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "MASTER_PASSPHRASE",
-  "unlock_with": "MASTER_PASSPHRASE",
+  "lock_with": "EXTERNAL_DATA",
+  "unlock_with": "EXTERNAL_DATA",
   "contents": ""
 },
 
 "alice_contract_secret":{
   "description":"Contract specific password to lock private information",
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "MASTER_PASSPHRASE",
-  "unlock_with": "MASTER_PASSPHRASE",
+  "lock_with": "EXTERNAL_DATA",
+  "unlock_with": "EXTERNAL_DATA",
   "contents": ""
 },
 

@@ -9,20 +9,13 @@
 
 "empty_vault":{
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "MASTER_PASSPHRASE",
-  "unlock_with": "MASTER_PASSPHRASE",
-  "contents": ""
-},
-
-"unsupported_keyword":{
-  "fill_with": "UNSUPPORTED_KEYWORD",
   "lock_with": "UNLOCKED",
   "unlock_with": "UNLOCKED",
   "contents": ""
 },
 
-"fill_with_master_pass_vault":{
-  "fill_with": "MASTER_PASSPHRASE",
+"unsupported_keyword":{
+  "fill_with": "UNSUPPORTED_KEYWORD",
   "lock_with": "UNLOCKED",
   "unlock_with": "UNLOCKED",
   "contents": ""

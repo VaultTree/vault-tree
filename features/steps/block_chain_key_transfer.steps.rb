@@ -6,11 +6,13 @@ end
 Given(/^the SENDER chooses an origin address and a concealed destination address$/) do
   @sender_external_data =
     {
+
+      'sender_secret' => "#{VaultTree::LockSmith.new(message: 'SENDER_SECURE_PASS').secure_hash}",
       'sender_origin_wallet_address' => '1XJEBF8EUBF855NEBHVENPFE9JE74E',
       'sender_concealed_destination_wallet_address' => '1JVKE8HD5JDHFEJHF678JEH8DEJGHE',
       'sender_btc_signing_key' => 'BITCOIN_SIGNING_KEY_KEEP_IT_SECRET'
     }
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'SENDER_SECURE_PASS', external_data: @sender_external_data)
+  @contract = VaultTree::Contract.new(@contract_json, external_data: @sender_external_data)
   @contract = @contract.close_vault('sender_origin_wallet_address')
   @contract = @contract.close_vault('sender_concealed_destination_wallet_address')
 end
@@ -21,7 +23,8 @@ end
 
 When(/^the SENDER transfers the contract to the RECEIVER$/) do
   @contract_json_over_the_wire = @contract.as_json
-  @contract = VaultTree::Contract.new(@contract_json_over_the_wire, master_passphrase: 'RECEIVER_SECURE_PASS')
+  @receiver_external_data = { 'receiver_secret' => "#{VaultTree::LockSmith.new(message: 'RECEIVER_SECURE_PASS').secure_hash}" }
+  @contract = VaultTree::Contract.new(@contract_json_over_the_wire, external_data: @receiver_external_data)
 end
 
 Then(/^the RECEIVER can access the origin wallet address$/) do
@@ -31,8 +34,12 @@ end
 When(/^the SENDER reveals the hidden wallet address by transfering bitcoins from the origin address$/) do
   @contract_json = @contract.as_json # save the json state
   wallet_address_from_watching_blockchain = @sender_external_data['sender_concealed_destination_wallet_address']
-  @receiver_external_data = { 'receiver_revealed_destination_wallet_address' => wallet_address_from_watching_blockchain}
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'RECEIVER_SECURE_PASS', external_data: @receiver_external_data)
+  @receiver_external_data = {
+
+    'receiver_secret' => "#{VaultTree::LockSmith.new(message: 'RECEIVER_SECURE_PASS').secure_hash}",
+    'receiver_revealed_destination_wallet_address' => wallet_address_from_watching_blockchain
+  }
+  @contract = VaultTree::Contract.new(@contract_json, external_data: @receiver_external_data)
   @contract = @contract.close_vault('receiver_revealed_destination_wallet_address')
 end
 

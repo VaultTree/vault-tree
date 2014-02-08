@@ -4,7 +4,6 @@ module VaultTree
 
     def initialize(json, params = {})
       @json = json
-      @master_passphrase = params[:master_passphrase]
       @external_data = params[:external_data]
     end
 
@@ -44,11 +43,6 @@ module VaultTree
       ContractPresenter.new(self).as_json
     end
 
-    def master_passphrase
-      validate_passphrase
-      @master_passphrase
-    end
-
     def external_data_hash
       @external_data
     end
@@ -58,10 +52,6 @@ module VaultTree
     end
 
     private
-
-    def passphrase_present?
-      !! @master_passphrase
-    end
 
     def valid_id?(id)
       id.nil? || vaults.include?(id)
@@ -81,10 +71,6 @@ module VaultTree
 
     def validate_vault(id)
       raise Exceptions::VaultDoesNotExist unless valid_id?(id)
-    end
-
-    def validate_passphrase
-      raise Exceptions::MissingPassphrase unless passphrase_present?
     end
 
     def update_external_data(params)

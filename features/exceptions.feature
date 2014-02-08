@@ -5,11 +5,6 @@ Scenario: Empty Vault
   When I attempt to open an empty vault
   Then an EmptyVault exception is raised
 
-Scenario: Attempted Fill with Master Password 
-  Given the broken contract
-  When I attempt fill a vault with my Master Password  
-  Then a FillAttemptMasterPassword exception is raised
-
 Scenario: Missing External Data On Vault Fill
   Given the broken contract
   When I attempt fill a vault with External Data that does not exists

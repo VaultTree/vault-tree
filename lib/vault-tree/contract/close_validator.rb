@@ -14,7 +14,7 @@ module VaultTree
     private
 
     def confirm_valid_fill_keyword
-      raise Exceptions::FillAttemptMasterPassword if vault.fill_with == 'MASTER_PASSPHRASE'
+      true
     end
 
     def external_data_required?

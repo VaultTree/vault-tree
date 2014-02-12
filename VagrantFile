@@ -1,30 +1,4 @@
 Vagrant::Config.run do |config|
   config.vm.box = "vault-tree-box"
   config.vm.box_url = "http://vault-tree-box.s3.amazonaws.com/package.box"
-  #config.vm.provision :chef_solo do |chef|
-  #  chef.cookbooks_path = "support/cookbooks"
-  #   chef.add_recipe("git")
-  #   chef.add_recipe("build-essential")
-  #   chef.add_recipe("ruby_build")
-  #   chef.add_recipe("chruby")
-  #   chef.add_recipe("install_ruby")
-  #end
-end
-
-module VagrantHelpers
-  module PathHelpers
-    extend self
-
-    def provision_dir
-      "#{project_dir}/lib/vagrant"
-    end
-
-    def project_dir
-      File.expand_path(current_dir_rel)
-    end
-
-    def current_dir_rel
-      File.dirname(__FILE__)
-    end
-  end
 end

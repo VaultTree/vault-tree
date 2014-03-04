@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/VaultTree/vault-tree.png)](https://codeclimate.com/github/VaultTree/vault-tree)
+
 ## Vault Tree
 
 _The Self Enforcing Bitcoin Contract_

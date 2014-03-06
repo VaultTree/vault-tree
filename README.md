@@ -102,15 +102,3 @@ and run `bundle` then `rake`. This will grab your dependincies, run all the test
 If you're not already familiar, take a few minutes to learn about how Vagrant will [sync your files] to and from the guest machine.
 
 [sync your files]: http://docs.vagrantup.com/v2/getting-started/synced_folders.html
-
-### Is it production ready?
-
-Are you serious? This project has like ... 1 fork and 1 star (Thanks Eric!).
-We have a long way to go.
-
-Here are some of the big issues that I'm thinking about as we move to version 1.0:
-
-* This is a crypto application so vulnerabilities need to be identified and corrected. We need more eyes in this area.
-* We we need to figure out if the supported keywords are sufficient to implement basic secure computation schemes.
-  - For example, Digital Signatures are not implemented but could be.
-  - Should they be implemented? What is the use case? Ect. We need to have these conversations.

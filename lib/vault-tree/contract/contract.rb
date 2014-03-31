@@ -24,11 +24,11 @@ module VaultTree
     end
 
     def header
-      contract["header"]
+      contract_hash["header"]
     end
 
     def vaults
-      contract["vaults"]
+      contract_hash["vaults"]
     end
 
     def vault(id)
@@ -36,7 +36,7 @@ module VaultTree
     end
 
     def update_vaults(vault)
-      @contract["vaults"][vault.id] = vault.properties unless vault.kind_of?(NullVault)
+      @contract_hash["vaults"][vault.id] = vault.properties unless vault.kind_of?(NullVault)
     end
 
     def as_json
@@ -65,8 +65,8 @@ module VaultTree
       vaults[id]['contents'].nil? || vaults[id]['contents'].empty?
     end
 
-    def contract
-      @contract ||= Support::JSON.decode(json)
+    def contract_hash
+      @contract_hash ||= Support::JSON.decode(json)
     end
 
     def validate_vault(id)

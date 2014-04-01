@@ -14,6 +14,10 @@ module VaultTree
       validate_vault(id)
     end
 
+    def to_hash
+      @vaults_hash
+    end
+
     private
 
     def validate_vault(id)
@@ -57,7 +61,7 @@ module VaultTree
     end
 
     def vaults
-      contract_hash["vaults"]
+      vault_list.to_hash
     end
 
     def vault(id)

@@ -1,9 +1,9 @@
 module VaultTree
   class Contract
-    attr_reader :json, :vault_list
+    attr_reader :json, :contract_hash, :vault_list
 
     def initialize(json, params = {})
-      @json = json
+      @contract_hash = Support::JSON.decode(json)
       @external_data = params[:external_data]
       @vault_list = VaultList.new(contract_hash["vaults"], self)
     end
@@ -43,10 +43,6 @@ module VaultTree
     end
 
     private
-
-    def contract_hash
-      @contract_hash ||= Support::JSON.decode(json)
-    end
 
     def update_external_data(params)
       vault_id = params[:id]

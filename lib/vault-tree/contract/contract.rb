@@ -88,10 +88,6 @@ module VaultTree
 
     private
 
-    def valid_id?(id)
-      id.nil? || vaults.include?(id)
-    end
-
     def non_empty_contents?(id)
       ! empty_contents?(id)
     end

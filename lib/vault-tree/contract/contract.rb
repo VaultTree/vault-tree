@@ -9,6 +9,8 @@ module VaultTree
 
     def close_vault(id)
       validate_vault(id)
+      update_vaults vault(id).close
+      self
     end
 
     def retrieve_contents(id)
@@ -20,6 +22,14 @@ module VaultTree
     end
 
     private
+
+    def update_vaults(vault)
+      @vaults_hash[vault.id] = vault.properties unless vault.kind_of?(NullVault)
+    end
+
+    def vault(id)
+      id.nil? ? NullVault.new : Vault.new(id, vaults_hash[id], contract)
+    end
 
     def validate_vault(id)
       raise Exceptions::VaultDoesNotExist unless valid_id?(id)
@@ -43,8 +53,7 @@ module VaultTree
 
     def close_vault(id, params = {data: nil})
       update_external_data(id: id , data: params[:data])
-      vault_list.close_vault(id)
-      update_vaults vault(id).close
+      @vault_list = @vault_list.close_vault(id)
       self
     end
 
@@ -67,10 +76,6 @@ module VaultTree
 
     def vault(id)
       id.nil? ? NullVault.new : Vault.new(id, vaults[id], self)
-    end
-
-    def update_vaults(vault)
-      @contract_hash["vaults"][vault.id] = vault.properties unless vault.kind_of?(NullVault)
     end
 
     def as_json

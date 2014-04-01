@@ -1,14 +1,13 @@
 module VaultTree
-  class Contract
-    attr_reader :json
+  class VaultList
+    attr_reader :vaults_hash, :contract
 
-    def initialize(json, params = {})
-      @json = json
-      @external_data = params[:external_data]
+    def initialize(vaults_hash, contract)
+      @vaults_hash = vaults_hash
+      @contract = contract
     end
 
-    def close_vault(id, params = {data: nil})
-      update_external_data(id: id , data: params[:data])
+    def close_vault(id)
       validate_vault(id)
       update_vaults vault(id).close
       self
@@ -23,20 +22,68 @@ module VaultTree
       non_empty_contents?(id)
     end
 
+    def to_hash
+      @vaults_hash
+    end
+
+    private
+
+    def non_empty_contents?(id)
+      ! empty_contents?(id)
+    end
+
+    def empty_contents?(id)
+      vaults_hash[id]['contents'].nil? || vaults_hash[id]['contents'].empty?
+    end
+
+    def update_vaults(vault)
+      @vaults_hash[vault.id] = vault.properties unless vault.kind_of?(NullVault)
+    end
+
+    def vault(id)
+      id.nil? ? NullVault.new : Vault.new(id, vaults_hash[id], contract)
+    end
+
+    def validate_vault(id)
+      raise Exceptions::VaultDoesNotExist unless valid_id?(id)
+    end
+
+    def valid_id?(id)
+      id.nil? || vaults_hash.include?(id)
+    end
+  end
+end
+
+module VaultTree
+  class Contract
+    attr_reader :json, :vault_list
+
+    def initialize(json, params = {})
+      @json = json
+      @external_data = params[:external_data]
+      @vault_list = VaultList.new(contract_hash["vaults"], self)
+    end
+
+    def close_vault(id, params = {data: nil})
+      update_external_data(id: id , data: params[:data])
+      @vault_list = vault_list.close_vault(id)
+      self
+    end
+
+    def retrieve_contents(id)
+      vault_list.retrieve_contents(id)
+    end
+
+    def vault_closed?(id)
+      vault_list.vault_closed?(id)
+    end
+
     def header
       contract_hash["header"]
     end
 
     def vaults
-      contract_hash["vaults"]
-    end
-
-    def vault(id)
-      id.nil? ? NullVault.new : Vault.new(id, vaults[id], self)
-    end
-
-    def update_vaults(vault)
-      @contract_hash["vaults"][vault.id] = vault.properties unless vault.kind_of?(NullVault)
+      vault_list.to_hash
     end
 
     def as_json
@@ -53,24 +100,8 @@ module VaultTree
 
     private
 
-    def valid_id?(id)
-      id.nil? || vaults.include?(id)
-    end
-
-    def non_empty_contents?(id)
-      ! empty_contents?(id)
-    end
-
-    def empty_contents?(id)
-      vaults[id]['contents'].nil? || vaults[id]['contents'].empty?
-    end
-
     def contract_hash
       @contract_hash ||= Support::JSON.decode(json)
-    end
-
-    def validate_vault(id)
-      raise Exceptions::VaultDoesNotExist unless valid_id?(id)
     end
 
     def update_external_data(params)

@@ -15,6 +15,7 @@ module VaultTree
 
     def retrieve_contents(id)
       validate_vault(id)
+      vault(id).retrieve_contents
     end
 
     def to_hash
@@ -53,13 +54,12 @@ module VaultTree
 
     def close_vault(id, params = {data: nil})
       update_external_data(id: id , data: params[:data])
-      @vault_list = @vault_list.close_vault(id)
+      @vault_list = vault_list.close_vault(id)
       self
     end
 
     def retrieve_contents(id)
       vault_list.retrieve_contents(id)
-      vault(id).retrieve_contents
     end
 
     def vault_closed?(id)

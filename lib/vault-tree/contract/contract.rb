@@ -74,10 +74,6 @@ module VaultTree
       vault_list.to_hash
     end
 
-    def vault(id)
-      id.nil? ? NullVault.new : Vault.new(id, vaults[id], self)
-    end
-
     def as_json
       ContractPresenter.new(self).as_json
     end

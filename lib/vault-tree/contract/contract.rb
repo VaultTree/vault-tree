@@ -6,7 +6,7 @@ module VaultTree
       @contract_hash   = Support::JSON.decode(json)
       @contract_header = ContractHeader.new(contract_hash["header"])
       @vault_list      = VaultList.new(contract_hash["vaults"], self)
-      @external_data   = params[:external_data]
+      @external_data   = params[:external_data] # Replace With ExternalContractData Class
     end
 
     def close_vault(id, params = {data: nil})

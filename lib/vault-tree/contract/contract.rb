@@ -18,11 +18,23 @@ module VaultTree
       vault(id).retrieve_contents
     end
 
+    def vault_closed?(id)
+      non_empty_contents?(id)
+    end
+
     def to_hash
       @vaults_hash
     end
 
     private
+
+    def non_empty_contents?(id)
+      ! empty_contents?(id)
+    end
+
+    def empty_contents?(id)
+      vaults_hash[id]['contents'].nil? || vaults_hash[id]['contents'].empty?
+    end
 
     def update_vaults(vault)
       @vaults_hash[vault.id] = vault.properties unless vault.kind_of?(NullVault)
@@ -63,7 +75,7 @@ module VaultTree
     end
 
     def vault_closed?(id)
-      non_empty_contents?(id)
+      vault_list.vault_closed?(id)
     end
 
     def header
@@ -87,14 +99,6 @@ module VaultTree
     end
 
     private
-
-    def non_empty_contents?(id)
-      ! empty_contents?(id)
-    end
-
-    def empty_contents?(id)
-      vaults[id]['contents'].nil? || vaults[id]['contents'].empty?
-    end
 
     def contract_hash
       @contract_hash ||= Support::JSON.decode(json)

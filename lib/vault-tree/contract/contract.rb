@@ -1,21 +1,50 @@
 module VaultTree
+  class VaultList
+    attr_reader :vaults_hash
+
+    def initialize(vaults_hash)
+      @vaults_hash = vaults_hash
+    end
+
+    def close_vault(id)
+      validate_vault(id)
+    end
+
+    def retrieve_contents(id)
+      validate_vault(id)
+    end
+
+    private
+
+    def validate_vault(id)
+      raise Exceptions::VaultDoesNotExist unless valid_id?(id)
+    end
+
+    def valid_id?(id)
+      id.nil? || vaults_hash.include?(id)
+    end
+  end
+end
+
+module VaultTree
   class Contract
-    attr_reader :json
+    attr_reader :json, :vault_list
 
     def initialize(json, params = {})
       @json = json
       @external_data = params[:external_data]
+      @vault_list = VaultList.new(contract_hash["vaults"])
     end
 
     def close_vault(id, params = {data: nil})
       update_external_data(id: id , data: params[:data])
-      validate_vault(id)
+      vault_list.close_vault(id)
       update_vaults vault(id).close
       self
     end
 
     def retrieve_contents(id)
-      validate_vault(id)
+      vault_list.retrieve_contents(id)
       vault(id).retrieve_contents
     end
 
@@ -67,10 +96,6 @@ module VaultTree
 
     def contract_hash
       @contract_hash ||= Support::JSON.decode(json)
-    end
-
-    def validate_vault(id)
-      raise Exceptions::VaultDoesNotExist unless valid_id?(id)
     end
 
     def update_external_data(params)

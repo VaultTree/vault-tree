@@ -1,20 +1,4 @@
 module VaultTree
-  class ExternalContractData
-    def initialize(external_data_hash)
-      @external_data_hash = external_data_hash
-    end
-
-    def update_data(h)
-      @external_data_hash = h
-    end
-
-    def to_hash
-      @external_data_hash
-    end
-  end
-end
-
-module VaultTree
   class Contract
     attr_reader :json, :contract_hash, :vault_list, :contract_header
 
@@ -22,7 +6,7 @@ module VaultTree
       @contract_hash   = Support::JSON.decode(json)
       @contract_header = ContractHeader.new(contract_hash["header"])
       @vault_list      = VaultList.new(contract_hash["vaults"], self)
-      @external_data   = params[:external_data]
+      @external_data   = params[:external_data] # Replace With ExternalContractData Class
     end
 
     def close_vault(id, params = {data: nil})

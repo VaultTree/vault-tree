@@ -1,9 +1,10 @@
 module VaultTree
   class VaultList
-    attr_reader :vaults_hash
+    attr_reader :vaults_hash, :contract
 
-    def initialize(vaults_hash)
+    def initialize(vaults_hash, contract)
       @vaults_hash = vaults_hash
+      @contract = contract
     end
 
     def close_vault(id)
@@ -37,7 +38,7 @@ module VaultTree
     def initialize(json, params = {})
       @json = json
       @external_data = params[:external_data]
-      @vault_list = VaultList.new(contract_hash["vaults"])
+      @vault_list = VaultList.new(contract_hash["vaults"], self)
     end
 
     def close_vault(id, params = {data: nil})

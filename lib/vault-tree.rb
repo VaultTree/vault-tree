@@ -11,6 +11,7 @@ require_relative 'vault-tree/lock_smith'
 
 # exceptions/*.rb
 require_relative 'vault-tree/exceptions/vault_tree_exception'
+require_relative 'vault-tree/exceptions/library_exception'
 VaultTree::PathHelpers.exceptions_files.each {|file| require_relative  file }
 
 # contract/*.rb

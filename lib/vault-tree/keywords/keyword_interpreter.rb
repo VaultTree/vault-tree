@@ -3,15 +3,17 @@ module VaultTree
     attr_reader :word, :vault
 
     def initialize(word,vault)
-      @word = word 
+      @word = word
       @vault = vault
     end
 
     def evaluate # start here
       begin
         keyword_class_name.new(vault, arg_array).evaluate
-      rescue NameError
-        raise Exceptions::UnsupportedKeyword
+      rescue NameError => e
+        raise Exceptions::UnsupportedKeyword.new(e,
+                                                 vault_id: vault.id,
+                                                 keyword: word)
       end
     end
 

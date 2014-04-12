@@ -66,7 +66,16 @@ module VaultTree
         end
       end
 
-
+      it 'Unsupported Keyword' do
+        begin
+          raise 'Some Random Runtime Error'
+        rescue => e
+          begin
+            raise UnsupportedKeyword.new(e, vault_id: 'some_vault', keyword: 'some_keyword')
+          rescue
+          end
+        end
+      end
 
     end
   end

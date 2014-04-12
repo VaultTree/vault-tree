@@ -45,7 +45,7 @@ module VaultTree
     end
 
     def validate_vault(id)
-      raise Exceptions::VaultDoesNotExist unless valid_id?(id)
+      raise Exceptions::VaultDoesNotExist.new(nil,vault_id: id) unless valid_id?(id)
     end
 
     def valid_id?(id)

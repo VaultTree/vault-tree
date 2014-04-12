@@ -55,6 +55,16 @@ module VaultTree
         end
       end
 
+      it 'Vault Does Not Exist' do
+        begin
+          raise 'Some Random Runtime Error'
+        rescue => e
+          begin
+            raise VaultDoesNotExist.new(e, vault_id: 'some_none_existant_vault')
+          rescue
+          end
+        end
+      end
 
 
 

@@ -77,6 +77,17 @@ module VaultTree
         end
       end
 
+      it 'Missing External Data' do
+        begin
+          raise 'Some Random Runtime Error'
+        rescue => e
+          begin
+            raise UnsupportedKeyword.new(e, vault_id: 'some_vault')
+          rescue
+          end
+        end
+      end
+
     end
   end
 end

@@ -13,7 +13,7 @@ module VaultTree
     private
 
     def check_for_external_data
-      raise(Exceptions::MissingExternalData) if missing_external_data?
+      raise(Exceptions::MissingExternalData.new(nil, vault_id: id)) if missing_external_data?
     end
 
     def missing_external_data?

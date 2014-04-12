@@ -34,8 +34,8 @@ module VaultTree
       def asymmetric_plaintext
         begin
           LockSmith.new(public_key: unlocking_public_key, private_key: unlocking_secret_key, cipher_text: contents).asymmetric_decrypt
-        rescue(RbNaCl::CryptoError)
-          raise(Exceptions::FailedUnlockAttempt)
+        rescue RbNaCl::CryptoError => e
+          raise failed_unlock_attempt(e)
         end
       end
 
@@ -48,9 +48,14 @@ module VaultTree
         begin
           key_hash = LockSmith.new(message: unlocking_key).secure_hash
           LockSmith.new(cipher_text: contents, secret_key: key_hash).symmetric_decrypt
-        rescue(RbNaCl::CryptoError)
-          raise(Exceptions::FailedUnlockAttempt)
+        rescue RbNaCl::CryptoError => e
+          raise failed_unlock_attempt(e)
         end
+      end
+
+      def failed_unlock_attempt(e)
+        runtime_info = {vault_id: vault.id, unlocking_key: vault.unlock_with}
+        Exceptions::FailedUnlockAttempt.new(e, runtime_info)
       end
 
       def locking_key

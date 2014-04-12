@@ -1,3 +1,10 @@
+## 0.3.7
+
+* Add Better Exception Messaging
+* Verbose Messaging when Vault Tree Exceptions are thrown
+* Log the Message to STDOUT
+* Pattern for implementing future custom exceptions
+
 ## 0.3.5
 
 * Remove support for MASTER_PASSPHRASE Keyword.

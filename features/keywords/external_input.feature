@@ -10,18 +10,11 @@ that all necessary external inputs will be explicitly passed in.
         {
           "header": {},
           "vaults": {
-            "random_vault_key":{
-              "description":"Random Number",
-              "fill_with": "RANDOM_NUMBER",
-              "lock_with": "UNLOCKED",
-              "unlock_with": "UNLOCKED",
-              "contents": ""
-              },
             "message":{
               "description": "Simple Congratulations Message",
               "fill_with": "EXTERNAL_INPUT['msg']",
-              "lock_with": "KEY['random_vault_key']",
-              "unlock_with": "KEY['random_vault_key']",
+              "lock_with": "EXTERNAL_INPUT['secret']",
+              "unlock_with": "EXTERNAL_INPUT['secret']",
               "contents": ""
             }
           }

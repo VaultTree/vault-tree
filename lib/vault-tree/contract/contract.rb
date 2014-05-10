@@ -16,13 +16,14 @@ module VaultTree
         @vault_list = vault_list.close_vault(id)
         self
       else
-        @external_input = external_input
+        @external_input = @external_input.merge(external_input)
         @vault_list = vault_list.close_vault(id)
         self
       end
     end
 
-    def retrieve_contents(id)
+    def retrieve_contents(id, external_input = {})
+      @external_input = @external_input.merge(external_input)
       vault_list.retrieve_contents(id)
     end
 

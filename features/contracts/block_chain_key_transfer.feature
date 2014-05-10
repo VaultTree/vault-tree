@@ -25,6 +25,65 @@ Feature: Block Chain Key Transfer
 
 Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
+  Given the blank contract:
+    """javascript
+      {
+        "header": {
+          "title":"Block Chain Key Transfer",
+          "description":"A simple key transfer sheme utilizing a revealed BTC Wallet Address. This can be used as step within the execution of a larger contract."
+        },
+        "vaults": {
+
+        "sender_btc_signing_key":{
+          "description":"This is the secret Bitcoin Signing Key that SENDER wishes to transfer to RECEIVER. The RECEIVER can unlock only after he has the revealed address.",
+          "fill_with": "EXTERNAL_DATA",
+          "lock_with": "KEY['sender_concealed_destination_wallet_address']",
+          "unlock_with": "KEY['receiver_revealed_destination_wallet_address']",
+          "contents": ""
+        },
+
+        "sender_origin_wallet_address":{
+          "description":"SENDER origin wallet address. Chosen by SENDER and known in advance to RECEIVER.",
+          "fill_with": "EXTERNAL_DATA",
+          "lock_with": "UNLOCKED",
+          "unlock_with": "UNLOCKED",
+          "contents": ""
+        },
+
+        "sender_concealed_destination_wallet_address":{
+          "description":"SENDER concealed copy of the destination wallet address. This wallet address is kept secret until SENDER chosed to transfer BTC to it",
+          "fill_with": "EXTERNAL_DATA",
+          "lock_with": "KEY['sender_secret']",
+          "unlock_with": "KEY['sender_secret']",
+          "contents": ""
+        },
+
+        "receiver_revealed_destination_wallet_address":{
+          "description":"RECEIVER monitors the Block Chain and fills this vault with the newly revealied destination address.",
+          "fill_with": "EXTERNAL_DATA",
+          "lock_with": "KEY['receiver_secret']",
+          "unlock_with": "KEY['receiver_secret']",
+          "contents": ""
+        },
+
+        "receiver_secret":{
+          "fill_with": "RANDOM_NUMBER",
+          "lock_with": "EXTERNAL_DATA",
+          "unlock_with": "EXTERNAL_DATA",
+          "contents": ""
+        },
+
+        "sender_secret":{
+          "description":"Contract specific password for SENDER. Used to Lock the SENDER private information.",
+          "fill_with": "RANDOM_NUMBER",
+          "lock_with": "EXTERNAL_DATA",
+          "unlock_with": "EXTERNAL_DATA",
+          "contents": ""
+        }
+
+      }
+    }
+    """
   Given the SENDER has the blank contract template
   And the SENDER chooses an origin address and a concealed destination address
   And he locks away the secret BTC signing key

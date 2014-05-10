@@ -1,6 +1,4 @@
 Given(/^Alice has the blank contract$/) do
-  contract_path = VaultTree::PathHelpers.core_contracts('one_two_three.0.7.0.json')
-  @contract_json = File.read(contract_path)
 end
 
 # Change this to just attributes vice public attributes

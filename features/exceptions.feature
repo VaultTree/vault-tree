@@ -1,12 +1,39 @@
 Feature: Vault Tree Exceptions
 
 Scenario: Empty Vault
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+
+          "empty_vault":{
+            "fill_with": "RANDOM_NUMBER",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt to open an empty vault
   Then an EmptyVault exception is raised
 
 Scenario: Missing External Data On Vault Fill
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "missing_external_data_vault":{
+            "fill_with": "EXTERNAL_DATA",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt fill a vault with External Data that does not exists
   Then a MissingExternalData exception is raised
 
@@ -49,22 +76,86 @@ Scenario: Missing External Data On Unlock
   Then a MissingExternalData exception is raised
 
 Scenario: Unsupported Keyword
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "unsupported_keyword":{
+            "fill_with": "UNSUPPORTED_KEYWORD",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt fill a vault with an unsupported Keyword
   Then an UnsupportedKeyword exception is raised
 
 Scenario: Vault Does Not Exists on Retrieval
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+
+          "empty_vault":{
+            "fill_with": "RANDOM_NUMBER",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt to open a vault that does not exists
   Then a VaultDoesNotExist exception is raised
 
 Scenario: Vault Does Not Exists on Closing
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+
+          "empty_vault":{
+            "fill_with": "RANDOM_NUMBER",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt to close a vault that does not exists
   Then a VaultDoesNotExist exception is raised
 
 Scenario: Missing Partner Decryption Key
-  Given the broken contract
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+
+          "empty_decryption_key":{
+            "description": "Leave this empty.",
+            "fill_with": "DECRYPTION_KEY",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          },
+
+          "orphaned_public_key":{
+            "description": "Attempt to establish a public key with first building a decryption key",
+            "fill_with": "PUBLIC_ENCRYPTION_KEY['empty_decryption_key']",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
   When I attempt to fill with an encryption key without first establishing the decryption key
   Then a MissingPartnerDecryptionKey exception is raised
 

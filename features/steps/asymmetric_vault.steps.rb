@@ -3,7 +3,7 @@ Given(/^Alice has the blank asymmetric vault contract$/) do
   @contract_json = File.read(contract_path)
 end
 
-When(/^she locks all of her public and private keys$/) do
+When(/^Alice locks all of her public and private keys$/) do
   @alice_contract_secret = "#{VaultTree::LockSmith.new(message: 'ALICE_SECURE_PASS').secure_hash}"
   @contract = VaultTree::Contract.new(@contract_json,
                                       external_data: {"alice_contract_secret" => @alice_contract_secret}

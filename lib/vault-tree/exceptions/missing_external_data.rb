@@ -9,10 +9,6 @@ module VaultTree
         'Missing External Data'
       end
 
-      def search_word
-        'missing_external_data'
-      end
-
       def runtime_information
         %Q{
           It looks like you need to provide external input for:

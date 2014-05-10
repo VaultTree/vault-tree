@@ -85,3 +85,21 @@ Scenario: Failed Symmetric Unlock Attempt
     """
   When I lock a vault with External Data and attempt to unlock with the wrong External Data
   Then a FailedUnlockAttempt exception is raised
+
+Scenario: Missing External Input On Lock
+  Given this broken contract:
+    """javascript
+      {
+        "header": {},
+        "vaults": {
+          "missing_external_input_vault":{
+            "fill_with": "EXTERNAL_INPUT['empty_value']",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          }
+        }
+      }
+    """
+  When I attempt lock a vault with External Input that does not exists
+  Then an InvalidExternalInput exception is raised

@@ -1,16 +1,23 @@
 module VaultTree
   class Contract
-    attr_reader :json, :contract_hash, :vault_list, :contract_header
+    attr_reader :json, :contract_hash, :vault_list, :contract_header, :external_input
 
     def initialize(json, params = {})
       @contract_hash   = Support::JSON.decode(json)
       @contract_header = ContractHeader.new(contract_hash["header"])
       @vault_list      = VaultList.new(contract_hash["vaults"], self)
       @external_data   = params[:external_data] # Replace With ExternalContractData Class
+      @external_input = {}
     end
 
     def close_vault(id, params = {data: nil})
       update_external_data(id: id , data: params[:data])
+      @vault_list = vault_list.close_vault(id)
+      self
+    end
+
+    def close_vault_v2(id, external_input = {})
+      @external_input = external_input
       @vault_list = vault_list.close_vault(id)
       self
     end

@@ -17,8 +17,11 @@ module VaultTree
       end
 
       def exception
-        output_exception_message
         self
+      end
+
+      def message
+        output_exception_message
       end
 
       def search_word
@@ -47,7 +50,6 @@ module VaultTree
         %Q{
           #{message_banner}
           #{present_name}
-          #{present_search_word}
           #{message_banner}
           #{present_runtime_information}
           #{present_background}
@@ -65,10 +67,6 @@ module VaultTree
 
       def present_name
         "Vault Tree Exception: #{name}"
-      end
-
-      def present_search_word
-        "Search For: #{search_word}" unless search_word.nil?
       end
 
       def present_summary

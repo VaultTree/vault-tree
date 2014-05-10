@@ -140,7 +140,7 @@ end
 When(/^I attempt lock a vault with External Input that does not exists$/) do
   @contract = VaultTree::Contract.new(@contract_json)
   begin
-    @contract = @contract.close_vault_v2('missing_external_input_vault', empty_value: '')
+    @contract = @contract.close_vault('missing_external_input_vault', empty_value: '')
   rescue => e
     @exception = e
   end

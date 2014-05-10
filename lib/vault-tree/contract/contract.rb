@@ -10,16 +10,16 @@ module VaultTree
       @external_input = {}
     end
 
-    def close_vault(id, params = {data: nil})
-      update_external_data(id: id , data: params[:data])
-      @vault_list = vault_list.close_vault(id)
-      self
-    end
-
-    def close_vault_v2(id, external_input = {})
-      @external_input = external_input
-      @vault_list = vault_list.close_vault(id)
-      self
+    def close_vault(id, external_input = {data: nil})
+      if external_input.has_key?(:data)
+        update_external_data(id: id , data: external_input[:data])
+        @vault_list = vault_list.close_vault(id)
+        self
+      else
+        @external_input = external_input
+        @vault_list = vault_list.close_vault(id)
+        self
+      end
     end
 
     def retrieve_contents(id)

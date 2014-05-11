@@ -25,16 +25,16 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "bob_contract_secret":{
             "description":"contract specific password to lock private information",
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_DATA",
-            "unlock_with": "EXTERNAL_DATA",
+            "lock_with": "EXTERNAL_INPUT['bcs_key']",
+            "unlock_with": "EXTERNAL_INPUT['bcs_key']",
             "contents": ""
           },
 
           "alice_contract_secret":{
             "description":"contract specific password to lock private information",
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_DATA",
-            "unlock_with": "EXTERNAL_DATA",
+            "lock_with": "EXTERNAL_INPUT['acs_key']",
+            "unlock_with": "EXTERNAL_INPUT['acs_key']",
             "contents": ""
           },
 
@@ -72,7 +72,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "congratulations_message":{
             "description":"A simple message for Bob to put in the final vault",
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "EXTERNAL_INPUT['msg']",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
             "contents": ""

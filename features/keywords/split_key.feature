@@ -13,22 +13,22 @@ Scenario: Close And Open With Split Key
         "vaults": {
           "a_consent_key":{
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_DATA",
-            "unlock_with": "EXTERNAL_DATA",
+            "lock_with": "EXTERNAL_INPUT['a_secret']",
+            "unlock_with": "EXTERNAL_INPUT['a_secret']",
             "contents": ""
           },
 
           "b_consent_key":{
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_DATA",
-            "unlock_with": "EXTERNAL_DATA",
+            "lock_with": "EXTERNAL_INPUT['b_secret']",
+            "unlock_with": "EXTERNAL_INPUT['b_secret']",
             "contents": ""
           },
 
           "c_consent_key":{
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_DATA",
-            "unlock_with": "EXTERNAL_DATA",
+            "lock_with": "EXTERNAL_INPUT['c_secret']",
+            "unlock_with": "EXTERNAL_INPUT['c_secret']",
             "contents": ""
           },
 
@@ -40,7 +40,7 @@ Scenario: Close And Open With Split Key
           },
 
           "abc_consent_message":{
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "EXTERNAL_INPUT['consent_message']",
             "lock_with": "KEY['abc_joint_consent_key']",
             "unlock_with": "KEY['abc_joint_consent_key']",
             "contents": ""

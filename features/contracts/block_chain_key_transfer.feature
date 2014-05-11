@@ -36,7 +36,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
         "sender_btc_signing_key":{
           "description":"This is the secret Bitcoin Signing Key that SENDER wishes to transfer to RECEIVER. The RECEIVER can unlock only after he has the revealed address.",
-          "fill_with": "EXTERNAL_DATA",
+          "fill_with": "EXTERNAL_INPUT['ssk']",
           "lock_with": "KEY['sender_concealed_destination_wallet_address']",
           "unlock_with": "KEY['receiver_revealed_destination_wallet_address']",
           "contents": ""
@@ -44,7 +44,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
         "sender_origin_wallet_address":{
           "description":"SENDER origin wallet address. Chosen by SENDER and known in advance to RECEIVER.",
-          "fill_with": "EXTERNAL_DATA",
+          "fill_with": "EXTERNAL_INPUT['sowa']",
           "lock_with": "UNLOCKED",
           "unlock_with": "UNLOCKED",
           "contents": ""
@@ -52,7 +52,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
         "sender_concealed_destination_wallet_address":{
           "description":"SENDER concealed copy of the destination wallet address. This wallet address is kept secret until SENDER chosed to transfer BTC to it",
-          "fill_with": "EXTERNAL_DATA",
+          "fill_with": "EXTERNAL_INPUT['scdwa']",
           "lock_with": "KEY['sender_secret']",
           "unlock_with": "KEY['sender_secret']",
           "contents": ""
@@ -60,7 +60,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
         "receiver_revealed_destination_wallet_address":{
           "description":"RECEIVER monitors the Block Chain and fills this vault with the newly revealied destination address.",
-          "fill_with": "EXTERNAL_DATA",
+          "fill_with": "EXTERNAL_INPUT['rrdwa']",
           "lock_with": "KEY['receiver_secret']",
           "unlock_with": "KEY['receiver_secret']",
           "contents": ""
@@ -68,16 +68,16 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
         "receiver_secret":{
           "fill_with": "RANDOM_NUMBER",
-          "lock_with": "EXTERNAL_DATA",
-          "unlock_with": "EXTERNAL_DATA",
+          "lock_with": "EXTERNAL_INPUT['rs_key']",
+          "unlock_with": "EXTERNAL_INPUT['rs_key']",
           "contents": ""
         },
 
         "sender_secret":{
           "description":"Contract specific password for SENDER. Used to Lock the SENDER private information.",
           "fill_with": "RANDOM_NUMBER",
-          "lock_with": "EXTERNAL_DATA",
-          "unlock_with": "EXTERNAL_DATA",
+          "lock_with": "EXTERNAL_INPUT['ss_key']",
+          "unlock_with": "EXTERNAL_INPUT['ss_key']",
           "contents": ""
         }
 

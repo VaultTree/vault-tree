@@ -18,7 +18,7 @@ Scenario: Asymmetric Vault
         "header": {},
         "vaults": {
           "asymmetric_message":{
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "EXTERNAL_INPUT['asymmetric_message']",
             "lock_with": "DH_KEY['another_public_key','my_decryption_key']",
             "unlock_with": "DH_KEY['my_public_key','another_decryption_key']",
             "contents": ""

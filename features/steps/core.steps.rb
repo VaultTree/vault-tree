@@ -111,11 +111,11 @@ Given(/^the blank contract:$/) do |string|
 end
 
 When(/^I lock a message in a vault using a symmetric vault key$/) do
-  @external_data = {"message" => "CONGRATS! YOU OPENED THE VAULT."}
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'MY_SECURE_PASS', external_data: @external_data)
-  @contract = @contract.close_vault('message')
+  @contract = VaultTree::Contract.new(@contract_json)
+  @msg = "CONGRATS! YOU OPENED THE VAULT."
+  @contract = @contract.close_vault('message', msg: @msg)
 end
 
 Then(/^I can recover the message using the same key$/) do
-  @contract.retrieve_contents('message').should == @external_data['message']
+  @contract.retrieve_contents('message').should == @msg
 end

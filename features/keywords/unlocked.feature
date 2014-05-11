@@ -24,7 +24,7 @@ Scenario: Transfer Key Via Unlocked Vault
             },
           "message_locked_with_random":{
             "description":"A simple message locked with a random number",
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "EXTERNAL_INPUT['msg']",
             "lock_with": "KEY['random_vault_key']",
             "unlock_with": "KEY['random_vault_key']",
             "contents": ""

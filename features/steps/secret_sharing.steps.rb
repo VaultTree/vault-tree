@@ -34,3 +34,15 @@ Then(/^I successfully gather the locked shares and unlock the message$/) do
   puts @recovered_message
   @recovered_message.should == @external_data["message"]
 end
+
+When(/^I lock away the shamir key share collection$/) do
+  @contract = VaultTree::Contract.new(@contract_json)
+  @contract = @contract.close_vault('share_collection')
+end
+
+Then(/^a random key is generated and split with the shamir secret sharing algorithm$/) do
+end
+
+Then(/^I can open the vault to recover the JSON representation of the secret shares$/) do
+  JSON.parse(@contract.retrieve_contents('share_collection')).should be_an_instance_of(Hash)
+end

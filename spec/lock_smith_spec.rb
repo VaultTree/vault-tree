@@ -39,28 +39,5 @@ module VaultTree
       end
     end
 
-    describe '#split_random_secret' do
-      it 'returns an array with the correct number strings' do
-        secret_shares = LockSmith.new(outstanding_secret_shares: 5, secret_recovery_threshold: 3).split_random_secret
-        secret_shares.should be_an_instance_of(Array)
-        secret_shares.first.should be_an_instance_of(String)
-        secret_shares.length.should == 5
-      end
-    end
-
-    describe '#split_random_secret | #assemble_shamir_key' do
-      context 'with 3 out of 5 secrets' do
-        it 'can generate and recover the split secret' do
-          secret_shares = LockSmith.new(outstanding_secret_shares: 5, secret_recovery_threshold: 3).split_random_secret
-          first_three = secret_shares[0..2]
-          last_three = secret_shares[2..4]
-          recovered_from_first_three = LockSmith.new(secret_shares: first_three).assemble_shamir_key
-          recovered_from_last_three = LockSmith.new(secret_shares: last_three).assemble_shamir_key
-          recovered_from_first_three.should_not be nil
-          recovered_from_first_three.should == recovered_from_last_three
-        end
-      end
-    end
-
   end
 end

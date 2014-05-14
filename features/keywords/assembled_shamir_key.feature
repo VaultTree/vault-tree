@@ -7,51 +7,51 @@ Scenario: Lock with Generated Key. Unlock with Assembled Shamir Key
         "header": {},
         "vaults": {
           "s_1":{
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "SHAMIR_SHARE['share_collection','1']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
           },
-
           "s_2":{
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "SHAMIR_SHARE['share_collection','2']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
           },
-
           "s_3":{
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "SHAMIR_SHARE['share_collection','3']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
           },
-
           "s_4":{
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "SHAMIR_SHARE['share_collection','4']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
           },
-
           "s_5":{
-            "fill_with": "EXTERNAL_DATA",
+            "fill_with": "SHAMIR_SHARE['share_collection','5']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
           },
-
+          "share_collection":{
+            "fill_with": "SHAMIR_KEY_SHARES['5','3']",
+            "lock_with": "UNLOCKED",
+            "unlock_with": "UNLOCKED",
+            "contents": ""
+          },
           "message":{
-            "fill_with": "EXTERNAL_DATA",
-            "lock_with": "GENERATED_SHAMIR_KEY['5','3','s_1','s_2','s_3','s_4','s_5']",
+            "fill_with": "EXTERNAL_INPUT['msg']",
+            "lock_with": "ASSEMBLED_SHAMIR_KEY['s_1','s_2','s_3','s_4','s_5']",
             "unlock_with": "ASSEMBLED_SHAMIR_KEY['s_1','s_2','s_3','s_4','s_5']",
             "contents": ""
           }
         }
       }
     """
-  And I create a new message
-  When I attempt to lock the message with a generated shamir key
-  Then key shares are created and locked away in their cooresponding vaults
-  When I attempt to unlock the message with the assembled shamir key
-  Then I successfully gather the locked shares and unlock the message
+  When I lock away the shamir key share collection
+  And I close the key shares in their respective vaults
+  Then I can lock away a message with the key assembled from the shares
+  And if all the shares are available I can unlock the message

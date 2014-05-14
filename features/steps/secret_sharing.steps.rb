@@ -58,3 +58,20 @@ Then(/^the library takes the approprate share from the collection vault and lock
   @contract.vault_closed?('share_2').should be true
   @contract.vault_closed?('share_3').should be true
 end
+
+When(/^I close the key shares in their respective vaults$/) do
+  @contract = @contract.close_vault('s_1')
+  @contract = @contract.close_vault('s_2')
+  @contract = @contract.close_vault('s_3')
+  @contract = @contract.close_vault('s_4')
+  @contract = @contract.close_vault('s_5')
+end
+
+Then(/^I can lock away a message with the key assembled from the shares$/) do
+  @message = 'MY SECRET STRING!'
+  @contract = @contract.close_vault('message', msg: @message)
+end
+
+Then(/^if all the shares are available I can unlock the message$/) do
+  @contract.retrieve_contents('message').should == @message
+end

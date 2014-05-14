@@ -12,11 +12,6 @@ Then(/^key shares are created and locked away in their cooresponding vaults$/) d
   @contract.vault_closed?('s_5').should be true
 end
 
-Then(/^I successfully gather the locked shares and unlock the message$/) do
-  puts @recovered_message
-  @recovered_message.should == @external_data["message"]
-end
-
 When(/^I lock away the shamir key share collection$/) do
   @contract = VaultTree::Contract.new(@contract_json)
   @contract = @contract.close_vault('share_collection')

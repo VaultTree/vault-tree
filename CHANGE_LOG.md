@@ -1,3 +1,9 @@
+## 0.3.17
+
+* Remove support for EXTERNAL_DATA Keyword
+* Use EXTERNAL_INPUT Insead
+
+
 ## 0.3.16
 
 * Remove support for GENERATED_SHAMIR_KEY Keyword

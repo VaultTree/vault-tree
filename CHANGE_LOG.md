@@ -1,3 +1,7 @@
+## 0.3.16
+
+* Remove support for GENERATED_SHAMIR_KEY Keyword
+
 ## 0.3.7
 
 * Add Better Exception Messaging

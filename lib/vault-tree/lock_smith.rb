@@ -1,5 +1,4 @@
 require 'rbnacl'
-require_relative 'lock_smith/generated_shamir_key'
 require_relative 'lock_smith/assembled_shamir_key'
 
 module VaultTree
@@ -140,20 +139,6 @@ module VaultTree
     # @return [String] assembled secret key
     def assemble_shamir_key
       VaultTree::Crypto::AssembledShamirKey.new( key_shares: secret_shares).assemble
-    end
-
-    # Generate a random secret key, and split the key with
-    # Shamir's algorithm.
-    #
-    # Threshold Requirment and Number of secret shares should be
-    # specified in the LockSmith initializer.
-    #
-    # @return [Array] Array of strings cooresponding to the secret shares
-    def split_random_secret
-      VaultTree::Crypto::GeneratedShamirKey.new(
-        outstanding_shares: outstanding_secret_shares,
-        recovery_threshold: secret_recovery_threshold
-      ).shares
     end
 
     private

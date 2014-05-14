@@ -7,7 +7,7 @@ need to know:
   - The **Vaults** section, which can be any collection of _vaults_ that form the
     contract.
 * The way in which you, the contract author, organize the vaults will determine the **Self-Enforcing Terms** of your contract.
-* Each vault will typically contain either an **external data** string that is provided by one of the contract
+* Each vault will typically contain either an **external input** string that is provided by one of the contract
   participants, or a key to anther vault.
 
 ### Writing and Simulating Contracts
@@ -47,7 +47,6 @@ Well, what if we associate each one of these steps in the scenario with some sim
 
 ```Ruby
 # This file: "features/core/one_two_three/one_two_three.steps.rb"
-# Associated Contract: "core/one_two_three.0.7.0.json"
 
 Given(/^Alice has the blank contract$/) do
   contract_path = VaultTree::ContractsRepo::PathHelpers.core_contracts('one_two_three.0.7.0.json')
@@ -55,15 +54,15 @@ Given(/^Alice has the blank contract$/) do
 end
 
 When(/^she locks all of her attributes$/) do
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'ALICE_SECURE_PASS', external_data: {})
+  @contract = VaultTree::Contract.new(@contract_json)
   @contract = @contract.close_vault('alice_decryption_key')
   @contract = @contract.close_vault('alice_public_encryption_key')
 end
 
 When(/^she sends the contract to Bob$/) do
   @contract_json = @contract.as_json
-  @bobs_external_data = {"congratulations_message" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
-  @contract = VaultTree::Contract.new(@contract_json, master_passphrase: 'BOB_SECURE_PASS', external_data: @bobs_external_data)
+  @bobs_external_input = {"congratulations_message" => "CONGRATS! YOU OPENED THE THIRD VAULT."}
+  @contract = VaultTree::Contract.new(@contract_json, @bobs_external_input)
 end
 ```
 
@@ -87,7 +86,7 @@ community off to a good start.
 I'll update these in the coming months as we get some more experience writing simple contracts.
 
 * The Vault Tree interpreter is stateless and always takes a contract as an input
-* All external data required for contract execution must be provided to the
+* All external input required for contract execution must be provided to the
 interpreter by the run time that is invoking the API. For example, there are no
 plans for the interpreter to make any network requests or do file IO.
 

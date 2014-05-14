@@ -46,3 +46,15 @@ end
 Then(/^I can open the vault to recover the JSON representation of the secret shares$/) do
   JSON.parse(@contract.retrieve_contents('share_collection')).should be_an_instance_of(Hash)
 end
+
+When(/^I fill an individual vault with the SECRET_SHARES keyword$/) do
+  @contract = @contract.close_vault('share_1')
+  @contract = @contract.close_vault('share_2')
+  @contract = @contract.close_vault('share_3')
+end
+
+Then(/^the library takes the approprate share from the collection vault and locks it away$/) do
+  @contract.vault_closed?('share_1').should be true
+  @contract.vault_closed?('share_2').should be true
+  @contract.vault_closed?('share_3').should be true
+end

@@ -119,15 +119,15 @@ Then(/^a MissingPartnerDecryptionKey exception is raised$/) do
   @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPartnerDecryptionKey)
 end
 
-When(/^I lock a vault with External Data and attempt to unlock with the wrong External Data$/) do
+When(/^I lock a vault with External Input and attempt to unlock with the wrong External Input$/) do
   locking_key = VaultTree::LockSmith.new().generate_secret_key
-  @contract = VaultTree::Contract.new(@contract_json, external_data: {'missing_external_data_vault' => locking_key})
-  @contract = @contract.close_vault('missing_external_data_vault')
+  @contract = VaultTree::Contract.new(@contract_json)
+  @contract = @contract.close_vault('some_random_vault', right_secret: 'LOCK_WITH_ME')
   @contract_json = @contract.as_json
   begin
     wrong_unlocking_key = VaultTree::LockSmith.new().generate_secret_key
-    @contract = VaultTree::Contract.new(@contract_json, external_data: {'missing_external_data_vault' => wrong_unlocking_key})
-    @contents = @contract.retrieve_contents('missing_external_data_vault')
+    @contract = VaultTree::Contract.new(@contract_json)
+    @contents = @contract.retrieve_contents('some_random_vault', wrong_secret: 'DO_NOT_UNLOCK_WITH_ME')
   rescue => e
     @exception = e
   end

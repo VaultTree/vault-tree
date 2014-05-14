@@ -29,62 +29,6 @@ Scenario: Empty Vault
   When I attempt to open an empty vault
   Then an EmptyVault exception is raised
 
-Scenario: Missing External Data On Vault Fill
-  Given this broken contract:
-    """javascript
-      {
-        "header": {},
-        "vaults": {
-          "missing_external_data_vault":{
-            "fill_with": "EXTERNAL_DATA",
-            "lock_with": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
-            "contents": ""
-          }
-        }
-      }
-    """
-  When I attempt fill a vault with External Data that does not exists
-  Then a MissingExternalData exception is raised
-
-Scenario: Missing External Data On Lock
-  Given this broken contract:
-    """javascript
-      {
-        "header": {},
-        "vaults": {
-          "missing_external_data_vault":{
-            "fill_with": "EXTERNAL_DATA",
-            "lock_with": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
-            "contents": ""
-          }
-        }
-      }
-    """
-  When I attempt lock a vault with External Data that does not exists
-  Then a MissingExternalData exception is raised
-
-Scenario: Missing External Data On Unlock
-  Given this broken contract:
-    """javascript
-      {
-        "header": {},
-        "vaults": {
-          "missing_external_data_vault":{
-            "description": "The external data is not provided in the initialzer. See the step definitions in this case.",
-            "fill_with": "RANDOM_NUMBER",
-            "lock_with": "RANDOM_NUMBER",
-            "unlock_with": "EXTERNAL_DATA",
-            "contents": ""
-          }
-        }
-      }
-    """
-  When I lock the data away
-  And I attempt to unlock a vault with External Data that does not exists
-  Then a MissingExternalData exception is raised
-
 Scenario: Unsupported Keyword
   Given this broken contract:
     """javascript
@@ -175,16 +119,16 @@ Scenario: Failed Symmetric Unlock Attempt
       {
         "header": {},
         "vaults": {
-          "missing_external_data_vault":{
+          "some_random_vault":{
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_DATA",
-            "unlock_with": "EXTERNAL_DATA",
+            "lock_with": "EXTERNAL_INPUT['right_secret']",
+            "unlock_with": "EXTERNAL_INPUT['wrong_secret']",
             "contents": ""
           }
         }
       }
     """
-  When I lock a vault with External Data and attempt to unlock with the wrong External Data
+  When I lock a vault with External Input and attempt to unlock with the wrong External Input
   Then a FailedUnlockAttempt exception is raised
 
 Scenario: Missing External Input On Lock

@@ -14,27 +14,39 @@ module VaultTree
     end
 
     def retrieve_contents
-      unlocked_contents
+      begin
+        doorman.unlock_contents
+      rescue RbNaCl::CryptoError => e
+        raise Exceptions::FailedUnlockAttempt.new(e, vault_id: id, unlocking_key: unlock_with)
+      end
+    end
+
+    def doorman
+      @doorman ||= Doorman.new(
+        vault: self,
+        id: id,
+        properties: properties
+      )
     end
 
     def fill_with
-      properties['fill_with']
+      doorman.fill_with
     end
 
     def lock_with
-      properties['lock_with']
+      doorman.lock_with
     end
 
     def unlock_with
-      properties['unlock_with']
+      doorman.unlock_with
     end
 
     def contents
-      properties['contents']
+      doorman.contents
     end
 
     def empty?
-      contents.empty?
+      doorman.empty_contents?
     end
 
     def filler
@@ -61,12 +73,12 @@ module VaultTree
       self
     end
 
-    def unlocked_contents
-      Doorman.new(self).unlocked_contents
-    end
-
     def locked_contents
-      Doorman.new(self).locked_contents
+      begin
+        doorman.lock_contents
+      rescue RbNaCl::CryptoError => e
+        raise Exceptions::FailedLockAttempt.new(e, vault_id: id, locking_key: lock_with)
+      end
     end
 
     def close_lock_ancestor
@@ -77,36 +89,12 @@ module VaultTree
       contract.close_vault(fill_ancestor_id)
     end
 
-    def has_lock_ancestor?
-      lock_with_key_or_contents?
-    end
-
-    def has_fill_ancestor?
-      fill_with_key_or_contents?
-    end
-
-    def lock_with_key_or_contents?
-      (locking_word_base == 'CONTENTS') || (locking_word_base == 'KEY')
-    end
-
-    def locking_word_base
-      KeywordInterpreter.new(lock_with,self).word_base
-    end
-
-    def fill_with_key_or_contents?
-      (filling_word_base == 'CONTENTS') || (filling_word_base == 'KEY')
-    end
-
-    def filling_word_base
-      KeywordInterpreter.new(fill_with,self).word_base
-    end
-
     def lock_ancestor_id
-      lock_with.extract_ancestor_id if has_lock_ancestor?
+      doorman.lock_ancestor
     end
 
     def fill_ancestor_id
-      fill_with.extract_ancestor_id if has_fill_ancestor?
+      doorman.fill_ancestor
     end
   end
 end

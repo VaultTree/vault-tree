@@ -12,7 +12,7 @@ Before you begin make sure you checkout the [Vault Tree Homepage] for an overvie
 
 ### Install
 
-As a prerequisite get [libsodium] (>= 0.4.3) on you machine. This is the underlying cryptographic library that Vault Tree depends on.
+As a prerequisite, get [libsodium] version (>= 0.4.3) on you machine. This is the underlying cryptographic library that Vault Tree depends on.
 
 [libsodium]: https://github.com/jedisct1/libsodium
 

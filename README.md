@@ -47,11 +47,11 @@ The [Documentation] is filled with examples of how to execute Vault Tree contrac
 
 Also, a great way to get going is to simply run the tests:
 
-* Clone the repo
+* clone the repo
 * bundle your dependencies
-* Run `rake`
+* run `rake`
 
-You sould see a full suite of green tests that will give you plenty of living
-examples of how you can use Vault Tree in your own application.
+You should see a full suite of green tests that will give you plenty of living
+examples of to use Vault Tree in your own application.
 
 [Documentation]: https://www.relishapp.com/vault-tree/vault-tree/docs

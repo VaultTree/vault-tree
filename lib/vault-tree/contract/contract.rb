@@ -15,9 +15,9 @@ module VaultTree
       self
     end
 
-    def retrieve_contents(id, external_input = {})
+    def open_vault(id, external_input = {})
       @external_input = @external_input.merge(external_input)
-      vault_list.retrieve_contents(id)
+      vault_list.open_vault(id)
     end
 
     def vault_closed?(id)

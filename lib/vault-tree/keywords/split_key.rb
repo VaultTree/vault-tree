@@ -13,7 +13,7 @@ module VaultTree
     private
 
     def required_keys
-      required_key_vaults.map {|id| contract.retrieve_contents(id) }
+      required_key_vaults.map {|id| contract.open_vault(id) }
     end
   end
 end

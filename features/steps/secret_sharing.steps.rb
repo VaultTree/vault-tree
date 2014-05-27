@@ -21,7 +21,7 @@ Then(/^a random key is generated and split with the shamir secret sharing algori
 end
 
 Then(/^I can open the vault to recover the JSON representation of the secret shares$/) do
-  JSON.parse(@contract.retrieve_contents('share_collection')).should be_an_instance_of(Hash)
+  JSON.parse(@contract.open_vault('share_collection')).should be_an_instance_of(Hash)
 end
 
 When(/^I fill an individual vault with the SECRET_SHARES keyword$/) do
@@ -50,5 +50,5 @@ Then(/^I can lock away a message with the key assembled from the shares$/) do
 end
 
 Then(/^if all the shares are available I can unlock the message$/) do
-  @contract.retrieve_contents('message').should == @message
+  @contract.open_vault('message').should == @message
 end

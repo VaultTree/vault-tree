@@ -32,7 +32,7 @@ module VaultTree
 
     def retrieve_key_shares
       @collected_shares = []
-      vault_ids.each{|id| @collected_shares << contract.retrieve_contents(id) }
+      vault_ids.each{|id| @collected_shares << contract.open_vault(id) }
       return @collected_shares
     end
 

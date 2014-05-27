@@ -13,9 +13,9 @@ module VaultTree
       self
     end
 
-    def retrieve_contents(id)
+    def open_vault(id)
       validate_vault(id)
-      vault(id).retrieve_contents
+      vault(id).open_vault
     end
 
     def vault_closed?(id)

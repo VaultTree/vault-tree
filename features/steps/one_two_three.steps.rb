@@ -17,30 +17,30 @@ When(/^she sends the contract to Bob$/) do
 end
 
 Then(/^Bob can access all of her public attributes$/) do
-  @contents = @contract.retrieve_contents('alice_public_encryption_key')
+  @contents = @contract.open_vault('alice_public_encryption_key')
 end
 
 When(/^Bob locks his attributes$/) do
 
   @contract = @contract.close_vault('bob_decryption_key', bcs_key: @bob_contract_secret_key)
   # Verify can reopen
-  @contract.retrieve_contents('bob_decryption_key', bcs_key: @bob_contract_secret_key)
+  @contract.open_vault('bob_decryption_key', bcs_key: @bob_contract_secret_key)
 
   @contract = @contract.close_vault('congratulations_message', bcs_key: @bob_contract_secret_key, msg: @congratulations_message)
   # Verify can reopen
-  @contract.retrieve_contents('congratulations_message', bcs_key: @bob_contract_secret_key)
+  @contract.open_vault('congratulations_message', bcs_key: @bob_contract_secret_key)
 
   @contract = @contract.close_vault('vault_two_key', bcs_key: @bob_contract_secret_key)
   # Verify they can reopen
-  @contract.retrieve_contents('vault_two_key', bcs_key: @bob_contract_secret_key)
+  @contract.open_vault('vault_two_key', bcs_key: @bob_contract_secret_key)
 
   @contract = @contract.close_vault('vault_three_key', bcs_key: @bob_contract_secret_key)
   # Verify they can reopen
-  @contract.retrieve_contents('vault_three_key', bcs_key: @bob_contract_secret_key)
+  @contract.open_vault('vault_three_key', bcs_key: @bob_contract_secret_key)
 
   @contract = @contract.close_vault('bob_public_encryption_key')
   # Verify they can reopen
-  @contract.retrieve_contents('bob_public_encryption_key')
+  @contract.open_vault('bob_public_encryption_key')
 end
 
 When(/^He fills and locks each of the three main vaults$/) do
@@ -52,6 +52,6 @@ end
 Then(/^Alice can execute the contract to recover the final message$/) do
   @contract_json = @contract.as_json
   @contract = VaultTree::Contract.new(@contract_json)
-  puts @contract.retrieve_contents('third', acs_key: @alice_contract_secret_key)
-  @contract.retrieve_contents('third', acs_key: @alice_contract_secret_key).should == @congratulations_message
+  puts @contract.open_vault('third', acs_key: @alice_contract_secret_key)
+  @contract.open_vault('third', acs_key: @alice_contract_secret_key).should == @congratulations_message
 end

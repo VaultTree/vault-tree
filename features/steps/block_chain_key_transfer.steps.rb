@@ -23,7 +23,7 @@ end
 
 Then(/^the RECEIVER can access the origin wallet address$/) do
   @receiver_secret = "#{VaultTree::LockSmith.new(message: 'RECEIVER_SECURE_PASS').secure_hash}"
-  @contract.retrieve_contents('sender_origin_wallet_address', rs_key: @receiver_secret).should == @sender_origin_wallet_address
+  @contract.open_vault('sender_origin_wallet_address', rs_key: @receiver_secret).should == @sender_origin_wallet_address
 end
 
 When(/^the SENDER reveals the hidden wallet address by transfering bitcoins from the origin address$/) do
@@ -34,7 +34,7 @@ When(/^the SENDER reveals the hidden wallet address by transfering bitcoins from
 end
 
 Then(/^the RECEIVER can unlock the vault to recover the transfered signing key$/) do
-  transfered_secret_key = @contract.retrieve_contents('sender_btc_signing_key', rs_key: @receiver_secret)
+  transfered_secret_key = @contract.open_vault('sender_btc_signing_key', rs_key: @receiver_secret)
   transfered_secret_key.should ==  @sender_btc_signing_key
   puts "PROPERLY TRANSFERED: #{transfered_secret_key} !"
 end

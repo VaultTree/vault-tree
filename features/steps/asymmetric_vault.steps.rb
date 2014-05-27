@@ -13,7 +13,7 @@ When(/^she sends the contract to Bob over the internet$/) do
 end
 
 Then(/^Bob can access of her public keys but not her private keys$/) do
-  @contents = @contract.retrieve_contents('alice_public_encryption_key')
+  @contents = @contract.open_vault('alice_public_encryption_key')
 end
 
 When(/^Bob locks his public and private keys$/) do
@@ -33,6 +33,6 @@ When(/^he sends the contract back to Alice over the internet$/) do
 end
 
 Then(/^Alice can unlock the message with a DH_KEY$/) do
-  puts @contract.retrieve_contents('message', acs_key: @acs_key)
-  @contract.retrieve_contents('message').should == @msg
+  puts @contract.open_vault('message', acs_key: @acs_key)
+  @contract.open_vault('message').should == @msg
 end

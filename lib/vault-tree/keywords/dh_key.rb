@@ -14,11 +14,11 @@ module VaultTree
     private
 
     def public_key_vault_contents
-      contract.retrieve_contents(public_key_vault_id)
+      contract.open_vault(public_key_vault_id)
     end
 
     def secret_key_vault_contents
-      contract.retrieve_contents(secret_key_vault_id)
+      contract.open_vault(secret_key_vault_id)
     end
   end
 end

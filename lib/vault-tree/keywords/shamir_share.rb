@@ -12,7 +12,7 @@ module VaultTree
     end
 
     def share_collection
-      JSON.parse contract.retrieve_contents(share_collection_vault)
+      JSON.parse contract.open_vault(share_collection_vault)
     end
   end
 end

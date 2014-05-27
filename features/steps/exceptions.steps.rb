@@ -36,7 +36,7 @@ end
 
 When(/^I attempt to open an empty vault$/) do
   begin
-    @contents = @contract.retrieve_contents('empty_vault')
+    @contents = @contract.open_vault('empty_vault')
   rescue => e
     @exception = e
   end
@@ -48,7 +48,7 @@ end
 
 When(/^I attempt to open a vault that does not exists$/) do
   begin
-    @contents = @contract.retrieve_contents('non_existant_vault')
+    @contents = @contract.open_vault('non_existant_vault')
   rescue => e
     @exception = e
   end
@@ -98,7 +98,7 @@ When(/^I lock a vault with External Input and attempt to unlock with the wrong E
   begin
     wrong_unlocking_key = VaultTree::LockSmith.new().generate_secret_key
     @contract = VaultTree::Contract.new(@contract_json)
-  @contents = @contract.retrieve_contents('some_random_vault', wrong_secret: 'DO_NOT_UNLOCK_WITH_ME')
+  @contents = @contract.open_vault('some_random_vault', wrong_secret: 'DO_NOT_UNLOCK_WITH_ME')
   rescue => e
     @exception = e
   end

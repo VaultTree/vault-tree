@@ -100,25 +100,23 @@ The **unlock_with** field naturally identifies the source of the vault's **Unloc
 
 It may not be obvious, but the reference to the Unlocking key does not necessarily need to be the same as the reference to the **Locking Key**. Here are some examples of where this could be the case: 
 
-* The same key is used to lock and unlock the vault, but copies of this key are
-* held in two separate vaults. Take a look at the **Block Chain Key Transfer**
-* contract to see a good example of this.
+* The same key is used to lock and unlock the vault, but copies of this key are held in two separate vaults. Take a look at the **Block Chain Key Transfer** contract to see a good example of this.
 * Vault Tree supports the notion of an **Asymmetric Vault** through the _DSL Keyword_
 
 ```
 DH_KEY
 ```
 
-An Asymmetric Vault is locked and unlocked with the help of a [Public-Private](http://en.wikipedia.org/wiki/Public-key_cryptography) keypair. Vault Tree's underlying cryptographic library makes this possible by implementing a cutting edge variant of the [ECDH] key exchange protocol.  
+An Asymmetric Vault is locked and unlocked with the help of a [Public-Private](http://en.wikipedia.org/wiki/Public-key_cryptography) keypair. Vault Tree's underlying cryptographic library makes this possible by implementing a cutting edge variant of the [ECDH] key exchange protocol.
 
 [ECDH]: http://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman
 
 #### Contents
 
-As you would expect, this field references the encrypted contents of the vault. In the example above you can see the _Base 64_ encoded ciphertext:
+As you would expect, this field references the encrypted contents of the vault. In the example above you can see the _Hex_ encoded ciphertext:
 
 ```
-"contents": "rSGrWGL4mEYtpuIaWO/iVGXAA5UUyLeeImSV3SBXzb+C7DW3"
+"contents": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
 ```
 Here are some items to keep in mind:
 

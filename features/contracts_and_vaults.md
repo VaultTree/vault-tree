@@ -4,9 +4,7 @@ Now that we've explored the ideas of a **Contract**, **Contract Enforcement**, a
 
 #### Vaults
 
-Vault Tree Contracts are made by assembling simple structures called **Vaults**.
-
-A vault is like a digital lock box that stores a single unambiguous piece of information. This piece of information is needed to continue the execution of a contract beyond a certain event.
+Vault Tree Contracts are made by assembling simple structures called **Vaults**. A vault is like a digital lock box that stores a single unambiguous piece of information.
 
 The light bulb should turn on when you realize that vaults can hold not only valuable external information, but the **keys to other vaults**.
 
@@ -21,6 +19,10 @@ benefit of being a **Distributed Cryptographic Contract**. This means:
 * Each Vault encrypts a piece of secret information. This can be external
 information such as a _URL_ or a _Bitcoin Wallet Address_. More often, a vault will contain the unlocking key to another vault in the contract.
 * The way in which the contract author **chooses to structure** the releationship between vaults, will determine how the contract is **Enforced**.
+* It is the responsibility of the contract author to arrange vaults so that there are no contract [moral hazards] or [perverse incentives].
+
+[moral hazards]: http://en.wikipedia.org/wiki/Moral_hazard
+[perverse incentives]: http://en.wikipedia.org/wiki/Perverse_incentive
 
 #### Complete Contracts
 
@@ -50,34 +52,29 @@ arranged to enforce the terms of the contract.
 Let's take a look at an example vault:
 
 ```javascript
-"bob_random_vault_key": {
+"bob_random_key": {
   "fill_with": "RANDOM_NUMBER",
-  "lock_with": "KEY['bob_vault_key']",
-  "unlock_with": "KEY['alice_vault_key']",
-  "contents": "rSGrWGL4mEYtpuIaWO/iVGXAA5UUyLeeImSV3SBXzb+C7DW3"
+  "lock_with": "KEY['bob_first_vault_key']",
+  "unlock_with": "KEY['alice_third_vault_key']",
+  "contents": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
 }
 ```
 
-It's important to keep in mind that, **every** vault follows this format. This convention for representing a vault should be sufficient to build any type of simplistic or sophisticated contract.
+It's important to keep in mind that, **every** vault follows this format. This
+convention for representing a vault should be sufficient to build any type of
+simple or sophisticated contract.
 
 #### Vault Id
 
-The **Vault Id** can be thought of as both the name and the **Unique** identifier of the vault.
+The **Vault Id** can be thought of as both the name and the **unique** identifier of the vault.
 
 In this case we have:
 
 ```
-"bob_random_vault_key"
+"bob_random_key"
 ```
 
-Try to give meaningful names that give insight into the locked contents held within the vault. Also, by convention vault names should begin with the name of the vault owner.
-
-A vault owner is the contract party that is responsibily for filling and locking the vault. In this simple case we have **bob**, but in an employment contract for example, we may have vault owners named **employer** and **employee**.
-
-It is the responsibility of the contract author to assign vault owners in such a way that there are no contract [moral hazards] or [perverse incentives].
-
-[moral hazards]: http://en.wikipedia.org/wiki/Moral_hazard
-[perverse incentives]: http://en.wikipedia.org/wiki/Perverse_incentive
+Try to give meaningful names that give insight into the locked contents held within the vault.
 
 #### Fill With
 
@@ -103,25 +100,23 @@ The **unlock_with** field naturally identifies the source of the vault's **Unloc
 
 It may not be obvious, but the reference to the Unlocking key does not necessarily need to be the same as the reference to the **Locking Key**. Here are some examples of where this could be the case: 
 
-* The same key is used to lock and unlock the vault, but copies of this key are
-* held in two separate vaults. Take a look at the **Block Chain Key Transfer**
-* contract to see a good example of this.
+* The same key is used to lock and unlock the vault, but copies of this key are held in two separate vaults. Take a look at the **Block Chain Key Transfer** contract to see a good example of this.
 * Vault Tree supports the notion of an **Asymmetric Vault** through the _DSL Keyword_
 
 ```
 DH_KEY
 ```
 
-An Asymmetric Vault is locked and unlocked with the help of a [Public-Private](http://en.wikipedia.org/wiki/Public-key_cryptography) keypair. Vault Tree's underlying cryptographic library makes this possible by implementing a cutting edge variant of the [ECDH] key exchange protocol.  
+An Asymmetric Vault is locked and unlocked with the help of a [Public-Private](http://en.wikipedia.org/wiki/Public-key_cryptography) keypair. Vault Tree's underlying cryptographic library makes this possible by implementing a cutting edge variant of the [ECDH] key exchange protocol.
 
 [ECDH]: http://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman
 
 #### Contents
 
-As you would expect, this field references the encrypted contents of the vault. In the example above you can see the _Base 64_ encoded ciphertext:
+As you would expect, this field references the encrypted contents of the vault. In the example above you can see the _Hex_ encoded ciphertext:
 
 ```
-"contents": "rSGrWGL4mEYtpuIaWO/iVGXAA5UUyLeeImSV3SBXzb+C7DW3"
+"contents": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
 ```
 Here are some items to keep in mind:
 

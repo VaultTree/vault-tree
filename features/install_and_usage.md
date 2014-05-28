@@ -1,57 +1,62 @@
-Make sure you checkout the README in the [Github Repo] for the full install documentation.
+### Install
 
-[Github Repo]: https://github.com/VaultTree/vault-tree
+As a prerequisite, get [libsodium] version (>= 0.4.3) on you machine. This is the underlying cryptographic library that Vault Tree depends on.
 
-### Install With Vagrant
+[libsodium]: https://github.com/jedisct1/libsodium
 
-I think it should be easy for you to get a Vault Tree development environment up and running. If you don't know about Vagrant, you should, it's awesome!
+* If you are on _OSX_ there is a [brew] package available. So just:
 
-* Follow the [Vagrant] download and install steps
-* Clone the Vault Tree Repo and go into it:
+  ```
+  brew install libsodium
+  ```
 
-[Vagrant]: http://www.vagrantup.com/
+[brew]: http://brew.sh/
 
-```shell
-git clone git@github.com:VaultTree/vault-tree.git
-cd ~/path/to/vault-tree/
+* If you're on a Debian based system, there is no _apt-get_ package that I know of, but there
+  are some helpful install scripts on the web.
+
+Now that you have libsodium, if you're a Ruby developer you know the drill from here:
+
+```ruby
+gem install vault-tree
 ```
 
-Now you just need to Vagrant Up!
+and then
 
-```shell
-vagrant up
+```ruby
+require 'vault-tree'
+```
+somewhere before you use it.
+
+### Usage
+
+Executing contracts in your Ruby application is is simple.
+
+Instantiate a new contract object with its corresponding JSON:
+
+```ruby
+  @contract = VaultTree::Contract.new(contract_json)
 ```
 
-This will download and boot a pre-packaged Linux virtual machine with Vault-Tree and all dependencies already installed.
+From here you have two methods available:
 
-Once your VM is downloaded and built. You can go inside with:
-
-```shell
-vagrant ssh
+```ruby
+  @contract.close_vault('vault_id', external_input = {})
 ```
 
-As a developer working on Vault Tree you can now go to the VM's directory:
-
-```
-/vagrant
-```
-and run
-
-```
-bundle
-rake
+```ruby
+  @contract.open_vault('vault_id', external_input = {})
 ```
 
-This will pull down the latest version of the code from [Ruby Gems] and then run all the core contracts and put you in a good spot to start exploring the library.
+### Testing
 
-If you're not already familiar, take a few minutes to learn about how Vagrant will [sync your files] to and from the guest machine.
+A great way to get going is to simply run the tests:
 
-[vault-tree]: https://github.com/VaultTree/vault-tree
-[main repo]: https://github.com/VaultTree/vault-tree
-[Ruby Gems]: http://rubygems.org
+* clone the repo
+* bundle your dependencies
+* run `rake`
 
-### Install With Bundler
+You should see a full suite of green tests that will give you plenty of living
+examples of to use Vault Tree in your own application.
 
-If you are comfortable with Ruby and Bundler checkout the README in the [main repo] to get started with a direct install.
-
-[main repo]: https://github.com/VaultTree/vault-tree
+[Documentation]: https://www.relishapp.com/vault-tree/vault-tree/docs

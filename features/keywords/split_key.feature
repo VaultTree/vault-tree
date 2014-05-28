@@ -3,7 +3,7 @@ Feature: Split Key
   ```javascript
   SPLIT_KEY['id_1','id_2','id_3']
   ```
-  Split Key is a simple for of secret sharing. 
+  Split Key is a simple form of secret sharing.
 
 Scenario: Close And Open With Split Key
   Given the blank contract:

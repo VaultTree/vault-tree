@@ -34,13 +34,11 @@ module VaultTree
       end
 
       def symmetric_ciphertext
-        key_hash = LockSmith.new(message: locking_key).secure_hash
-        LockSmith.new(message: filler, secret_key: key_hash).symmetric_encrypt
+        LockSmith.new(message: filler, secret_key: locking_key).symmetric_encrypt
       end
 
       def symmetric_plaintext
-        key_hash = LockSmith.new(message: unlocking_key).secure_hash
-        LockSmith.new(cipher_text: contents, secret_key: key_hash).symmetric_decrypt
+        LockSmith.new(cipher_text: contents, secret_key: unlocking_key).symmetric_decrypt
       end
 
       def fill_with

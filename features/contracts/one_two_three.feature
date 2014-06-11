@@ -96,7 +96,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "first":{
             "description":"This is an asymmetric vault with mutual authentication. It contains the key to vault two and is locked by Bob, with Alices public key. Only Alice can unlock it.",
-            "fill_with": "KEY['vault_two_key']",
+            "fill_with": "CONTENTS['vault_two_key']",
             "lock_with": "DH_KEY['alice_public_encryption_key','bob_decryption_key']",
             "unlock_with": "DH_KEY['bob_public_encryption_key','alice_decryption_key']",
             "contents": ""
@@ -104,7 +104,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "second":{
             "description":"Alice unlocks this vault with the key held in the first vault.",
-            "fill_with": "KEY['vault_three_key']",
+            "fill_with": "CONTENTS['vault_three_key']",
             "lock_with": "KEY['vault_two_key']",
             "unlock_with": "KEY['first']",
             "contents": ""
@@ -112,7 +112,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "third":{
             "description":"Contains a simple message. Unlock the key found in the second vault.",
-            "fill_with": "KEY['congratulations_message']",
+            "fill_with": "CONTENTS['congratulations_message']",
             "lock_with": "KEY['vault_three_key']",
             "unlock_with": "KEY['second']",
             "contents": ""

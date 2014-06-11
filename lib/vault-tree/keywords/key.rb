@@ -7,6 +7,12 @@ module VaultTree
     end
 
     def evaluate
+      LockSmith.new(message: raw_contents).secure_hash
+    end
+
+    private
+
+    def raw_contents
       contract.open_vault(vault_id)
     end
   end

@@ -1,5 +1,9 @@
 Feature: External Key
 
+  EXTERNAL_KEY ensures your password is run through a secure hash before it is used to
+  lock contents. Hashing guarentees a properly padded vault key and keeps the locked vault
+  more secure if you have a weak password.
+
   Scenario: Close And Open Using and External Key
     Given the blank contract:
       """javascript

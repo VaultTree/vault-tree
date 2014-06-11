@@ -93,12 +93,12 @@ end
 When(/^I lock a vault with External Input and attempt to unlock with the wrong External Input$/) do
   locking_key = VaultTree::LockSmith.new().generate_secret_key
   @contract = VaultTree::Contract.new(@contract_json)
-  @contract = @contract.close_vault('some_random_vault', right_secret: 'LOCK_WITH_ME')
+  @contract = @contract.close_vault('some_random_vault', right_secret: '5dd0abe3335d6f0ceab00e44a9d41a030c2a59802ffd6b42464c01f1c7fbdd68')
   @contract_json = @contract.as_json
   begin
     wrong_unlocking_key = VaultTree::LockSmith.new().generate_secret_key
     @contract = VaultTree::Contract.new(@contract_json)
-  @contents = @contract.open_vault('some_random_vault', wrong_secret: 'DO_NOT_UNLOCK_WITH_ME')
+  @contents = @contract.open_vault('some_random_vault', wrong_secret: '7dd0abe3335d6f0ceab00e44a9d41a030c2a59802ffd6b42464c01f1c7fbdd68')
   rescue => e
     @exception = e
   end

@@ -13,22 +13,22 @@ Scenario: Close And Open With Split Key
         "vaults": {
           "a_consent_key":{
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_INPUT['a_secret']",
-            "unlock_with": "EXTERNAL_INPUT['a_secret']",
+            "lock_with": "EXTERNAL_KEY['a_secret']",
+            "unlock_with": "EXTERNAL_KEY['a_secret']",
             "contents": ""
           },
 
           "b_consent_key":{
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_INPUT['b_secret']",
-            "unlock_with": "EXTERNAL_INPUT['b_secret']",
+            "lock_with": "EXTERNAL_KEY['b_secret']",
+            "unlock_with": "EXTERNAL_KEY['b_secret']",
             "contents": ""
           },
 
           "c_consent_key":{
             "fill_with": "RANDOM_NUMBER",
-            "lock_with": "EXTERNAL_INPUT['c_secret']",
-            "unlock_with": "EXTERNAL_INPUT['c_secret']",
+            "lock_with": "EXTERNAL_KEY['c_secret']",
+            "unlock_with": "EXTERNAL_KEY['c_secret']",
             "contents": ""
           },
 
@@ -49,6 +49,7 @@ Scenario: Close And Open With Split Key
       }
     """
   And Consent keys for parties A, B, and C
-  When I lock a message in a vault using a split key
+  When I lock a away the consent keys
+  And I lock a message in a vault using a split key
   Then I can recover the message if each party gives consent
   And I cannot recover the message if one party fails to give consent

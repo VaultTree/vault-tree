@@ -61,12 +61,16 @@ Given(/^Consent keys for parties A, B, and C$/) do
   @c_secret = "C_SECRET_CONSENT_KEY"
 end
 
-When(/^I lock a message in a vault using a split key$/) do
-  @abc_consent_message = "A, B, AND C ALL AGREED TO OPEN THE VAULT."
-  @contract = VaultTree::Contract.new(@contract_json)
+When(/^I lock a away the consent keys$/) do
   @contract = @contract.close_vault('a_consent_key', a_secret: @a_secret)
   @contract = @contract.close_vault('b_consent_key', b_secret: @b_secret)
   @contract = @contract.close_vault('c_consent_key', c_secret: @c_secret)
+  @contract_json = @contract.as_json
+end
+
+When(/^I lock a message in a vault using a split key$/) do
+  @abc_consent_message = "A, B, AND C ALL AGREED TO OPEN THE VAULT."
+  @contract = VaultTree::Contract.new(@contract_json)
   @contract = @contract.close_vault('abc_joint_consent_key',
                                      a_secret: @a_secret,
                                      b_secret: @b_secret,
@@ -102,6 +106,7 @@ end
 
 Given(/^the blank contract:$/) do |string|
   @contract_json = string
+  @contract = VaultTree::Contract.new(@contract_json)
 end
 
 When(/^I lock a message in a vault using a symmetric vault key$/) do

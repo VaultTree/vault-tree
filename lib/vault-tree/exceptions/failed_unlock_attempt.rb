@@ -7,34 +7,23 @@ module VaultTree
         @unlocking_key = params[:unlocking_key]
       end
 
-      def name
-        'Failed Unlock Attempt'
-      end
-
-      def search_word
-        'failed_unlock_exception'
-      end
-
       def runtime_information
         %Q{
           Attempted to Unlock Vault:
             #{@vault_id}
           With Key:
             #{@unlocking_key}
-        }
-      end
 
-      def troubleshooting_questions
-        %Q{* Access to Vault Key?
-             - Does the CPU that is executing this particular contract
-               have access to the vault key? It could be the case that
-               this contract does not permit you to open this particular vault.
-             - Are you providing the correct key to the Vault Tree Contract? It
-               could be that your are trying to open the vault with the wrong key.
-           * Invalid Ciphertext?
-             - Have the encrypted contents of the vault been tampered with?
-               The underlying Vault Tree Cryto library (NaCl) uses authenticated
-               encryption. This ensures that ciphertext cannot be modified.}
+        * Can you access the vault key?
+         - Does the CPU that is executing this particular contract
+           have access to the vault key? It could be the case that
+           this contract does not permit you to open this particular vault.
+         - Are you providing the correct key to the Vault Tree Contract? It
+           could be that your are trying to open the vault with the wrong key.
+        * Invalid Ciphertext?
+          - Have the encrypted contents of the vault been tampered with?
+            The underlying Vault Tree Cryto library (NaCl) uses authenticated
+            encryption. This ensures that ciphertext cannot be modified.}
       end
     end
   end

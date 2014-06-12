@@ -24,10 +24,6 @@ module VaultTree
         output_exception_message
       end
 
-      def search_word
-        nil
-      end
-
       def background
         nil
       end
@@ -37,7 +33,7 @@ module VaultTree
       end
 
       def name
-        nil
+        self.class
       end
 
       private
@@ -49,15 +45,9 @@ module VaultTree
       def full_exception_message
         %Q{
           #{message_banner}
-          #{present_name}
+          #{name}
           #{message_banner}
           #{present_runtime_information}
-          #{present_background}
-          #{present_troubleshooting}
-          #{present_original_exception_class}
-          #{present_original_exception_message}
-          #{present_original_backtrace}
-          #{message_banner}
         }
       end
 
@@ -65,51 +55,10 @@ module VaultTree
         %Q{####################################################}
       end
 
-      def present_name
-        "Vault Tree Exception: #{name}"
-      end
-
-      def present_summary
-        %Q{Here is what went wrong:
-            #{summary}
-        } unless summary.nil?
-      end
-
-      def present_troubleshooting
-        %Q{Troubleshooting Questions To Ask:
-            #{troubleshooting_questions}
-        } unless troubleshooting_questions.nil?
-      end
-
-      def present_background
-        %Q{Background Info:
-            #{background}
-        } unless background.nil?
-      end
-
       def present_runtime_information
-        %Q{Runtime Information:
-            #{runtime_information}
-        } unless runtime_information.empty?
+        "#{runtime_information}" unless runtime_information.empty?
       end
 
-      def present_original_exception_class
-        %Q{Original Exception Class:
-            #{original_exception.class}
-         } unless original_exception.nil?
-      end
-
-      def present_original_exception_message
-        %Q{Original Exception Message:
-            #{original_exception.message}
-         } unless original_exception.nil?
-      end
-
-      def present_original_backtrace
-        %Q{Original Exception Backtrace:
-            #{original_exception.backtrace.join("\n")}
-         } unless original_exception.nil?
-      end
     end
   end
 end

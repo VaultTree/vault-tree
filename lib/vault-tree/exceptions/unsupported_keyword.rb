@@ -6,14 +6,6 @@ module VaultTree
         @keyword = params[:keyword]
       end
 
-      def name
-        'Unsupported Keyword'
-      end
-
-      def search_word
-        'unsupported_keyword'
-      end
-
       def runtime_information
         %Q{
           It looks like you have used an unsupported Keyword.

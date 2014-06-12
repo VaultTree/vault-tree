@@ -1,4 +1,0 @@
-Vagrant::Config.run do |config|
-  config.vm.box = "vault-tree-box"
-  config.vm.box_url = "http://vault-tree-box.s3.amazonaws.com/package.box"
-end

@@ -1,5 +1,4 @@
 require 'rspec'
-RSpec.configure{ |config| config.color_enabled = true }
 require 'secretsharing'
 
 describe 'Secret Sharing Test Run' do

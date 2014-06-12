@@ -1,6 +1,5 @@
 require 'rspec'
 require 'JSON'
-RSpec.configure{ |config| config.color_enabled = true }
 require_relative '../lib/vault-tree/lock_smith/shamir_key_shares'
 
 module VaultTree

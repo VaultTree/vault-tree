@@ -49,6 +49,10 @@ module VaultTree
       doorman.empty_contents?
     end
 
+    def closed?
+      ! empty?
+    end
+
     def filler
       KeywordInterpreter.new(fill_with, self).evaluate
     end

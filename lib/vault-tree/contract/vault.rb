@@ -69,12 +69,8 @@ module VaultTree
     end
 
     def close_self
-      @properties['contents'] = locked_contents
+      @properties['contents'] = doorman.lock_contents
       self
-    end
-
-    def locked_contents
-      doorman.lock_contents
     end
 
     def close_lock_ancestor

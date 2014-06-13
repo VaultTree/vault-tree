@@ -13,12 +13,8 @@ module VaultTree
       close_self
     end
 
-    def open_vault
-      begin
-        doorman.unlock_contents
-      rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedUnlockAttempt.new(e, vault_id: id, unlocking_key: unlock_with)
-      end
+    def open
+      doorman.unlock_contents
     end
 
     def doorman
@@ -49,6 +45,10 @@ module VaultTree
       doorman.empty_contents?
     end
 
+    def closed?
+      ! empty?
+    end
+
     def filler
       KeywordInterpreter.new(fill_with, self).evaluate
     end
@@ -74,11 +74,7 @@ module VaultTree
     end
 
     def locked_contents
-      begin
-        doorman.lock_contents
-      rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedLockAttempt.new(e, vault_id: id, locking_key: lock_with)
-      end
+      doorman.lock_contents
     end
 
     def close_lock_ancestor

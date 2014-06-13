@@ -9,12 +9,20 @@ module VaultTree
       end
 
       def lock_contents
-        already_locked? ? contents : ciphertext_contents
+        begin
+          already_locked? ? contents : ciphertext_contents
+        rescue RbNaCl::CryptoError => e
+          raise Exceptions::FailedLockAttempt.new(e, vault_id: vault.id)
+        end
       end
 
       def unlock_contents
-        raise Exceptions::EmptyVault if empty_contents?
-        plaintext_contents
+        begin
+          raise Exceptions::EmptyVault if empty_contents?
+          plaintext_contents
+        rescue RbNaCl::CryptoError => e
+          raise Exceptions::FailedUnlockAttempt.new(e, vault_id: vault.id)
+        end
       end
 
       def ciphertext_contents

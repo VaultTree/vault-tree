@@ -11,8 +11,6 @@ module VaultTree
         %Q{
           Attempted to Lock Vault:
             #{@vault_id}
-          With Key:
-            #{@locking_key}
         }
       end
     end

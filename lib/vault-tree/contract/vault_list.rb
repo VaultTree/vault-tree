@@ -15,7 +15,7 @@ module VaultTree
 
     def open_vault(id)
       validate_vault(id)
-      vault(id).open_vault
+      vault(id).open
     end
 
     def vault_closed?(id)

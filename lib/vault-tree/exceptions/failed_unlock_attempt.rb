@@ -11,8 +11,6 @@ module VaultTree
         %Q{
           Attempted to Unlock Vault:
             #{@vault_id}
-          With Key:
-            #{@unlocking_key}
 
         * Can you access the vault key?
          - Does the CPU that is executing this particular contract

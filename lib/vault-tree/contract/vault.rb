@@ -14,11 +14,7 @@ module VaultTree
     end
 
     def open
-      begin
-        doorman.unlock_contents
-      rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedUnlockAttempt.new(e, vault_id: id, unlocking_key: unlock_with)
-      end
+      doorman.unlock_contents
     end
 
     def doorman
@@ -78,11 +74,7 @@ module VaultTree
     end
 
     def locked_contents
-      begin
-        doorman.lock_contents
-      rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedLockAttempt.new(e, vault_id: id, locking_key: lock_with)
-      end
+      doorman.lock_contents
     end
 
     def close_lock_ancestor

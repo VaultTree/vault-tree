@@ -13,7 +13,7 @@ module VaultTree
       close_self
     end
 
-    def open_vault
+    def open
       begin
         doorman.unlock_contents
       rescue RbNaCl::CryptoError => e

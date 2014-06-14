@@ -1,27 +1,18 @@
 module VaultTree
   class Vault
     class Doorman
-      attr_reader :vault, :properties
+      attr_reader :vault
 
       def initialize(params = {})
         @vault = params[:vault]
-        @properties = params[:properties]
       end
 
       def lock_contents
-        begin
-          already_locked? ? contents : encrypt_contents
-        rescue RbNaCl::CryptoError => e
-          raise Exceptions::FailedLockAttempt.new(e, vault_id: vault.id)
-        end
+        already_locked? ? vault.contents : encrypt_contents
       end
 
       def unlock_contents
-        begin
-          plaintext_contents
-        rescue RbNaCl::CryptoError => e
-          raise Exceptions::FailedUnlockAttempt.new(e, vault_id: vault.id)
-        end
+        plaintext_contents
       end
 
       def encrypt_contents
@@ -37,7 +28,7 @@ module VaultTree
       end
 
       def asymmetric_plaintext
-        LockSmith.new(public_key: unlocking_public_key, private_key: unlocking_secret_key, cipher_text: contents).asymmetric_decrypt
+        LockSmith.new(public_key: unlocking_public_key, private_key: unlocking_secret_key, cipher_text: vault.contents).asymmetric_decrypt
       end
 
       def symmetric_ciphertext
@@ -45,23 +36,7 @@ module VaultTree
       end
 
       def symmetric_plaintext
-        LockSmith.new(cipher_text: contents, secret_key: unlocking_key).symmetric_decrypt
-      end
-
-      def fill_with
-        properties['fill_with']
-      end
-
-      def lock_with
-        properties['lock_with']
-      end
-
-      def unlock_with
-        properties['unlock_with']
-      end
-
-      def contents
-        properties['contents']
+        LockSmith.new(cipher_text: vault.contents, secret_key: unlocking_key).symmetric_decrypt
       end
 
       def locking_key
@@ -97,7 +72,7 @@ module VaultTree
       end
 
       def empty_contents?
-        contents.nil? || contents.empty?
+        vault.contents.nil? || vault.contents.empty?
       end
 
       def already_locked?
@@ -109,11 +84,11 @@ module VaultTree
       end
 
       def dh_locking_key?
-        lock_with =~ /DH_KEY/
+        vault.lock_with =~ /DH_KEY/
       end
 
       def dh_unlocking_key?
-        unlock_with =~ /DH_KEY/
+        vault.unlock_with =~ /DH_KEY/
       end
     end
   end

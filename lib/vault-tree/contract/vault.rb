@@ -9,21 +9,25 @@ module VaultTree
     end
 
     def close
-      @properties['contents'] = doorman.lock_contents
-      self
+      begin
+        @properties['contents'] = doorman.lock_contents
+        self
+      rescue RbNaCl::CryptoError => e
+        raise Exceptions::FailedLockAttempt.new(e, vault_id: id)
+      end
     end
 
     def open
-      contract.close_vault(id)
-      doorman.unlock_contents
+      begin
+        contract.close_vault(id)
+        doorman.unlock_contents
+      rescue RbNaCl::CryptoError => e
+        raise Exceptions::FailedUnlockAttempt.new(e, vault_id: id)
+      end
     end
 
     def doorman
-      @doorman ||= Doorman.new(
-        vault: self,
-        id: id,
-        properties: properties
-      )
+      @doorman ||= Doorman.new(vault: self)
     end
 
     def fill_with

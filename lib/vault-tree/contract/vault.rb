@@ -9,11 +9,12 @@ module VaultTree
     end
 
     def close
-      close_ancestors
-      close_self
+      @properties['contents'] = doorman.lock_contents
+      self
     end
 
     def open
+      contract.close_vault(id)
       doorman.unlock_contents
     end
 
@@ -26,27 +27,19 @@ module VaultTree
     end
 
     def fill_with
-      doorman.fill_with
+      properties['fill_with']
     end
 
     def lock_with
-      doorman.lock_with
+      properties['lock_with']
     end
 
     def unlock_with
-      doorman.unlock_with
+      properties['unlock_with']
     end
 
     def contents
-      doorman.contents
-    end
-
-    def empty?
-      doorman.empty_contents?
-    end
-
-    def closed?
-      ! empty?
+      properties['contents']
     end
 
     def filler
@@ -61,32 +54,5 @@ module VaultTree
       KeywordInterpreter.new(unlock_with, self).evaluate
     end
 
-    private
-
-    def close_ancestors
-      close_lock_ancestor
-      close_fill_ancestor
-    end
-
-    def close_self
-      @properties['contents'] = doorman.lock_contents
-      self
-    end
-
-    def close_lock_ancestor
-      contract.close_vault(lock_ancestor_id)
-    end
-
-    def close_fill_ancestor
-      contract.close_vault(fill_ancestor_id)
-    end
-
-    def lock_ancestor_id
-      doorman.lock_ancestor
-    end
-
-    def fill_ancestor_id
-      doorman.fill_ancestor
-    end
   end
 end

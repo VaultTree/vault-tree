@@ -13,11 +13,7 @@ module VaultTree
     private
 
     def decryption_key
-      begin
-        contract.open_vault(vault_id)
-      rescue Exceptions::EmptyVault => e
-        raise Exceptions::MissingPartnerDecryptionKey.new(e, vault_id: vault_id )
-      end
+      contract.open_vault(vault_id)
     end
   end
 end

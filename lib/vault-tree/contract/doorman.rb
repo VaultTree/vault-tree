@@ -10,7 +10,7 @@ module VaultTree
 
       def lock_contents
         begin
-          already_locked? ? contents : ciphertext_contents
+          already_locked? ? contents : encrypt_contents
         rescue RbNaCl::CryptoError => e
           raise Exceptions::FailedLockAttempt.new(e, vault_id: vault.id)
         end
@@ -18,14 +18,13 @@ module VaultTree
 
       def unlock_contents
         begin
-          raise Exceptions::EmptyVault if empty_contents?
           plaintext_contents
         rescue RbNaCl::CryptoError => e
           raise Exceptions::FailedUnlockAttempt.new(e, vault_id: vault.id)
         end
       end
 
-      def ciphertext_contents
+      def encrypt_contents
         dh_locking_key? ? asymmetric_ciphertext : symmetric_ciphertext
       end
 
@@ -110,47 +109,11 @@ module VaultTree
       end
 
       def dh_locking_key?
-        vault.lock_with =~ /DH_KEY/
+        lock_with =~ /DH_KEY/
       end
 
       def dh_unlocking_key?
-        vault.unlock_with =~ /DH_KEY/
-      end
-
-      def fill_ancestor
-        fill_with.extract_ancestor_id if has_fill_ancestor?
-      end
-
-      def lock_ancestor
-        lock_with.extract_ancestor_id if has_lock_ancestor?
-      end
-
-      def has_lock_ancestor?
-        lock_with_key_or_contents?
-      end
-
-      def lock_with_key_or_contents?
-        (locking_word_base == 'CONTENTS') || (locking_word_base == 'KEY')
-      end
-
-      def has_fill_ancestor?
-        fill_with_key_or_contents?
-      end
-
-      def fill_with_key_or_contents?
-        (filling_word_base == 'CONTENTS') || (filling_word_base == 'KEY')
-      end
-
-      def filling_word_base
-        word_base fill_with
-      end
-
-      def locking_word_base
-        word_base lock_with
-      end
-
-      def word_base(word)
-        word.gsub(/(\[.*\])/,'').strip
+        unlock_with =~ /DH_KEY/
       end
     end
   end

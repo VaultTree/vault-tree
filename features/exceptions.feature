@@ -10,25 +10,6 @@ Feature: Vault Tree Exceptions
 
   Thanks!
 
-Scenario: Empty Vault
-  Given this broken contract:
-    """javascript
-      {
-        "header": {},
-        "vaults": {
-
-          "empty_vault":{
-            "fill_with": "RANDOM_NUMBER",
-            "lock_with": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
-            "contents": ""
-          }
-        }
-      }
-    """
-  When I attempt to open an empty vault
-  Then an EmptyVault exception is raised
-
 Scenario: Unsupported Keyword
   Given this broken contract:
     """javascript
@@ -84,34 +65,6 @@ Scenario: Vault Does Not Exists on Closing
     """
   When I attempt to close a vault that does not exists
   Then a VaultDoesNotExist exception is raised
-
-Scenario: Missing Partner Decryption Key
-  Given this broken contract:
-    """javascript
-      {
-        "header": {},
-        "vaults": {
-
-          "empty_decryption_key":{
-            "description": "Leave this empty.",
-            "fill_with": "DECRYPTION_KEY",
-            "lock_with": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
-            "contents": ""
-          },
-
-          "orphaned_public_key":{
-            "description": "Attempt to establish a public key with first building a decryption key",
-            "fill_with": "PUBLIC_ENCRYPTION_KEY['empty_decryption_key']",
-            "lock_with": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
-            "contents": ""
-          }
-        }
-      }
-    """
-  When I attempt to fill with an encryption key without first establishing the decryption key
-  Then a MissingPartnerDecryptionKey exception is raised
 
 Scenario: Failed Symmetric Unlock Attempt
   Given this broken contract:

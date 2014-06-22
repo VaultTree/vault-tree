@@ -38,8 +38,6 @@ module VaultTree
       KeywordInterpreter.new(properties['unlock_with'], self).evaluate
     end
 
-    # Methods From Doorman
-
     def lock_contents
       already_locked? ? properties['contents'] : encrypt_contents
     end
@@ -111,6 +109,5 @@ module VaultTree
     def dh_unlocking_key?
       properties['unlock_with'] =~ /DH_KEY/
     end
-
   end
 end

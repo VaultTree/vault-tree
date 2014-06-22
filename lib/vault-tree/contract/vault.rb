@@ -26,38 +26,22 @@ module VaultTree
       end
     end
 
-    def fill_with
-      properties['fill_with']
-    end
-
-    def lock_with
-      properties['lock_with']
-    end
-
-    def unlock_with
-      properties['unlock_with']
-    end
-
-    def contents
-      properties['contents']
-    end
-
     def filler
-      KeywordInterpreter.new(fill_with, self).evaluate
+      KeywordInterpreter.new(properties['fill_with'], self).evaluate
     end
 
     def locking_key
-      KeywordInterpreter.new(lock_with, self).evaluate
+      KeywordInterpreter.new(properties['lock_with'], self).evaluate
     end
 
     def unlocking_key
-      KeywordInterpreter.new(unlock_with, self).evaluate
+      KeywordInterpreter.new(properties['unlock_with'], self).evaluate
     end
 
     # Methods From Doorman
 
     def lock_contents
-      already_locked? ? contents : encrypt_contents
+      already_locked? ? properties['contents'] : encrypt_contents
     end
 
     def unlock_contents
@@ -77,7 +61,7 @@ module VaultTree
     end
 
     def asymmetric_plaintext
-      LockSmith.new(public_key: unlocking_public_key, private_key: unlocking_secret_key, cipher_text: contents).asymmetric_decrypt
+      LockSmith.new(public_key: unlocking_public_key, private_key: unlocking_secret_key, cipher_text: properties['contents'] ).asymmetric_decrypt
     end
 
     def symmetric_ciphertext
@@ -85,7 +69,7 @@ module VaultTree
     end
 
     def symmetric_plaintext
-      LockSmith.new(cipher_text: contents, secret_key: unlocking_key).symmetric_decrypt
+      LockSmith.new(cipher_text: properties['contents'], secret_key: unlocking_key).symmetric_decrypt
     end
 
     def locking_public_key
@@ -113,7 +97,7 @@ module VaultTree
     end
 
     def empty_contents?
-      contents.nil? || contents.empty?
+      properties['contents'].nil? || properties['contents'].empty?
     end
 
     def already_locked?
@@ -121,11 +105,11 @@ module VaultTree
     end
 
     def dh_locking_key?
-      lock_with =~ /DH_KEY/
+      properties['lock_with'] =~ /DH_KEY/
     end
 
     def dh_unlocking_key?
-      unlock_with =~ /DH_KEY/
+      properties['unlock_with'] =~ /DH_KEY/
     end
 
   end

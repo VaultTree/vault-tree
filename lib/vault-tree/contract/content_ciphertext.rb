@@ -14,18 +14,20 @@ module VaultTree
     private
 
     def asymmetric_ciphertext
-      LockSmith.new(
-        public_key: vault_key.public,
-        private_key: vault_key.secret,
-        message: message
-      ).asymmetric_encrypt
+      lock_smith.asymmetric_encrypt
     end
 
     def symmetric_ciphertext
+      lock_smith.symmetric_encrypt
+    end
+
+    def lock_smith
       LockSmith.new(
-        message: message,
-        secret_key: vault_key.secret
-      ).symmetric_encrypt
+        public_key: vault_key.public,
+        private_key: vault_key.secret,
+        secret_key: vault_key.secret,
+        message: message
+      )
     end
   end
 end

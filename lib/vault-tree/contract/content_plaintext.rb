@@ -1,13 +1,13 @@
 module VaultTree
   class ContentPlaintext
-    attr_reader :content_string, :vault_key
+    attr_reader :cipher_text, :vault_key
 
     def initialize(c,k)
-      @content_string = c
+      @cipher_text = c
       @vault_key = k
     end
 
-    def evaulate
+    def evaluate
       vault_key.asymmetric? ? asymmetric_plaintext : symmetric_plaintext
     end
 
@@ -17,13 +17,13 @@ module VaultTree
       LockSmith.new(
         public_key: vault_key.public,
         private_key: vault_key.secret,
-        cipher_text: content_string
+        cipher_text: cipher_text
       ).asymmetric_decrypt
     end
 
     def symmetric_plaintext
       LockSmith.new(
-        cipher_text: content_string,
+        cipher_text: cipher_text,
         secret_key: vault_key.secret
       ).symmetric_decrypt
     end

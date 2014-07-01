@@ -2,9 +2,9 @@
 
 ## Vault Tree
 
-_The Self Enforcing Bitcoin Contract_
+_The Self Enforcing Contract_
 
-Vault Tree helps developers build distributed applications on top of the Bitcoin Blockchain.
+Vault Tree helps you build crypto-based business logic into your application.
 
 Before you begin make sure you checkout the [Vault Tree Homepage] for an overview of the project.
 

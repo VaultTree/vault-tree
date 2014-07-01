@@ -52,6 +52,6 @@ Also, a great way to get going is to simply run the tests:
 * run `rake`
 
 You should see a full suite of green tests that will give you plenty of living
-examples of to use Vault Tree in your own application.
+examples of how to use Vault Tree in your own application.
 
 [Documentation]: https://www.relishapp.com/vault-tree/vault-tree/docs

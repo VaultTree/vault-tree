@@ -8,7 +8,7 @@ Vault Tree helps you build crypto-based business logic into your application.
 
 Before you begin make sure you checkout the [Vault Tree Homepage] for an overview of the project.
 
-[Vault Tree Homepage]: http://vault-tree.org
+[Vault Tree Homepage]: http://vaulttree.gitub.io
 
 ### Install
 

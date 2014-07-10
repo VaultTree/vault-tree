@@ -32,11 +32,23 @@ module VaultTree
     end
 
     def input_value_not_nil
-      raise_error if contract.external_input[input_name_symbol].nil?
+      raise_error if (input_key_present? && nil_input_value?)
     end
 
     def input_value_not_empty
-      raise_error if contract.external_input[input_name_symbol].empty?
+      raise_error if (input_key_present? && empty_input_value?)
+    end
+
+    def input_key_present?
+      contract.external_input.has_key?(input_name_symbol)
+    end
+
+    def nil_input_value?
+      contract.external_input[input_name_symbol].nil?
+    end
+
+    def empty_input_value?
+      contract.external_input[input_name_symbol].empty?
     end
 
     def raise_error

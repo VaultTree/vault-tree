@@ -12,7 +12,7 @@ module VaultTree
     def close_vault(id, external_input = {data: nil})
       @external_input = @external_input.merge(external_input)
       @vault_list = vault_list.close_vault(id)
-      self
+      self.as_json
     end
 
     def open_vault(id, external_input = {})

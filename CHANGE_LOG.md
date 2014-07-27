@@ -1,8 +1,13 @@
+## 0.6.0
+
+* Return JSON from close_vault method
+- now open_vault and close_vault return as string
+* Update tests to support new public interface
+
 ## 0.3.17
 
 * Remove support for EXTERNAL_DATA Keyword
 * Use EXTERNAL_INPUT Insead
-
 
 ## 0.3.16
 

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["abash1212@gmail.com"]
   spec.description   = %q{Vault Tree is a Ruby library for executing distributed cryptographic contracts.}
   spec.summary       = %q{The Self Enforcing Contract}
-  spec.homepage      = ""
+  spec.homepage      = "http://vaulttree.github.io/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

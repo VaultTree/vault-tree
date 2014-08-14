@@ -19,15 +19,15 @@ module VaultTree
     end
 
     def filler
-      KeywordInterpreter.new(properties['fill_with'], self).evaluate
+      interpret_keyword('fill_with')
     end
 
     def locking_key
-      VaultKey.new KeywordInterpreter.new(properties['lock_with'], self).evaluate
+      VaultKey.new interpret_keyword('lock_with')
     end
 
     def unlocking_key
-      VaultKey.new KeywordInterpreter.new(properties['unlock_with'], self).evaluate
+      VaultKey.new interpret_keyword('unlock_with')
     end
 
     def locked_contents
@@ -48,6 +48,10 @@ module VaultTree
 
     def already_locked?
       ! (properties['contents'].nil? || properties['contents'].empty?)
+    end
+
+    def interpret_keyword(prop_key)
+      KeywordInterpreter.new(properties[prop_key], self).evaluate
     end
 
   end

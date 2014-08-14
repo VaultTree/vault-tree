@@ -31,19 +31,11 @@ module VaultTree
     end
 
     def locked_contents
-      begin
-        already_locked? ? properties['contents'] : ciphertext(filler)
-      rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedLockAttempt.new(e, vault_id: id)
-      end
+      already_locked? ? properties['contents'] : ciphertext(filler)
     end
 
     def unlocked_contents
-      begin
-        plaintext properties['contents']
-      rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedUnlockAttempt.new(e, vault_id: id)
-      end
+      plaintext properties['contents']
     end
 
     def ciphertext(m)

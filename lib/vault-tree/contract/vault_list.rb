@@ -8,14 +8,22 @@ module VaultTree
     end
 
     def close_vault(id)
-      validate_vault(id)
-      update_vaults vault(id).close
-      self
+      begin
+        validate_vault(id)
+        update_vaults vault(id).close
+        self
+      rescue RbNaCl::CryptoError => e
+        raise Exceptions::FailedLockAttempt.new(e, vault_id: id)
+      end
     end
 
     def open_vault(id)
-      validate_vault(id)
-      vault(id).open
+      begin
+        validate_vault(id)
+        vault(id).open
+      rescue RbNaCl::CryptoError => e
+        raise Exceptions::FailedUnlockAttempt.new(e, vault_id: id)
+      end
     end
 
     def vault_closed?(id)

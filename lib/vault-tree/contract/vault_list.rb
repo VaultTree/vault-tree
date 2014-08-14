@@ -10,7 +10,7 @@ module VaultTree
     def close_vault(id)
       begin
         validate_vault(id)
-        update_vaults vault(id).close
+        update_vaults(id, vault(id).close)
         self
       rescue RbNaCl::CryptoError => e
         raise Exceptions::FailedLockAttempt.new(e, vault_id: id)
@@ -44,8 +44,8 @@ module VaultTree
       vaults_hash[id]['contents'].nil? || vaults_hash[id]['contents'].empty?
     end
 
-    def update_vaults(vault)
-      @vaults_hash[vault.id] = vault.properties unless vault.kind_of?(NullVault)
+    def update_vaults(id, vault)
+      @vaults_hash[id] = vault.properties unless vault.kind_of?(NullVault)
     end
 
     def vault(id)

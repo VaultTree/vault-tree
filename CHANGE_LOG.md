@@ -1,3 +1,8 @@
+## 0.8.0
+* Rbnacl Version 3.1.1
+* Rbnacl/libsodium
+  - Build Crypto library on gem install
+
 ## 0.6.0
 
 * Return JSON from close_vault method

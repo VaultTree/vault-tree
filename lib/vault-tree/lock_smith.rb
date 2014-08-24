@@ -1,4 +1,4 @@
-require 'rbnacl'
+require 'rbnacl/libsodium'
 require_relative 'lock_smith/assembled_shamir_key'
 
 module VaultTree

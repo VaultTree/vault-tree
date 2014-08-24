@@ -1,5 +1,5 @@
 require 'rspec'
-require 'JSON'
+require 'json'
 require_relative '../lib/vault-tree/lock_smith/shamir_key_shares'
 
 module VaultTree

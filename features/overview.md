@@ -12,7 +12,7 @@ There are many examples that we are already familiar with from our daily lives s
 
 It's been know for quite a while that well structured contracts can be thought of as a computer programs. If we bring cutting edge [cryptographic libraries], and distributed virtual currencies such as [Bitcoin] into the picture, can we change the way we view the problem of **contract enforcement**?
 
-You can think of Vault Tree as a collection of tools that will help web developers, businesses, and online communities explore a new way of thinking about contracts.
+You can think of Vault Tree as a collection of tools to help web developers explore a new way of thinking about contracts.
 
 [cryptographic libraries]: http://en.wikipedia.org/wiki/Cryptography
 [Bitcoin]: http://bitcoin.org/en/ 

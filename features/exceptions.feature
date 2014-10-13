@@ -1,12 +1,8 @@
 Feature: Vault Tree Exceptions
 
-  The library trys to anticipate common usage errors. A
-  custom error with a helpful message should be raised if there
-  is a problem with you contract.
+  The library trys to anticipate common usage errors. A custom error with a helpful message should be raised if there is a problem with you contract.
 
-  If you do run across an unexpected ruby runtime error, please
-  file a Github issue. I want to make the experience of executing
-  and debugging your own contracts as painless as possible.
+  If you do run across an unexpected ruby runtime error, please file a Github issue. I want to make the experience of executing and debugging your own contracts as painless as possible.
 
   Thanks!
 

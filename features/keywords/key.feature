@@ -1,6 +1,6 @@
 Feature: Key
 
-  This keyword is an alias of the the `CONTENTS` keyword:
+  `KEY` fetches the contents from the specified vault and performs a secure hash on the result.
 
   ```javascript
   KEY['vault_id']

@@ -1,3 +1,6 @@
+# Relish
+.relish
+
 # Docker Stuff
 .dockerignore
 Dockerfile

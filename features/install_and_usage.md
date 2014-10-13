@@ -1,32 +1,8 @@
 ### Install
 
-As a prerequisite, get [libsodium] version (>= 0.4.3) on you machine. This is the underlying cryptographic library that Vault Tree depends on.
+You can find the install instructions on the Github [README].
 
-[libsodium]: https://github.com/jedisct1/libsodium
-
-* If you are on _OSX_ there is a [brew] package available. So just:
-
-  ```
-  brew install libsodium
-  ```
-
-[brew]: http://brew.sh/
-
-* If you're on a Debian based system, there is no _apt-get_ package that I know of, but there
-  are some helpful install scripts on the web.
-
-Now that you have libsodium, if you're a Ruby developer you know the drill from here:
-
-```ruby
-gem install vault-tree
-```
-
-and then
-
-```ruby
-require 'vault-tree'
-```
-somewhere before you use it.
+[README]: https://github.com/VaultTree/vault-tree
 
 ### Usage
 

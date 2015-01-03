@@ -1,3 +1,7 @@
+## 0.10.3
+Docker
+* Using Docker for testing
+
 ## 0.10.2
 Eliminate Rspec
 

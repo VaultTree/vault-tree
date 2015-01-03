@@ -1,12 +1,6 @@
 # Relish
 .relish
 
-# Docker Stuff
-.dockerignore
-Dockerfile
-
-Vagrantfile
-
 # Do not Check In Gemfile.lock
 Gemfile.lock
 

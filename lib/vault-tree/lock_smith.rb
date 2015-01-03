@@ -15,9 +15,6 @@ module VaultTree
       @secret_key = opts[:secret_key]
       @private_key = opts[:private_key]
       @public_key = opts[:public_key]
-      @signing_key = opts[:signing_key]
-      @verify_key = opts[:verify_key]
-      @signature = opts[:signature]
     end
 
     # Random Key for Semetric Encryption
@@ -39,28 +36,6 @@ module VaultTree
     # @return [String] Hex encoded Public Key
     def generate_public_key
       bin2hex(RbNaCl::PrivateKey.new(private_key).public_key.to_bytes)
-    end
-
-    # Randomly Generated Signing Key
-    #
-    # @return [String] Hex encoded Signing Key
-    def generate_signing_key
-      bin2hex(RbNaCl::SigningKey.generate.to_bytes)
-    end
-
-
-    # Public Signature Verification Key
-    # Derived from a given signing key
-    #
-    # @return [String] Hex encoded Verify Key
-    def generate_verify_key
-      bin2hex(RbNaCl::SigningKey.new(signing_key).verify_key.to_bytes)
-    end
-
-    # Check the validity of a message's signature
-    # Will raise RbNaCl::BadSignatureError if the signature check fails
-    def verify_message
-      RbNaCl::VerifyKey.new(verify_key).verify(message, signature)
     end
 
     # Symmetric Encryption of the given message
@@ -117,17 +92,6 @@ module VaultTree
       bin2hex RbNaCl::Hash.sha256(message)
     end
 
-    # Sign a message with the signing key
-    def sign_message
-      bin2hex RbNaCl::SigningKey.new(signing_key).sign(message)
-    end
-
-    # Check the validity of a message's signature
-    # Will raise RbNaCl::BadSignatureError if the signature check fails
-    def verify_message
-      RbNaCl::VerifyKey.new(verify_key).verify(signature, message)
-    end
-
     private
 
     def message; @message end
@@ -139,9 +103,6 @@ module VaultTree
     def private_key; hex2bin @private_key end
     def public_key; hex2bin @public_key end
     def secret_key; hex2bin @secret_key end
-    def signing_key; hex2bin @signing_key end
-    def verify_key; hex2bin @verify_key end
-    def signature; hex2bin @signature end
 
     # Hex encodes a message
     #

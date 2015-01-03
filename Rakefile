@@ -1,13 +1,12 @@
 require_relative 'lib/vault-tree.rb'
 require 'cucumber'
 require 'cucumber/rake/task'
-require 'rspec/core/rake_task'
 require "bundler/gem_tasks"
 
 task :default do
+  Rake::Task["test"].invoke
   Rake::Task["cuke"].invoke
   Rake::Task["contracts"].invoke
-  Rake::Task["spec"].invoke
 end
 
 Cucumber::Rake::Task.new(:cuke) do |t|
@@ -22,8 +21,9 @@ Cucumber::Rake::Task.new(:contracts) do |t|
   t.cucumber_opts = "-r features features/contracts --format pretty"
 end
 
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = "--format doc"
+require 'rake/testtask'
+Rake::TestTask.new do |t|
+  t.test_files = FileList['spec/*_spec.rb']
 end
 
 desc 'Upload Features and Markdown to Relish'

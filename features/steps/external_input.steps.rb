@@ -6,7 +6,7 @@ When(/^I lock the external input in a vault using a symmetric vault key$/) do
 end
 
 Then(/^I can recover the input message using the same key$/) do
-  VaultTree::Contract.new(@contract).open_vault('message', secret: @secret).should == @external_input[:msg]
+  assert_equal @external_input[:msg], VaultTree::Contract.new(@contract).open_vault('message', secret: @secret)
 end
 
 When(/^I lock the external input in a vault using an external key$/) do

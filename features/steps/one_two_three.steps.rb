@@ -47,5 +47,5 @@ end
 
 Then(/^Alice can execute the contract to recover the final message$/) do
   puts VaultTree::Contract.new(@contract).open_vault('third', acs_key: @alice_contract_secret_key)
-  VaultTree::Contract.new(@contract).open_vault('third', acs_key: @alice_contract_secret_key).should == @congratulations_message
+  assert_equal @congratulations_message, VaultTree::Contract.new(@contract).open_vault('third', acs_key: @alice_contract_secret_key)
 end

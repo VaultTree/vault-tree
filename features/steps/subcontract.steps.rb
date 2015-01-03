@@ -17,5 +17,5 @@ end
 Then(/^we can recover the newly written subcontract$/) do
   @first_vault_contents = VaultTree::Contract.new(@contract).open_vault('first_vault')
   @first_vault_subcontract_contents = VaultTree::Contract.new(@subcontract).open_vault('first_vault')
-  expect(@first_vault_subcontract_contents).to eq(@first_vault_contents)
+  assert_equal @first_vault_contents, @first_vault_subcontract_contents
 end

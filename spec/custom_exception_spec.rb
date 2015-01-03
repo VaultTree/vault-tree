@@ -1,4 +1,5 @@
-require 'rspec'
+require 'minitest/spec'
+require 'minitest/autorun'
 require_relative '../lib/vault-tree'
 
 module VaultTree
@@ -16,14 +17,14 @@ module VaultTree
       end
 
       it 'can catch an exception and reraise a custom exception' do
-        expect{example_code}.to raise_error(FailedUnlockAttempt)
+        proc {example_code}.must_raise(FailedUnlockAttempt)
       end
 
       it 'Outputs message nicely to standard out' do
         begin
           example_code
         rescue
-          STDOUT.write('Hopefully this looks good.')
+          # STDOUT.write('Hopefully this looks good.')
         end
       end
     end

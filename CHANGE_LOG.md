@@ -1,3 +1,10 @@
+## 0.10.2
+Eliminate Rspec
+
+* Go to mintest for unit specs
+* Switch to test unit style assertions in step definitions
+* Run minitests from rake
+
 ## 0.10.1
 Remove References to Digital Signatures
 

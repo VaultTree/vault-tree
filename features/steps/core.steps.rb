@@ -60,41 +60,6 @@ When(/^I lock a away the consent keys$/) do
   @contract = VaultTree::Contract.new(@contract).as_json
 end
 
-When(/^I lock a message in a vault using a split key$/) do
-  @abc_consent_message = "A, B, AND C ALL AGREED TO OPEN THE VAULT."
-  @contract = VaultTree::Contract.new(@contract).close_vault('abc_joint_consent_key',
-                                     a_secret: @a_secret,
-                                     b_secret: @b_secret,
-                                     c_secret: @c_secret)
-  @contract = VaultTree::Contract.new(@contract).close_vault('abc_consent_message',
-                                     consent_message: @abc_consent_message,
-                                     a_secret: @a_secret,
-                                     b_secret: @b_secret,
-                                     c_secret: @c_secret)
-  @contract = VaultTree::Contract.new(@contract).as_json
-end
-
-Then(/^I can recover the message if each party gives consent$/) do
-  @unlocking_consent = {
-    a_secret: "A_SECRET_CONSENT_KEY",
-    b_secret: "B_SECRET_CONSENT_KEY",
-    c_secret: "C_SECRET_CONSENT_KEY"
-  }
-  @contract = VaultTree::Contract.new(@contract).as_json
-  VaultTree::Contract.new(@contract).open_vault('abc_consent_message', @unlocking_consent).should == @abc_consent_message
-  puts VaultTree::Contract.new(@contract).open_vault('abc_consent_message', @unlocking_consent)
-end
-
-Then(/^I cannot recover the message if one party fails to give consent$/) do
-  @incomplete_unlocking_consent_keys = {
-    a_secret: "A_WRONG_SECRET_CONSENT_KEY",
-    b_secret: "B_SECRET_CONSENT_KEY",
-    c_secret: "C_SECRET_CONSENT_KEY"
-  }
-  @contract = VaultTree::Contract.new(@contract).as_json
-  expect{VaultTree::Contract.new(@contract).open_vault('abc_consent_message',@incomplete_unlocking_consent_keys)}.to raise_error(VaultTree::Exceptions::FailedUnlockAttempt)
-end
-
 Given(/^the blank contract:$/) do |string|
   @contract = string
 end

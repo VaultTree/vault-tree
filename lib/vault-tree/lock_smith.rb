@@ -1,5 +1,4 @@
 require 'rbnacl/libsodium'
-require_relative 'lock_smith/assembled_shamir_key'
 
 module VaultTree
   # VaultTree::LockSmith Interface to Crypto Primatives
@@ -7,8 +6,7 @@ module VaultTree
   # This class provides a interface all of the cryptographic functions used
   # by Vault Tree.
   #
-  # Specifically, it exposed the functionallity of the RbNaCl Gem and the
-  # vault-tree-ss secret sharing gem.
+  # Specifically, it exposes the functionallity of the RbNaCl Gem
   class LockSmith
 
     def initialize(opts = {})
@@ -20,9 +18,6 @@ module VaultTree
       @signing_key = opts[:signing_key]
       @verify_key = opts[:verify_key]
       @signature = opts[:signature]
-      @outstanding_secret_shares = opts[:outstanding_secret_shares]
-      @secret_recovery_threshold = opts[:secret_recovery_threshold]
-      @secret_shares = opts[:secret_shares]
     end
 
     # Random Key for Semetric Encryption
@@ -133,20 +128,9 @@ module VaultTree
       RbNaCl::VerifyKey.new(verify_key).verify(signature, message)
     end
 
-    # Recovers the shared secret from the shares provided
-    # in the initializer.
-    #
-    # @return [String] assembled secret key
-    def assemble_shamir_key
-      VaultTree::Crypto::AssembledShamirKey.new( key_shares: secret_shares).assemble
-    end
-
     private
 
     def message; @message end
-    def outstanding_secret_shares; @outstanding_secret_shares end
-    def secret_recovery_threshold; @secret_recovery_threshold end
-    def secret_shares; @secret_shares end
 
     # Locksmith always expects hex representations
     # of keys and ciphertext. Convert to binary to

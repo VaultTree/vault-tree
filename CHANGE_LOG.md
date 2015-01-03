@@ -1,3 +1,13 @@
+## 0.10.0
+Removing Secret Sharing and Split Key Functionality
+* Not clear that this functionality should be a core part of the library
+* If included, we will need to rely on an audited third party gem
+* It would require additional crypto operations that are ouside of the scope
+  of Nacl and Rbnacl.
+* Git history will maintain the first attempt at this feature so if there
+  are new proposals to reinstate this code in the future, we should be able
+  to organize a pull request without much effort.
+
 ## 0.8.0
 * Rbnacl Version 3.1.1
 * Rbnacl/libsodium

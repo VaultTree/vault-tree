@@ -1,3 +1,18 @@
+## 0.10.1
+Remove References to Digital Signatures
+
+* Clean up some old references to signature functionality
+* I do not intend to bring message signing functionality to Vault Tree.
+  (Of course, Nacl performs authenticated encryption under the hood)
+
+Rbnacl supports digital signatures. Over time have toyed with the idea of
+bringing this functionality into Vault Tree.
+
+For now, signing will be left out and the library will focus on locking and
+unlocking strings. The locked strings may well be signed messages or
+verification/signing keys, but these operations should be handled by an
+external tool.
+
 ## 0.10.0
 Removing Secret Sharing and Split Key Functionality
 * Not clear that this functionality should be a core part of the library

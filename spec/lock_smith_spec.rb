@@ -27,16 +27,5 @@ module VaultTree
         recovered_msg.should == 'Secret Message'
       end
     end
-
-    describe '#sign_message | #verify_message' do
-      it 'sign and verify a message' do
-        msg = 'My Message to Sign!'
-        sk = LockSmith.new().generate_signing_key
-        vk = LockSmith.new(signing_key: sk).generate_verify_key
-        sig = LockSmith.new(signing_key: sk, message: msg).sign_message
-        LockSmith.new(verify_key: vk, message: msg, signature: sig).verify_message.should be true
-      end
-    end
-
   end
 end

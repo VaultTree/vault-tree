@@ -1,5 +1,5 @@
 Then(/^a MissingPassphrase exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPassphrase)
+  assert_instance_of VaultTree::Exceptions::MissingPassphrase, @exception
 end
 
 Given(/^this broken contract:$/) do |string|
@@ -19,7 +19,7 @@ When(/^I attempt fill a vault with my Master Password$/) do
 end
 
 Then(/^a FillAttemptMasterPassword exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::FillAttemptMasterPassword)
+  assert_instance_of VaultTree::Exceptions::FillAttemptMasterPassword, @exception
 end
 
 When(/^I attempt to open an empty vault$/) do
@@ -31,7 +31,7 @@ When(/^I attempt to open an empty vault$/) do
 end
 
 Then(/^an EmptyVault exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::EmptyVault)
+  assert_instance_of VaultTree::Exceptions::EmptyVault, @exception
 end
 
 When(/^I attempt to open a vault that does not exists$/) do
@@ -51,7 +51,7 @@ When(/^I attempt to close a vault that does not exists$/) do
 end
 
 Then(/^a VaultDoesNotExist exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::VaultDoesNotExist)
+  assert_instance_of VaultTree::Exceptions::VaultDoesNotExist, @exception
 end
 
 When(/^I attempt fill a vault with an unsupported Keyword$/) do
@@ -63,7 +63,7 @@ When(/^I attempt fill a vault with an unsupported Keyword$/) do
 end
 
 Then(/^an UnsupportedKeyword exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::UnsupportedKeyword)
+  assert_instance_of VaultTree::Exceptions::UnsupportedKeyword, @exception
 end
 
 When(/^I attempt to fill with an encryption key without first establishing the decryption key$/) do
@@ -75,7 +75,7 @@ When(/^I attempt to fill with an encryption key without first establishing the d
 end
 
 Then(/^a MissingPartnerDecryptionKey exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::MissingPartnerDecryptionKey)
+  assert_instance_of VaultTree::Exceptions::MissingPartnerDecryptionKey, @exception
 end
 
 When(/^I lock a vault with External Input and attempt to unlock with the wrong External Input$/) do
@@ -93,7 +93,7 @@ When(/^I lock a vault with External Input and attempt to unlock with the wrong E
 end
 
 Then(/^a FailedUnlockAttempt exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::FailedUnlockAttempt)
+  assert_instance_of VaultTree::Exceptions::FailedUnlockAttempt, @exception
 end
 
 When(/^I attempt lock a vault with External Input that does not exists$/) do
@@ -106,5 +106,5 @@ When(/^I attempt lock a vault with External Input that does not exists$/) do
 end
 
 Then(/^an InvalidExternalInput exception is raised$/) do
-  @exception.should be_an_instance_of(VaultTree::Exceptions::InvalidExternalInput)
+  assert_instance_of VaultTree::Exceptions::InvalidExternalInput, @exception
 end

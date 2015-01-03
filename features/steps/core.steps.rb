@@ -10,7 +10,7 @@ When(/^I use the random key to lock a message$/) do
 end
 
 Then(/^I can recover the message with the Random Key$/) do
-  VaultTree::Contract.new(@contract).open_vault('message_locked_with_random').should == @msg
+  assert_equal @msg, VaultTree::Contract.new(@contract).open_vault('message_locked_with_random')
 end
 
 When(/^I put this random key in an unlocked vault$/) do
@@ -20,7 +20,7 @@ end
 Then(/^another user can recover the message with the Unlocked Random Key$/) do
   @contract = VaultTree::Contract.new(@contract).close_vault('message_locked_with_unlocked_random_number')
   @contract = VaultTree::Contract.new(@contract).as_json
-  VaultTree::Contract.new(@contract).open_vault('message_locked_with_unlocked_random_number').should == @msg
+  assert_equal @msg, VaultTree::Contract.new(@contract).open_vault('message_locked_with_unlocked_random_number')
 end
 
 Given(/^I have access to the another user's unlocked public key$/) do
@@ -44,7 +44,7 @@ When(/^I transfer the contract to the other user$/) do
 end
 
 Then(/^they can create a DH Key and unlock the message$/) do
-  VaultTree::Contract.new(@contract).open_vault('asymmetric_message').should == @asymmetric_message
+  assert_equal @asymmetric_message, VaultTree::Contract.new(@contract).open_vault('asymmetric_message')
 end
 
 Given(/^Consent keys for parties A, B, and C$/) do
@@ -71,5 +71,5 @@ When(/^I lock a message in a vault using a symmetric vault key$/) do
 end
 
 Then(/^I can recover the message using the same key$/) do
-  VaultTree::Contract.new(@contract).open_vault('message').should == @msg
+  assert_equal @msg, VaultTree::Contract.new(@contract).open_vault('message')
 end

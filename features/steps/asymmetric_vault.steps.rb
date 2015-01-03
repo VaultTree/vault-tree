@@ -30,5 +30,5 @@ end
 
 Then(/^Alice can unlock the message with a DH_KEY$/) do
   puts VaultTree::Contract.new(@contract).open_vault('message', acs_key: @acs_key)
-  VaultTree::Contract.new(@contract).open_vault('message', acs_key: @acs_key).should == @msg
+  assert_equal @msg, VaultTree::Contract.new(@contract).open_vault('message', acs_key: @acs_key)
 end

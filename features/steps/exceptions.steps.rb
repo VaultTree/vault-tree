@@ -2,10 +2,6 @@ Then(/^an exception is raised$/) do
   assert_equal true, (@exception.respond_to?(:exception) && @exception.respond_to?(:message))
 end
 
-Then(/^a MissingPassphrase exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::MissingPassphrase, @exception
-end
-
 Given(/^this broken contract:$/) do |string|
   @contract = string
 end
@@ -22,20 +18,12 @@ When(/^I attempt fill a vault with my Master Password$/) do
   end
 end
 
-Then(/^a FillAttemptMasterPassword exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::FillAttemptMasterPassword, @exception
-end
-
 When(/^I attempt to open an empty vault$/) do
   begin
     @contents = VaultTree::Contract.new(@contract).open_vault('empty_vault')
   rescue => e
     @exception = e
   end
-end
-
-Then(/^an EmptyVault exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::EmptyVault, @exception
 end
 
 When(/^I attempt to open a vault that does not exists$/) do
@@ -54,10 +42,6 @@ When(/^I attempt to close a vault that does not exists$/) do
   end
 end
 
-Then(/^a VaultDoesNotExist exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::VaultDoesNotExist, @exception
-end
-
 When(/^I attempt fill a vault with an unsupported Keyword$/) do
   begin
     @contract = VaultTree::Contract.new(@contract).close_vault('unsupported_keyword')
@@ -66,20 +50,12 @@ When(/^I attempt fill a vault with an unsupported Keyword$/) do
   end
 end
 
-Then(/^an UnsupportedKeyword exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::UnsupportedKeyword, @exception
-end
-
 When(/^I attempt to fill with an encryption key without first establishing the decryption key$/) do
   begin
     @contract = VaultTree::Contract.new(@contract).close_vault('orphaned_public_key')
   rescue => e
     @exception = e
   end
-end
-
-Then(/^a MissingPartnerDecryptionKey exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::MissingPartnerDecryptionKey, @exception
 end
 
 When(/^I lock a vault with External Input and attempt to unlock with the wrong External Input$/) do
@@ -96,10 +72,6 @@ When(/^I lock a vault with External Input and attempt to unlock with the wrong E
   end
 end
 
-Then(/^a FailedUnlockAttempt exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::FailedUnlockAttempt, @exception
-end
-
 When(/^I attempt lock a vault with External Input that does not exists$/) do
   @contract = VaultTree::Contract.new(@contract).as_json
   begin
@@ -107,8 +79,4 @@ When(/^I attempt lock a vault with External Input that does not exists$/) do
   rescue => e
     @exception = e
   end
-end
-
-Then(/^an InvalidExternalInput exception is raised$/) do
-  assert_instance_of VaultTree::Exceptions::InvalidExternalInput, @exception
 end

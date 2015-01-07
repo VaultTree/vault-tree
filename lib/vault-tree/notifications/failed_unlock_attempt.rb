@@ -1,6 +1,6 @@
 module VaultTree
-  module Exceptions
-    class FailedUnlockAttempt < LibraryException
+  module Notifications
+    class FailedUnlockAttempt < Notification
 
       def post_initialize(params)
         @vault_id = params[:vault_id]

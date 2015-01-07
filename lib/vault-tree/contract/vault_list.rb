@@ -13,7 +13,8 @@ module VaultTree
         update_vaults(id, vault(id).close)
         self
       rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedLockAttempt.new(e, vault_id: id)
+        Notifications::FailedLockAttempt.new(vault_id: id).notify
+        raise
       end
     end
 
@@ -22,7 +23,8 @@ module VaultTree
         validate_vault(id)
         vault(id).open
       rescue RbNaCl::CryptoError => e
-        raise Exceptions::FailedUnlockAttempt.new(e, vault_id: id)
+        Notifications::FailedUnlockAttempt.new(vault_id: id).notify
+        raise
       end
     end
 
@@ -53,7 +55,10 @@ module VaultTree
     end
 
     def validate_vault(id)
-      raise Exceptions::VaultDoesNotExist.new(nil,vault_id: id) unless valid_id?(id)
+      unless valid_id?(id)
+        Notifications::VaultDoesNotExist.new(vault_id: id).notify
+        raise
+      end
     end
 
     def valid_id?(id)

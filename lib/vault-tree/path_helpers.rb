@@ -50,8 +50,8 @@ module VaultTree
       "#{fixtures_dir}/simple_test_contract.json"
     end
 
-    def exceptions_files
-      Dir["#{project_dir}/lib/vault-tree/exceptions/*.rb"]
+    def notification_files
+      Dir["#{project_dir}/lib/vault-tree/notifications/*.rb"]
     end
 
     def keywords_files

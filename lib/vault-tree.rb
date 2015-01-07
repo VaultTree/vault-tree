@@ -9,9 +9,9 @@ require_relative 'vault-tree/util/string'
 # lock_smith.rb
 require_relative 'vault-tree/lock_smith'
 
-# exceptions/*.rb
-require_relative 'vault-tree/exceptions/library_exception'
-VaultTree::PathHelpers.exceptions_files.each {|file| require_relative  file }
+# notifications/*.rb
+require_relative 'vault-tree/notifications/notification'
+VaultTree::PathHelpers.notification_files.each {|file| require_relative  file }
 
 # contract/*.rb
 VaultTree::PathHelpers.contract_files.each {|file| require_relative  file }

@@ -1,6 +1,6 @@
 module VaultTree
-  module Exceptions
-    class EmptyVault < LibraryException
+  module Notifications
+    class EmptyVault < Notification
 
       def post_initialize(params)
         @vault_id = params[:vault_id]

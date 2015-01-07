@@ -1,3 +1,13 @@
+## 0.10.4
+Enhance Notification Messages
+* Try to make notifications more helpful
+
+Refactor Custom Exceptions
+* Vault Tree no longer raises custom exceptions
+* Instead, the library will alway raise the lower level error
+* When a known exception is caught. Vault Tree with print a helpful
+  notification message to Standard Out.
+
 ## 0.10.3
 Docker
 * Using Docker for testing

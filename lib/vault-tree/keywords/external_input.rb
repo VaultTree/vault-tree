@@ -52,7 +52,8 @@ module VaultTree
     end
 
     def raise_error
-      raise Exceptions::InvalidExternalInput.new(nil, vault_id: id)
+      Notifications::InvalidExternalInput.new(vault_id: id).notify
+      raise 'invalid external input'
     end
   end
 end

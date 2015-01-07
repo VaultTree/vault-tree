@@ -1,13 +1,15 @@
 module VaultTree
-  module Exceptions
-    class MissingPartnerDecryptionKey < LibraryException
+  module Notifications
+    class FailedLockAttempt < Notification
+
       def post_initialize(params)
         @vault_id = params[:vault_id]
+        @locking_key = params[:locking_key]
       end
 
       def runtime_information
         %Q{
-          Missing Decryption Key For:
+          Attempted to Lock Vault:
             #{@vault_id}
         }
       end

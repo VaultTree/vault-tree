@@ -11,9 +11,8 @@ module VaultTree
       begin
         keyword_class_name.new(vault, arg_array).evaluate
       rescue NameError => e
-        raise Exceptions::UnsupportedKeyword.new(e,
-                                                 vault_id: vault.id,
-                                                 keyword: word)
+        Notifications::UnsupportedKeyword.new(vault_id: vault.id, keyword: word).notify
+        raise
       end
     end
 

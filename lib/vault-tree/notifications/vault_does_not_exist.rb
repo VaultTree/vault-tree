@@ -6,7 +6,9 @@ module VaultTree
       end
 
       def runtime_information
-        %Q{Can not find vault #{@vault_id}}
+        %Q{
+          Vault Does Not Exist: #{@vault_id}
+        }
       end
     end
   end

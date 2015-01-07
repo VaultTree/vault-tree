@@ -7,8 +7,10 @@ module VaultTree
 
       def runtime_information
         %Q{
-          Vault:
-          #{@vault_id}
+          Invalid External Input for Vault: #{@vault_id}
+
+          * External input must be deserialized as a Hash
+          * Input should not be nil or empty
         }
       end
     end

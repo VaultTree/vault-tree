@@ -8,13 +8,8 @@ module VaultTree
 
       def runtime_information
         %Q{
-          It looks like you have used an unsupported Keyword.
-
-          Attempted Keyword:
-          #{@keyword}
-
-          Vault:
-          #{@vault_id}
+          Unsupported Keyword: #{@keyword}
+          Vault: #{@vault_id}
         }
       end
     end

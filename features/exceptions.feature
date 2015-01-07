@@ -22,7 +22,7 @@ Scenario: Unsupported Keyword
       }
     """
   When I attempt fill a vault with an unsupported Keyword
-  Then an UnsupportedKeyword exception is raised
+  Then an exception is raised
 
 Scenario: Vault Does Not Exists on Retrieval
   Given this broken contract:
@@ -41,7 +41,7 @@ Scenario: Vault Does Not Exists on Retrieval
       }
     """
   When I attempt to open a vault that does not exists
-  Then a VaultDoesNotExist exception is raised
+  Then an exception is raised
 
 Scenario: Vault Does Not Exists on Closing
   Given this broken contract:
@@ -60,7 +60,7 @@ Scenario: Vault Does Not Exists on Closing
       }
     """
   When I attempt to close a vault that does not exists
-  Then a VaultDoesNotExist exception is raised
+  Then an exception is raised
 
 Scenario: Failed Symmetric Unlock Attempt
   Given this broken contract:
@@ -78,7 +78,7 @@ Scenario: Failed Symmetric Unlock Attempt
       }
     """
   When I lock a vault with External Input and attempt to unlock with the wrong External Input
-  Then a FailedUnlockAttempt exception is raised
+  Then an exception is raised
 
 Scenario: Missing External Input On Lock
   Given this broken contract:
@@ -96,4 +96,4 @@ Scenario: Missing External Input On Lock
       }
     """
   When I attempt lock a vault with External Input that does not exists
-  Then an InvalidExternalInput exception is raised
+  Then an exception is raised

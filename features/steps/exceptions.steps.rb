@@ -1,3 +1,7 @@
+Then(/^an exception is raised$/) do
+  assert_equal true, (@exception.respond_to?(:exception) && @exception.respond_to?(:message))
+end
+
 Then(/^a MissingPassphrase exception is raised$/) do
   assert_instance_of VaultTree::Exceptions::MissingPassphrase, @exception
 end

@@ -20,13 +20,13 @@ Feature: Subcontract
               "contents": ""
             },
             "first_vault":{
-              "fill_with": "RANDOM_NUMBER",
+              "fill_with": "RANDOM_KEY",
               "lock_with": "UNLOCKED",
               "unlock_with": "UNLOCKED",
               "contents": ""
             },
             "second_vault":{
-              "fill_with": "RANDOM_NUMBER",
+              "fill_with": "RANDOM_KEY",
               "lock_with": "UNLOCKED",
               "unlock_with": "UNLOCKED",
               "contents": ""

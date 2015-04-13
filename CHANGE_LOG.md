@@ -1,3 +1,9 @@
+## 0.11.0
+Random Byte Generation
+* Rename RANDOM_NUMBER to RANDOM_KEY
+* Add a secure hash to the random key
+  generation process.
+
 ## 0.10.4
 Enhance Notification Messages
 * Try to make notifications more helpful

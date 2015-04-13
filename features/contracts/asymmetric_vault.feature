@@ -23,7 +23,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
         "vaults": {
           "bob_contract_secret":{
             "description":"Contract specific password to lock private information",
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['bcs_key']",
             "unlock_with": "EXTERNAL_INPUT['bcs_key']",
             "contents": ""
@@ -31,7 +31,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
 
           "alice_contract_secret":{
             "description":"Contract specific password to lock private information",
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['acs_key']",
             "unlock_with": "EXTERNAL_INPUT['acs_key']",
             "contents": ""

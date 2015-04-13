@@ -19,7 +19,7 @@ Feature: Key
           "vaults": {
             "random_vault_key":{
               "description":"Random Number",
-              "fill_with": "RANDOM_NUMBER",
+              "fill_with": "RANDOM_KEY",
               "lock_with": "UNLOCKED",
               "unlock_with": "UNLOCKED",
               "contents": ""

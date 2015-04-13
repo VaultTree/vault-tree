@@ -32,7 +32,7 @@ Scenario: Vault Does Not Exists on Retrieval
         "vaults": {
 
           "empty_vault":{
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
@@ -51,7 +51,7 @@ Scenario: Vault Does Not Exists on Closing
         "vaults": {
 
           "empty_vault":{
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""
@@ -69,7 +69,7 @@ Scenario: Failed Symmetric Unlock Attempt
         "header": {},
         "vaults": {
           "some_random_vault":{
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['right_secret']",
             "unlock_with": "EXTERNAL_INPUT['wrong_secret']",
             "contents": ""

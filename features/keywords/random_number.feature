@@ -3,7 +3,7 @@ Feature: Random Number
 The keyword
 
 ```javascript
-RANDOM_NUMBER
+RANDOM_KEY
 ```
 
 behaves as expected.
@@ -21,8 +21,8 @@ Scenario: Close And Open With Random Key
         },
         "vaults": {
           "random_vault_key":{
-            "description":"Random Number",
-            "fill_with": "RANDOM_NUMBER",
+            "description":"Random Key",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "contents": ""

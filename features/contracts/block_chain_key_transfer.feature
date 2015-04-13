@@ -67,7 +67,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
         },
 
         "receiver_secret":{
-          "fill_with": "RANDOM_NUMBER",
+          "fill_with": "RANDOM_KEY",
           "lock_with": "EXTERNAL_INPUT['rs_key']",
           "unlock_with": "EXTERNAL_INPUT['rs_key']",
           "contents": ""
@@ -75,7 +75,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
 
         "sender_secret":{
           "description":"Contract specific password for SENDER. Used to Lock the SENDER private information.",
-          "fill_with": "RANDOM_NUMBER",
+          "fill_with": "RANDOM_KEY",
           "lock_with": "EXTERNAL_INPUT['ss_key']",
           "unlock_with": "EXTERNAL_INPUT['ss_key']",
           "contents": ""

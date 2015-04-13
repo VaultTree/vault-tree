@@ -53,7 +53,7 @@ Let's take a look at an example vault:
 
 ```javascript
 "bob_random_key": {
-  "fill_with": "RANDOM_NUMBER",
+  "fill_with": "RANDOM_KEY",
   "lock_with": "KEY['bob_first_vault_key']",
   "unlock_with": "KEY['alice_third_vault_key']",
   "contents": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "

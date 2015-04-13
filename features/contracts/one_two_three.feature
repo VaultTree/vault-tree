@@ -24,7 +24,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "bob_contract_secret":{
             "description":"contract specific password to lock private information",
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['bcs_key']",
             "unlock_with": "EXTERNAL_INPUT['bcs_key']",
             "contents": ""
@@ -32,7 +32,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "alice_contract_secret":{
             "description":"contract specific password to lock private information",
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['acs_key']",
             "unlock_with": "EXTERNAL_INPUT['acs_key']",
             "contents": ""
@@ -80,7 +80,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "vault_two_key":{
             "description":"Key to lock vault two. Once Bob locks the second vault he will put this key inside vault one.",
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
             "contents": ""
@@ -88,7 +88,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
 
           "vault_three_key":{
             "description":"Key to lock vault three. Once Bob locks the third vault he will put this key inside vault two.",
-            "fill_with": "RANDOM_NUMBER",
+            "fill_with": "RANDOM_KEY",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
             "contents": ""

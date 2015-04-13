@@ -81,6 +81,14 @@ module VaultTree
       bin2hex RbNaCl::Random.random_bytes
     end
 
+    # Random key generation
+    #
+    # Generate a random number using the random_number() method
+    # now hash the the generated number using the secure_hash() method
+    def random_key
+      bin2hex RbNaCl::Hash.sha256(RbNaCl::Random.random_bytes)
+    end
+
     # Returns the SHA-256 hash of the given data
     #
     # There's no streaming done, just pass in the data and be done with it.

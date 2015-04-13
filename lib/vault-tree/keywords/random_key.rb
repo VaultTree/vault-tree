@@ -1,5 +1,5 @@
 module VaultTree
-  class RandomNumber < Keyword
+  class RandomKey < Keyword
 
     def evaluate
       LockSmith.new().random_number

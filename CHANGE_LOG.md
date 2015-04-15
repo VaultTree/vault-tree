@@ -1,3 +1,13 @@
+## 0.11.1
+
+JSON Schema Experimentation
+Considering changing the Vault Tree DSL this is
+some exploration work with JSON Schema
+
+* Bring down the JSON Schema validation gem
+* Minitest example to spike out new JSON contracts
+* No changes to existing implementation
+
 ## 0.11.0
 Random Byte Generation
 * Rename RANDOM_NUMBER to RANDOM_KEY

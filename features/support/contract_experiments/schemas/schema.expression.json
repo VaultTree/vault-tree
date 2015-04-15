@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Vault Tree Expression",
+  "oneOf": [
+    {"$ref":"./expressions/schema.vault_contents.json"},
+    {"$ref":"./expressions/schema.generated_key.json"},
+    {"$ref":"./expressions/schema.vault_collection.json"},
+    {"$ref":"./expressions/schema.computed_pub_key.json"},
+    {"$ref":"./expressions/schema.external_input.json"}
+  ]
+}
+

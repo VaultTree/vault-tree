@@ -1,0 +1,63 @@
+# This is interesting
+# consider viewing each JSON object as an 'expression' to the vault tree interpreter
+# simply evaluate the expression as you execute the 
+
+Lock
+or 
+Lock -> Unlock
+
+Algorithm
+
+"public_key_example": {
+  "content": {},
+  "locking_key": {
+    "pub_key": {"vault_content": "alice_public_encryption_key"},
+    "sec_key": {"vault_content": "bob_decryption_key"},
+  },
+  "unlocking_key": {
+    "pub_key": {"vault_content": "bob_public_encryption_key"},
+    "sec_key": {"vault_content": "alice_decryption_key"},
+  },
+  "ciphertext": ""
+},
+
+"contents_from_example": {
+  "content":
+    "content_from": "vault_three_key"
+  },
+  "locking_key": {},
+  "unlocking_key": {},
+  "ciphertext": ""
+},
+
+"external_input_example": {
+  "content": {
+    "external_input": "something_outside"
+  },
+  "content": {
+    "vault_content": "something_inside"
+  },
+  "content": {
+    "generated_value": {"pub_key_from":{"vault_content": "something_inside"}}
+  },
+  "content": {
+    "generated_value": "random_key"
+  },
+  "content": {
+    "generated_value": "open_key"
+  },
+  "content": {
+    "vault_collection": ['vault_id_one', 'vault_id_two'] ,
+  },
+  "locking_key": {},
+  "unlocking_key": {},
+  "ciphertext": ""
+},
+
+"": {
+  "content": {},
+  "locking_key": {},
+  "unlocking_key": {},
+  "ciphertext": ""
+},
+

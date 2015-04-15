@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Vault",
+    "type": "object",
+    "properties": {
+        "contents": {
+          "$ref": "./schema.expression.json"
+        },
+        "lock": {
+          "oneOf":[
+            {"$ref": "./schema.sym_key.json"},
+            {"$ref": "./schema.asym_key.json"}
+          ]
+        },
+        "unlock": {
+          "oneOf":[
+            {"$ref": "./schema.sym_key.json"},
+            {"$ref": "./schema.asym_key.json"}
+          ]
+        },
+        "ciphertext": {
+            "type": "string"
+        }
+    },
+    "required": ["contents", "lock", "unlock","ciphertext"]
+}

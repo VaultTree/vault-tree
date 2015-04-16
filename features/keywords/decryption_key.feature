@@ -3,7 +3,7 @@ Feature: Decryption Key
 Decryption keys are asymmetric private keys.
 
 ```javascript
-"fill_with": "DECRYPTION_KEY",
+"contents": "DECRYPTION_KEY",
 ```
 
 When establishing a public private key pair, you need to generate the decryption

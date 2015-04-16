@@ -18,31 +18,31 @@ Scenario: Asymmetric Vault
         "header": {},
         "vaults": {
           "asymmetric_message":{
-            "fill_with": "EXTERNAL_INPUT['asymmetric_message']",
+            "contents": "EXTERNAL_INPUT['asymmetric_message']",
             "lock_with": "DH_KEY['another_public_key','my_decryption_key']",
             "unlock_with": "DH_KEY['my_public_key','another_decryption_key']",
             "ciphertext": ""
           },
           "my_decryption_key":{
-            "fill_with": "DECRYPTION_KEY",
+            "contents": "DECRYPTION_KEY",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
           },
           "my_public_key":{
-            "fill_with": "PUBLIC_ENCRYPTION_KEY['my_decryption_key']",
+            "contents": "PUBLIC_ENCRYPTION_KEY['my_decryption_key']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
           },
           "another_decryption_key":{
-            "fill_with": "DECRYPTION_KEY",
+            "contents": "DECRYPTION_KEY",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
           },
           "another_public_key":{
-            "fill_with": "PUBLIC_ENCRYPTION_KEY['another_decryption_key']",
+            "contents": "PUBLIC_ENCRYPTION_KEY['another_decryption_key']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""

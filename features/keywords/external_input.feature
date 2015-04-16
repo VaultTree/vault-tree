@@ -23,7 +23,7 @@ more secure if you have a weak password.
           "vaults": {
             "message":{
               "description": "Simple Congratulations Message",
-              "fill_with": "EXTERNAL_INPUT['msg']",
+              "contents": "EXTERNAL_INPUT['msg']",
               "lock_with": "EXTERNAL_INPUT['secret']",
               "unlock_with": "EXTERNAL_INPUT['secret']",
               "ciphertext": ""

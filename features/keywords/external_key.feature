@@ -12,7 +12,7 @@ Feature: External Key
           "vaults": {
             "message":{
               "description": "Simple Congratulations Message",
-              "fill_with": "EXTERNAL_INPUT['msg']",
+              "contents": "EXTERNAL_INPUT['msg']",
               "lock_with": "EXTERNAL_KEY['secret']",
               "unlock_with": "EXTERNAL_KEY['secret']",
               "ciphertext": ""

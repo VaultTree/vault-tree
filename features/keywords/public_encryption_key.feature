@@ -2,7 +2,7 @@ Feature: Public Encryption Key
 
 
 ```javascript
-  "fill_with": "PUBLIC_ENCRYPTION_KEY['decryption_key_vault_id']",
+  "contents": "PUBLIC_ENCRYPTION_KEY['decryption_key_vault_id']",
 ```
 
 Public encryption keys are derived from their corresponding private decryption key.

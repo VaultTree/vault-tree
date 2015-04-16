@@ -15,7 +15,7 @@ Feature: External Key
               "fill_with": "EXTERNAL_INPUT['msg']",
               "lock_with": "EXTERNAL_KEY['secret']",
               "unlock_with": "EXTERNAL_KEY['secret']",
-              "contents": ""
+              "ciphertext": ""
             }
           }
         }

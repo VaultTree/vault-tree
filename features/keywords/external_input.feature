@@ -26,7 +26,7 @@ more secure if you have a weak password.
               "fill_with": "EXTERNAL_INPUT['msg']",
               "lock_with": "EXTERNAL_INPUT['secret']",
               "unlock_with": "EXTERNAL_INPUT['secret']",
-              "contents": ""
+              "ciphertext": ""
             }
           }
         }

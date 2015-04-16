@@ -9,7 +9,7 @@ module VaultTree
     end
 
     def close
-      @properties['contents'] = locked_contents
+      @properties['ciphertext'] = locked_contents
       self
     end
 
@@ -31,11 +31,11 @@ module VaultTree
     end
 
     def locked_contents
-      already_locked? ? properties['contents'] : ciphertext(filler)
+      already_locked? ? properties['ciphertext'] : ciphertext(filler)
     end
 
     def unlocked_contents
-      plaintext properties['contents']
+      plaintext properties['ciphertext']
     end
 
     def ciphertext(m)
@@ -47,7 +47,7 @@ module VaultTree
     end
 
     def already_locked?
-      ! (properties['contents'].nil? || properties['contents'].empty?)
+      ! (properties['ciphertext'].nil? || properties['ciphertext'].empty?)
     end
 
     def interpret_keyword(prop_key)

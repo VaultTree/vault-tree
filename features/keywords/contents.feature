@@ -19,6 +19,6 @@ Here is an example of a vault that makes use of the `CONTENTS` keyword.
   "fill_with": "CONTENTS['message_locked_with_random_key']",
   "lock_with": "KEY['unlocked_random_key']",
   "unlock_with": "KEY['unlocked_random_key']",
-  "contents": ""
+  "ciphertext": ""
 }
 ```

@@ -1,3 +1,9 @@
+## 0.12.0
+
+Contents to Ciphertext
+* In all contracts the key "contents" is replaced with "ciphertext"
+* This paves the way for future changes to the contract structure
+
 ## 0.11.1
 
 JSON Schema Experimentation

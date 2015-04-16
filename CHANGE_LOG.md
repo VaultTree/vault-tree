@@ -1,3 +1,9 @@
+## 0.12.1
+
+Fill With to Contents
+* In all contracts the key "fill_with" is replaced with "contents"
+* This paves the way for future changes to the contract structure
+
 ## 0.12.0
 
 Contents to Ciphertext

@@ -19,7 +19,7 @@ module VaultTree
     end
 
     def filler
-      interpret_keyword('fill_with')
+      interpret_keyword('contents')
     end
 
     def locking_key

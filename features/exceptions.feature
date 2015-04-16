@@ -15,7 +15,7 @@ Scenario: Unsupported Keyword
           "unsupported_keyword":{
             "contents": "UNSUPPORTED_KEYWORD",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
           }
         }
@@ -34,7 +34,7 @@ Scenario: Vault Does Not Exists on Retrieval
           "empty_vault":{
             "contents": "RANDOM_KEY",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
           }
         }
@@ -53,7 +53,7 @@ Scenario: Vault Does Not Exists on Closing
           "empty_vault":{
             "contents": "RANDOM_KEY",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
           }
         }
@@ -71,7 +71,7 @@ Scenario: Failed Symmetric Unlock Attempt
           "some_random_vault":{
             "contents": "RANDOM_KEY",
             "lock_key": "EXTERNAL_INPUT['right_secret']",
-            "unlock_with": "EXTERNAL_INPUT['wrong_secret']",
+            "unlock_key": "EXTERNAL_INPUT['wrong_secret']",
             "ciphertext": ""
           }
         }
@@ -89,7 +89,7 @@ Scenario: Missing External Input On Lock
           "missing_external_input_vault":{
             "contents": "EXTERNAL_INPUT['empty_value']",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
           }
         }

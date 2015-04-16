@@ -27,7 +27,7 @@ module VaultTree
     end
 
     def unlocking_key
-      VaultKey.new interpret_keyword('unlock_with')
+      VaultKey.new interpret_keyword('unlock_key')
     end
 
     def locked_contents

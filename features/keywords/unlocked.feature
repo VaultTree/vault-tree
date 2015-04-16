@@ -2,7 +2,7 @@ Feature: Unlocked
 
 ```javascript
   "lock_key": "UNLOCKED",
-  "unlock_with": "UNLOCKED"
+  "unlock_key": "UNLOCKED"
 ```
 
 This keyword should be used to make vault contents accessable to anyone.
@@ -19,27 +19,27 @@ Scenario: Transfer Key Via Unlocked Vault
             "description":"Random Number",
             "contents": "RANDOM_KEY",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
             },
           "message_locked_with_random":{
             "description":"A simple message locked with a random number",
             "contents": "EXTERNAL_INPUT['msg']",
             "lock_key": "KEY['random_vault_key']",
-            "unlock_with": "KEY['random_vault_key']",
+            "unlock_key": "KEY['random_vault_key']",
             "ciphertext": ""
           },
           "unlocked_random_key":{
             "description":"An unlocked random key",
             "contents": "KEY['random_vault_key']",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
           },
           "message_locked_with_unlocked_random_number":{
             "contents": "CONTENTS['message_locked_with_random']",
             "lock_key": "KEY['unlocked_random_key']",
-            "unlock_with": "KEY['unlocked_random_key']",
+            "unlock_key": "KEY['unlocked_random_key']",
             "ciphertext": ""
           }
         }

@@ -6,13 +6,13 @@
         "contents": {
           "$ref": "./schema.expression.json"
         },
-        "lock": {
+        "lock_key": {
           "oneOf":[
             {"$ref": "./schema.sym_key.json"},
             {"$ref": "./schema.asym_key.json"}
           ]
         },
-        "unlock": {
+        "unlock_key": {
           "oneOf":[
             {"$ref": "./schema.sym_key.json"},
             {"$ref": "./schema.asym_key.json"}
@@ -22,5 +22,5 @@
             "type": "string"
         }
     },
-    "required": ["contents", "lock", "unlock","ciphertext"]
+    "required": ["contents", "lock_key", "unlock_key","ciphertext"]
 }

@@ -25,7 +25,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "description":"Contract specific password to lock private information",
             "contents": "RANDOM_KEY",
             "lock_key": "EXTERNAL_INPUT['bcs_key']",
-            "unlock_with": "EXTERNAL_INPUT['bcs_key']",
+            "unlock_key": "EXTERNAL_INPUT['bcs_key']",
             "ciphertext": ""
           },
 
@@ -33,7 +33,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "description":"Contract specific password to lock private information",
             "contents": "RANDOM_KEY",
             "lock_key": "EXTERNAL_INPUT['acs_key']",
-            "unlock_with": "EXTERNAL_INPUT['acs_key']",
+            "unlock_key": "EXTERNAL_INPUT['acs_key']",
             "ciphertext": ""
           },
 
@@ -41,7 +41,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "description":"Public key for asymmetric encryption",
             "contents": "PUBLIC_ENCRYPTION_KEY['alice_decryption_key']",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
           },
 
@@ -49,7 +49,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "description":"Public key for asymmetric encryption",
             "contents": "PUBLIC_ENCRYPTION_KEY['bob_decryption_key']",
             "lock_key": "UNLOCKED",
-            "unlock_with": "UNLOCKED",
+            "unlock_key": "UNLOCKED",
             "ciphertext": ""
           },
 
@@ -57,7 +57,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "description":"Private key for asymmetric decryption",
             "contents": "DECRYPTION_KEY",
             "lock_key": "KEY['alice_contract_secret']",
-            "unlock_with": "KEY['alice_contract_secret']",
+            "unlock_key": "KEY['alice_contract_secret']",
             "ciphertext": ""
           },
 
@@ -65,7 +65,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "description":"Private key for asymmetric decryption",
             "contents": "DECRYPTION_KEY",
             "lock_key": "KEY['bob_contract_secret']",
-            "unlock_with": "KEY['bob_contract_secret']",
+            "unlock_key": "KEY['bob_contract_secret']",
             "ciphertext": ""
           },
 
@@ -73,7 +73,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "description":"This is an asymmetric vault. It contains a secret message.",
             "contents": "EXTERNAL_INPUT['msg']",
             "lock_key": "DH_KEY['alice_public_encryption_key','bob_decryption_key']",
-            "unlock_with": "DH_KEY['bob_public_encryption_key','alice_decryption_key']",
+            "unlock_key": "DH_KEY['bob_public_encryption_key','alice_decryption_key']",
             "ciphertext": ""
           }
 

@@ -55,7 +55,7 @@ Let's take a look at an example vault:
 "bob_random_key": {
   "contents": "RANDOM_KEY",
   "lock_key": "KEY['bob_first_vault_key']",
-  "unlock_with": "KEY['alice_third_vault_key']",
+  "unlock_key": "KEY['alice_third_vault_key']",
   "ciphertext": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
 }
 ```

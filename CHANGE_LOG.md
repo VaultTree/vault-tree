@@ -1,3 +1,9 @@
+## 0.12.3
+
+Unlock With to Unlock Key
+* In all contracts the key "unlock_with" is replaced with "unlock_key"
+* This paves the way for future changes to the contract structure
+
 ## 0.12.2
 
 Lock With to Lock Key

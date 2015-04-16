@@ -9,7 +9,7 @@ Feature: Key
   Note that:
     * It should be used specifically when the contents are a Symmetric vault key.
     * It takes one argument, the name of the vault holding the desired string.
-    * The `KEY` keyword can be used in the **"contents"**, **"lock_key"** and **"unlock_with"** fields.
+    * The `KEY` keyword can be used in the **"contents"**, **"lock_key"** and **"unlock_key"** fields.
 
   Scenario: Close And Open Using with a Key
     Given the blank contract:
@@ -21,14 +21,14 @@ Feature: Key
               "description":"Random Number",
               "contents": "RANDOM_KEY",
               "lock_key": "UNLOCKED",
-              "unlock_with": "UNLOCKED",
+              "unlock_key": "UNLOCKED",
               "ciphertext": ""
               },
             "message":{
               "description": "Simple Congratulations Message",
               "contents": "EXTERNAL_INPUT['msg']",
               "lock_key": "KEY['random_vault_key']",
-              "unlock_with": "KEY['random_vault_key']",
+              "unlock_key": "KEY['random_vault_key']",
               "ciphertext": ""
             }
           }

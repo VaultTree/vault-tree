@@ -14,7 +14,7 @@ Feature: External Key
               "description": "Simple Congratulations Message",
               "contents": "EXTERNAL_INPUT['msg']",
               "lock_key": "EXTERNAL_KEY['secret']",
-              "unlock_with": "EXTERNAL_KEY['secret']",
+              "unlock_key": "EXTERNAL_KEY['secret']",
               "ciphertext": ""
             }
           }

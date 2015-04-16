@@ -15,19 +15,19 @@ Feature: Subcontract
 
             "subcontract_vault":{
               "contents": "SUBCONTRACT['first_vault','second_vault']",
-              "lock_with": "UNLOCKED",
+              "lock_key": "UNLOCKED",
               "unlock_with": "UNLOCKED",
               "ciphertext": ""
             },
             "first_vault":{
               "contents": "RANDOM_KEY",
-              "lock_with": "UNLOCKED",
+              "lock_key": "UNLOCKED",
               "unlock_with": "UNLOCKED",
               "ciphertext": ""
             },
             "second_vault":{
               "contents": "RANDOM_KEY",
-              "lock_with": "UNLOCKED",
+              "lock_key": "UNLOCKED",
               "unlock_with": "UNLOCKED",
               "ciphertext": ""
             }

@@ -25,7 +25,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "bob_contract_secret":{
             "description":"contract specific password to lock private information",
             "contents": "RANDOM_KEY",
-            "lock_with": "EXTERNAL_INPUT['bcs_key']",
+            "lock_key": "EXTERNAL_INPUT['bcs_key']",
             "unlock_with": "EXTERNAL_INPUT['bcs_key']",
             "ciphertext": ""
           },
@@ -33,7 +33,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "alice_contract_secret":{
             "description":"contract specific password to lock private information",
             "contents": "RANDOM_KEY",
-            "lock_with": "EXTERNAL_INPUT['acs_key']",
+            "lock_key": "EXTERNAL_INPUT['acs_key']",
             "unlock_with": "EXTERNAL_INPUT['acs_key']",
             "ciphertext": ""
           },
@@ -41,7 +41,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "alice_public_encryption_key":{
             "description":"public key for asymmetric encryption",
             "contents": "PUBLIC_ENCRYPTION_KEY['alice_decryption_key']",
-            "lock_with": "UNLOCKED",
+            "lock_key": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
           },
@@ -49,7 +49,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "bob_public_encryption_key":{
             "description":"public key for asymmetric encryption",
             "contents": "PUBLIC_ENCRYPTION_KEY['bob_decryption_key']",
-            "lock_with": "UNLOCKED",
+            "lock_key": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
           },
@@ -57,7 +57,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "alice_decryption_key":{
             "description":"private key for asymmetric decryption",
             "contents": "DECRYPTION_KEY",
-            "lock_with": "KEY['alice_contract_secret']",
+            "lock_key": "KEY['alice_contract_secret']",
             "unlock_with": "KEY['alice_contract_secret']",
             "ciphertext": ""
           },
@@ -65,7 +65,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "bob_decryption_key":{
             "description":"private key for asymmetric decryption",
             "contents": "DECRYPTION_KEY",
-            "lock_with": "KEY['bob_contract_secret']",
+            "lock_key": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
             "ciphertext": ""
           },
@@ -73,7 +73,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "congratulations_message":{
             "description":"A simple message for Bob to put in the final vault",
             "contents": "EXTERNAL_INPUT['msg']",
-            "lock_with": "KEY['bob_contract_secret']",
+            "lock_key": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
             "ciphertext": ""
           },
@@ -81,7 +81,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "vault_two_key":{
             "description":"Key to lock vault two. Once Bob locks the second vault he will put this key inside vault one.",
             "contents": "RANDOM_KEY",
-            "lock_with": "KEY['bob_contract_secret']",
+            "lock_key": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
             "ciphertext": ""
           },
@@ -89,7 +89,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "vault_three_key":{
             "description":"Key to lock vault three. Once Bob locks the third vault he will put this key inside vault two.",
             "contents": "RANDOM_KEY",
-            "lock_with": "KEY['bob_contract_secret']",
+            "lock_key": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
             "ciphertext": ""
           },
@@ -97,7 +97,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "first":{
             "description":"This is an asymmetric vault with mutual authentication. It contains the key to vault two and is locked by Bob, with Alices public key. Only Alice can unlock it.",
             "contents": "CONTENTS['vault_two_key']",
-            "lock_with": "DH_KEY['alice_public_encryption_key','bob_decryption_key']",
+            "lock_key": "DH_KEY['alice_public_encryption_key','bob_decryption_key']",
             "unlock_with": "DH_KEY['bob_public_encryption_key','alice_decryption_key']",
             "ciphertext": ""
           },
@@ -105,7 +105,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "second":{
             "description":"Alice unlocks this vault with the key held in the first vault.",
             "contents": "CONTENTS['vault_three_key']",
-            "lock_with": "KEY['vault_two_key']",
+            "lock_key": "KEY['vault_two_key']",
             "unlock_with": "KEY['first']",
             "ciphertext": ""
           },
@@ -113,7 +113,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
           "third":{
             "description":"Contains a simple message. Unlock the key found in the second vault.",
             "contents": "CONTENTS['congratulations_message']",
-            "lock_with": "KEY['vault_three_key']",
+            "lock_key": "KEY['vault_three_key']",
             "unlock_with": "KEY['second']",
             "ciphertext": ""
           }

@@ -37,7 +37,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
         "sender_btc_signing_key":{
           "description":"This is the secret Bitcoin Signing Key that SENDER wishes to transfer to RECEIVER. The RECEIVER can unlock only after he has the revealed address.",
           "contents": "EXTERNAL_INPUT['ssk']",
-          "lock_with": "KEY['sender_concealed_destination_wallet_address']",
+          "lock_key": "KEY['sender_concealed_destination_wallet_address']",
           "unlock_with": "KEY['receiver_revealed_destination_wallet_address']",
           "ciphertext": ""
         },
@@ -45,7 +45,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
         "sender_origin_wallet_address":{
           "description":"SENDER origin wallet address. Chosen by SENDER and known in advance to RECEIVER.",
           "contents": "EXTERNAL_INPUT['sowa']",
-          "lock_with": "UNLOCKED",
+          "lock_key": "UNLOCKED",
           "unlock_with": "UNLOCKED",
           "ciphertext": ""
         },
@@ -53,7 +53,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
         "sender_concealed_destination_wallet_address":{
           "description":"SENDER concealed copy of the destination wallet address. This wallet address is kept secret until SENDER chosed to transfer BTC to it",
           "contents": "EXTERNAL_INPUT['scdwa']",
-          "lock_with": "KEY['sender_secret']",
+          "lock_key": "KEY['sender_secret']",
           "unlock_with": "KEY['sender_secret']",
           "ciphertext": ""
         },
@@ -61,14 +61,14 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
         "receiver_revealed_destination_wallet_address":{
           "description":"RECEIVER monitors the Block Chain and fills this vault with the newly revealied destination address.",
           "contents": "EXTERNAL_INPUT['rrdwa']",
-          "lock_with": "KEY['receiver_secret']",
+          "lock_key": "KEY['receiver_secret']",
           "unlock_with": "KEY['receiver_secret']",
           "ciphertext": ""
         },
 
         "receiver_secret":{
           "contents": "RANDOM_KEY",
-          "lock_with": "EXTERNAL_INPUT['rs_key']",
+          "lock_key": "EXTERNAL_INPUT['rs_key']",
           "unlock_with": "EXTERNAL_INPUT['rs_key']",
           "ciphertext": ""
         },
@@ -76,7 +76,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
         "sender_secret":{
           "description":"Contract specific password for SENDER. Used to Lock the SENDER private information.",
           "contents": "RANDOM_KEY",
-          "lock_with": "EXTERNAL_INPUT['ss_key']",
+          "lock_key": "EXTERNAL_INPUT['ss_key']",
           "unlock_with": "EXTERNAL_INPUT['ss_key']",
           "ciphertext": ""
         }

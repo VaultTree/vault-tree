@@ -24,7 +24,7 @@ more secure if you have a weak password.
             "message":{
               "description": "Simple Congratulations Message",
               "contents": "EXTERNAL_INPUT['msg']",
-              "lock_with": "EXTERNAL_INPUT['secret']",
+              "lock_key": "EXTERNAL_INPUT['secret']",
               "unlock_with": "EXTERNAL_INPUT['secret']",
               "ciphertext": ""
             }

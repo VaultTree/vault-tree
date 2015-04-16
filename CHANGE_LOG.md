@@ -1,3 +1,9 @@
+## 0.12.2
+
+Lock With to Lock Key
+* In all contracts the key "lock_with" is replaced with "lock_key"
+* This paves the way for future changes to the contract structure
+
 ## 0.12.1
 
 Fill With to Contents

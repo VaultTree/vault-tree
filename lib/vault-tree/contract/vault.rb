@@ -23,7 +23,7 @@ module VaultTree
     end
 
     def locking_key
-      VaultKey.new interpret_keyword('lock_with')
+      VaultKey.new interpret_keyword('lock_key')
     end
 
     def unlocking_key

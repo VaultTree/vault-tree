@@ -13,7 +13,7 @@ Feature: External Key
             "message":{
               "description": "Simple Congratulations Message",
               "contents": "EXTERNAL_INPUT['msg']",
-              "lock_with": "EXTERNAL_KEY['secret']",
+              "lock_key": "EXTERNAL_KEY['secret']",
               "unlock_with": "EXTERNAL_KEY['secret']",
               "ciphertext": ""
             }

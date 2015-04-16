@@ -1,7 +1,7 @@
 Feature: Unlocked
 
 ```javascript
-  "lock_with": "UNLOCKED",
+  "lock_key": "UNLOCKED",
   "unlock_with": "UNLOCKED"
 ```
 
@@ -18,27 +18,27 @@ Scenario: Transfer Key Via Unlocked Vault
           "random_vault_key":{
             "description":"Random Number",
             "contents": "RANDOM_KEY",
-            "lock_with": "UNLOCKED",
+            "lock_key": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
             },
           "message_locked_with_random":{
             "description":"A simple message locked with a random number",
             "contents": "EXTERNAL_INPUT['msg']",
-            "lock_with": "KEY['random_vault_key']",
+            "lock_key": "KEY['random_vault_key']",
             "unlock_with": "KEY['random_vault_key']",
             "ciphertext": ""
           },
           "unlocked_random_key":{
             "description":"An unlocked random key",
             "contents": "KEY['random_vault_key']",
-            "lock_with": "UNLOCKED",
+            "lock_key": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
           },
           "message_locked_with_unlocked_random_number":{
             "contents": "CONTENTS['message_locked_with_random']",
-            "lock_with": "KEY['unlocked_random_key']",
+            "lock_key": "KEY['unlocked_random_key']",
             "unlock_with": "KEY['unlocked_random_key']",
             "ciphertext": ""
           }

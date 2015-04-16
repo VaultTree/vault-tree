@@ -23,7 +23,7 @@ Scenario: Close And Open With Random Key
           "random_vault_key":{
             "description":"Random Key",
             "contents": "RANDOM_KEY",
-            "lock_with": "UNLOCKED",
+            "lock_key": "UNLOCKED",
             "unlock_with": "UNLOCKED",
             "ciphertext": ""
             },
@@ -31,7 +31,7 @@ Scenario: Close And Open With Random Key
           "message_locked_with_random":{
             "description":"A simple message locked with a random number",
             "contents": "EXTERNAL_INPUT['msg']",
-            "lock_with": "KEY['random_vault_key']",
+            "lock_key": "KEY['random_vault_key']",
             "unlock_with": "KEY['random_vault_key']",
             "ciphertext": ""
           }

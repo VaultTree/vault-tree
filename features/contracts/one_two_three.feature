@@ -27,7 +27,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['bcs_key']",
             "unlock_with": "EXTERNAL_INPUT['bcs_key']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "alice_contract_secret":{
@@ -35,7 +35,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['acs_key']",
             "unlock_with": "EXTERNAL_INPUT['acs_key']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "alice_public_encryption_key":{
@@ -43,7 +43,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "PUBLIC_ENCRYPTION_KEY['alice_decryption_key']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "bob_public_encryption_key":{
@@ -51,7 +51,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "PUBLIC_ENCRYPTION_KEY['bob_decryption_key']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "alice_decryption_key":{
@@ -59,7 +59,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "DECRYPTION_KEY",
             "lock_with": "KEY['alice_contract_secret']",
             "unlock_with": "KEY['alice_contract_secret']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "bob_decryption_key":{
@@ -67,7 +67,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "DECRYPTION_KEY",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "congratulations_message":{
@@ -75,7 +75,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "EXTERNAL_INPUT['msg']",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "vault_two_key":{
@@ -83,7 +83,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "RANDOM_KEY",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "vault_three_key":{
@@ -91,7 +91,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "RANDOM_KEY",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "first":{
@@ -99,7 +99,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "CONTENTS['vault_two_key']",
             "lock_with": "DH_KEY['alice_public_encryption_key','bob_decryption_key']",
             "unlock_with": "DH_KEY['bob_public_encryption_key','alice_decryption_key']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "second":{
@@ -107,7 +107,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "CONTENTS['vault_three_key']",
             "lock_with": "KEY['vault_two_key']",
             "unlock_with": "KEY['first']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "third":{
@@ -115,7 +115,7 @@ Scenario: Alice and Bob Execute the One Two Three Contract
             "fill_with": "CONTENTS['congratulations_message']",
             "lock_with": "KEY['vault_three_key']",
             "unlock_with": "KEY['second']",
-            "contents": ""
+            "ciphertext": ""
           }
 
         }

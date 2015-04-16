@@ -26,7 +26,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['bcs_key']",
             "unlock_with": "EXTERNAL_INPUT['bcs_key']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "alice_contract_secret":{
@@ -34,7 +34,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "fill_with": "RANDOM_KEY",
             "lock_with": "EXTERNAL_INPUT['acs_key']",
             "unlock_with": "EXTERNAL_INPUT['acs_key']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "alice_public_encryption_key":{
@@ -42,7 +42,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "fill_with": "PUBLIC_ENCRYPTION_KEY['alice_decryption_key']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "bob_public_encryption_key":{
@@ -50,7 +50,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "fill_with": "PUBLIC_ENCRYPTION_KEY['bob_decryption_key']",
             "lock_with": "UNLOCKED",
             "unlock_with": "UNLOCKED",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "alice_decryption_key":{
@@ -58,7 +58,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "fill_with": "DECRYPTION_KEY",
             "lock_with": "KEY['alice_contract_secret']",
             "unlock_with": "KEY['alice_contract_secret']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "bob_decryption_key":{
@@ -66,7 +66,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "fill_with": "DECRYPTION_KEY",
             "lock_with": "KEY['bob_contract_secret']",
             "unlock_with": "KEY['bob_contract_secret']",
-            "contents": ""
+            "ciphertext": ""
           },
 
           "message":{
@@ -74,7 +74,7 @@ Scenario: Bob Locks and Alice Unlocks with a Shared Key
             "fill_with": "EXTERNAL_INPUT['msg']",
             "lock_with": "DH_KEY['alice_public_encryption_key','bob_decryption_key']",
             "unlock_with": "DH_KEY['bob_public_encryption_key','alice_decryption_key']",
-            "contents": ""
+            "ciphertext": ""
           }
 
 

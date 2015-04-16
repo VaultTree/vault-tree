@@ -43,7 +43,7 @@ module VaultTree
     end
 
     def empty_contents?(id)
-      vaults_hash[id]['contents'].nil? || vaults_hash[id]['contents'].empty?
+      vaults_hash[id]['ciphertext'].nil? || vaults_hash[id]['ciphertext'].empty?
     end
 
     def update_vaults(id, vault)

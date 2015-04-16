@@ -39,7 +39,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
           "fill_with": "EXTERNAL_INPUT['ssk']",
           "lock_with": "KEY['sender_concealed_destination_wallet_address']",
           "unlock_with": "KEY['receiver_revealed_destination_wallet_address']",
-          "contents": ""
+          "ciphertext": ""
         },
 
         "sender_origin_wallet_address":{
@@ -47,7 +47,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
           "fill_with": "EXTERNAL_INPUT['sowa']",
           "lock_with": "UNLOCKED",
           "unlock_with": "UNLOCKED",
-          "contents": ""
+          "ciphertext": ""
         },
 
         "sender_concealed_destination_wallet_address":{
@@ -55,7 +55,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
           "fill_with": "EXTERNAL_INPUT['scdwa']",
           "lock_with": "KEY['sender_secret']",
           "unlock_with": "KEY['sender_secret']",
-          "contents": ""
+          "ciphertext": ""
         },
 
         "receiver_revealed_destination_wallet_address":{
@@ -63,14 +63,14 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
           "fill_with": "EXTERNAL_INPUT['rrdwa']",
           "lock_with": "KEY['receiver_secret']",
           "unlock_with": "KEY['receiver_secret']",
-          "contents": ""
+          "ciphertext": ""
         },
 
         "receiver_secret":{
           "fill_with": "RANDOM_KEY",
           "lock_with": "EXTERNAL_INPUT['rs_key']",
           "unlock_with": "EXTERNAL_INPUT['rs_key']",
-          "contents": ""
+          "ciphertext": ""
         },
 
         "sender_secret":{
@@ -78,7 +78,7 @@ Scenario: SENDER Transfers a BTC Signing Key to the RECEIVER
           "fill_with": "RANDOM_KEY",
           "lock_with": "EXTERNAL_INPUT['ss_key']",
           "unlock_with": "EXTERNAL_INPUT['ss_key']",
-          "contents": ""
+          "ciphertext": ""
         }
 
       }

@@ -56,7 +56,7 @@ Let's take a look at an example vault:
   "fill_with": "RANDOM_KEY",
   "lock_with": "KEY['bob_first_vault_key']",
   "unlock_with": "KEY['alice_third_vault_key']",
-  "contents": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
+  "ciphertext": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
 }
 ```
 
@@ -111,12 +111,12 @@ An Asymmetric Vault is locked and unlocked with the help of a [Public-Private](h
 
 [ECDH]: http://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman
 
-#### Contents
+#### Ciphertext
 
 As you would expect, this field references the encrypted contents of the vault. In the example above you can see the _Hex_ encoded ciphertext:
 
 ```
-"contents": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
+"ciphertext": "dc92c330e5f911e3ac100800200c9a6648ab522cf91739ade ... "
 ```
 Here are some items to keep in mind:
 

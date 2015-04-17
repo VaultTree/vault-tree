@@ -29,7 +29,7 @@ end
 symetric_key_vault = %Q[
   {
     "vaults": {
-      "vault_id": {
+      "random_key": {
         "contents": {
           "generated_key": "random_sym"
         },
@@ -51,7 +51,7 @@ symetric_key_vault = %Q[
 
 describe 'symetric key vault' do
   it 'validates against the schema' do
-    validation_result = JSON::Validator.validate('schemas/schema.json', symetric_key_vault, :validate_schema => true, strict: true )
+    validation_result = JSON::Validator.validate!('schemas/schema.json', symetric_key_vault, :validate_schema => true, strict: true )
     validation_result.must_equal(true)
   end
 end

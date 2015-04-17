@@ -26,27 +26,44 @@ describe '#single_vault.json' do
   end
 end
 
-symetric_key_vault = %Q{
+symetric_key_vault = %Q[
   {
-    "header": {},
     "vaults": {
-      "random_vault_key":{
-        "description":"Random Number",
-        "contents": "RANDOM_KEY",
-        "lock_key": "UNLOCKED",
-        "unlock_key": "UNLOCKED",
-        "ciphertext": ""
+      "random_vault_key": {
+        "contents": {
+          "generated_key": "random_sym"
         },
-      "message":{
-        "description": "Simple Congratulations Message",
-        "contents": "EXTERNAL_INPUT['msg']",
-        "lock_key": "KEY['random_vault_key']",
-        "unlock_key": "KEY['random_vault_key']",
+        "lock_key": {
+          "sym_key": {
+            "generated_key": "open_sym"
+          }
+        },
+        "unlock_key": {
+          "sym_key": {
+            "generated_key": "open_sym"
+          }
+        },
+        "ciphertext": ""
+      },
+      "message": {
+        "contents": {
+          "external_input": "msg"
+        },
+        "lock_key": {
+          "sym_key": {
+            "vault_contents": "random_vault_key"
+          }
+        },
+        "unlock_key": {
+          "sym_key": {
+            "vault_contents": "random_vault_key"
+          }
+        },
         "ciphertext": ""
       }
     }
   }
-}
+]
 
 describe 'symetric key vault' do
   it 'validates against the schema' do

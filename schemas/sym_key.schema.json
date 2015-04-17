@@ -5,7 +5,7 @@
   "properties": {
     "sym_key": {
       "type": "object",
-      "$ref": "./schema.expression.json"
+      "$ref": "./expression.schema.json"
     }
   },
   "required": ["sym_key"]

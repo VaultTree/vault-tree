@@ -5,8 +5,8 @@
   "properties": {
     "computed_pub_key": {
       "oneOf": [
-        {"$ref":"./schema.vault_contents.json"},
-        {"$ref":"./schema.external_input.json"}
+        {"$ref":"./vault_contents.schema.json"},
+        {"$ref":"./external_input.schema.json"}
       ]
     }
   },

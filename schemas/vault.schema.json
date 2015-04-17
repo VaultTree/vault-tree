@@ -4,18 +4,18 @@
     "type": "object",
     "properties": {
         "contents": {
-          "$ref": "./schema.expression.json"
+          "$ref": "./expression.schema.json"
         },
         "lock_key": {
           "oneOf":[
-            {"$ref": "./schema.sym_key.json"},
-            {"$ref": "./schema.asym_key.json"}
+            {"$ref": "./sym_key.schema.json"},
+            {"$ref": "./asym_key.schema.json"}
           ]
         },
         "unlock_key": {
           "oneOf":[
-            {"$ref": "./schema.sym_key.json"},
-            {"$ref": "./schema.asym_key.json"}
+            {"$ref": "./sym_key.schema.json"},
+            {"$ref": "./asym_key.schema.json"}
           ]
         },
         "ciphertext": {

@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Vault Collection",
   "type": "object",
   "properties": {
-    "vault_id": {
+    "vaults": {
       "type": "object",
-      "$ref": "./schema.vault.json"
+      "$ref": "./vault_collection.schema.json"
     }
-  }
+  },
+  "required":["vaults"]
 }

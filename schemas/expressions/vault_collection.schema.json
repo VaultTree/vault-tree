@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Vault Collection Expression",
+  "type": "object",
+  "properties": {
+    "vault_collection": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "minItems": 1
+    }
+  },
+  "required": [
+    "vault_collection"
+  ],
+  "additionalProperties": false
+}

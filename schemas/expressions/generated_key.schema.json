@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Vault Tree Vault Generated Key Expression",
+  "type": "object",
+  "properties": {
+    "generated_key": {
+      "enum": [
+        "random_sym",
+        "open_sym",
+        "random_asym_prv",
+        "open_asym_prv"
+      ]
+    }
+  },
+  "required": [
+    "generated_key"
+  ],
+  "additionalProperties": false
+}

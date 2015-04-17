@@ -29,7 +29,7 @@ end
 symetric_key_vault = %Q[
   {
     "vaults": {
-      "random_vault_key": {
+      "vault_id": {
         "contents": {
           "generated_key": "random_sym"
         },
@@ -41,22 +41,6 @@ symetric_key_vault = %Q[
         "unlock_key": {
           "sym_key": {
             "generated_key": "open_sym"
-          }
-        },
-        "ciphertext": ""
-      },
-      "message": {
-        "contents": {
-          "external_input": "msg"
-        },
-        "lock_key": {
-          "sym_key": {
-            "vault_contents": "random_vault_key"
-          }
-        },
-        "unlock_key": {
-          "sym_key": {
-            "vault_contents": "random_vault_key"
           }
         },
         "ciphertext": ""

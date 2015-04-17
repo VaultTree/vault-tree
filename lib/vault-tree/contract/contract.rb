@@ -3,7 +3,7 @@ module VaultTree
     attr_reader :json, :contract_hash, :vault_list, :contract_header, :external_input
 
     def initialize(json, params = {})
-      @contract_hash   = Support::JSON.decode(json)
+      @contract_hash   = decode_json(json)
       @contract_header = ContractHeader.new(contract_hash["header"])
       @vault_list      = VaultList.new(contract_hash["vaults"], self)
       @external_input = {}
@@ -30,6 +30,16 @@ module VaultTree
 
     def vaults
       vault_list.to_hash
+    end
+
+    def decode_json(json)
+      validate_json json
+      Support::JSON.decode json
+    end
+
+    def validate_json(j)
+      #JSON::Validator.validate('schemas/schema.json', single_vault, :validate_schema => true )
+      return j
     end
 
     def as_json

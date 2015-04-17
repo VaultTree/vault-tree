@@ -55,3 +55,23 @@ describe 'symetric key vault' do
     validation_result.must_equal(true)
   end
 end
+
+external_input_vault = %Q[
+  {
+    "vaults": {
+      "message":{
+        "contents": {"external_input":"msg"},
+        "lock_key": {"sym_key":{"external_input":"secret"}},
+        "unlock_key": {"sym_key":{"external_input":"secret"}},
+        "ciphertext": ""
+      }
+    }
+  }
+]
+
+describe 'external input vault ' do
+  it 'validates against the schema' do
+    validation_result = JSON::Validator.validate!('schemas/schema.json', external_input_vault, :validate_schema => true, strict: true )
+    validation_result.must_equal(true)
+  end
+end

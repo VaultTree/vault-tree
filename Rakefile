@@ -15,6 +15,8 @@ Cucumber::Rake::Task.new(:cuke) do |t|
   t.cucumber_opts = "-r features features --format pretty"
 end
 
+# run a particuar scenario
+# cucumber -r features features/contracts --format pretty features/keywords/external_input.feature
 Cucumber::Rake::Task.new(:contracts) do |t|
   # -r means you require all support files first
   # this allows you to organize and run by subdirectory

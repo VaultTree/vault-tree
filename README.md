@@ -115,7 +115,7 @@ and your plaintext message should be sent to the terminal.
 
 ##### That's It!
 
-Like many of your favorite UNIX tools, _vt_ operates as a filter in the _STDIN_ and _STDOUT_ stream. Pipe your Vault Tree JSON contract into _vt_ and specify which vault you want to open or close.
+Like many of your favorite UNIX tools, _vt_ operates as a filter in the _STDIN_ and _STDOUT_ stream. Pipe your Vault Tree JSON vault collection into _vt_ and specify which vault you want to open or close.
 
 If you like JSON and simple text-based workflow, then Vault Tree can help you manage basic encryption tasks.
 
@@ -125,6 +125,6 @@ In addition to simple use cases you can keep reading to learn about how symmetri
 
 Take a look at the `spec/vault_collections/*` test for more examples on how to use Vault Tree at the command line.
 
-## Under Development
+## Early Stage Development
 
-Vault Tree will continue to remain the proof of concept stage for a while. Use at your own risk. There are many isses that need to be address before you can rely on the library for secure applications.
+Vault Tree will continue to remain in the proof of concept stage for a while. Use at your own risk. There are many isses that need to be address before you can rely on the library for secure applications.

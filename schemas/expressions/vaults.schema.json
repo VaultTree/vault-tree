@@ -3,7 +3,7 @@
   "title": "Vault Collection Expression",
   "type": "object",
   "properties": {
-    "vault_collection": {
+    "vaults": {
       "type": "array",
       "items": { "type": "string" },
       "uniqueItems": true,
@@ -11,7 +11,7 @@
     }
   },
   "required": [
-    "vault_collection"
+    "vaults"
   ],
   "additionalProperties": false
 }

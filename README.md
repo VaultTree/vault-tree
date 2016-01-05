@@ -2,45 +2,129 @@
 
 ## Vault Tree
 
-_The Self Enforcing Contract_
+_cryptography for the rest of us_
 
-Vault Tree helps you build crypto-based business logic into your application.
+Vault Tree is high level JSON-based crypto library for application developers.
 
-Before you begin make sure you checkout the [Vault Tree Homepage] for an overview of the project.
+Checkout the [homepage] for an overview of the project.
 
-[Vault Tree Homepage]: http://vaulttree.github.io
+[homepage]: http://vaulttree.github.io
 
-### Install
+### Install and Setup
+
+##### Prerequisites
+
+Ensure that you have the following available on your system:
+
+* MRI `ruby 1.9.3` or higher
+* A suitible build tool for compiling the [libsodium] crypto library
+
+In most cases you will have the necessary build tools on your machine. Bundler should find the right build tool and handle the compilation.
+
+These are only external dependencies.
+
+[libsodium]: https://github.com/jedisct1/libsodium
+
+##### Source Code
+
+The prefered install method is to clone the source code directly to your machine. To do so run the following in directory of your choice:
 
 ```
-gem install vault-tree
+git clone git@github.com:vaulttree/vault-tree.git
 ```
 
-and then
+##### Compile Native Extentions
+
+From inside the `vault-tree/` directory run:
 
 ```
-require 'vault-tree'
+  bundle install
 ```
-
-somewhere before you use it.
-
-### Dependencies
 
 Bundler will build [libsodium] version (>= 0.4.3) on you machine. This is the underlying cryptographic library that Vault Tree depends on.
 
 [libsodium]: https://github.com/jedisct1/libsodium
 
-### Usage
+##### Path
 
-The [Documentation] is filled with examples of how to execute Vault Tree contracts.
+Make sure you have `vault-tree/bin/vt` in your `$PATH`
 
-Also, a great way to get going is to simply run the tests:
+### Quick Start
 
-* clone the repo
-* bundle your dependencies
-* run `rake`
+##### vaults.json
 
-You should see a full suite of green tests that will give you plenty of living
-examples of how to use Vault Tree in your own application.
+Save the following to a file named `empty_vaults.json`:
 
-[Documentation]: https://www.relishapp.com/vault-tree/vault-tree/docs
+```
+{
+  "vaults":{
+    "quick_start": {
+      "contents": { "external_input": "qs_message" },
+      "lock_key": { "sym_key": { "external_input": "qs_key" } },
+      "unlock_key": { "sym_key": { "external_input": "qs_key" } },
+      "ciphertext": ""
+    }
+  }
+}
+```
+
+##### key and message
+
+Generate a random key and save it to your shell.
+
+```
+QS_KEY=$(vt key)
+```
+
+Save a secret string to your shell.
+
+```
+MESSAGE='MY_SECRET_MESSAGE'
+```
+
+##### close your vault
+
+```
+cat empty_vaults.json | vt close quick_start qs_message=$MESSAGE qs_key=$QS_KEY > vaults.json
+```
+
+Take a look at your new `vaults.json` file. You should see something like this:
+
+```
+{
+  "vaults":{
+    "quick_start": {
+      "contents": { "external_input": "qs_message" },
+      "lock_key": { "sym_key": { "external_input": "qs_key" } },
+      "unlock_key": { "sym_key": { "external_input": "qs_key" } },
+      "ciphertext": "34d2f43c5d1d40a15381044340c775aa1e85e321b17f11bdafe1960f3b8bbdea894d"
+    }
+  }
+}
+```
+
+##### open the vault
+
+To recover your encrypted message run:
+
+```
+cat vaults.json | vt open quick_start qs_key=$QS_KEY
+```
+
+and your plaintext message should be sent to the terminal.
+
+##### That's It!
+
+Like many of your favorite UNIX tools, _vt_ operates as a filter in the _STDIN_ and _STDOUT_ stream. Pipe your Vault Tree JSON contract into _vt_ and specify which vault you want to open or close.
+
+If you like JSON and simple text-based workflow, then Vault Tree can help you manage basic encryption tasks.
+
+In addition to simple use cases you can keep reading to learn about how symmetric, asymmetric, and nested vaults can help you build crypto-based business logic into your applications and workflows.
+
+## CLI Examples
+
+Take a look at the `spec/vault_collections/*` test for more examples on how to use Vault Tree at the command line.
+
+## Under Development
+
+Vault Tree will continue to remain the proof of concept stage for a while. Use at your own risk. There are many isses that need to be address before you can rely on the library for secure applications.

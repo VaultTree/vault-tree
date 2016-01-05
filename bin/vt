@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+#/ Usage: vt [options]...
+# ** Tip: use #/ lines to define the --help usage message.
+# ** Tip: Useful: https://practicingruby.com/articles/building-unix-style-command-line-applications
+$stderr.sync = true
+require 'optparse'
+require_relative '../lib/vault-tree'
+
+# default options
+input    = false
+
+# parse arguments
+file = __FILE__
+ARGV.options do |opts|
+  opts.on("-i", "--input") { input = true }
+  opts.parse!
+end
+
+# do your thing
+#warn "ARGV:     #{ARGF.argv.inspect}"
+#warn "input:     #{input.inspect}"
+
+START_INDEX = 2
+INDEX_LIMIT = 8
+
+def build_input_hash(standard_in, arg_vector)
+  input_hash = {}
+  core  = {'stdin' => standard_in, 'action' => ARGV[0], 'vault_id' => ARGV[1]}
+  input_hash =input_hash.merge(core)
+
+  inputs = extract_kv_inputs(arg_vector, START_INDEX, INDEX_LIMIT)
+  input_hash['external_inputs'] = inputs
+  return input_hash
+end
+
+def extract_kv_inputs(argv, start_index, index_limit)
+  kv_inputs = {}; (start_index..index_limit).each do |i|
+    kv_string = argv[i]
+    unless kv_string.nil?
+      input_pair = kv_string.split('=')
+      kv_inputs[input_pair.first] = input_pair.last
+    end
+  end
+  return kv_inputs;
+end
+
+def validate_input_hash(h)
+  # TODO: Better Validation. Flush Out in cli spec
+  #unless @input['action'] == 'close' || @input['action'] == 'open'
+  #  $stderr.puts "There is a problem"
+  #  exit(1)
+  # end
+end
+
+@input = build_input_hash( $stdin.read, ARGV)
+
+if @input['action'] == 'close'
+  @json_collection = VaultTree::VaultCollection.new(@input['stdin']).close_vault(@input['vault_id'], @input['external_inputs'])
+  STDOUT.write @json_collection
+end
+
+if @input['action'] == 'open'
+  @result = VaultTree::VaultCollection.new(@input['stdin']).open_vault(@input['vault_id'], @input['external_inputs'])
+  STDOUT.write @result
+end

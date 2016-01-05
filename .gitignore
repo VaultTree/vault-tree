@@ -11,10 +11,6 @@ coverage.data
 # rdoc generated
 rdoc
 
-# yard generated
-doc
-.yardoc
-
 # bundler
 .bundle
 
@@ -24,13 +20,3 @@ pkg
 # Vagrant
 .vagrant/
 package.box
-
-# ignore built gem
-*.gem
-
-# ignore .spec_in
-# for custom spec runs
-.spec_in
-
-# ignore mruby dir
-mruby/

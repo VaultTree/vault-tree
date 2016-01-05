@@ -1,3 +1,27 @@
+## 0.15.0 - Project Wide Clean Up
+  * README cleanup with new quick start guide
+  * Trim down Dockerfile and use Phusion Passenger Ruby image
+  * Building and testing from a simplified Dockerfile
+  * Add some specs around stringify_keys method
+  * Some small refactors accross the library
+  * Some ideas for CLI Error handling
+
+## 0.14.0 - Integration Test Rewrite
+  * Remove existing cucumber features
+  * Transfer verbiage From existing cucumber feature to minitest comments
+  * Rewrite the following specs to use vt commandline parser:
+    - One Two Three Vaults
+    - Nested Vault Collection
+    - Asym Vault Collection
+    - BTC Blockchain Key Transfer
+
+## 0.13.0 - Core Implementation Refactoring
+  * JSON Based Collection Structure and Schema
+  * Introduce CollectionBuilder Class
+  * Introduce Expression Class
+  * Introduce VaultCollection Class
+  * Rework Vault class for functional open and close
+
 ## 0.12.3
 
 Unlock With to Unlock Key

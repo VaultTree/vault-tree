@@ -6,13 +6,13 @@ single_vault = %Q{
   {
     "vaults":{
       "vault_id":{
-        "contents": {"vault_collection": ["id_one","id_two"]},
+        "contents": {"vaults": ["id_one","id_two"]},
         "lock_key": {
           "asym_pub_key": {"computed_pub_key": {"vault_contents":"id"}},
           "asym_prv_key": {"external_input":""}
         },
         "unlock_key": {
-          "sym_key": {"generated_key": "open_asym_prv"}
+          "sym_key": {"open_key": "asym_prv_key"}
         },
         "ciphertext": "" }
     }
@@ -31,16 +31,16 @@ symetric_key_vault = %Q[
     "vaults": {
       "random_key": {
         "contents": {
-          "generated_key": "random_sym"
+          "random_key": "sym_key"
         },
         "lock_key": {
           "sym_key": {
-            "generated_key": "open_sym"
+            "open_key": "sym_key"
           }
         },
         "unlock_key": {
           "sym_key": {
-            "generated_key": "open_sym"
+            "open_key": "sym_key"
           }
         },
         "ciphertext": ""

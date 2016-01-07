@@ -19,9 +19,9 @@ Ensure that you have the following available on your system:
 * MRI `ruby 1.9.3` or higher
 * A suitible build tool for compiling the [libsodium] crypto library
 
-In most cases you will have the necessary build tools on your machine. Bundler should find the right build tool and handle the compilation.
+In most cases you'll have the necessary build tools on your machine. Bundler should find the right compiler.
 
-These are only external dependencies.
+These are the only external dependencies.
 
 [libsodium]: https://github.com/jedisct1/libsodium
 

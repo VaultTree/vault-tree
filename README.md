@@ -30,7 +30,7 @@ These are the only external dependencies.
 The prefered install method is to clone the source code directly to your machine. To do so run the following in directory of your choice:
 
 ```
-git clone git@github.com:vaulttree/vault-tree.git
+git clone https://github.com/VaultTree/vault-tree.git
 ```
 
 ##### Compile Native Extentions
@@ -68,9 +68,11 @@ Save the following to a file named `empty_vaults.json`:
 }
 ```
 
+You can find this exact example at `spec/fixtures/empty_vaults.json`
+
 ##### key and message
 
-Generate a random key and save it to your shell.
+Generate a random key and save it to your shell. The command `vt key` will generate a random hex encoded secret key and send it to `STDOUT`.
 
 ```
 QS_KEY=$(vt key)
@@ -79,14 +81,18 @@ QS_KEY=$(vt key)
 Save a secret string to your shell.
 
 ```
-MESSAGE='MY_SECRET_MESSAGE'
+QS_MESSAGE='MY_SECRET_MESSAGE'
 ```
 
 ##### close your vault
 
+With $QS_KEY already in your shell, lets close the only vault in your collection.
+
 ```
-cat empty_vaults.json | vt close quick_start qs_message=$MESSAGE qs_key=$QS_KEY > vaults.json
+QS_MESSAGE='MY_SECRET_MESSAGE'; cat spec/fixtures/empty_vaults.json | vt close quick_start "qs_message=$QS_MESSAGE" "qs_key=$QS_KEY";  > vaults.json
 ```
+
+Be mindful of the double quotes for proper shell string interpolation.
 
 Take a look at your new `vaults.json` file. You should see something like this:
 
@@ -108,18 +114,18 @@ Take a look at your new `vaults.json` file. You should see something like this:
 To recover your encrypted message run:
 
 ```
-cat vaults.json | vt open quick_start qs_key=$QS_KEY
+cat vaults.json | vt open quick_start "qs_key=$QS_KEY"
 ```
 
 and your plaintext message should be sent to the terminal.
 
 ##### That's It!
 
-Like many of your favorite UNIX tools, _vt_ operates as a filter in the _STDIN_ and _STDOUT_ stream. Pipe your Vault Tree JSON vault collection into _vt_ and specify which vault you want to open or close.
+Like many of your favorite UNIX tools, _vt_ operates as a filter in the _STDIN_ and _STDOUT_ stream. Pipe your JSON vault collection into _vt_ and specify which vault you want to open or close.
 
-If you like JSON and simple text-based workflow, then Vault Tree can help you manage basic encryption tasks.
+If you like JSON and simple text-based tools, then Vault Tree can help you manage basic encryption tasks.
 
-In addition to simple use cases you can keep reading to learn about how symmetric, asymmetric, and nested vaults can help you build crypto-based business logic into your applications and workflows.
+In addition to simple use cases, Vault Tree supports symmetric, asymmetric, and nested vaults. Combining these concepts lets you build crypto-based business logic into your applications and workflows.
 
 ## CLI Examples
 

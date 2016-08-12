@@ -3,63 +3,128 @@
 # ** Tip: use #/ lines to define the --help usage message.
 # ** Tip: Useful: https://practicingruby.com/articles/building-unix-style-command-line-applications
 $stderr.sync = true
-require 'optparse'
+
+# anything written to STDOUT here will be silenced
+# reference: Rails 3 source. http://apidock.com/rails/v3.2.13/Kernel/silence_stream
+def silence_stream(stream)
+  old_stream = stream.dup
+  stream.reopen(RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ? 'NUL:' : '/dev/null')
+  stream.sync = true
+  yield
+ensure
+  stream.reopen(old_stream)
+end
+
+# Bundler Binstub
+# ensure the bundler context from the Gem file is used
+#
+# The ruby 'load' method in this case will print information to STDOUT.
+# Wrapping in the silence_stream method avoids this output noise
+silence_stream(STDOUT) do
+  require "pathname"
+  require "rubygems"
+  require "bundler/setup"
+  if ENV["BUNDLE_GEMFILE"].nil?
+    ENV["BUNDLE_GEMFILE"] = File.expand_path("../../Gemfile", Pathname.new(__FILE__).realpath)
+    load Gem.bin_path("bundler", "bundler")
+  end
+end
+
 require_relative '../lib/vault-tree'
 
-# default options
-input    = false
-
-# parse arguments
-file = __FILE__
-ARGV.options do |opts|
-  opts.on("-i", "--input") { input = true }
-  opts.parse!
+def summary
+  File.read File.expand_path('../doc/help.txt', File.dirname(__FILE__))
 end
 
-# do your thing
-#warn "ARGV:     #{ARGF.argv.inspect}"
-#warn "input:     #{input.inspect}"
+require_relative '../lib/util/cli_parsing'
 
-START_INDEX = 2
-INDEX_LIMIT = 8
+class Summary
+  include VaultTree::CliParsing
 
-def build_input_hash(standard_in, arg_vector)
-  input_hash = {}
-  core  = {'stdin' => standard_in, 'action' => ARGV[0], 'vault_id' => ARGV[1]}
-  input_hash =input_hash.merge(core)
+  def initialize(vaults, arguments)
+    @vaults = vaults
+    @arguments = arguments
+  end
+  attr_reader :vaults, :arguments
 
-  inputs = extract_kv_inputs(arg_vector, START_INDEX, INDEX_LIMIT)
-  input_hash['external_inputs'] = inputs
-  return input_hash
-end
-
-def extract_kv_inputs(argv, start_index, index_limit)
-  kv_inputs = {}; (start_index..index_limit).each do |i|
-    kv_string = argv[i]
-    unless kv_string.nil?
-      input_pair = kv_string.split('=')
-      kv_inputs[input_pair.first] = input_pair.last
+  def display!
+    if display?
+      STDOUT.write(summary)
+      exit(0)
     end
   end
-  return kv_inputs;
+
+  def display?
+    display_summary?(vaults, arguments)
+  end
 end
 
-def validate_input_hash(h)
-  # TODO: Better Validation. Flush Out in cli spec
-  #unless @input['action'] == 'close' || @input['action'] == 'open'
-  #  $stderr.puts "There is a problem"
-  #  exit(1)
-  # end
+class RandomKey
+
+  def initialize(vaults, arguments)
+    @vaults = vaults
+    @arguments = arguments
+  end
+  attr_reader :vaults, :arguments
+
+  # TODO: This needs to be cleaned up
+  # Shift this logic over the cli parsing utility
+  def generate!
+    if vaults.nil? && ARGV[0] == 'key'
+      STDOUT.write VaultTree::LockSmith.new.generate_secret_key
+      exit(0)
+    end
+  end
 end
 
-@input = build_input_hash( $stdin.read, ARGV)
+class CommandLineAction
+  include VaultTree::CliParsing
 
-if @input['action'] == 'close'
-  @json_collection = VaultTree::VaultCollection.new(@input['stdin']).close_vault(@input['vault_id'], @input['external_inputs'])
-  STDOUT.write @json_collection
+  def initialize(vaults, arguments)
+    @vaults = vaults
+    @arguments = arguments
+  end
+  attr_reader :vaults, :arguments
+
+  def action
+    @action = parse_action!(vaults, arguments)
+  end
+
+  def execute!
+    if action[:door_action] ==  'close'
+      STDOUT.write VaultTree::VaultCollection.new(action[:input]).close_vault(action[:vault_id], action[:external_input])
+      exit(0)
+    end
+
+    if action[:door_action] ==  'open'
+      STDOUT.write VaultTree::VaultCollection.new(action[:input]).open_vault(action[:vault_id], action[:external_input])
+      exit(0)
+    end
+  rescue => e
+    STDOUT.write "#{parse_exception!(e)[:type]}: #{parse_exception!(e)[:message]}"
+    exit(1)
+  end
 end
 
-if @input['action'] == 'open'
-  @result = VaultTree::VaultCollection.new(@input['stdin']).open_vault(@input['vault_id'], @input['external_inputs'])
-  STDOUT.write @result
+if (STDIN.tty?)
+  standard_in = nil
+  arguments = ARGV
+else
+  standard_in = $stdin.read
+  arguments = ARGV
 end
+
+# Check for summary display
+#
+# if the user simply types 'vt' then there should be no error and the
+# summary display should print
+Summary.new(standard_in, arguments).display!
+
+# TODO: This needs to be speced out and cleaned up
+RandomKey.new(standard_in, arguments).generate!
+
+# Validated and parse cli input
+#
+# After the stdin and arguments are caputured. they are organized
+# and validated before going to the vault tree library code.
+CommandLineAction.new(standard_in, arguments).execute!

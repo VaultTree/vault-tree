@@ -1,0 +1,34 @@
+vt(1)                                                              |
+======
+
+NAME
+----
+vault-tree -- painless cryptography
+
+SYNOPSIS
+--------
+
+  vt <open|close> <vault_id> [ external_input <key=value> ]
+  vt <key>
+
+  -h, --help Print the full help.
+
+COMMANDS
+-----------
+
+  open  - return the contents of a vault to the standard output
+  close - lock contents into vault and return the updated collection to standard output
+  key   - random (512 bit hex-encoded) secret key to the standard output
+
+DESCRIPTION
+-----------
+Vault Tree is high level, JSON-based crypto library.
+
+It allows you to encrypt, decrypt, and store your sensitive data using intuitive
+conventions in a structured JSON file.
+
+Actual cryptographic operations are handled by the Networking and Cryptography Library
+
+https://nacl.cr.yp.to/
+
+authored by Daniel J. Bernstein.

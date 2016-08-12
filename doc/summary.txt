@@ -1,0 +1,20 @@
+VT(1)                                                                     VT(1)
+
+NAME
+
+  vault-tree -- painless cryptography
+
+SYNOPSIS
+
+  vt <open|close> <vault_id> [ external_input <key=value> ]
+  vt <key>
+
+  -v, --version                    Print the version and exit.
+  -h, --help                       Print the full help.
+
+COMMANDS
+
+  open  - return the contents of a vault to the standard output
+  close - lock contents into vault and return the updated collection to standard output
+  key   - random (512 bit hex-encoded) secret key to the standard output
+

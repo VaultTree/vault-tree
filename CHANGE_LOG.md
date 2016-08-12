@@ -1,3 +1,8 @@
+## 0.16.0 - CLI Stabilization
+  * Fix Basic use cases at the commandline
+  * Enhance README and fix problems with the Quick Start Guide Description
+  * Generate Random key functionality at the command line
+
 ## 0.15.0 - Project Wide Clean Up
   * README cleanup with new quick start guide
   * Trim down Dockerfile and use Phusion Passenger Ruby image

@@ -12,7 +12,7 @@ module VaultTree
 
     def open_vault(id, external_input = {data: nil})
       c = collection_builder.combined_collection(vaults_hash, external_input)
-      r = collection.open_vault(id, c)
+      collection.open_vault(id, c)
     end
 
     def close_vault(id, external_input = {data: nil})

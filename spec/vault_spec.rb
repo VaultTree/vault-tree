@@ -34,7 +34,6 @@ module VaultTree
 
         it 'it returns the given ciphertext when already closed' do
           lk   = {"sym_key" => "#{@sym_key}", "asym_prv_key" => "", "asym_pub_key" => ""}
-          ulk  = {"sym_key" => "#{@sym_key}", "asym_prv_key" => "", "asym_pub_key" => ""}
           Vault.new().close(@msg, @ext_ctxt, lk).must_equal(@ext_ctxt)
         end
       end

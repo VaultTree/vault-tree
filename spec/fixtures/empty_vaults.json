@@ -1,0 +1,10 @@
+{
+  "vaults":{
+    "quick_start": {
+      "contents": { "external_input": "qs_message" },
+      "lock_key": { "sym_key": { "external_input": "qs_key" } },
+      "unlock_key": { "sym_key": { "external_input": "qs_key" } },
+      "ciphertext": ""
+    }
+  }
+}

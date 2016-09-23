@@ -30,6 +30,7 @@ describe 'command line utility' do
   end
 
   it 'the exit code is 0 when no collection piped and no arguments are given' do
+    skip
     silence_stream(STDOUT) do
       system("./bin/vt")
     end

@@ -5,6 +5,13 @@ NAME
 ----
 vault-tree -- painless cryptography
 
+DESCRIPTION
+-----------
+
+Vault Tree is high level, JSON-based crypto library. It allows you
+to encrypt, decrypt, and store your sensitive data using intuitive
+conventions in a structured JSON file.
+
 SYNOPSIS
 --------
 
@@ -19,16 +26,3 @@ COMMANDS
   open  - return the contents of a vault to the standard output
   close - lock contents into vault and return the updated collection to standard output
   key   - random (512 bit hex-encoded) secret key to the standard output
-
-DESCRIPTION
------------
-Vault Tree is high level, JSON-based crypto library.
-
-It allows you to encrypt, decrypt, and store your sensitive data using intuitive
-conventions in a structured JSON file.
-
-Actual cryptographic operations are handled by the Networking and Cryptography Library
-
-https://nacl.cr.yp.to/
-
-authored by Daniel J. Bernstein.

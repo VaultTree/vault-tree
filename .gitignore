@@ -20,3 +20,6 @@ pkg
 # Vagrant
 .vagrant/
 package.box
+
+# Git configuration
+.gitconfig

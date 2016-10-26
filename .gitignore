@@ -1,9 +1,6 @@
 # Relish
 .relish
 
-# Do not Check In Gemfile.lock
-Gemfile.lock
-
 # simple_cove generated
 coverage
 coverage.data

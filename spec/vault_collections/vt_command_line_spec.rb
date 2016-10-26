@@ -29,14 +29,6 @@ describe 'command line utility' do
     $?.to_i.must_equal(0)
   end
 
-  it 'the exit code is 0 when no collection piped and no arguments are given' do
-    skip
-    silence_stream(STDOUT) do
-      system("./bin/vt")
-    end
-    $?.to_i.must_equal(0)
-  end
-
   it 'the exit code is 0 when a valid collection piped and valid arguments are given' do
     silence_stream(STDOUT) do
       system("VAULTS='#{blank_collection}'; echo $VAULTS | ./bin/vt close solo msg=#{@msg} ek=#{@ek}")

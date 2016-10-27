@@ -26,3 +26,4 @@ COMMANDS
   open  - return the contents of a vault to the standard output
   close - lock contents into vault and return the updated collection to standard output
   key   - random (512 bit hex-encoded) secret key to the standard output
+

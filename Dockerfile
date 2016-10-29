@@ -1,15 +1,13 @@
 FROM alpine:3.4
 
-RUN apk update && apk --update add ruby ruby-irb ruby-json ruby-rake \
-    ruby-bigdecimal ruby-io-console libstdc++ tzdata
+RUN apk update && apk --no-cache add curl wget openssl ca-certificates \
+    less libstdc++ pcre libffi libxml2 libxslt zlib tzdata ruby ruby-json ruby-rake \
+    ruby-bigdecimal ruby-bundler ruby-rdoc ruby-io-console ruby-irb \
+    &&  rm -rf /var/cache/apk/*
 
 RUN apk --update add --virtual build_deps \
     build-base ruby-dev libc-dev linux-headers \
     openssl-dev libxml2-dev libxslt-dev libffi-dev
-
-RUN apk --update add --virtual build-dependencies build-base ruby-dev openssl-dev \
-    libc-dev linux-headers && \
-    gem install bundler --no-rdoc --no-ri
 
 # create the working dir
 RUN mkdir /vault-tree
@@ -22,9 +20,6 @@ ADD ./ /vault-tree
 
 # bundle gem
 RUN bundle install
-
-# cleanup
-RUN apk del build_deps
 
 # run all tests
 RUN bundle exec rake

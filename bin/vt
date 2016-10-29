@@ -4,39 +4,13 @@
 # ** Tip: Useful: https://practicingruby.com/articles/building-unix-style-command-line-applications
 $stderr.sync = true
 
-# anything written to STDOUT here will be silenced
-# reference: Rails 3 source. http://apidock.com/rails/v3.2.13/Kernel/silence_stream
-def silence_stream(stream)
-  old_stream = stream.dup
-  stream.reopen(RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ? 'NUL:' : '/dev/null')
-  stream.sync = true
-  yield
-ensure
-  stream.reopen(old_stream)
-end
-
-# Bundler Binstub
-# ensure the bundler context from the Gem file is used
-#
-# The ruby 'load' method in this case will print information to STDOUT.
-# Wrapping in the silence_stream method avoids this output noise
-silence_stream(STDOUT) do
-  require "pathname"
-  require "rubygems"
-  require "bundler/setup"
-  if ENV["BUNDLE_GEMFILE"].nil?
-    ENV["BUNDLE_GEMFILE"] = File.expand_path("../../Gemfile", Pathname.new(__FILE__).realpath)
-    load Gem.bin_path("bundler", "bundler")
-  end
-end
-
 require_relative '../lib/vault-tree'
+require_relative '../lib/util/cli_parsing'
 
 def summary
   File.read File.expand_path('../doc/help.txt', File.dirname(__FILE__))
 end
 
-require_relative '../lib/util/cli_parsing'
 
 class Summary
   include VaultTree::CliParsing

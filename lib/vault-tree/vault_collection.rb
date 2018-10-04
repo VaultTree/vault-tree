@@ -39,7 +39,11 @@ module VaultTree
     end
 
     def schema_file
-      'schemas/schema.json'
+      "#{current_dir}/../../schemas/schema.json"
+    end
+
+    def current_dir
+      File.expand_path(File.dirname(__FILE__))
     end
   end
 end
